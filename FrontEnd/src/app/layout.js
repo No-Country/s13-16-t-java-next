@@ -1,9 +1,8 @@
-
 import Header from "@/components/Header/Header";
 import "./globals.css";
 import { Lato } from "next/font/google";
 
-const lato = Lato({ subsets: ["latin"], weight: ["300", "900"] });
+export const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
 
 export const metadata = {
   title: "App Reciclame",
@@ -14,8 +13,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <Header/>
+      <body className={lato.className}>
+        <Header />
         {children}
       </body>
     </html>
