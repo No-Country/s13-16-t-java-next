@@ -1,3 +1,4 @@
+
 import Header from "@/components/Header/Header";
 import "./globals.css";
 import { Lato } from "next/font/google";
