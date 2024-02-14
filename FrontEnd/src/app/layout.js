@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Lato } from "next/font/google";
 
-const lato = Lato({ subsets: ["latin"], weight: "400", weight: "700", weight: "900" });
+const lato = Lato({ subsets: ["latin"], weight: ["300", "900"]});
 
 export const metadata = {
   title: "App Reciclame",
