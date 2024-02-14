@@ -1,13 +1,14 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import React from 'react'
 
 
-const Header = () => {
+export default function () { 
   return (
     <header className='border-b-2 border-gray-500'>
         <nav className='flex justify-between m-auto max-w-7xl'>
             <ul className='flex m-2 p-2 gap-4'>
-                <Link className='p-1' href={'/'}>Logo</Link>
+                <Image width={30} height={30} src="" className='p-1'></Image>
             </ul>
             <ul className='flex m-2 p-2 gap-4'>
                 <Link className='p-1' href={'/'}>Explorar</Link>
@@ -19,4 +20,5 @@ const Header = () => {
   )
 }
 
-export default Header
+
+
