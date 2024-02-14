@@ -5,7 +5,8 @@ const lato = Lato({ subsets: ["latin"], weight: ["300", "900"] });
 
 export const metadata = {
   title: "App Reciclame",
-  description: "App para reciclaje, Red social de Reciclaje, concientizacion ambiental",
+  description:
+    "App para reciclaje, Red social de Reciclaje, concientizacion ambiental",
 };
 
 export default function RootLayout({ children }) {
