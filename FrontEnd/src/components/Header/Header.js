@@ -7,9 +7,7 @@ export default function () {
   return (
     <header className='border-b-2 border-gray-500'>
         <nav className='flex justify-between m-auto max-w-7xl'>
-            <ul className='flex m-2 p-2 gap-4'>
-                <Image width={30} height={30} src="" className='p-1'></Image>
-            </ul>
+            <Image width={48} height={48} src="" className='flex m-2 p-2 gap-4'></Image>
             <ul className='flex m-2 p-2 gap-4'>
                 <Link className='p-1' href={'/'}>Explorar</Link>
                 <Link className='p-1' href={'/'}>Registrarme</Link>
