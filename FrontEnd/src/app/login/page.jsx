@@ -1,12 +1,24 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Image from "next/image";
-
+import { useForm } from "react-hook-form";
+import { Context } from "../../context/ContextProvider";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { userSchema } from "../../validations/userSchema";
 export default function Login() {
   const [showPassword, setShowPassword] = React.useState(false);
 
+  const { isLogged, setIsLogged } = useContext(Context);
 
+  console.log(isLogged);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(userSchema),
+  });
 
   const handleShowPassword = (e) => {
     e.preventDefault();
@@ -25,7 +37,7 @@ export default function Login() {
         />
       </picture>
       <form
-        action=""
+        onSubmit={handleSubmit((data) => console.log(data))}
         className="flex h-full w-full flex-col items-center justify-center gap-6 bg-white p-16 lg:p-24"
       >
         <p className="text-star w-full text-2xl font-bold uppercase">
@@ -34,10 +46,15 @@ export default function Login() {
         <div className="flex w-full flex-col justify-center gap-2">
           <label className="capitalize">correo electronico</label>
           <input
-            type="text"
+            type="email"
             className="h-10 w-full rounded-lg bg-[#D9D9D9] p-3 text-lg italic placeholder-white"
             placeholder="tucorreo@correo.com"
+            id="email"
+            {...register("email")}
           />
+          {errors.email && (
+            <p className="text-red-500">{errors.email.message}</p>
+          )}
         </div>
         <div className="flex w-full flex-col justify-center gap-2">
           <div className="flex items-center justify-between">
@@ -52,8 +69,11 @@ export default function Login() {
               className="relative h-10 w-full rounded-lg bg-[#D9D9D9] p-3 text-lg italic placeholder-white"
               placeholder="tu contraseña"
               id="password"
+              {...register("password")}
             />
-
+            {errors.password && (
+              <p className="text-red-500">{errors.password.message}</p>
+            )}
             {showPassword ? (
               <button
                 className="absolute right-[110px] mt-3"
@@ -108,7 +128,11 @@ export default function Login() {
           </div>
         </div>
         <div className="w-full">
-          <button className=" w-1/3 rounded-3xl bg-[#838383] p-3 text-white" type="submit">
+          <button
+            className=" w-1/3 rounded-3xl bg-[#838383] p-3 text-white"
+            type="submit"
+            onClick={setIsLogged(true)}
+          >
             Acceder
           </button>
         </div>

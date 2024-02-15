@@ -7,11 +7,12 @@ import React from "react";
 import { Context } from "../../context/ContextProvider";
 import { useContext } from "react";
 
+
 export default function Header() {
   const { isLogged, setIsLogged } = useContext(Context);
-  
+
   return (
-    <div className="fixed left-0 top-0 w-full -mb-12">
+    <div className="fixed left-0 top-0 -mb-12 w-full">
       <header className="border-b-2 border-gray-500">
         <nav className="m-auto flex max-w-7xl justify-between">
           <Image
