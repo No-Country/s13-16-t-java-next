@@ -16,14 +16,14 @@ export default function Header() {
       {isLogged ? (
         <HeaderLogin />
       ) : (
-        <div className="fixed left-0 top-0 z-50 -mb-12 w-full">
+        <div className="fixed left-0 top-0 -mb-12 w-full">
           <header className="border-b-2 border-gray-500">
             <nav className="m-auto flex max-w-7xl justify-between">
               <Image
                 width={48}
                 height={48}
                 src=""
-                className="m-2 flex p-2"
+                className="m-2 flex gap-4 p-2"
                 alt=""
               ></Image>
               <ul className="m-2 flex gap-4 p-2">
