@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Login() {
   const [showPassword, setShowPassword] = React.useState(false);
 
-  'use server';
+
 
 
   const handleShowPassword = (e) => {
