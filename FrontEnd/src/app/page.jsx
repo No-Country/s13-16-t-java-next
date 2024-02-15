@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useContext } from "react";
-import { Context } from "@/context/ContextProvider";
+import { Context } from "../context/ContextProvider";
 
-import CardPost from "@/components/CardPost";
-import { SearchIcon } from "@/components/Icons";
+import CardPost from "../components/CardPost";
+import { SearchIcon } from "../components/Icons";
 
 import { Lato } from "next/font/google";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });

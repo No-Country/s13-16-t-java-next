@@ -1,7 +1,7 @@
 import React from "react";
 import "./globals.css";
 import { Lato } from "next/font/google";
-import { Header } from "@/components/Header";
+import { Header } from "../components/Header";
 import { Providers } from "./Providers";
 
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
