@@ -1,8 +1,10 @@
-import Header from "@/components/Header/Header";
+import React from "react";
 import "./globals.css";
 import { Lato } from "next/font/google";
+import { Header } from "@/components/Header";
+import { Providers } from "./Providers";
 
-export const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
+const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
 
 export const metadata = {
   title: "App Reciclame",
@@ -12,10 +14,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className={lato.className}>
-        <Header />
-        {children}
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   );
