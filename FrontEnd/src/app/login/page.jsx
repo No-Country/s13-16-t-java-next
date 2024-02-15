@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Login() {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -108,9 +109,9 @@ export default function Login() {
           </div>
         </div>
         <div className="w-full">
-          <button className=" w-1/3 rounded-3xl bg-[#838383] p-3 text-white" type="submit">
+          <Link href={"/explorar"}><button className=" w-1/3 rounded-3xl bg-[#838383] p-3 text-white" type="submit">
             Acceder
-          </button>
+          </button></Link>
         </div>
         <p className="text-star w-full">O ingresar con</p>
         <div className="flex w-full items-center gap-4">
