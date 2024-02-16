@@ -16,7 +16,7 @@ export default function Header() {
       {isLogged ? (
         <HeaderLogin />
       ) : (
-        <div className="fixed left-0 top-0 -mb-12 w-full">
+        <div className="fixed left-0 top-0 -mb-12 w-full z-10">
           <header className="border-b-2 border-gray-500">
             <nav className="m-auto flex max-w-7xl justify-between">
               <Image
@@ -30,7 +30,7 @@ export default function Header() {
                 <Link className="p-1" href={"/explorar"}>
                   Explorar
                 </Link>
-                <Link className="p-1" href={"/registrarse"}>
+                <Link className="p-1" href={"/registro"}>
                   Registrarse
                 </Link>
                 <Link
