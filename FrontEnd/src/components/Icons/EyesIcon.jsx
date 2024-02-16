@@ -33,16 +33,16 @@ export function EyeClose({ props }) {
       <path
         d="M8.58494 8.58691C8.20992 8.96206 7.9993 9.47082 7.99939 10.0013C7.99948 10.5317 8.21029 11.0404 8.58544 11.4154C8.96059 11.7904 9.46935 12.0011 9.99979 12.001C10.5302 12.0009 11.0389 11.7901 11.4139 11.4149"
         stroke="#39353F"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M14.681 14.673C13.2782 15.5507 11.6547 16.0109 10 16C6.4 16 3.4 14 1 10C2.272 7.88 3.712 6.322 5.32 5.326M8.18 4.18C8.77904 4.05873 9.38881 3.99842 10 4C13.6 4 16.6 6 19 10C18.334 11.11 17.621 12.067 16.862 12.87M1 1L19 19"
         stroke="#39353F"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
