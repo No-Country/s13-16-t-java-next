@@ -1,11 +1,14 @@
 
 import Image from "next/image";
-import FormLogin from "../../components/forms/formLogin";
+import FormRegister from "../../components/forms/FormRegister";
 
-export default function Login() {
+
+
+export default function Register( ) {
   
+
   return (
-    <main className="mt-[65px]  grid min-h-[100vh] items-center justify-items-center bg-[#D9D9D9] lg:grid-cols-2">
+    <main className=" mt-[65px] grid  items-center justify-items-center bg-[#D9D9D9] lg:grid-cols-2">
       <picture className="  flex h-[400px] w-[400px] items-center justify-center rounded-2xl bg-[#838383] xl:p-5">
         <Image
           src={"/image/login.png"}
@@ -16,8 +19,7 @@ export default function Login() {
           className=""
         />
       </picture>
-      <FormLogin/>
-      
+      <FormRegister/>
     </main>
   );
 }

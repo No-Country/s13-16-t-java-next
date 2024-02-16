@@ -4,7 +4,6 @@ import { Lato } from "next/font/google";
 import { Header } from "../components/Header";
 import { Providers } from "./Providers";
 
-
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
 
 export const metadata = {
@@ -18,7 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="es">
       <body className={lato.className}>
         <Providers>
-        <Header />
+          <Header />
           {children}
         </Providers>
       </body>
