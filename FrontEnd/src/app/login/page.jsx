@@ -5,13 +5,17 @@ import { Context } from "../../context/ContextProvider";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema } from "../../validations/userSchema";
+import { useRouter } from "next/navigation";
+
+// TODO -> Verificar si ya está logeado, en lugar de mostrarle el login, redirigirlo a la página de configuración de perfil.
+// ! usando useRouter enviarlo a ('/configuracion/perfil')
 
 export default function Login() {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const { isLogged, setIsLogged } = useContext(Context);
 
-  console.log(isLogged);
+  const router = useRouter();
 
   const {
     register,
@@ -38,7 +42,11 @@ export default function Login() {
         />
       </picture>
       <form
-        onSubmit={handleSubmit((data) => console.log(data))}
+        onSubmit={handleSubmit((data) => {
+          console.log(data);
+          router.push("/configuracion/perfil");
+          setIsLogged(true);
+        })}
         className="flex h-full w-full flex-col items-center justify-center gap-6 bg-white p-16 lg:p-24"
       >
         <p className="text-star w-full text-2xl font-bold uppercase">
@@ -130,11 +138,8 @@ export default function Login() {
         </div>
         <div className="w-full">
           <button
-            className=" w-1/3 rounded-3xl bg-[#838383] p-3 text-white"
+            className="w-1/3 rounded-3xl bg-[#838383] p-3 text-white"
             type="submit"
-            onClick={() => {
-              setIsLogged(true)
-            }}
           >
             Acceder
           </button>

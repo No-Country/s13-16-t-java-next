@@ -25,18 +25,17 @@ export default function Header() {
                 src=""
                 className="m-2 flex gap-4 p-2"
                 alt=""
-              ></Image>
+              />
               <ul className="m-2 flex gap-4 p-2">
-                <Link className="p-1" href={"/"}>
+                <Link className="p-1" href={"/explorar"}>
                   Explorar
                 </Link>
-                <Link className="p-1" href={"/"}>
+                <Link className="p-1" href={"/registrarse"}>
                   Registrarse
                 </Link>
                 <Link
                   className="w-40 rounded-full bg-gray-300 p-1 text-center font-bold text-white"
                   href={"/login"}
-                  onClick={() => setIsLogged(true)}
                 >
                   Iniciar Sesión
                 </Link>
