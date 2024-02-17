@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { IconComment } from "../Icons/SearchIcon";
 import { IconBell } from "../Icons/SearchIcon";
+import MenuIcon from "../Icons/MenuIcon"
 
 export default function HeaderLogin() {
   return (
@@ -19,26 +20,27 @@ export default function HeaderLogin() {
               className="mr-10 flex p-2"
               alt=""
             ></Image>
-            <Link className="p-1" href={"/"}>
+            <Link className="p-1 hidden md:block" href={"/"}>
               Home
             </Link>
-            <Link className="p-1" href={"/explorar"}>
+            <Link className="p-1 hidden md:block" href={"/explorar"}>
               Explorar
             </Link>
-            <Link className="p-1" href={"/blog"}>
+            <Link className="p-1 hidden md:block" href={"/blog"}>
               Blog
             </Link>
           </ul>
           <ul className="m-2 flex items-center gap-7 p-2">
+            <MenuIcon/>
             <Link
-              className="w-40 rounded-full bg-gray-300 p-1 text-center text-black"
+              className="w-40 rounded-full bg-gray-300 p-1 text-center text-black hidden md:block"
               href={"/"}
             >
               Publicar +
             </Link>
             <IconBell />
             <IconComment />
-            <Image width={40} height={40} className="p-2" src="" alt=""></Image>
+            <Image width={40} height={40} className="p-2 hidden md:block" src="" alt=""></Image>
           </ul>
         </nav>
       </header>

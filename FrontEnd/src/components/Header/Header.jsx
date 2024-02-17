@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import HeaderLogin from "../HeaderLogin/HeaderLogin";
+import MenuIcon from "../Icons/MenuIcon"
 
 import { Context } from "../../context/ContextProvider";
 import { useContext } from "react";
@@ -26,15 +27,16 @@ export default function Header() {
                 className="m-2 flex gap-4 p-2"
                 alt=""
               />
-              <ul className="m-2 flex gap-4 p-2">
-                <Link className="p-1" href={"/explorar"}>
+              <ul className="m-2 flex gap-4 p-2 ">
+                <MenuIcon/>
+                <Link className="p-1 hidden md:block" href={"/explorar"}>
                   Explorar
                 </Link>
-                <Link className="p-1" href={"/registro"}>
+                <Link className="p-1 hidden md:block" href={"/registro"}>
                   Registrarse
                 </Link>
                 <Link
-                  className="w-40 rounded-full bg-gray-300 p-1 text-center font-bold text-white"
+                  className="w-40 rounded-full bg-gray-300 p-1 text-center font-bold text-white hidden md:block"
                   href={"/login"}
                 >
                   Iniciar Sesión
