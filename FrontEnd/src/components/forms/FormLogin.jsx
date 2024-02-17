@@ -36,7 +36,7 @@ function FormLogin() {
           router.push("/configuracion/perfil");
           setIsLogged(true);
         })}
-        className="flex h-full w-full flex-col items-center justify-center gap-6 bg-white p-16 lg:p-24"
+        className="flex h-full w-full flex-col items-center lg:justify-center gap-6 bg-white md:p-16 md:mt-3  p-8  lg:p-24"
       >
         <p className="text-star w-full text-2xl font-bold uppercase">
           ingresar
@@ -45,8 +45,8 @@ function FormLogin() {
           <label className="capitalize">correo electronico</label>
           <input
             type="email"
-            className="h-10 w-full rounded-lg bg-[#D9D9D9] p-3 text-lg italic placeholder-white"
-            placeholder="tucorreo@correo.com"
+            className="h-12 w-full rounded-3xl border-2 border-[#838383] p-3 placeholder-[#838383] "
+            placeholder="Correo"
             id="email"
             {...register("email")}
           />
@@ -57,28 +57,31 @@ function FormLogin() {
         <div className=" relative flex w-full flex-col justify-center gap-2">
           <div className="flex items-center justify-between">
             <label className="font-[400] capitalize">contraseña</label>
-            <Link href="" className="text-[12px]">
-              ¿Has olvidado tu contraseña?
-            </Link>
+           
           </div>
           <div className="">
             <input
               type={showPassword ? "text" : "password"}
-              className="h-10 w-full rounded-lg bg-[#D9D9D9] p-3 text-lg italic placeholder-white"
-              placeholder="tu contraseña"
+              className="h-12 w-full rounded-3xl border-2 border-[#838383] p-3 placeholder-[#838383] "
               id="password"
+              placeholder="contraseña"
               {...register("password")}
             />
+            <div className="flex justify-end w-full">
+             <Link href="" className="text-[12px] mt-2 underline">
+              ¿Has olvidado tu contraseña?
+            </Link>
+            </div>
              {errors.password && (
               <p className="text-red-500">{errors.password.message}</p>
             )}
              <div
-            className="cursor-pointer absolute right-2 top-8 mt-3"
+            className="cursor-pointer absolute right-4 top-8 mt-4"
             onClick={() => {
               setShowPassword(!showPassword);
             }}
           >
-            {showPassword ? <EyeOpen /> : <EyeClose />}
+            {showPassword ? <EyeOpen fill={"#838383"}/> : <EyeClose stroke={"#838383"} />}
           </div>
          
           </div>
@@ -86,14 +89,14 @@ function FormLogin() {
         </div>
         <div className="w-full">
           <button
-            className="w-1/3 rounded-3xl bg-[#838383] p-3 text-white"
+            className="md:w-1/3 w-full rounded-3xl p-3 text-white bg-primary-green"
             type="submit"
           >
-            Acceder
+            Ingresar
           </button>
         </div>
         <div className="w-full">
-        <p className="text-star w-full flex gap-2 text-lg">¿No tienes cuenta? <Link href="/registro" className="font-[500]  text-lg underline ">Regístrate aquí</Link></p>
+        <p className="text-star w-full flex gap-2  lg:text-lg text-sm mt-24 lg:mt-0">¿No tienes cuenta? <Link href="/registro" className="lg:font-[500]  lg:text-lg text-sm underline font-semibold  ">Regístrate aquí</Link></p>
         </div>
       </form>
   )
