@@ -14,56 +14,61 @@ export default function Page() {
 
   return (
     <section className="grid min-h-dvh place-items-center pt-20">
-      <div className="flex gap-4">
-        <div className="relative mt-10 self-start">
-          <Image
-            className="rounded-full bg-gray-300"
-            width={144}
-            height={144}
-            src=""
-            alt="foto de perfil"
-          />
-          <button
-            className="absolute bottom-0 right-0 h-10 w-10 rounded-full bg-gray-400 p-2"
-            type="button"
-          >
-            <AddIcon />
-          </button>
-        </div>
-        <div className="md:max-w-lg">
-          <header>
-            <h1 className="text-2xl font-bold">Configura tu cuenta</h1>
-          </header>
-          <form action="" className="flex flex-col gap-10">
-            <h2>Tus intereses</h2>
-
-            <div className="flex flex-wrap gap-4">
-              {Array.from({ length: 12 }).map((_, i) => (
-                <button
-                  className="rounded-xl border border-gray-400 bg-gray-300 px-4 py-2"
-                  type="button"
-                  key={i}
-                >
-                  Interés {i + 1}
-                </button>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-4">
+      <div className="p-4 md:max-w-5xl">
+        <header>
+          <h1 className="text-2xl font-bold uppercase">Configurar tu cuenta</h1>
+        </header>
+        <div className="min-[640px]:flex min-[640px]:gap-40">
+          <div className="relative mt-10 flex justify-center min-[640px]:w-full min-[640px]:flex-col min-[640px]:justify-start">
+            <h2 className="absolute left-0 font-medium min-[640px]:static min-[640px]:mb-4 min-[640px]:text-center">
+              Foto de perfil
+            </h2>
+            <div className="relative w-max min-[640px]:mx-auto">
+              <Image
+                className="aspect-square min-w-24 rounded-full bg-gray-300 min-[640px]:w-40"
+                width={96}
+                height={96}
+                src=""
+                alt="foto de perfil"
+              />
               <button
-                className="rounded-xl border border-gray-400 px-4 py-2"
+                className="absolute bottom-0 right-0 h-10 w-10 rounded-full bg-gray-400 p-2"
                 type="button"
               >
-                Volver
+                <AddIcon />
+              </button>
+            </div>
+          </div>
+          <div>
+            <form action="" className="flex flex-col gap-10">
+              <h2 className="font-medium">Tus intereses</h2>
+              <div className="flex flex-wrap justify-center gap-4 min-[640px]:justify-start">
+                {Array.from({ length: 12 }).map((_, i) => (
+                  <button
+                    className="border-secondary-violet w-full max-w-40 rounded-[20px] border bg-[#EAE2FA4D] px-5 py-4 leading-5"
+                    type="button"
+                    key={i}
+                  >
+                    Tus intereses
+                  </button>
+                ))}
+              </div>
+            </form>
+            <div className="mt-10 flex justify-center gap-4 min-[640px]:items-center min-[640px]:justify-start">
+              <button
+                className="border-primary-green text-primary-green w-full max-w-40 rounded-full border px-4 py-2"
+                type="button"
+              >
+                Omitir
               </button>
               <button
-                className="rounded-xl bg-gray-300 px-4 py-2"
+                className="bg-primary-green w-full max-w-40 rounded-full px-4 py-2 text-white"
                 type="submit"
               >
                 Continuar
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </section>

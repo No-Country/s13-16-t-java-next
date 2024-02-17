@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 
-export default function MenuIcon(props) {
+export default function MenuIconLog(props) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -11,18 +11,28 @@ export default function MenuIcon(props) {
   return (
     <>
       <div className="cursor-pointer" onClick={toggleMenu}>
-        {menuOpen ? <XMarkIcon {...props} /> : <HamburgerIcon {...props} />}
+        {menuOpen ? (
+          <XMarkIcon {...props} />
+        ) : (
+          <MenuIcon {...props} />
+        )}
       </div>
       {menuOpen && (
         <div className="absolute right-0 top-full flex w-full flex-col border border-gray-300 bg-gray-200 shadow-lg md:hidden">
-          <Link className="m-2 border-b border-gray-300 text-center" href={"/registro"}>
-            Registrarse
+          <Link className="m-2 border-b border-gray-300 text-center" href={"/"}>
+            Home
           </Link>
-          <Link className="m-2 border-b border-gray-300 text-center" href={"/login"}>
-            Iniciar Sesión
+          <Link className="m-2 border-b border-gray-300 text-center" href={""}>
+            Notificaciones
           </Link>
-          <Link className="m-2 text-center" href={"/explorar"}>
+          <Link className="m-2 border-b border-gray-300 text-center" href={""}>
+            Mensajes
+          </Link>
+          <Link className="m-2 border-b border-gray-300 text-center" href={"/explorar"}>
             Explorar
+          </Link>
+          <Link className="m-2 text-center" href={"/blog"}>
+            Blog
           </Link>
         </div>
       )}
@@ -30,7 +40,7 @@ export default function MenuIcon(props) {
   );
 }
 
-const HamburgerIcon = (props) => {
+const MenuIcon = (props) => {
   return (
     <svg
       {...props}

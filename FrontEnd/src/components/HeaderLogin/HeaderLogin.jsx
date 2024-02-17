@@ -5,9 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { IconComment } from "../Icons/SearchIcon";
 import { IconBell } from "../Icons/SearchIcon";
-import MenuIcon from "../Icons/MenuIcon"
+import MenuIconLog from "../Icons/MenuIconLog"
+
+
 
 export default function HeaderLogin() {
+
   return (
     <div className="fixed left-0 top-0 z-50 -mb-12 w-full">
       <header className="border-b-2 border-gray-500">
@@ -31,7 +34,7 @@ export default function HeaderLogin() {
             </Link>
           </ul>
           <ul className="m-2 flex items-center gap-7 p-2">
-            <MenuIcon/>
+            <MenuIconLog/>
             <Link
               className="w-40 rounded-full bg-gray-300 p-1 text-center text-black hidden md:block"
               href={"/"}

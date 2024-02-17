@@ -15,7 +15,7 @@ function FormRegister() {
   const {register, handleSubmit} = useForm()
   return (
     <form
-       className="flex h-full w-full flex-col items-center justify-center gap-6 overflow-y-auto bg-white px-24 py-10"
+       className="flex h-full w-full flex-col items-center justify-center gap-6 overflow-y-auto bg-white p-5  md:px-24 md:py-10"
       
        onSubmit={handleSubmit((data) => {
         console.log(data);
@@ -108,9 +108,9 @@ function FormRegister() {
         </div>
         <div className="flex w-full flex-col gap-2 ">
           <label className="font-[400] capitalize">fecha de nacimiento</label>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-3">
             <select
-             className="h-12  rounded-3xl border-2 border-[#838383] p-3 placeholder-[#838383]"
+             className="rounded-3xl border-2 border-[#838383] p-3 placeholder-[#838383]"
              {...register("day")}>
                 <option >dd</option>
               {days.map((day) => (
@@ -120,7 +120,7 @@ function FormRegister() {
               ))}
             </select>
             <select
-             className="h-12  rounded-3xl border-2 border-[#838383] p-3 placeholder-[#838383]"
+             className="rounded-3xl border-2 border-[#838383] p-3 placeholder-[#838383]"
              {...register("month")}>
                 <option value="" >mm</option>
               {months.map((month, index) => (
@@ -130,7 +130,7 @@ function FormRegister() {
               ))}
             </select>
             <select 
-            className="h-12  rounded-3xl border-2 border-[#838383] p-3 placeholder-[#838383]"
+            className=" rounded-3xl border-2 border-[#838383] p-3 placeholder-[#838383]"
             {...register("year")}>
               <option value="">yyyy</option>
               {years.map((year) => (
@@ -144,14 +144,14 @@ function FormRegister() {
 
         <div className="w-full">
           <button
-            className="w-1/3 rounded-3xl bg-[#838383] p-3 text-white"
+            className="md:w-[40%] rounded-3xl  p-3 text-white bg-primary-green w-full "
             type="submit"
           >
-            Enviar
+            Registrate
           </button>
         </div>
-        <div className="w-full">
-          <p className="text-star flex w-full gap-2 text-lg">
+        <div className="w-full flex justify-center">
+          <p className="md:text-star flex justify-center md:justify-normal w-full gap-2 text-lg">
             ¿ Tienes cuenta?{" "}
             <Link href="/login" className="text-lg  font-[500] underline ">
               Inicia sesion
