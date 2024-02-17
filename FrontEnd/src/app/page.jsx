@@ -89,7 +89,7 @@ export default function Home() {
                 </p>
               </div>
               <button
-                className="w-full max-w-36 rounded-2xl bg-[#6DE495] px-8 py-[10px] leading-5 text-white"
+                className="bg-primary-green w-full max-w-36 rounded-2xl px-8 py-[10px] leading-5 text-white"
                 type="button"
               >
                 Boton
@@ -109,7 +109,7 @@ export default function Home() {
                 ))}
               </div>
               <button
-                className="mx-auto block h-12 w-full rounded-2xl bg-[#6DE495] px-8 py-[10px] text-lg leading-5 text-white min-[640px]:max-w-52"
+                className="bg-primary-green mx-auto block h-12 w-full rounded-2xl px-8 py-[10px] text-lg leading-5 text-white min-[640px]:max-w-52"
                 type="button"
               >
                 Explorar
