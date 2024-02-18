@@ -45,7 +45,7 @@ export default function Page() {
               <div className="flex flex-wrap justify-center gap-4 min-[640px]:justify-start">
                 {Array.from({ length: 12 }).map((_, i) => (
                   <button
-                    className="border-secondary-violet w-full max-w-40 rounded-[20px] border bg-[#EAE2FA4D] px-5 py-4 leading-5"
+                    className="w-full max-w-40 rounded-[20px] border border-secondary-violet bg-[#EAE2FA4D] px-5 py-4 leading-5"
                     type="button"
                     key={i}
                   >
@@ -56,13 +56,13 @@ export default function Page() {
             </form>
             <div className="mt-10 flex justify-center gap-4 min-[640px]:items-center min-[640px]:justify-start">
               <button
-                className="border-primary-green text-primary-green w-full max-w-40 rounded-full border px-4 py-2"
+                className="w-full max-w-40 rounded-full border border-primary-green px-4 py-2 text-primary-green"
                 type="button"
               >
                 Omitir
               </button>
               <button
-                className="bg-primary-green w-full max-w-40 rounded-full px-4 py-2 text-white"
+                className="w-full max-w-40 rounded-full bg-primary-green px-4 py-2 text-white"
                 type="submit"
               >
                 Continuar
