@@ -4,9 +4,11 @@ import React, { useContext } from "react";
 import { Context } from "../context/ContextProvider";
 
 import CardPost from "../components/CardPost";
-import { SearchIcon } from "../components/Icons";
+
+import HomeLogin from "../components/HomeLogin/HomeLogin";
 
 import { Lato } from "next/font/google";
+import { SearchIcon } from "../components/Icons";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
 
 export default function Home() {
@@ -15,18 +17,7 @@ export default function Home() {
   return (
     <>
       {isLogged ? (
-        <main className="pt-20">
-          <h2
-            className={`${lato.className} text-[66px] capitalize leading-[5rem]`}
-          >
-            Te podría interesar
-          </h2>
-          <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto md:w-2/3 md:columns-6">
-            {Array.from({ length: 36 }).map((_, i) => (
-              <CardPost key={i} />
-            ))}
-          </div>
-        </main>
+        <HomeLogin />
       ) : (
         <main className="bg-gray-200">
           <article
@@ -54,7 +45,7 @@ export default function Home() {
                 <label
                   id="input-search"
                   className="mx-auto mt-8 flex items-center gap-4 text-pretty rounded-full border-[1.5px]
-                  border-[#6D6D6D] bg-white p-4"
+          border-[#6D6D6D] bg-white p-4"
                 >
                   <SearchIcon className="aspect-square w-[1.875rem]" />
                   <input
@@ -89,7 +80,7 @@ export default function Home() {
                 </p>
               </div>
               <button
-                className="bg-primary-green w-full max-w-36 rounded-2xl px-8 py-[10px] leading-5 text-white"
+                className="w-full max-w-36 rounded-2xl bg-primary-green px-8 py-[10px] leading-5 text-white"
                 type="button"
               >
                 Boton
@@ -109,7 +100,7 @@ export default function Home() {
                 ))}
               </div>
               <button
-                className="bg-primary-green mx-auto block h-12 w-full rounded-2xl px-8 py-[10px] text-lg leading-5 text-white min-[640px]:max-w-52"
+                className="mx-auto block h-12 w-full rounded-2xl bg-primary-green px-8 py-[10px] text-lg leading-5 text-white min-[640px]:max-w-52"
                 type="button"
               >
                 Explorar

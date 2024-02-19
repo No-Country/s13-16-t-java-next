@@ -18,22 +18,24 @@ export default function MenuIconLog(props) {
         )}
       </div>
       {menuOpen && (
-        <div className="absolute right-0 top-full flex w-full flex-col border border-gray-300 bg-gray-200 shadow-lg md:hidden">
-          <Link className="m-2 border-b border-gray-300 text-center" href={"/"}>
-            Home
-          </Link>
-          <Link className="m-2 border-b border-gray-300 text-center" href={""}>
-            Notificaciones
-          </Link>
-          <Link className="m-2 border-b border-gray-300 text-center" href={""}>
-            Mensajes
-          </Link>
-          <Link className="m-2 border-b border-gray-300 text-center" href={"/explorar"}>
-            Explorar
-          </Link>
-          <Link className="m-2 text-center" href={"/blog"}>
-            Blog
-          </Link>
+        <div className="fixed top-20 left-0 h-full w-1/2 bg-gray-200 shadow-lg z-50 transition-transform duration-500 ease-out transform translate-x-0 md:hidden">
+          <div className="h-full flex flex-col justify-start items-start">
+            <Link className="m-2 border-b border-gray-300 text-center" href={"/"}>
+              Home
+            </Link>
+            <Link className="m-2 border-b border-gray-300 text-center" href={""}>
+              Notificaciones
+            </Link>
+            <Link className="m-2 border-b border-gray-300 text-center" href={""}>
+              Mensajes
+            </Link>
+            <Link className="m-2 border-b border-gray-300 text-center" href={"/explorar"}>
+              Explorar
+            </Link>
+            <Link className="m-2 text-center" href={"/blog"}>
+              Blog
+            </Link>
+          </div>
         </div>
       )}
     </>
