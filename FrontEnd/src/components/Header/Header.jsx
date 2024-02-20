@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import HeaderLogin from "../HeaderLogin/HeaderLogin";
+import MenuIcon from "../Icons/MenuIcon"
 
 import { Context } from "../../context/ContextProvider";
 import { useContext } from "react";
@@ -16,7 +17,7 @@ export default function Header() {
       {isLogged ? (
         <HeaderLogin />
       ) : (
-        <div className="fixed left-0 top-0 -mb-12 w-full">
+        <div className="fixed left-0 top-0 -mb-12 w-full z-10">
           <header className="border-b-2 border-gray-500">
             <nav className="m-auto flex max-w-7xl justify-between">
               <Image
@@ -25,18 +26,18 @@ export default function Header() {
                 src=""
                 className="m-2 flex gap-4 p-2"
                 alt=""
-              ></Image>
-              <ul className="m-2 flex gap-4 p-2">
-                <Link className="p-1" href={"/"}>
+              />
+              <ul className="m-2 flex gap-4 p-2 ">
+                <MenuIcon/>
+                <Link className="p-1 hidden md:block" href={"/explorar"}>
                   Explorar
                 </Link>
-                <Link className="p-1" href={"/"}>
+                <Link className="p-1 hidden md:block" href={"/registro"}>
                   Registrarse
                 </Link>
                 <Link
-                  className="w-40 rounded-full bg-gray-300 p-1 text-center font-bold text-white"
+                  className="w-40 rounded-full bg-gray-300 p-1 text-center font-bold text-white hidden md:block"
                   href={"/login"}
-                  onClick={() => setIsLogged(true)}
                 >
                   Iniciar Sesión
                 </Link>
