@@ -24,17 +24,33 @@ public class Post {
     @Id
     //@GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @Column(nullable = false)
     private String title;
+
+    @Column(nullable = false)
     private String description;
+
+    @Column(nullable = false)
     private int favorite;
+
     //private Profile profile;
     //Image
+
+    @Enumerated (EnumType.STRING)
+    @Column(nullable = false)
     private Category category;
+
+    @Column (nullable = false)
     private LocalDate date;
+
+    @Enumerated (EnumType.STRING)
+    @Column(nullable = false)
     private Status status;
-    @OneToMany
+
+    @OneToMany (mappedBy = "post")
     private ArrayList<Comment> comments;
+
+    @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
-
-
 }

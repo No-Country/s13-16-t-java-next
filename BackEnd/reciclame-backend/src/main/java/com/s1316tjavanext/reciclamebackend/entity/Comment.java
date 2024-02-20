@@ -22,13 +22,20 @@ public class Comment {
     @Id
     //@GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @Column(nullable = false)
     private String description;
+
+    @Column(nullable = false)
     private LocalDate date;
+
+    @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
+
     //private Profile profile;
+
     @ManyToOne
+    @JoinColumn(name = "post_id", nullable = false)
     private Post post;
-
-
 
 }
