@@ -1,17 +1,17 @@
 import Image from "next/image";
 import { FormRegister } from "@/src/components/forms/FormRegister";
+import RegisterBackground from "@/src/assets/background/background-1.webp";
 
 export default function Register() {
   return (
-    <main className="mt-[65px] grid items-center justify-items-center bg-[#D9D9D9] lg:grid-cols-2">
-      <picture className=" hidden  h-[400px] w-[400px] items-center justify-center rounded-2xl bg-[#838383] lg:flex xl:p-5">
+    <main className="relative grid items-center justify-items-center lg:grid-cols-2">
+      <picture className="min-h-full self-start pt-16">
         <Image
-          src={"/image/login.png"}
-          alt={"Image login"}
-          width={176}
-          height={176}
+          width={1416}
+          height={1574}
+          src={RegisterBackground}
+          alt={"Image register"}
           priority
-          className=""
         />
       </picture>
       <FormRegister />

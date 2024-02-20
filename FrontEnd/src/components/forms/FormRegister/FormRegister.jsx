@@ -51,7 +51,7 @@ function FormRegister() {
 
   return (
     <form
-      className="flex h-full w-full flex-col items-center justify-center gap-6 overflow-y-auto bg-white p-5  md:px-24 md:py-10"
+      className="flex h-full w-full max-w-2xl flex-col items-center justify-center gap-6 overflow-y-auto bg-white p-5  md:px-24 md:py-10"
       onSubmit={handleSubmit((data) => {
         console.log(data);
         // router.push("/configuracion");
@@ -230,8 +230,8 @@ function FormRegister() {
           <div className="relative w-full">
             <select
               className={`input-form ${errors.month ? "hover:border-wrong focus:outline-wrong" : "hover:border-secondary-violet focus:outline-secondary-violet"}`}
-              onChange={(e) => setMonthSelected(e.target.value)}
               {...register("month")}
+              onChange={(e) => setMonthSelected(e.target.value)}
             >
               <option value="">mm</option>
               {months.map((month, index) => (
@@ -250,8 +250,8 @@ function FormRegister() {
           <div className="relative w-full">
             <select
               className={`input-form ${errors.year ? "hover:border-wrong focus:outline-wrong" : "hover:border-secondary-violet focus:outline-secondary-violet"}`}
-              onChange={(e) => setYearSelected(e.target.value)}
               {...register("year")}
+              onChange={(e) => setYearSelected(e.target.value)}
             >
               <option value="">yyyy</option>
               {years.map((year) => {

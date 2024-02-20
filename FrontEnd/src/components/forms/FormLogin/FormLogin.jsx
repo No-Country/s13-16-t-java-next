@@ -34,7 +34,7 @@ function FormLogin() {
         router.push("/configuracion/perfil");
         setIsLogged(true);
       })}
-      className="flex h-full w-full flex-col items-center gap-6 bg-white p-8 md:mt-3 md:p-16  lg:justify-center  lg:p-24"
+      className="flex h-full w-full max-w-2xl flex-col items-center gap-6 bg-white p-8 md:mt-3 md:p-16  lg:justify-center  lg:p-24"
     >
       <p className="text-star w-full text-2xl font-bold uppercase">ingresar</p>
       <div className="relative flex w-full flex-col justify-center gap-2">
