@@ -23,8 +23,6 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public List<Province> getProvinces() {
-        System.out.println("LocationServiceImpl.getProvinces");
-        System.out.println("Provinces:" + provinceRepository.findAll());
         return provinceRepository.findAll();
     }
 
