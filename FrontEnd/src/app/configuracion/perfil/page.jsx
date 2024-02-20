@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { Context } from "../../../context/ContextProvider";
 import Image from "next/image";
 import { AddIcon } from "../../../components/Icons";
+import UserImage from "@/src/assets/profile/Rectangle.png";
 
 export default function Page() {
   const { isLogged } = useContext(Context);
@@ -28,11 +29,11 @@ export default function Page() {
                 className="aspect-square min-w-24 rounded-full bg-gray-300 min-[640px]:w-40"
                 width={96}
                 height={96}
-                src=""
+                src={UserImage}
                 alt="foto de perfil"
               />
               <button
-                className="absolute bottom-0 right-0 h-10 w-10 rounded-full bg-gray-400 p-2"
+                className="absolute bottom-0 right-0 h-10 w-10 rounded-full bg-accent-yellow p-2"
                 type="button"
               >
                 <AddIcon />
@@ -41,7 +42,10 @@ export default function Page() {
           </div>
           <div>
             <form action="" className="flex flex-col gap-10">
-              <h2 className="font-medium">Tus intereses</h2>
+              <div>
+                <h2 className="font-medium">Tus intereses</h2>
+                <p>Elige hasta 3 opciones:</p>
+              </div>
               <div className="flex flex-wrap justify-center gap-4 min-[640px]:justify-start">
                 {Array.from({ length: 12 }).map((_, i) => (
                   <button

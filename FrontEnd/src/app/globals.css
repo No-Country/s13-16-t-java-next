@@ -7,3 +7,13 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+@layer components {
+  .input-form {
+    @apply h-12 w-full appearance-none rounded-3xl border-2 border-primary-green p-3 placeholder-[#838383];
+
+    & + .chevron-down-icon {
+      @apply absolute right-2 top-0 grid h-full w-8 place-items-center;
+    }
+  }
+}

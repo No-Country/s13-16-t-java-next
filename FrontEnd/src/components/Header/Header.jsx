@@ -19,7 +19,7 @@ export default function Header() {
       ) : (
         <div className="fixed left-0 top-0 -mb-12 w-full z-10">
           <header className="border-b-2 border-gray-500">
-            <nav className="m-auto flex max-w-7xl justify-between">
+            <nav className="m-auto flex max-w-7xl h-16 justify-between">
               <Image
                 width={48}
                 height={48}

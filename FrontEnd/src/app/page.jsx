@@ -19,12 +19,11 @@ export default function Home() {
       {isLogged ? (
         <HomeLogin />
       ) : (
-        <main className="bg-gray-200">
+        <main>
           <article
-            className="grid h-dvh w-full place-items-center"
+            className="grid h-dvh w-full place-items-center text-white"
             style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1496458590512-56d2688442b1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+              backgroundImage: "url('/background/homepage.webp')",
               backgroundSize: "cover",
             }}
           >
@@ -45,11 +44,11 @@ export default function Home() {
                 <label
                   id="input-search"
                   className="mx-auto mt-8 flex items-center gap-4 text-pretty rounded-full border-[1.5px]
-          border-[#6D6D6D] bg-white p-4"
+          border-white p-4"
                 >
-                  <SearchIcon className="aspect-square w-[1.875rem]" />
+                  <SearchIcon className="aspect-square w-[1.875rem] fill-white" />
                   <input
-                    className="w-full border-none bg-transparent outline-none"
+                    className="w-full border-none bg-transparent outline-none placeholder:text-white"
                     type="search"
                     name="search"
                     id="input-search"
@@ -80,7 +79,7 @@ export default function Home() {
                 </p>
               </div>
               <button
-                className="w-full max-w-36 rounded-2xl bg-primary-green px-8 py-[10px] leading-5 text-white"
+                className="w-full max-w-36 rounded-2xl bg-secondary-violet px-8 py-[10px] leading-5 text-white"
                 type="button"
               >
                 Boton

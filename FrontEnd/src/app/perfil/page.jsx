@@ -1,5 +1,10 @@
-import React from "react";
+import BlogPost from "../../components/BlogPost";
 
-export default function Page() {
-  return <div>pagina del perfil</div>;
+export default function PerfilPage() {
+    return(
+        <section className="w-11/12 mx-auto">
+            <p>Publicaciones</p>
+            <BlogPost/>
+        </section>
+    )
 }
