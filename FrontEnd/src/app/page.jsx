@@ -19,12 +19,11 @@ export default function Home() {
       {isLogged ? (
         <HomeLogin />
       ) : (
-        <main className="bg-gray-200">
+        <main>
           <article
             className="grid h-dvh w-full place-items-center"
             style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1496458590512-56d2688442b1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+              backgroundImage: "url('/background/homepage.webp')",
               backgroundSize: "cover",
             }}
           >
@@ -80,7 +79,7 @@ export default function Home() {
                 </p>
               </div>
               <button
-                className="w-full max-w-36 rounded-2xl bg-primary-green px-8 py-[10px] leading-5 text-white"
+                className="w-full max-w-36 rounded-2xl bg-secondary-violet px-8 py-[10px] leading-5 text-white"
                 type="button"
               >
                 Boton
