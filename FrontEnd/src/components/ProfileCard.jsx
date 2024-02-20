@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import img from '../assets/profile/Rectangle-2.png'
+import ConfigIcon from '../components/Icons/ConfigIcon'
 
 export default function ProfileCard() {
     const pathname = usePathname();
@@ -23,7 +24,7 @@ export default function ProfileCard() {
       ];
 
   return (
-  <article className="w-11/12 max-[855px]:w-full mx-auto border-solid border-2 bg-white border-white rounded-[2.5rem] max-[855px]:rounded-none h-fit shadow-xl max-[855px]:shadow-none -translate-y-16">
+  <article className="w-11/12 relative max-[855px]:w-full mx-auto border-solid border-2 bg-white border-white rounded-[2.5rem] max-[855px]:rounded-none h-fit shadow-xl max-[855px]:shadow-none -translate-y-16">
     <div className="mb-8 flex flex-col min-[855px]:flex-row justify-between">
         <Image src={img} alt="" height={200} width={200} className="bg-gray-300 rounded-full ml-10 -translate-y-16 border-white border-4 border-solid" />
         <div className="mt-8 max-[855px]:-mt-8">
@@ -53,6 +54,9 @@ export default function ProfileCard() {
             </Link>
         ))}
     </nav>
+    <button className="absolute top-4 right-8 bg-gray-dark-bg rounded-md p-1 hover:scale-105">
+        <ConfigIcon width="30" height="30"/>
+    </button>
   </article>)
 }
 
