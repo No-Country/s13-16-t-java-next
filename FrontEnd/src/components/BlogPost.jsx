@@ -2,11 +2,21 @@ import Image from "next/image"
 import img from '../assets/unsplash_6ZGEQb-CxIo.png'
 import FavIcon from '../components/Icons/FavIcon'
 
-export default function BlogPost() {
+export default function BlogPost({query}) {
+
+    const blogs = [ 
+        {tittle: 'Reciclaje de plasticos'},
+        {tittle: 'Reciclaje de bolsas plasticas'},
+        {tittle: 'Reciclaje de maderas'},
+        {tittle: 'Reciclaje de bancos de maderas'},
+        {tittle: 'Reciclaje de vidrios'},
+        {tittle: 'Reciclaje de telas'},
+    ]
+
   return (
     <div className="my-12 flex flex-wrap justify-center min-[1337px]:justify-between gap-x-4 gap-y-10 md:mx-auto w-full ">
-        {Array.from({ length: 12 }).map((_, i) => (
-            <BlogArticle key={i} tittle={'Nombre del Articulo'}/>
+        {blogs.map((blog) => (
+            <BlogArticle key={blog.tittle} tittle={blog.tittle}/>
         ))}
   </div>)
 }
@@ -20,7 +30,7 @@ export function BlogArticle({tittle}){
                 </div>
                 <p className="text-[16px] font-[500]">{tittle}</p>
             </article>
-            <button className="hidden group-hover:block absolute top-4 right-4 ">
+            <button className="block md:hidden group-hover:block absolute top-4 right-4 ">
                 <FavIcon width="25" height="24" />
             </button>
         </div>
