@@ -31,7 +31,7 @@ function FormLogin() {
     <form
       onSubmit={handleSubmit((data) => {
         console.log(data);
-        router.push("/configuracion/perfil");
+        router.push("/");
         setIsLogged(true);
       })}
       className="flex h-full w-full max-w-2xl flex-col items-center gap-6 bg-white p-8 md:mt-3 md:p-16  lg:justify-center  lg:p-24"

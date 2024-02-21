@@ -6,12 +6,13 @@ import Image from "next/image";
 import { IconComment } from "../Icons/SearchIcon";
 import { IconBell } from "../Icons/SearchIcon";
 import MenuIconLog from "../Icons/MenuIconLog";
+import Submenu from "../Submenu";
 
 export default function HeaderLogin() {
   return (
-    <div className="fixed left-0 top-0 z-50 -mb-12 w-full">
+    <div className="fixed left-0 top-0 z-50 -mb-12 w-full bg-white">
       <header className="border-b-2 border-gray-500">
-        <nav className="m-auto flex h-16 max-w-7xl justify-between">
+        <nav className="m-auto flex h-16 max-w-7xl justify-between relative">
           <ul className="m-2 flex items-center gap-4 p-2">
             <Image
               width={48}
@@ -33,20 +34,17 @@ export default function HeaderLogin() {
           <ul className="m-2 flex items-center gap-7 p-2">
             <MenuIconLog />
             <Link
-              className="hidden w-40 rounded-full bg-gray-300 p-1 text-center text-black md:block"
+              className="hidden w-40 rounded-full bg-accent-yellow p-2 text-center  text-black md:block"
               href={"/"}
             >
               Publicar +
             </Link>
             <IconBell />
             <IconComment />
-            <Image
-              width={40}
-              height={40}
-              className="hidden p-2 md:block"
-              src=""
-              alt=""
-            ></Image>
+           
+           
+            <Submenu/>
+   
           </ul>
         </nav>
       </header>

@@ -19,7 +19,7 @@ const Page = () => {
             placeholder="Busca materiales (ej: papel, plástico, etc)"
           />
         </label>
-        <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto md:w-2/3 md:columns-6 p-2">
+        <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto  md:columns-6 p-2">
           {Array.from({ length: 36 }).map((_, i) => (
             <CardPost key={i} />
           ))}
