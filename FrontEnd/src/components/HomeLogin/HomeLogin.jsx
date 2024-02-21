@@ -7,11 +7,11 @@ export default function HomeLogin() {
   return (
     <main className="mx-auto max-w-7xl pt-20">
       <h2
-        className={`${lato.className} text-[clamp(42px,_8vw,_66px)] font-semibold capitalize`}
+        className={`${lato.className} text-[clamp(42px,_8vw,_66px)] font-semibold capitalize pl-2 text-center lg:text-start`}
       >
         Te podría interesar
       </h2>
-      <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto md:w-2/3 md:columns-6">
+      <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto  lg:columns-6">
         {Array.from({ length: 36 }).map((_, i) => (
           <Link href={`/publicaciones/${i}`}><CardPost key={i} /></Link>
         ))}

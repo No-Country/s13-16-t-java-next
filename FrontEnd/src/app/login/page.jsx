@@ -1,6 +1,6 @@
 import Image from "next/image";
 import FormLogin from "../../components/forms/FormLogin/FormLogin";
-import LoginBackground from "@/src/assets/background/background-3.webp";
+import LoginBackground from "@/src/assets/background/background-2.png";
 
 export default function Login() {
   return (
