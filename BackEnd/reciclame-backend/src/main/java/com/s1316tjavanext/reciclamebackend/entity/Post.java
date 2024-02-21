@@ -8,7 +8,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -22,7 +22,7 @@ import java.util.UUID;
 @Where(clause = "deleted=false")
 public class Post {
     @Id
-    //@GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(nullable = false)
@@ -32,7 +32,7 @@ public class Post {
     private String description;
 
     @Column(nullable = false)
-    private int favorite;
+    private int love;
 
     //private Profile profile;
     //Image
@@ -46,10 +46,10 @@ public class Post {
 
     @Enumerated (EnumType.STRING)
     @Column(nullable = false)
-    private Status status;
+    private Status status = Status.Abierto;
 
     @OneToMany (mappedBy = "post")
-    private ArrayList<Comment> comments;
+    private List<Comment> comments;
 
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;

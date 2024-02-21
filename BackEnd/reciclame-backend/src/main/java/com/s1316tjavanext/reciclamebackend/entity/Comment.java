@@ -20,7 +20,7 @@ import java.util.UUID;
 public class Comment {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(nullable = false)
@@ -32,6 +32,7 @@ public class Comment {
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
 
+    //private Photo photo;
     //private Profile profile;
 
     @ManyToOne
