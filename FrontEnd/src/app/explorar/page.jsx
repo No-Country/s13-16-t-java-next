@@ -1,5 +1,4 @@
 import React from "react";
-import HeaderLogin from "../../components/HeaderLogin/HeaderLogin";
 import CardPost from "../../components/CardPost";
 import { SearchIcon } from "../../components/Icons";
 
