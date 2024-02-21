@@ -17,7 +17,7 @@ export default function MenuIconLog(props) {
       {menuOpen && (
         <div className="fixed left-0 top-16 z-50 h-full w-1/2 translate-x-0 transform bg-gray-100 shadow-lg transition-transform duration-500 ease-out md:hidden">
           <div className="m-2 flex flex-wrap items-center p-2">
-            <Image src={""} width={20} height={20} alt=""></Image>
+            <Image src={"/image/profileHeader.png"} width={40} height={40} alt="Imagen de Perfil" className="rounded-full"></Image>
             <div className="m-2 p-2">
               <h3 className="text-xl">Nombre de usuario</h3>
               <Link href={"/perfil"}>Mi Perfil</Link>
