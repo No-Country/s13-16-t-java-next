@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { FormRegister } from "@/src/components/forms/FormRegister";
-import RegisterBackground from "@/src/assets/background/background-1.webp";
+import RegisterBackground from "@/src/assets/background/background-1.png";
 
 export default function Register() {
   return (

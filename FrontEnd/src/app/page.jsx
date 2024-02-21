@@ -93,7 +93,7 @@ export default function Home() {
               >
                 Explora nuestra comunidad
               </h2>
-              <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto md:w-2/3 md:columns-6">
+              <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto  md:columns-6">
                 {Array.from({ length: 12 }).map((_, i) => (
                   <CardPost key={i} />
                 ))}
