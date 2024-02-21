@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image"
-import { useState, useContextgit  } from "react";
+import { useState, useContext  } from "react";
 import { Context } from "../context/ContextProvider";
 
 
