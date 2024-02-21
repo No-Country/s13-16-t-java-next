@@ -24,7 +24,7 @@ export default function Submenu() {
         onClick={() => setShowMenu(!showMenu)}
       ></Image>
       {showMenu ? (
-        <div className="hidden  absolute -bottom-[140px] right-0 lg:flex  h-36 w-40 flex-col justify-between rounded-xl border border-gray-dark-bg p-3">
+        <div className="hidden  absolute -bottom-[140px] right-0 md:flex  h-36 w-40 flex-col justify-between rounded-xl border border-gray-dark-bg p-3">
           <Link href={"/profile"} className="hover:border-b-2 border-secondary-violet"> Perfil</Link>
           <Link href={""} className="hover:border-b-2 border-secondary-violet"> Donaciones</Link>
           <Link href={"/configuracion"}  className="hover:border-b-2 border-secondary-violet"> Configuración</Link>
