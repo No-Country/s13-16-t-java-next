@@ -26,9 +26,9 @@ public class ProfileServiceImpl implements ProfileService {
         Profile newProfile = new Profile();
         System.out.println(profile.getBio());
         newProfile.setId(UUID.randomUUID());
-        newProfile.setGivenName(profile.getGivenName());
-        System.out.println(profile.getFamilyName());
-        newProfile.setFamilyName(profile.getFamilyName());
+        newProfile.setName(profile.getName());
+        System.out.println(profile.getLastName());
+        newProfile.setLastName(profile.getLastName());
         newProfile.setPhotoId(profile.getPhotoId());
         newProfile.setBio(profile.getBio());
         return profileRepository.save(newProfile);

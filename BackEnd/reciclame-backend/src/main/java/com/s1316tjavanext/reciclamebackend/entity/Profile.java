@@ -1,7 +1,6 @@
 package com.s1316tjavanext.reciclamebackend.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,8 +18,11 @@ public class Profile implements Serializable {
 
     @Id
     private UUID id;
-    private String givenName;
-    private String familyName;
+    @Column(name = "given_name")
+    private String name;
+    @Column(name = "family_name")
+    private String lastName;
+    @Column(name = "photo_id")
     private String photoId;
     private String bio;
 }
