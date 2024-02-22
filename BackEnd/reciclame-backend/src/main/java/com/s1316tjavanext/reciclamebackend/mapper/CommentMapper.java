@@ -16,15 +16,7 @@ public interface CommentMapper {
     /*
      * Method to convert comment object to comment dto
      */
-    @Mapping(target = "postId", source = "comment.post.id")
-    @Mapping(target = "post", ignore = true)
-    /*@BeanMapping(ignoreByDefault = true)
-    @Mappings({
-        @Mapping(target = "id", source = "id"),
-        @Mapping(target = "postId", source = "comment.post.id"),
-        @Mapping(target = "description", source = "description"),
-        @Mapping(target = "date", source = "date")
-    })*/
+    @Mapping(source = "post.id" , target = "postId")
     CommentDto commentToCommentDto(Comment comment);
 
     /*
@@ -36,6 +28,7 @@ public interface CommentMapper {
      * Method to convert a comment dto to comment object
      */
     @InheritConfiguration
+    @Mapping(source = "postId", target = "post.id")
     Comment commentDtoToComment(CommentDto commentDto);
 }
 
