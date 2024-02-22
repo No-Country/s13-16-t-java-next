@@ -21,7 +21,7 @@ const Publication = {
   ],
 };
 export default function Publications({ params }) {
-  const { id } = params;
+  //const { id } = params;
  
   return (
     <main className="mt-[65px] grid justify-items-center lg:grid-cols-2">
