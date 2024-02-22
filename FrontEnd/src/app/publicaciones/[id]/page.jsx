@@ -24,7 +24,7 @@ export default function Publications({ params }) {
   const { id } = params;
  
   return (
-    <main className="mt-[65px] grid h-[100vh] justify-items-center lg:grid-cols-2">
+    <main className="mt-[65px] grid justify-items-center lg:grid-cols-2">
       <Post post={Publication}/>
     </main>
   );

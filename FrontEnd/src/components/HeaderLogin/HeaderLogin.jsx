@@ -35,11 +35,11 @@ export default function HeaderLogin() {
             <MenuIconLog />
             <Link
               className="hidden w-40 rounded-full bg-accent-yellow p-2 text-center  text-black md:block"
-              href={"/"}
+              href={"/newpost"}
             >
               Publicar +
             </Link>
-            <IconBell />
+            <Link href={"/notificaciones"}><IconBell /></Link>
             <IconComment />
            
            
