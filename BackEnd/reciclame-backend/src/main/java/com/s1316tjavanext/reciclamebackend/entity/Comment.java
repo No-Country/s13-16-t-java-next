@@ -36,7 +36,7 @@ public class Comment {
     //private Profile profile;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "post_id", referencedColumnName = "id", nullable = false)
     private Post post;
 
 }
