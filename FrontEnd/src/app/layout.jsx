@@ -12,7 +12,9 @@ export const metadata = {
   description:
     "App para reciclaje, Red social de Reciclaje, concientizacion ambiental",
   icons: {
-    icon: "/icon.png",
+    icon: "/favicon.ico?v=4",
+    apple: "/apple-touch-icon.png?v=4",
+    shortcut: "/apple-touch-icon.png?v=4",
   }
 };
 
