@@ -16,20 +16,20 @@ Reciclame es una red social dedicada a promover la reutilización de materiales 
 
 | Nombre               | GitHub                                      |
 |----------------------|---------------------------------------------|
-| Lohana Orellano      | [![Lohana Orallano](https://avatars.githubusercontent.com/u/115760417?v=4&s=200)](https://github.com/LohanaO) |
-| Matías Luengo         | [![Matías Luengo](https://avatars.githubusercontent.com/u/101943045?v=4&s=200)](https://github.com/MatiasLuengo) |
-| Fabian Ochoa         | [![Fabian Ochoa](https://avatars.githubusercontent.com/u/104035823?v=4&s=200)](https://github.com/thefabi8a) |
-| Cristian Mozetich    | [![Cristian Mozetich](https://avatars.githubusercontent.com/u/117293281?v=4&s=200)](https://github.com/CristianMozetich) |
+| Lohana Orellano      | [![Lohana Orallano](https://avatars.githubusercontent.com/u/115760417?v=4&s=180)](https://github.com/LohanaO) |
+| Matías Luengo         | [![Matías Luengo](https://avatars.githubusercontent.com/u/101943045?v=4&s=180)](https://github.com/MatiasLuengo) |
+| Fabian Ochoa         | [![Fabian Ochoa](https://avatars.githubusercontent.com/u/104035823?v=4&s=180)](https://github.com/thefabi8a) |
+| Cristian Mozetich    | [![Cristian Mozetich](https://avatars.githubusercontent.com/u/117293281?v=4&s=180)](https://github.com/CristianMozetich) |
 
 ### Backend
 
 | Nombre               | GitHub                                      |
 |----------------------|---------------------------------------------|
-| Nicolás Ortiz      | [![Nicolás Ortiz](https://avatars.githubusercontent.com/u/68659234?v=4&s=200)](https://github.com/nico-ortiz) |
-| Jesus Monroy         | [![Jesus Monroy](https://avatars.githubusercontent.com/u/25678161?v=4&s=200)](https://github.com/jdmonroyg) |
+| Nicolás Ortiz      | [![Nicolás Ortiz](https://avatars.githubusercontent.com/u/68659234?v=4&s=180)](https://github.com/nico-ortiz) |
+| Jesus Monroy         | [![Jesus Monroy](https://avatars.githubusercontent.com/u/25678161?v=4&s=180)](https://github.com/jdmonroyg) |
 | Efrén Morales         | [![Efrén Morales]()]() |
 | Lihuel    | [![Lihuel]()]() |
-| Rafael Talavera    | [![Rafael Talavera](https://avatars.githubusercontent.com/u/125708112?v=4&s=200)](https://github.com/RafaelTalavera) |
+| Rafael Talavera    | [![Rafael Talavera](https://avatars.githubusercontent.com/u/125708112?v=4&s=180)](https://github.com/RafaelTalavera) |
 
 ### UX/UI
 
