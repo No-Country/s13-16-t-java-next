@@ -5,6 +5,8 @@ import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -36,7 +38,7 @@ public class Comment {
     //private Profile profile;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "post_id", referencedColumnName = "id", nullable = false)
     private Post post;
 
 }
