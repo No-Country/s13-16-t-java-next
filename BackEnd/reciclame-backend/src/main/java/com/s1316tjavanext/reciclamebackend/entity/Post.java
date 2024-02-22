@@ -32,7 +32,7 @@ public class Post {
     private String description;
 
     @Column(nullable = false)
-    private int love;
+    private int love = 0;
 
     //private Profile profile;
     //Image
@@ -46,7 +46,7 @@ public class Post {
 
     @Enumerated (EnumType.STRING)
     @Column(nullable = false)
-    private Status status = Status.Abierto;
+    private Status status;
 
     @OneToMany (mappedBy = "post")
     private List<Comment> comments;

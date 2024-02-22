@@ -15,9 +15,9 @@ import java.util.List;
  */
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PostMapper {
-    PostDto toPostDto (Post post);
-    List<PostDto> toPostsDto(List<Post> posts);
+    PostDto postToPostDto(Post post);
+    List<PostDto> postsToPostsDto(List<Post> posts);
     @InheritInverseConfiguration
     @Mapping(target = "comments", ignore = true)
-    Post toPost (PostDto postDto);
+    Post postDtoToPost(PostDto postDto);
 }
