@@ -23,5 +23,5 @@ public record PostDto(
         //Profile
         LocalDate date,
         Status status,
-        List<Comment> comments) {
+        List<CommentDto> comments) {
 }

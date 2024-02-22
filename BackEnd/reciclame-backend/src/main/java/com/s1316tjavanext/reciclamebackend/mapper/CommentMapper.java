@@ -28,8 +28,6 @@ public interface CommentMapper {
      * Method to convert a comment dto to comment object
      */
     @InheritConfiguration
-    @Mapping(target = "deleted",ignore = true)
-    @Mapping(target = "post", ignore = true)
     Comment commentDtoToComment(CommentDto commentDto);
 }
 

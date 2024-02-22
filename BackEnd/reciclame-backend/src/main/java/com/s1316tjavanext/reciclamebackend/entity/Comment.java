@@ -26,6 +26,9 @@ public class Comment {
     @Column(nullable = false)
     private String description;
 
+    @Column(name = "post_id" ,nullable = false)
+    private UUID postId;
+
     @Column(nullable = false)
     private LocalDate date;
 
@@ -36,7 +39,8 @@ public class Comment {
     //private Profile profile;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "post_id", referencedColumnName = "id",
+            insertable = false, updatable = false)
     private Post post;
 
 }

@@ -7,8 +7,8 @@ import com.s1316tjavanext.reciclamebackend.entity.Post;
 
 public record CommentDto(
     UUID id,
+    UUID postId,
     String description,
-    LocalDate date,
-    Post post
+    LocalDate date
 ) {
 }
