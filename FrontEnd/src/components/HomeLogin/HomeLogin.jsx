@@ -13,7 +13,7 @@ export default function HomeLogin() {
       </h2>
       <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto  lg:columns-6">
         {Array.from({ length: 36 }).map((_, i) => (
-          <Link href={`/publicaciones/${i}`}><CardPost key={i} /></Link>
+          <CardPost key={i} />
         ))}
       </div>
     </main>
