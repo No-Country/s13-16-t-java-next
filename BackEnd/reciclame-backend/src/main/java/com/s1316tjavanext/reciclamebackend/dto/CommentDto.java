@@ -9,6 +9,7 @@ public record CommentDto(
     UUID id,
     UUID postId,
     String description,
-    LocalDate date
+    LocalDate date,
+    Post post
 ) {
 }

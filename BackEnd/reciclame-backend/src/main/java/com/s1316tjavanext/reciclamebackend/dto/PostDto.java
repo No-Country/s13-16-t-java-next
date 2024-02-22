@@ -1,6 +1,5 @@
 package com.s1316tjavanext.reciclamebackend.dto;
 
-import com.s1316tjavanext.reciclamebackend.entity.Comment;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Category;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Status;
 

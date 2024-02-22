@@ -1,9 +1,11 @@
 package com.s1316tjavanext.reciclamebackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Category;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Status;
 import jakarta.persistence.*;
 import lombok.Data;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -49,6 +51,7 @@ public class Post {
     private Status status;
 
     @OneToMany (mappedBy = "post")
+    @JsonIgnore
     private List<Comment> comments;
 
     @Column(nullable = false)

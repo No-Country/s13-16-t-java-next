@@ -2,6 +2,7 @@ package com.s1316tjavanext.reciclamebackend.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -26,9 +27,6 @@ public class Comment {
     @Column(nullable = false)
     private String description;
 
-    @Column(name = "post_id" ,nullable = false)
-    private UUID postId;
-
     @Column(nullable = false)
     private LocalDate date;
 
@@ -39,8 +37,7 @@ public class Comment {
     //private Profile profile;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "id",
-            insertable = false, updatable = false)
+    @JoinColumn(name = "post_id")
     private Post post;
 
 }
