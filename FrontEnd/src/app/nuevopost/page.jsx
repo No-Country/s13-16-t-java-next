@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ChevronDownIcon } from "@/src/components/Icons";
 
-export default function NewPost() {
+export default function NuevoPost() {
   return (
     <div className="m-auto mt-20 flex h-full items-center justify-center">
       <label className="dark:hover:bg-bray-800 m-2 hidden h-72 w-96 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 md:m-12 md:block dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600">

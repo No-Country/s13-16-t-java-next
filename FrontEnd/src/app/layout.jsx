@@ -11,6 +11,11 @@ export const metadata = {
   title: "App Reciclame",
   description:
     "App para reciclaje, Red social de Reciclaje, concientizacion ambiental",
+  icons: {
+    icon: "/favicon.ico?v=4",
+    apple: "/apple-touch-icon.png?v=4",
+    shortcut: "/apple-touch-icon.png?v=4",
+  }
 };
 
 export default function RootLayout({ children }) {

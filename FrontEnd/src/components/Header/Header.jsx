@@ -18,14 +18,14 @@ export default function Header() {
         <HeaderLogin />
       ) : (
         <div className="fixed left-0 top-0 z-10 -mb-12 w-full bg-white">
-          <header className="border-b-2 border-gray-500">
+          <header className="shadow-xl">
             <nav className="m-auto flex h-16 max-w-7xl justify-between">
               <Image
                 width={48}
                 height={48}
-                src=""
+                src="/android-chrome-192x192.png"
                 className="m-2 flex gap-4 p-2"
-                alt=""
+                alt="reciclame"
               />
               <ul className="m-2 flex gap-4 p-2 ">
                 <MenuIcon />

@@ -20,6 +20,13 @@ module.exports = {
         'dark-text': '#39353F',
       }
     },
+    keyframes: {
+      shimmer: {
+        '100%': {
+          transform: 'translateX(100%)',
+        },
+      },
+    },
   },
   plugins: [],
 };

@@ -11,15 +11,15 @@ import Submenu from "../Submenu";
 export default function HeaderLogin() {
   return (
     <div className="fixed left-0 top-0 z-50 -mb-12 w-full bg-white">
-      <header className="border-b-2 border-gray-500">
-        <nav className="m-auto flex h-16 max-w-7xl justify-between relative">
+      <header className="shadow-xl">
+        <nav className="relative m-auto flex h-16 max-w-7xl justify-between">
           <ul className="m-2 flex items-center gap-4 p-2">
             <Image
               width={48}
               height={48}
-              src=""
+              src="/android-chrome-192x192.png"
               className="mr-10 flex p-2"
-              alt=""
+              alt="reciclame"
             ></Image>
             <Link className="hidden p-1 md:block" href={"/"}>
               Home
@@ -34,17 +34,17 @@ export default function HeaderLogin() {
           <ul className="m-2 flex items-center gap-7 p-2">
             <MenuIconLog />
             <Link
-              className="hidden w-40 rounded-full bg-accent-yellow p-2 text-center  text-black md:block"
-              href={"/"}
+              className="hidden w-40 rounded-full bg-accent-yellow p-2 text-center font-bold text-black md:block"
+              href={"/nuevopost"}
             >
               Publicar +
             </Link>
-            <IconBell />
+            <Link href={"/notificaciones"}>
+              <IconBell />
+            </Link>
             <IconComment />
-           
-           
-            <Submenu/>
-   
+
+            <Submenu />
           </ul>
         </nav>
       </header>
