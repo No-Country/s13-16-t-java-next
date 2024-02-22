@@ -16,49 +16,64 @@ export default function MenuIconLog(props) {
       </div>
       {menuOpen && (
         <div className="fixed left-0 top-16 z-50 h-full w-1/2 translate-x-0 transform bg-gray-100 shadow-lg transition-transform duration-500 ease-out md:hidden">
-          <div className="m-2 flex flex-wrap items-center p-2">
-            <Image src={"/image/profileHeader.png"} width={40} height={40} alt="Imagen de Perfil" className="rounded-full"></Image>
-            <div className="m-2 p-2">
-              <h3 className="text-xl">Nombre de usuario</h3>
-              <Link href={"/perfil"}>Mi Perfil</Link>
+          <div className="flex  items-center p-2 gap-2">
+            <Image
+              src={"/image/profileHeader.png"}
+              width={50}
+              height={50}
+              alt="Imagen de Perfil"
+              className="rounded-full"
+            ></Image>
+            <div className=" p-2 w-full flex-col">
+              <h3 className="">Usuario Fulano</h3>
+              <Link href={"/perfil"} className="text-sm text-primary-green underline hover:cursor-pointer">Mi Perfil →</Link>
             </div>
           </div>
           <div className="flex h-full flex-col items-start justify-start">
             <Link
-              className="m-1 ml-3 border-gray-300 p-2 text-center"
+              className="m-1 ml-3 w-[90%] rounded-xl border-gray-300 p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30"
               href={"/"}
             >
               Home
             </Link>
             <Link
-              className="m-1 ml-3 border-gray-300 p-2 text-center"
+              className="m-1 ml-3 w-[90%]   rounded-xl border-gray-300 p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30 "
               href={""}
             >
               Notificaciones
             </Link>
             <Link
-              className="m-1 ml-3 border-gray-300 p-2 text-center"
+              className="m-1 ml-3 w-[90%]  rounded-xl border-gray-300 p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30"
               href={""}
             >
               Mensajes
             </Link>
             <Link
-              className="m-1 ml-3 border-gray-300 p-2 text-center"
+              className="m-1 ml-3 w-[90%]  rounded-xl border-gray-300 p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30"
               href={"/explorar"}
             >
               Explorar
             </Link>
-            <Link className="m-1 ml-3 p-2 text-center" href={"/blog"}>
+            <Link
+              className="m-1 ml-3 w-[90%]  rounded-xl p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30" 
+              href={"/blog"}
+            >
               Blog
             </Link>
-            <div className="absolute bottom-20 flex flex-col p-2">
-              <Link className="m-1 ml-3" href={""}>
+            <div className="absolute bottom-20 flex flex-col p-2 justify-start">
+              <Link
+                className="m-1 rounded-xl p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30"
+                href={""}
+              >
                 Preguntas Frecuentes
               </Link>
-              <Link className="m-1 ml-3" href={""}>
+              <Link
+                className="m-1 rounded-xl  p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30"
+                href={""}
+              >
                 Soporte
               </Link>
-              <Link className="m-1 ml-3 flex text-wrong" href={""}>
+              <Link className="m-1   flex text-wrong" href={""}>
                 Cerrar sesión
                 <CerrarSesionIcon />
               </Link>
