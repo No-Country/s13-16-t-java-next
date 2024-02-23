@@ -1,0 +1,104 @@
+[
+  {
+    "id": 1,
+    "title": "Busco Madera",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In placerat eu mi ut sollicitudin. Phasellus facilisis sapien lacus, ut mattis nisl convallis ut. Nullam id lorem viverra, varius sapien vel, ullamcorper dui. Aenean non augue suscipit, aliquet magna sed, luctus ligula. Cras eget odio commodo sapien pharetra ullamcorper vel at dui. Phasellus lectus orci, ",
+    "image": "/image/madera.jpg",
+    "love": 0,
+    "category": "Madera",
+    "date": "2024-02-22",
+    "status": "Abierto",
+    "comments": [
+      {
+        "id": "990a888f-6e90-4e89-bf2a-8af0a433cbef",
+        "postId": null,
+        "description": "Tengo medio kilo de madera, le sirve?",
+        "date": "2024-02-22"
+      },
+      {
+        "id": "990a888f-6e90-4e89-bf2a-8af0a433cber",
+        "postId": null,
+        "description": "Sed mi nisl, consectetur ut fermentum sed, dictum quis ligula. Ut ac nisi at sem fermentum pulvinar. Vivamus erat elit, viverra et suscipit eu, varius a metus. Praesent convallis elit id nulla fringilla commodo.",
+        "date": "2024-02-25"
+      }
+    ]
+  },
+
+  {
+    "id": 2,
+    "title": "Busco Botellas de Plástico",
+    "description": "Necesito botellas de plástico vacías para un proyecto de arte. Si tienes algunas que puedas donar, estaría muy agradecido.",
+    "image": "/image/botellas.jpeg",
+    "love": 15,
+    "category": "Plástico",
+    "date": "2024-02-28",
+    "status": "Abierto",
+    "comments": []
+  },
+  {
+    "id": 3,
+    "title": "Recogida de Vidrio",
+    "description": "Organizaremos una recogida de vidrio en el barrio este sábado. Si tienes botellas de vidrio vacías para donar, por favor tráelas al parque central a las 10 am.",
+    "image": "/image/vidrio.jpg",
+    "love": 10,
+    "category": "Vidrio",
+    "date": "2024-02-26",
+    "status": "Abierto",
+    "comments": []
+  },
+  {
+    "id": 4,
+    "title": "Donación de Cartón",
+    "description": "Tengo una cantidad considerable de cajas de cartón usadas que me gustaría donar. Si estás interesado, por favor ponte en contacto.",
+    "image": "/image/carton.jpg",
+    "love": 50,
+    "category": "Cartón",
+    "date": "2024-02-24",
+    "status": "Abierto",
+    "comments": []
+  },
+  {
+    "id": 5,
+    "title": "Reciclar Latas de Aluminio",
+    "description": "Estoy recolectando latas de aluminio para un proyecto de reciclaje. Si tienes algunas que puedas donar, estaré encantado de recogerlas.",
+    "image": "/image/latas.jpg",
+    "love": 30,
+    "category": "Aluminio",
+    "date": "2024-02-25",
+    "status": "Abierto",
+    "comments": []
+  },
+  {
+    "id": 6,
+    "title": "Busco Sachets de leche",
+    "description": "Estoy buscando sachets de leche para un proyecto de reciclaje. Si tienes algunas que puedas donar, estaré encantado de recogerlas.",
+    "image": "/image/sachet.jpg",
+    "love": 1,
+    "category": "Textil",
+    "date": "2024-02-27",
+    "status": "Abierto",
+    "comments": []
+  },
+  {
+    "id": 7,
+    "title": "Recogida de Pilas",
+    "description": "Organizaremos una recogida de pilas usadas en la escuela local. Si tienes pilas usadas para desechar, por favor tráelas el viernes.",
+    "image": "/image/pilas.jpg",
+    "love": 9,
+    "category": "Electrónicos",
+    "date": "2024-02-29",
+    "status": "Abierto",
+    "comments": []
+  },
+  {
+    "id": 8,
+    "title": "Reciclar Neumáticos",
+    "description": "Tengo varios neumáticos usados que necesito reciclar. ¿Alguien sabe dónde puedo llevarlos o qué puedo hacer con ellos?",
+    "image": "/image/neumaticos.jpg",
+    "love": 7,
+    "category": "Neumáticos",
+    "date": "2024-03-02",
+    "status": "Abierto",
+    "comments": []
+  }
+]
