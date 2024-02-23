@@ -51,7 +51,6 @@ public class Post {
     private Status status;
 
     @OneToMany (mappedBy = "post")
-    //@JsonIgnore
     private List<Comment> comments;
 
     @Column(nullable = false)
