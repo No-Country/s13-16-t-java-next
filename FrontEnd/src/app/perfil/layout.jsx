@@ -5,6 +5,7 @@ import Image from "next/image"
 import { useRouter } from 'next/navigation';
 import {Context} from '../../context/ContextProvider';
 import { useContext } from 'react';
+import {ProfileCardSkeleton} from '../../components/skeletons'
 
 export default function Layout({children}) {
   const router = useRouter();
