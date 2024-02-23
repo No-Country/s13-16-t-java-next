@@ -38,4 +38,7 @@ public class Profile implements Serializable {
 
     @Schema(name = "bio", description = "Biography of the user", example = "I'm a software engineer")
     private String bio;
+
+//    @OneToOne
+//    private Post post;
 }
