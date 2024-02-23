@@ -14,6 +14,7 @@ export default function HeaderLogin() {
       <header className="shadow-xl">
         <nav className="relative m-auto flex h-16 max-w-7xl justify-between">
           <ul className="m-2 flex items-center gap-4 p-2">
+            <Link href={"/"}>
             <Image
               width={48}
               height={48}
@@ -21,6 +22,7 @@ export default function HeaderLogin() {
               className="mr-10 flex p-2"
               alt="reciclame"
             ></Image>
+            </Link>
             <Link className="hidden p-1 md:block" href={"/"}>
               Home
             </Link>
