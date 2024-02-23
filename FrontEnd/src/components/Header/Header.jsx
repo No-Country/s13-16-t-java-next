@@ -20,6 +20,7 @@ export default function Header() {
         <div className="fixed left-0 top-0 z-10 -mb-12 w-full bg-white">
           <header className="shadow-xl">
             <nav className="m-auto flex h-16 max-w-7xl justify-between">
+              <Link href={"/"}>
               <Image
                 width={48}
                 height={48}
@@ -27,6 +28,7 @@ export default function Header() {
                 className="m-2 flex gap-4 p-2"
                 alt="reciclame"
               />
+              </Link>
               <ul className="m-2 flex gap-4 p-2 ">
                 <MenuIcon />
                 <Link className="hidden p-1 md:block" href={"/explorar"}>

@@ -38,7 +38,7 @@ export default function MenuIconLog(props) {
             </Link>
             <Link
               className="m-1 ml-3 w-[90%]   rounded-xl border-gray-300 p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30 "
-              href={""}
+              href={"/notificaciones"}
             >
               Notificaciones
             </Link>
@@ -59,6 +59,12 @@ export default function MenuIconLog(props) {
               href={"/blog"}
             >
               Blog
+            </Link>
+            <Link
+              className="m-1 ml-3 w-[90%]  rounded-xl p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30" 
+              href={"/nuevopost"}
+            >
+              Publicar
             </Link>
             <div className="absolute bottom-20 flex flex-col p-2 justify-start">
               <Link
