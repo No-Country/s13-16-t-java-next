@@ -29,6 +29,7 @@ public interface CommentMapper {
      */
     @InheritConfiguration
     @Mapping(source = "postId", target = "post.id")
+    @Mapping(target = "deleted", ignore = true)
     Comment commentDtoToComment(CommentDto commentDto);
 }
 
