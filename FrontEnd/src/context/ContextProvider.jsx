@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useState } from "react";
-import data from '@/src/data/data.json'
+import data from "@/src/data/data.json";
 export const Context = createContext();
 
 export default function ContextProvider({ children }) {
@@ -9,7 +9,9 @@ export default function ContextProvider({ children }) {
   const [publications, setPublications] = React.useState(data);
 
   return (
-    <Context.Provider value={{ isLogged, setIsLogged, publications }}>
+    <Context.Provider
+      value={{ isLogged, setIsLogged, publications, setPublications }}
+    >
       {children}
     </Context.Provider>
   );

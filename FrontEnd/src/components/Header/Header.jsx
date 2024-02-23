@@ -10,7 +10,7 @@ import { Context } from "../../context/ContextProvider";
 import { useContext } from "react";
 
 export default function Header() {
-  const { isLogged, setIsLogged } = useContext(Context);
+  const { isLogged } = useContext(Context);
 
   return (
     <>
@@ -21,13 +21,13 @@ export default function Header() {
           <header className="shadow-xl">
             <nav className="m-auto flex h-16 max-w-7xl justify-between">
               <Link href={"/"}>
-              <Image
-                width={48}
-                height={48}
-                src="/android-chrome-192x192.png"
-                className="m-2 flex gap-4 p-2"
-                alt="reciclame"
-              />
+                <Image
+                  width={48}
+                  height={48}
+                  src="/android-chrome-192x192.png"
+                  className="m-2 flex gap-4 p-2"
+                  alt="reciclame"
+                />
               </Link>
               <ul className="m-2 flex gap-4 p-2 ">
                 <MenuIcon />
@@ -38,7 +38,7 @@ export default function Header() {
                   Registrarse
                 </Link>
                 <Link
-                  className="hidden w-40  rounded-full p-1 text-center font-bold text-white md:block bg-primary-green"
+                  className="hidden w-40  rounded-full bg-primary-green p-1 text-center font-bold text-white md:block"
                   href={"/login"}
                 >
                   Iniciar Sesión
