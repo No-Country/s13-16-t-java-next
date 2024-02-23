@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Lato } from "next/font/google";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
 
-export default function HomeLogin() {
+export default function HomeLogin({ publications }) {
   return (
     <main className="mx-auto max-w-7xl pt-20">
       <h2
@@ -12,8 +12,8 @@ export default function HomeLogin() {
         Te podría interesar
       </h2>
       <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto  lg:columns-6">
-        {Array.from({ length: 36 }).map((_, i) => (
-          <CardPost key={i} />
+        {publications?.map((publication) => (
+          <CardPost key={publication.id} publication={publication} />
         ))}
       </div>
     </main>

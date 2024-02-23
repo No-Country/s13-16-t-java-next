@@ -11,13 +11,15 @@ import { Lato } from "next/font/google";
 import { SearchIcon } from "../components/Icons";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
 
+
 export default function Home() {
-  const { isLogged } = useContext(Context);
+  const { isLogged, publications } = useContext(Context);
+ 
 
   return (
     <>
       {isLogged ? (
-        <HomeLogin />
+        <HomeLogin publications={publications} />
       ) : (
         <main>
           <article
@@ -94,8 +96,8 @@ export default function Home() {
                 Explora nuestra comunidad
               </h2>
               <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto  md:columns-6">
-                {Array.from({ length: 12 }).map((_, i) => (
-                  <CardPost key={i} />
+                {publications?.map((publication) => (
+                  <CardPost key={publication.id} publication={publication} />
                 ))}
               </div>
               <button
