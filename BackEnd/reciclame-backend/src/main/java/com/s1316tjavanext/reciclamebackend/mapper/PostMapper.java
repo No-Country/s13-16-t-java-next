@@ -19,5 +19,6 @@ public interface PostMapper {
     List<PostDto> postsToPostsDto(List<Post> posts);
     @InheritInverseConfiguration
     @Mapping(target = "comments", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
     Post postDtoToPost(PostDto postDto);
 }

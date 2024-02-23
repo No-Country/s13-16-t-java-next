@@ -72,8 +72,14 @@ public class CommentServiceImpl implements CommentService {
         CommentDto commentToUpdate = this.getCommentById(commentId);
 
         if (commentToUpdate != null) {
-            CommentDto commentResult = commentMapper.commentToCommentDto(commentRepository.save(commentMapper.commentDtoToComment(commentDto)));
-            return commentResult;
+            Post post = postRepository.findById(commentDto.postId()).orElse(null);
+            if (post != null) {
+                Comment comment = commentMapper.commentDtoToComment(commentToUpdate);
+                comment.setDescription(commentDto.description());
+                comment.setDate(LocalDate.now());
+                comment.setPost(post);
+                return commentMapper.commentToCommentDto(comment);
+            }
         }
         return null;
     }
