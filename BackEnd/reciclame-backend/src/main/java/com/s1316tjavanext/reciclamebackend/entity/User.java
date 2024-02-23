@@ -4,22 +4,24 @@
  */
 package com.s1316tjavanext.reciclamebackend.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.context.annotation.Profile;
 
 /**
  *
@@ -38,8 +40,8 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long userId; 
     
-    //@OneToOne(fetch = FetchType.LAZY)
-     //  private Profile profile;
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Profile perfil;
     
     @Column(name = "givenName", nullable=false)
     private String name;
@@ -53,12 +55,13 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
     
-    // @OneToMany(fetch = FetchType.LAZY);
-    // @ToString.Exclude
-    // @JoinColumn(name="cliente_id", nullable=false)
-    // private Localidad cliente;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Province> province;
     
-     @Column(name = "birthdate", nullable = false)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Location> location;
+    
+    @Column(name = "birthdate", nullable = false)
     private Date birthdate;
     
 }
