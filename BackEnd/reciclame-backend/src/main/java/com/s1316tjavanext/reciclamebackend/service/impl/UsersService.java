@@ -6,7 +6,10 @@ package com.s1316tjavanext.reciclamebackend.service.impl;
 
 import com.s1316tjavanext.reciclamebackend.entity.User;
 import com.s1316tjavanext.reciclamebackend.repository.UserRepository;
+import exception.MiException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author mathi
  */
-public class Userservice {
+public class UsersService {
     
     
     @Autowired
     private UserRepository userRepository;
 
+   
     /*
   /////////////   ESTO ES PARA VALIDAR LA CONTRASEÑA /////////////
     
@@ -38,10 +42,7 @@ public class Userservice {
         }
     }
 
-    public boolean verifyPassword(String inputPassword) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        return passwordEncoder.matches(inputPassword, this.password);
-    }
+   */
 
     private boolean validarRequisitosPassword(String password) {
         // Asegurar que la contraseña tiene al menos 8 caracteres, incluyendo mayúsculas y minúsculas
@@ -61,14 +62,16 @@ public class Userservice {
     ////////ESTE ES PARA CREAR AL USUARIO USANDO VALIDACIONES //////////
     
     
-     public void createUser(String email, String name, String password, String password2) throws MiException {
-    validar(email, name, password, password2);
+     public void createUser(String email, String name, Date birthdate, String password, String password2, String phone) throws MiException {
+    validar(email, name, password, password2, birthdate, phone);
 
     User user = new User();
 
     user.setEmail(email);
     user.setName(name);
-    user.setPassword(new BCryptPasswordEncoder().encode(password));
+    user.setPhone(phone);
+    user.setPassword(password);
+    user.setBirthdate(birthdate);
     user.setBirthdate(new Date());
    
 
@@ -79,7 +82,7 @@ public class Userservice {
     ///////////    ESTO ES PARA EDITA   //////////
     
      @Transactional
-  public void modificarCliente(Long id, String email, String name, String password, String password2) throws MiException {
+  public void EditUser(Long id, String email, String name, Date birthdate, String password, String password2, String phone) throws MiException {
 
     User user = new User() {
     };
@@ -90,10 +93,13 @@ public class Userservice {
       user = respuesta.get();
     }
 
-    validar(email, user, password, password2);
+   validar(email, name, password, password2, birthdate, phone);
+
     user.setEmail(email);
     user.setName(name);
-    user.setPassword(new BCryptPasswordEncoder().encode(password));
+    user.setPassword(password);
+    user.setBirthdate(birthdate);
+    user.setPhone(phone);
 
     userRepository.save(user);
   }
@@ -104,7 +110,7 @@ public class Userservice {
     ///////////        ESTO ES PARA LAS VALIDACIONES ///////////////////
     
     
-    public void validar(String email, String name, String password, String password2, String phone , Date birthdate ) throws MiException {
+    public void validar(String email, String name, String password, String password2, Date birthdate , String phone  ) throws MiException {
 
     if (name.isEmpty()) {
       throw new MiException("el nombre no puede ser nulo o estar vacio");
@@ -127,9 +133,30 @@ public class Userservice {
     if (!password.equals(password2)) {
       throw new MiException("las contraseñas ingresadas deben ser iguales");
     }
+    }
     
+    //////////    BORRAR USUARIO            /////////////
     
-   */ 
+      @Transactional
+  public void eliminarUsuario(Long id) {
+
+    Optional<User> respuesta = userRepository.findById(id);
+    if (respuesta.isPresent()) {
+      userRepository.deleteById(id);
+    }
+  }
+  
+  
+  ///////////////  LISTAR USUARIOS  //////////////
+  
+
+  public List<User> listUser() {
+    List<User> usuarios = new ArrayList();
+    usuarios = userRepository.findAll();
+    return usuarios;
+  }
+  
+   
     
     
 }
