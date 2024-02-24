@@ -16,4 +16,8 @@
       @apply absolute right-2 top-0 grid h-full w-8 place-items-center;
     }
   }
+
+  .header-mobile-link {
+    @apply m-1 ml-3 w-[90%] rounded-xl p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30;
+  }
 }

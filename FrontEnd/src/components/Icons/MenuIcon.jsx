@@ -8,24 +8,46 @@ export default function MenuIcon(props) {
     setMenuOpen(!menuOpen);
   };
 
+  const handleClick = () => {
+    toggleMenu();
+  };
+
   return (
     <>
       <div className="cursor-pointer" onClick={toggleMenu}>
         {menuOpen ? <XMarkIcon {...props} /> : <HamburgerIcon {...props} />}
       </div>
-      {menuOpen && (
-        <div className="absolute right-0 top-full flex w-full flex-col border border-gray-300 bg-gray-200 shadow-lg md:hidden">
-          <Link className="m-2 border-b border-gray-300 text-center" href={"/registro"}>
-            Registrarse
-          </Link>
-          <Link className="m-2 border-b border-gray-300 text-center" href={"/login"}>
-            Iniciar Sesión
-          </Link>
-          <Link className="m-2 text-center" href={"/explorar"}>
-            Explorar
-          </Link>
+      <div className={`absolute left-0 top-16 w-full md:hidden`}>
+        <div
+          className="relative z-10 h-full w-full translate-x-0 transform bg-white shadow-lg transition-transform duration-[250ms] ease-out md:hidden"
+          style={
+            menuOpen
+              ? { transform: "translateX(0)" }
+              : { transform: "translateX(-100%)" }
+          }
+        >
+          <div className="flex flex-col">
+            <Link
+              onClick={handleClick}
+              className="m-2 border-b text-lg border-gray-300 p-1 hover:text-primary-green "
+              href={"/registro"}
+            >
+              Registrarse
+            </Link>
+            <Link
+              onClick={handleClick}
+              className="m-2 border-b text-lg border-gray-300 p-1 hover:text-primary-green"
+              href={"/login"}
+            >
+              Iniciar Sesión
+            </Link>
+            <Link onClick={handleClick} className="m-2 p-1 hover:text-primary-green text-lg" href={"/explorar"}>
+              Explorar
+            </Link>
+          </div>
         </div>
-      )}
+        <div/>
+      </div>
     </>
   );
 }

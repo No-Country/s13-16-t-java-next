@@ -1,86 +1,133 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function MenuIconLog(props) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
+  function toggleMenu() {
     setMenuOpen(!menuOpen);
-  };
+  }
+
+  function handleLinkClick() {
+    toggleMenu();
+  }
+
+  const pathname = usePathname();
 
   return (
     <>
       <div className="cursor-pointer" onClick={toggleMenu}>
         {menuOpen ? <XMarkIcon {...props} /> : <MenuIcon {...props} />}
       </div>
-      {menuOpen && (
-        <div className="fixed left-0 top-16 z-50 h-full w-1/2 translate-x-0 transform bg-gray-100 shadow-lg transition-transform duration-500 ease-out md:hidden">
-          <div className="flex  items-center p-2 gap-2">
+      <div className={`fixed left-0 top-16 z-50 h-full w-full md:hidden`}>
+        <div
+          className="relative z-10 h-full w-1/2 translate-x-0 transform bg-white shadow-lg transition-transform duration-[250ms] ease-out md:hidden"
+          style={
+            menuOpen
+              ? { transform: "translateX(0)" }
+              : { transform: "translateX(-100%)" }
+          }
+        >
+          <div className="flex items-center gap-2 p-2">
             <Image
               src={"/image/profileHeader.png"}
               width={50}
               height={50}
               alt="Imagen de Perfil"
               className="rounded-full"
-            ></Image>
-            <div className=" p-2 w-full flex-col">
+            />
+            <div className=" w-full flex-col p-2">
               <h3 className="">Usuario Fulano</h3>
-              <Link href={"/perfil"} className="text-sm text-primary-green underline hover:cursor-pointer">Mi Perfil →</Link>
+              <Link
+                href={"/perfil"}
+                className={`text-sm text-primary-green underline hover:cursor-pointer`}
+                onClick={handleLinkClick}
+              >
+                Mi Perfil →
+              </Link>
             </div>
           </div>
           <div className="flex h-full flex-col items-start justify-start">
             <Link
-              className="m-1 ml-3 w-[90%] rounded-xl border-gray-300 p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30"
+              className={`header-mobile-link ${pathname === "/" ? "border border-secondary-violet" : ""}`}
               href={"/"}
+              onClick={handleLinkClick}
             >
               Home
             </Link>
             <Link
-              className="m-1 ml-3 w-[90%]   rounded-xl border-gray-300 p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30 "
-              href={""}
+              className={`header-mobile-link ${pathname === "/notificaciones" ? "border border-secondary-violet" : ""}`}
+              href={"/notificaciones"}
+              onClick={handleLinkClick}
             >
               Notificaciones
             </Link>
             <Link
-              className="m-1 ml-3 w-[90%]  rounded-xl border-gray-300 p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30"
-              href={""}
+              className={`header-mobile-link ${pathname === "/mensajes" ? "border border-secondary-violet" : ""}`}
+              href={"/mensajes"}
+              onClick={handleLinkClick}
             >
               Mensajes
             </Link>
             <Link
-              className="m-1 ml-3 w-[90%]  rounded-xl border-gray-300 p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30"
+              className={`header-mobile-link ${pathname === "/explorar" ? "border border-secondary-violet" : ""}`}
               href={"/explorar"}
+              onClick={handleLinkClick}
             >
               Explorar
             </Link>
             <Link
-              className="m-1 ml-3 w-[90%]  rounded-xl p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30" 
+              className={`header-mobile-link ${pathname === "/blog" ? "border border-secondary-violet" : ""}`}
               href={"/blog"}
+              onClick={handleLinkClick}
             >
               Blog
             </Link>
-            <div className="absolute bottom-20 flex flex-col p-2 justify-start">
+            <Link
+              className={`header-mobile-link ${pathname === "/nuevopost" ? "border border-secondary-violet" : ""}`}
+              href={"/nuevopost"}
+              onClick={handleLinkClick}
+            >
+              Publicar
+            </Link>
+            <div className="absolute bottom-20 flex flex-col justify-start p-2">
               <Link
-                className="m-1 rounded-xl p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30"
-                href={""}
+                className={`header-mobile-link ${pathname === "/preguntas-frecuentes" ? "border border-secondary-violet" : ""}`}
+                href={"/preguntas-frecuentes"}
+                onClick={handleLinkClick}
               >
                 Preguntas Frecuentes
               </Link>
               <Link
-                className="m-1 rounded-xl  p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30"
-                href={""}
+                className={`header-mobile-link ${pathname === "/soporte" ? "border border-secondary-violet" : ""}`}
+                href={"/soporte"}
+                onClick={handleLinkClick}
               >
                 Soporte
               </Link>
-              <Link className="m-1   flex text-wrong" href={""}>
+              <Link
+                className="m-1 flex text-wrong"
+                href={""}
+                onClick={handleLinkClick}
+              >
                 Cerrar sesión
                 <CerrarSesionIcon />
               </Link>
             </div>
           </div>
         </div>
-      )}
+        <div
+          onClick={toggleMenu}
+          className="h-full w-full backdrop-blur-sm transition-transform duration-[250ms] ease-out md:hidden"
+          style={
+            menuOpen
+              ? { transform: "translateY(-100%)" }
+              : { transform: "translateY(0)" }
+          }
+        />
+      </div>
     </>
   );
 }

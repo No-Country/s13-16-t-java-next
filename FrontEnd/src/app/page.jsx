@@ -9,15 +9,16 @@ import HomeLogin from "../components/HomeLogin/HomeLogin";
 
 import { Lato } from "next/font/google";
 import { SearchIcon } from "../components/Icons";
+import Link from "next/link";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
 
 export default function Home() {
-  const { isLogged } = useContext(Context);
+  const { isLogged, publications } = useContext(Context);
 
   return (
     <>
       {isLogged ? (
-        <HomeLogin />
+        <HomeLogin publications={publications} />
       ) : (
         <main>
           <article
@@ -78,12 +79,12 @@ export default function Home() {
                   conseciente y sostenible
                 </p>
               </div>
-              <button
-                className="w-full max-w-36 rounded-2xl bg-secondary-violet px-8 py-[10px] leading-5 text-white"
-                type="button"
+              <Link
+                href="/registro"
+                className="w-full max-w-36 rounded-full bg-secondary-violet px-8 py-[10px] leading-5 text-white"
               >
-                Boton
-              </button>
+                Unite a nuestra comunidad
+              </Link>
             </div>
           </article>
           <article className="mx-auto min-h-dvh max-w-7xl pb-10">
@@ -94,8 +95,8 @@ export default function Home() {
                 Explora nuestra comunidad
               </h2>
               <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto  md:columns-6">
-                {Array.from({ length: 12 }).map((_, i) => (
-                  <CardPost key={i} />
+                {publications?.map((publication) => (
+                  <CardPost key={publication.id} publication={publication} />
                 ))}
               </div>
               <button
