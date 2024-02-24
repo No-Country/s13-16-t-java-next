@@ -8,7 +8,7 @@ export default function Explorar() {
   const { publications } = useContext(Context);
   return (
     <div>
-      <div className="mt-40">
+      <div className="mt-60">
         <label
           id="input-search"
           className="mx-auto mt-8 flex w-full max-w-xs items-center gap-4 text-pretty rounded-full bg-gray-200 p-4 md:max-w-xl"

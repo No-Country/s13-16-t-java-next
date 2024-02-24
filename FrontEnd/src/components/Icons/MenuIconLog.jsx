@@ -23,7 +23,7 @@ export default function MenuIconLog(props) {
       </div>
       <div className={`fixed left-0 top-16 z-50 h-full w-full md:hidden`}>
         <div
-          className="relative z-10 h-full w-1/2 translate-x-0 transform bg-gray-100 shadow-lg transition-transform duration-[250ms] ease-out md:hidden"
+          className="relative z-10 h-full w-1/2 translate-x-0 transform bg-white shadow-lg transition-transform duration-[250ms] ease-out md:hidden"
           style={
             menuOpen
               ? { transform: "translateX(0)" }
