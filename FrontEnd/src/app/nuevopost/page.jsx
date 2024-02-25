@@ -1,10 +1,9 @@
-import Link from "next/link";
 import { ChevronDownIcon } from "@/src/components/Icons";
 
 export default function NuevoPost() {
   return (
-    <div className="m-auto mt-20 flex h-full items-center justify-center">
-      <label className="dark:hover:bg-bray-800 m-2 hidden h-72 w-96 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 md:m-12 md:block dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+    <div className="m-auto mt-56 flex flex-col items-center justify-center md:mt-56 md:flex-row">
+      <label className="dark:hover:bg-bray-800 m-auto hidden h-72 w-96 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 md:m-12 md:block dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600">
         <div className="flex flex-col items-center justify-center pb-6 pt-5">
           <svg
             viewBox="0 0 434 381"
@@ -21,16 +20,16 @@ export default function NuevoPost() {
         <input id="dropzone-file" type="file" className="hidden" />
       </label>
 
-      <form className="m-2 md:m-12">
+      <form className="m-auto flex flex-col md:m-12 ">
         <div className="flex flex-col justify-center">
           <input
-            className="input-form m-2 w-full hover:border-secondary-violet focus:outline-secondary-violet md:w-96"
+            className="input-form m-auto mb-4 w-full hover:border-secondary-violet focus:outline-secondary-violet md:w-96"
             type="text"
             placeholder="Título"
           />
           <div className="relative">
             <select
-              className="input-form m-2 w-full hover:border-secondary-violet focus:outline-secondary-violet md:w-96"
+              className="input-form m-auto mb-4 w-full hover:border-secondary-violet focus:outline-secondary-violet md:w-96"
               type="select"
               placeholder="Categoría"
             >
@@ -46,12 +45,12 @@ export default function NuevoPost() {
             <ChevronDownIcon className="chevron-down-icon mr-2 p-1" />
           </div>
           <textarea
-            className="input-form m-2 max-h-80 min-h-40 w-full resize-none hover:border-secondary-violet focus:outline-secondary-violet md:w-96"
+            className="input-form m-auto mb-4 max-h-80 min-h-40 w-full resize-none hover:border-secondary-violet focus:outline-secondary-violet md:w-96"
             type="text"
             placeholder="Desripción"
           />
         </div>
-        <label className="dark:hover:bg-bray-800 m-2 block h-32 w-96 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 md:m-12 md:hidden dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+        <label className="dark:hover:bg-bray-800 m-auto block h-32 w-96 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 md:m-12 md:hidden dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600">
           <div className="flex flex-col items-center justify-center pb-6 pt-5">
             <svg
               viewBox="0 0 434 381"
@@ -68,20 +67,20 @@ export default function NuevoPost() {
           <input id="dropzone-file" type="file" className="hidden" />
         </label>
         <div className="w-full text-end">
-          <Link
-            className="m-2 w-full rounded-3xl border border-secondary-violet p-2 text-center text-secondary-violet lg:w-28"
+          <button
+            className="m-auto mb-4 mt-4 w-full rounded-3xl border border-secondary-violet p-2 text-center text-secondary-violet lg:m-2 lg:w-28"
             href={""}
             type="submit"
           >
             Cancelar
-          </Link>
-          <Link
+          </button>
+          <button
             type="submit"
-            className="m-2 w-full rounded-3xl bg-accent-yellow p-2 text-center lg:w-28"
+            className="m-auto mb-5 w-full rounded-3xl bg-accent-yellow p-2 text-center lg:m-2 lg:w-28"
             href={""}
           >
             Publicar
-          </Link>
+          </button>
         </div>
       </form>
     </div>
