@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.util.List;
@@ -34,8 +35,9 @@ public class PostController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<PostDto> save(@RequestBody @Valid PostDto postDto){
-        return ResponseEntity.ok(postService.save(postDto));
+    public ResponseEntity<PostDto> save(@RequestParam("image")MultipartFile mpf,
+                                        @Valid PostDto postDto){
+        return ResponseEntity.ok(postService.save(postDto,mpf));
     }
 
     @DeleteMapping("/delete/{id}")
@@ -50,9 +52,10 @@ public class PostController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<PostDto> delete(@PathVariable UUID id,
-                                          @RequestBody PostDto postDto){
+                                          @RequestParam("image") MultipartFile mpf,
+                                          @Valid PostDto postDto){
         try{
-            return ResponseEntity.ok(postService.update(id,postDto));
+            return ResponseEntity.ok(postService.update(id,postDto,mpf));
         }catch (RuntimeException ignore){
             return ResponseEntity.notFound().build();
         }

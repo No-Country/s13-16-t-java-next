@@ -1,6 +1,5 @@
 package com.s1316tjavanext.reciclamebackend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Category;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Status;
 import jakarta.persistence.*;
@@ -33,11 +32,13 @@ public class Post {
     @Column(nullable = false)
     private String description;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Column(nullable = false)
     private int love = 0;
 
     //private Profile profile;
-    //Image
 
     @Enumerated (EnumType.STRING)
     @Column(nullable = false)

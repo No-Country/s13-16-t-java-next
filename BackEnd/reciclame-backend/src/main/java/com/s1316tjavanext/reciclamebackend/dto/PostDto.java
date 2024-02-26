@@ -2,6 +2,7 @@ package com.s1316tjavanext.reciclamebackend.dto;
 
 import com.s1316tjavanext.reciclamebackend.entity.enums.Category;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Status;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.time.LocalDate;
@@ -17,7 +18,9 @@ public record PostDto(
         //Photo
         String title,
         String description,
-        int love,
+        MultipartFile multipartFile,
+        String imageUrl,
+        Integer love,
         Category category,
         //Profile
         LocalDate date,
