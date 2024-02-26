@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PostMapper {
+    @Mapping(target = "multipartFile", ignore = true)
     PostDto postToPostDto(Post post);
     List<PostDto> postsToPostsDto(List<Post> posts);
     @InheritInverseConfiguration
