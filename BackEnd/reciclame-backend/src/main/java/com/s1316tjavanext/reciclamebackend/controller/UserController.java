@@ -6,7 +6,7 @@ package com.s1316tjavanext.reciclamebackend.controller;
 
 import com.s1316tjavanext.reciclamebackend.entity.User;
 import com.s1316tjavanext.reciclamebackend.repository.UserRepository;
-import com.s1316tjavanext.reciclamebackend.service.impl.UsersService;
+import com.s1316tjavanext.reciclamebackend.service.impl.UsersServiceImpl;
 import exception.MiException;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +27,7 @@ public class UserController {
   private UserRepository usuarioRepository;
   
   @Autowired
-  private UsersService userService;
+  private UsersServiceImpl userServiceImpl;
   
   ////////// CREAR USUARIO GET //////////
   
@@ -44,7 +44,7 @@ public class UserController {
   public String crearUsuario(@RequestParam String email, @RequestParam String nombre, @RequestParam("fechaDeNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate, @RequestParam String password, @RequestParam String password2, @RequestParam String phone, ModelMap modelo) {
 
     try {
-      userService.createUser(email, nombre, birthdate, password, password2, phone);
+      userServiceImpl.createUser(email, nombre, birthdate, password, password2, phone);
       modelo.put("exito", "El Usuario fue registrado correctamente!");
     } catch (MiException ex) {
       modelo.put("error", ex.getMessage());
@@ -68,7 +68,7 @@ public class UserController {
   public String modificarUsuario(@PathVariable Long id, @RequestParam String email, @RequestParam String nombre, @RequestParam("fechaDeNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate, @RequestParam String password, @RequestParam String password2, @RequestParam String phone, ModelMap modelo) {
 
     try {
-      userService.EditUser(id, email, nombre, birthdate, password, password2, phone);
+      userServiceImpl.EditUser(id, email, nombre, birthdate, password, password2, phone);
       modelo.put("exito", "El Usuario fue modificado correctamente!");
     } catch (MiException e) {
 
@@ -93,8 +93,8 @@ public class UserController {
 
     try {
 
-      userService.eliminarUsuario(id);
-      List<User> user = userService.listUser();
+      userServiceImpl.eliminarUsuario(id);
+      List<User> user = userServiceImpl.listUser();
       modelo.addAttribute("usuarios", user);
       modelo.put("exito", "El Usuario fue eliminado correctamente!");
       return "redirect:../index.html";

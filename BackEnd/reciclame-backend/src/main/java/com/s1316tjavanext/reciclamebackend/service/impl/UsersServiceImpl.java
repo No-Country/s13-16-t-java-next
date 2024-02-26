@@ -19,12 +19,15 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author mathi
  */
-public class UsersService {
+public class UsersServiceImpl {
     
     
     @Autowired
     private UserRepository userRepository;
 
+    public UsersServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
    
     /*
   /////////////   ESTO ES PARA VALIDAR LA CONTRASEÑA /////////////
@@ -62,21 +65,20 @@ public class UsersService {
     ////////ESTE ES PARA CREAR AL USUARIO USANDO VALIDACIONES //////////
     
     
-     public void createUser(String email, String name, Date birthdate, String password, String password2, String phone) throws MiException {
-    validar(email, name, password, password2, birthdate, phone);
+    public void createUser(String email, String name, Date birthdate, String password, String password2, String phone) throws MiException {
+        validar(email, name, password, password2, birthdate, phone);
 
-    User user = new User();
+        User user = new User();
 
-    user.setEmail(email);
-    user.setName(name);
-    user.setPhone(phone);
-    user.setPassword(password);
-    user.setBirthdate(birthdate);
-    user.setBirthdate(new Date());
-   
+        user.setEmail(email);
+        user.setName(name);
+        user.setPhone(phone);
+        user.setPassword(password);
+        user.setBirthdate(birthdate);
+        user.setBirthdate(new Date());
 
-    userRepository.save(user);
-  }
+        userRepository.save(user);
+    }
     
     
     ///////////    ESTO ES PARA EDITA   //////////
