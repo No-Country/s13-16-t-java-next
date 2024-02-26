@@ -1,5 +1,4 @@
 import CardPost from "../CardPost";
-import Link from "next/link" 
 import { Lato } from "next/font/google";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
 
@@ -7,7 +6,7 @@ export default function HomeLogin({ publications }) {
   return (
     <main className="mx-auto max-w-7xl pt-20">
       <h2
-        className={`${lato.className} text-[clamp(42px,_8vw,_66px)] font-semibold capitalize pl-2 text-center lg:text-start`}
+        className={`${lato.className} pl-2 text-center text-[clamp(42px,_8vw,_66px)] font-semibold capitalize lg:text-start`}
       >
         Te podría interesar
       </h2>

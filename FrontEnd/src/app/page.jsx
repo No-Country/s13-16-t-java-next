@@ -9,12 +9,11 @@ import HomeLogin from "../components/HomeLogin/HomeLogin";
 
 import { Lato } from "next/font/google";
 import { SearchIcon } from "../components/Icons";
+import Link from "next/link";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
-
 
 export default function Home() {
   const { isLogged, publications } = useContext(Context);
- 
 
   return (
     <>
@@ -80,12 +79,12 @@ export default function Home() {
                   conseciente y sostenible
                 </p>
               </div>
-              <button
-                className="w-full max-w-36 rounded-2xl bg-secondary-violet px-8 py-[10px] leading-5 text-white"
-                type="button"
+              <Link
+                href="/registro"
+                className="w-full max-w-36 rounded-full bg-secondary-violet px-8 py-[10px] leading-5 text-white"
               >
-                Boton
-              </button>
+                Unite a nuestra comunidad
+              </Link>
             </div>
           </article>
           <article className="mx-auto min-h-dvh max-w-7xl pb-10">

@@ -1,13 +1,17 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../../../context/ContextProvider";
 import Image from "next/image";
 import { AddIcon } from "../../../components/Icons";
 import UserImage from "@/src/assets/profile/Rectangle.png";
 
 export default function Page() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+
   const { isLogged } = useContext(Context);
   const router = useRouter();
 
