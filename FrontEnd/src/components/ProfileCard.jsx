@@ -72,7 +72,7 @@ export default function ProfileCard() {
       </nav>
       <Link
         href={"/configuracion/perfil"}
-        className="absolute right-8 top-4 rounded-md bg-gray-dark-bg p-1 hover:scale-105"
+        className="absolute right-8 top-4 rounded-md bg-gray-dark-bg p-1 hover:bg-gray-bg"
       >
         <ConfigIcon width="30" height="30" />
       </Link>
