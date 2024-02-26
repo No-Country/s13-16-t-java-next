@@ -17,7 +17,9 @@ export default function MenuIcon(props) {
       <div className="cursor-pointer" onClick={toggleMenu}>
         {menuOpen ? <XMarkIcon {...props} /> : <HamburgerIcon {...props} />}
       </div>
-      <div className={`absolute left-0 top-16 w-full md:hidden`}>
+      <div
+        className={`absolute left-0 top-16 w-full md:hidden ${!menuOpen ? "-translate-x-full" : "translate-x-0"}`}
+      >
         <div
           className="relative z-10 h-full w-full translate-x-0 transform bg-white shadow-lg transition-transform duration-[250ms] ease-out md:hidden"
           style={
@@ -29,24 +31,28 @@ export default function MenuIcon(props) {
           <div className="flex flex-col">
             <Link
               onClick={handleClick}
-              className="m-2 border-b text-lg border-gray-300 p-1 hover:text-primary-green "
+              className="m-2 border-b border-gray-300 p-1 text-lg hover:text-primary-green "
               href={"/registro"}
             >
               Registrarse
             </Link>
             <Link
               onClick={handleClick}
-              className="m-2 border-b text-lg border-gray-300 p-1 hover:text-primary-green"
+              className="m-2 border-b border-gray-300 p-1 text-lg hover:text-primary-green"
               href={"/login"}
             >
               Iniciar Sesión
             </Link>
-            <Link onClick={handleClick} className="m-2 p-1 hover:text-primary-green text-lg" href={"/explorar"}>
+            <Link
+              onClick={handleClick}
+              className="m-2 p-1 text-lg hover:text-primary-green"
+              href={"/explorar"}
+            >
               Explorar
             </Link>
           </div>
         </div>
-        <div/>
+        <div />
       </div>
     </>
   );
