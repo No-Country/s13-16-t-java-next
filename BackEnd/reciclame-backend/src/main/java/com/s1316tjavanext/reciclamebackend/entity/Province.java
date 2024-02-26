@@ -1,10 +1,7 @@
 package com.s1316tjavanext.reciclamebackend.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -19,5 +16,9 @@ public class Province {
     @Column(name = "nombre")
     @Schema(description = "Nombre de la provincia", example = "Santa Fe")
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

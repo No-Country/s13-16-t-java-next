@@ -10,23 +10,25 @@ import com.s1316tjavanext.reciclamebackend.service.impl.UsersServiceImpl;
 import exception.MiException;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
  * @author mathi
  */
+@AllArgsConstructor
+@RestController
+@Tag(name = "Users", description = "Endpoints for managing users")
+@RequestMapping("/profile")
 public class UserController {
-  @Autowired
   private UserRepository usuarioRepository;
-  
-  @Autowired
   private UsersServiceImpl userServiceImpl;
   
   ////////// CREAR USUARIO GET //////////
@@ -66,7 +68,7 @@ public class UserController {
   ///////////  PARAR EDITAR EL PERFIL ////////////////////////
   
   @PostMapping("/modificarUsuario/{id}")
-  public String modificarUsuario(@PathVariable Long id, @RequestParam String email, @RequestParam String nombre,@RequestParam String apellido, @RequestParam("fechaDeNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate, @RequestParam String password, @RequestParam String password2, @RequestParam String phone, ModelMap modelo) {
+  public String modificarUsuario(@PathVariable UUID id, @RequestParam String email, @RequestParam String nombre, @RequestParam String apellido, @RequestParam("fechaDeNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate, @RequestParam String password, @RequestParam String password2, @RequestParam String phone, ModelMap modelo) {
 
     try {
       userServiceImpl.EditUser(id, email, nombre,apellido, birthdate, password, password2, phone);
@@ -91,7 +93,7 @@ public class UserController {
   /////////////////////      PARA ELIMINAR EL USUARIO  /////////////////////
 
    @GetMapping("/eliminarUsuario/{id}")
-  public String eliminarUsuario(@PathVariable Long id, ModelMap modelo) {
+  public String eliminarUsuario(@PathVariable UUID id, ModelMap modelo) {
 
     try {
 

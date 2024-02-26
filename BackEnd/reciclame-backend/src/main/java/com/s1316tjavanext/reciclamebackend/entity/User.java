@@ -4,24 +4,18 @@
  */
 package com.s1316tjavanext.reciclamebackend.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.context.annotation.Profile;
+
 
 /**
  *
@@ -36,11 +30,12 @@ import org.springframework.context.annotation.Profile;
 @Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
-    private Long userId; 
+    private UUID userId;
     
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne
+    @JoinColumn(name = "profile_id")
     private Profile perfil;
     
     @Column(name = "givenName", nullable=false)
@@ -58,10 +53,10 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
     
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
     private List<Province> province;
-    
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
     private List<Location> location;
     
     @Column(name = "birthdate", nullable = false)

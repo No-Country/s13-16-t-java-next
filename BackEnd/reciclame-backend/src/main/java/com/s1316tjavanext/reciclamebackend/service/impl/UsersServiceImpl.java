@@ -7,11 +7,12 @@ package com.s1316tjavanext.reciclamebackend.service.impl;
 import com.s1316tjavanext.reciclamebackend.entity.User;
 import com.s1316tjavanext.reciclamebackend.repository.UserRepository;
 import exception.MiException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
+
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -19,11 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author mathi
  */
+@Service
 public class UsersServiceImpl {
-    
-    
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
+
 
     public UsersServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -85,7 +86,7 @@ public class UsersServiceImpl {
     ///////////    ESTO ES PARA EDITA   //////////
     
      @Transactional
-  public void EditUser(Long id, String email, String name,String lastName, Date birthdate, String password, String password2, String phone) throws MiException {
+  public void EditUser(UUID id, String email, String name, String lastName, Date birthdate, String password, String password2, String phone) throws MiException {
 
     User user = new User() {
     };
@@ -145,7 +146,7 @@ public class UsersServiceImpl {
     //////////    BORRAR USUARIO            /////////////
     
       @Transactional
-  public void eliminarUsuario(Long id) {
+  public void eliminarUsuario(UUID id) {
 
     Optional<User> respuesta = userRepository.findById(id);
     if (respuesta.isPresent()) {
