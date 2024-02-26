@@ -52,8 +52,8 @@ export default function MenuIconLog(props) {
             </div>
           </div>
           <div className="flex h-full flex-col items-start justify-start">
-          <Link
-              className=" w-[90%] rounded-3xl ml-3 mb-3 bg-accent-yellow p-2 text-center font-semibold shadow-lg text-black"
+            <Link
+              className=" mb-3 ml-3 w-[90%] rounded-3xl bg-accent-yellow p-2 text-center font-semibold text-black shadow-lg"
               href={"/nuevopost"}
             >
               Publicar +
@@ -93,7 +93,7 @@ export default function MenuIconLog(props) {
             >
               Blog
             </Link>
-          
+
             <div className="absolute bottom-20 flex flex-col justify-start p-2">
               <Link
                 className={`header-mobile-link ${pathname === "/preguntas-frecuentes" ? "border border-secondary-violet" : ""}`}
