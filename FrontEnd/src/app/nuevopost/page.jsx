@@ -4,7 +4,7 @@ export default function NuevoPost() {
   return (
     <div className="h-full grid-cols-2 items-center justify-center md:grid">
       <label className="dark:hover:bg-bray-800 m-auto hidden cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 md:block dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col">
           <svg
             viewBox="0 0 434 381"
             fill="none"
@@ -20,7 +20,7 @@ export default function NuevoPost() {
         <input id="dropzone-file" type="file" className="hidden" />
       </label>
 
-      <form className="m-2 mt-20 p-12">
+      <form className="p-12 mt-20">
         <div>
           <input
             className="input-form mb-4 w-full hover:border-secondary-violet focus:outline-secondary-violet"
