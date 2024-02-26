@@ -5,6 +5,8 @@ import HeartFavorite from "@/src/components/Icons/HeartFavorite";
 import Button from "@/src/components/Button";
 import Coments from "@/src/components/Coments";
 import FormComent from "@/src/components/forms/FormComent/FormComent";
+import WspIcon from "../Icons/WspIcon";
+import Link from "next/link";
 export default function Post({ post }) {
   const [like, setLike] = useState(post.likes);
 
@@ -48,9 +50,12 @@ export default function Post({ post }) {
           <span>{post.category}</span>
         </p>
         <p className="text-justify">{post.description}</p>
-        <Button className=" mt-0 w-full rounded-3xl bg-accent-yellow p-2  text-lg font-[500]">
-          Me interesa
-        </Button>
+        <Link
+          href={"https://wa.me/"}
+          className="mt-0 flex w-full gap-2 rounded-3xl bg-accent-yellow p-2 justify-center text-lg font-[500]"
+        >
+          Me interesa <WspIcon />
+        </Link>
         <Coments coments={post.coments} />
         <FormComent />
       </div>
