@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Context } from "../../context/ContextProvider";
 import { useContext, useEffect, useState } from "react";
-import {ProfileCardSkeleton} from '../../components/skeletons'
+import { ProfileCardSkeleton } from "../../components/skeletons";
 import { Suspense } from "react";
 
 export default function Layout({ children }) {
@@ -27,7 +27,7 @@ export default function Layout({ children }) {
         layout="responsive"
         className="min-h-72 bg-primary-green"
       />
-      <Suspense fallback={<ProfileCardSkeleton/>}>
+      <Suspense fallback={<ProfileCardSkeleton />}>
         <ProfileCard />
       </Suspense>
       {children}

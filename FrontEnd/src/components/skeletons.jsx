@@ -26,33 +26,37 @@ export function NotificationCartSkeleton() {
   );
 }
 export function ProfileCardSkeleton() {
-    return(   
-    <div className={`w-11/12 max-[855px]:w-full mx-auto border-solid border-2 bg-gray-dark-bg rounded-[2.5rem] max-[855px]:rounded-none h-fit shadow-xl max-[855px]:shadow-none -translate-y-16`}>
-        <div className="mb-8 flex flex-col min-[855px]:flex-row justify-between">
-            <div className={`${shimmer} relative overflow-hidden bg-gray-bg rounded-full z-50 h-[200px] w-[200px] ml-10 -translate-y-16 border-white border-4 border-solid`}></div>
-            <div className="mt-8 max-[855px]:-mt-8">
-                <div className="bg-gray-bg w-56 h-8 max-[855px]:ml-10 rounded-md"></div>
-                <div className="max-[855px]:mt-12 flex max-sm:flex-wrap gap-x-10 gap-y-2 mt-6 max-[855px]:w-11/12 max-[855px]:mx-auto">
-                    <div className="bg-gray-bg w-24 h-6 rounded-md"></div>
-                    <div className="bg-gray-bg w-24 h-6 rounded-md"></div>
-                    <div className="bg-gray-bg w-24 h-6 rounded-md"></div>
-                </div>
-            </div>
-            <div className="mt-8 lg:pr-20 max-[855px]:mt-12 max-[855px]:w-11/12 max-[855px]:mx-auto">
-                <div className="bg-gray-bg w-28 h-6 mb-4 rounded-md"></div>
-                <div className="flex gap-4 w-52 max-[855px]:w-full flex-wrap">
-                    <div className="bg-gray-bg w-20 h-6 rounded-md"></div>
-                    <div className="bg-gray-bg w-20 h-6 rounded-md"></div>
-                    <div className="bg-gray-bg w-20 h-6 rounded-md"></div>
-                </div>
-            </div>
+  return (
+    <div
+      className={`mx-auto h-fit w-11/12 -translate-y-16 rounded-[2.5rem] border-2 border-solid bg-gray-dark-bg shadow-xl max-[855px]:w-full max-[855px]:rounded-none max-[855px]:shadow-none`}
+    >
+      <div className="mb-8 flex flex-col justify-between min-[855px]:flex-row">
+        <div
+          className={`${shimmer} relative z-50 ml-10 h-[200px] w-[200px] -translate-y-16 overflow-hidden rounded-full border-4 border-solid border-white bg-gray-bg`}
+        ></div>
+        <div className="mt-8 max-[855px]:-mt-8">
+          <div className="h-8 w-56 rounded-md bg-gray-bg max-[855px]:ml-10"></div>
+          <div className="mt-6 flex gap-x-10 gap-y-2 max-[855px]:mx-auto max-[855px]:mt-12 max-[855px]:w-11/12 max-sm:flex-wrap">
+            <div className="h-6 w-24 rounded-md bg-gray-bg"></div>
+            <div className="h-6 w-24 rounded-md bg-gray-bg"></div>
+            <div className="h-6 w-24 rounded-md bg-gray-bg"></div>
+          </div>
         </div>
-        <div className="w-11/12 mb-4 max-[855px]:w-full mx-auto flex max-[855px]:justify-center min-[855px]:gap-x-6">
-            <div className="bg-gray-bg w-28 h-8 rounded-md"></div>
-            <div className="bg-gray-bg w-28 h-8 rounded-md"></div>
-            <div className="bg-gray-bg w-28 h-8 rounded-md"></div>
+        <div className="mt-8 max-[855px]:mx-auto max-[855px]:mt-12 max-[855px]:w-11/12 lg:pr-20">
+          <div className="mb-4 h-6 w-28 rounded-md bg-gray-bg"></div>
+          <div className="flex w-52 flex-wrap gap-4 max-[855px]:w-full">
+            <div className="h-6 w-20 rounded-md bg-gray-bg"></div>
+            <div className="h-6 w-20 rounded-md bg-gray-bg"></div>
+            <div className="h-6 w-20 rounded-md bg-gray-bg"></div>
+          </div>
         </div>
-        <div className="absolute top-4 right-8 w-6 h-6 bg-gray-bg rounded-md p-1"></div>
-     </div>
-    )
+      </div>
+      <div className="mx-auto mb-4 flex w-11/12 max-[855px]:w-full max-[855px]:justify-center min-[855px]:gap-x-6">
+        <div className="h-8 w-28 rounded-md bg-gray-bg"></div>
+        <div className="h-8 w-28 rounded-md bg-gray-bg"></div>
+        <div className="h-8 w-28 rounded-md bg-gray-bg"></div>
+      </div>
+      <div className="absolute right-8 top-4 h-6 w-6 rounded-md bg-gray-bg p-1"></div>
+    </div>
+  );
 }
