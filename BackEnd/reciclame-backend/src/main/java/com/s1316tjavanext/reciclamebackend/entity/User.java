@@ -46,6 +46,9 @@ public class User {
     @Column(name = "givenName", nullable=false)
     private String name;
     
+    @Column(name = "givenlastName", nullable=false)
+    private String lastName;
+    
     @Column(name = "Email", nullable=false, length = 255)
     private String Email;
     

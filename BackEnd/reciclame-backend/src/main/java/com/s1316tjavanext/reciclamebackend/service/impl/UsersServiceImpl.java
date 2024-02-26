@@ -65,13 +65,14 @@ public class UsersServiceImpl {
     ////////ESTE ES PARA CREAR AL USUARIO USANDO VALIDACIONES //////////
     
     
-    public void createUser(String email, String name, Date birthdate, String password, String password2, String phone) throws MiException {
-        validar(email, name, password, password2, birthdate, phone);
+    public void createUser(String email, String name, String lastName, Date birthdate, String password, String password2, String phone) throws MiException {
+        validar(email, name,lastName, password, password2, birthdate, phone);
 
         User user = new User();
 
         user.setEmail(email);
         user.setName(name);
+        user.setLastName(lastName);
         user.setPhone(phone);
         user.setPassword(password);
         user.setBirthdate(birthdate);
@@ -84,7 +85,7 @@ public class UsersServiceImpl {
     ///////////    ESTO ES PARA EDITA   //////////
     
      @Transactional
-  public void EditUser(Long id, String email, String name, Date birthdate, String password, String password2, String phone) throws MiException {
+  public void EditUser(Long id, String email, String name,String lastName, Date birthdate, String password, String password2, String phone) throws MiException {
 
     User user = new User() {
     };
@@ -95,10 +96,11 @@ public class UsersServiceImpl {
       user = respuesta.get();
     }
 
-   validar(email, name, password, password2, birthdate, phone);
+   validar(email, name,lastName, password, password2, birthdate, phone);
 
     user.setEmail(email);
     user.setName(name);
+    user.setLastName(lastName);
     user.setPassword(password);
     user.setBirthdate(birthdate);
     user.setPhone(phone);
@@ -112,10 +114,13 @@ public class UsersServiceImpl {
     ///////////        ESTO ES PARA LAS VALIDACIONES ///////////////////
     
     
-    public void validar(String email, String name, String password, String password2, Date birthdate , String phone  ) throws MiException {
+    public void validar(String email, String name, String lastName, String password, String password2, Date birthdate , String phone  ) throws MiException {
 
     if (name.isEmpty()) {
       throw new MiException("el nombre no puede ser nulo o estar vacio");
+    }
+    if (lastName.isEmpty()) {
+      throw new MiException("el apellido no puede ser nulo o estar vacio");
     }
 
     if (email.isEmpty()) {

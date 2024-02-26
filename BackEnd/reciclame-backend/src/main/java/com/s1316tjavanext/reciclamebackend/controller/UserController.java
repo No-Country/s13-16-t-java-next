@@ -41,15 +41,16 @@ public class UserController {
   
   ///////////  CREAR USUARIO POR POST ////////////
   @PostMapping("/crearUsuario")
-  public String crearUsuario(@RequestParam String email, @RequestParam String nombre, @RequestParam("fechaDeNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate, @RequestParam String password, @RequestParam String password2, @RequestParam String phone, ModelMap modelo) {
+  public String crearUsuario(@RequestParam String email, @RequestParam String nombre, @RequestParam String apellido, @RequestParam("fechaDeNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate, @RequestParam String password, @RequestParam String password2, @RequestParam String phone, ModelMap modelo) {
 
     try {
-      userServiceImpl.createUser(email, nombre, birthdate, password, password2, phone);
+      userServiceImpl.createUser(email, nombre,apellido, birthdate, password, password2, phone);
       modelo.put("exito", "El Usuario fue registrado correctamente!");
     } catch (MiException ex) {
       modelo.put("error", ex.getMessage());
       modelo.put("email", email);
       modelo.put("name", nombre);
+      modelo.put("lastName", apellido);
       modelo.put("birthdate", birthdate);
       modelo.put("password", password);
       modelo.put("password2", password2);
@@ -65,16 +66,17 @@ public class UserController {
   ///////////  PARAR EDITAR EL PERFIL ////////////////////////
   
   @PostMapping("/modificarUsuario/{id}")
-  public String modificarUsuario(@PathVariable Long id, @RequestParam String email, @RequestParam String nombre, @RequestParam("fechaDeNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate, @RequestParam String password, @RequestParam String password2, @RequestParam String phone, ModelMap modelo) {
+  public String modificarUsuario(@PathVariable Long id, @RequestParam String email, @RequestParam String nombre,@RequestParam String apellido, @RequestParam("fechaDeNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate, @RequestParam String password, @RequestParam String password2, @RequestParam String phone, ModelMap modelo) {
 
     try {
-      userServiceImpl.EditUser(id, email, nombre, birthdate, password, password2, phone);
+      userServiceImpl.EditUser(id, email, nombre,apellido, birthdate, password, password2, phone);
       modelo.put("exito", "El Usuario fue modificado correctamente!");
     } catch (MiException e) {
 
       modelo.put("error", e.getMessage());
       modelo.put("email", email);
-      modelo.put("nombre", nombre);
+      modelo.put("name", nombre);
+      modelo.put("lastName", apellido);
       modelo.put("birthdate", birthdate);
       modelo.put("password", password);
       modelo.put("password2", password2);
