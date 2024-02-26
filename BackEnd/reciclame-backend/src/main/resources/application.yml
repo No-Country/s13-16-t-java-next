@@ -2,6 +2,7 @@ server:
   port: 8080
   error:
     include-stacktrace: never
+  forward-headers-strategy: framework
 spring:
   jpa:
     show-sql: true
