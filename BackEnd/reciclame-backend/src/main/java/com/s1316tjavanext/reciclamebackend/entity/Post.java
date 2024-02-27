@@ -36,7 +36,7 @@ public class Post {
     private String imageUrl;
 
     @Column(nullable = false)
-    private int love = 0;
+    private int love;
 
     //private Profile profile;
 
@@ -55,5 +55,5 @@ public class Post {
     private List<Comment> comments;
 
     @Column(nullable = false)
-    private boolean deleted = Boolean.FALSE;
+    private boolean deleted;
 }

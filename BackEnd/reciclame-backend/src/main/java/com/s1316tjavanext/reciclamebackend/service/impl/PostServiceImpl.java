@@ -1,6 +1,7 @@
 package com.s1316tjavanext.reciclamebackend.service.impl;
 
 import com.s1316tjavanext.reciclamebackend.dto.PostDto;
+import com.s1316tjavanext.reciclamebackend.dto.PostRequestDto;
 import com.s1316tjavanext.reciclamebackend.entity.Post;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Status;
 import com.s1316tjavanext.reciclamebackend.mapper.PostMapper;
@@ -38,12 +39,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDto save(PostDto postDto, MultipartFile mpf) {
+    public PostDto save(PostRequestDto postRequestDto, MultipartFile mpf) {
+        PostDto postDto = postMapper.postRequestDtoToPostDto(postRequestDto);
         Post post = postMapper.postDtoToPost(postDto);
         post.setDate(LocalDate.now());
         post.setStatus(Status.Abierto);
+        post.setLove(0);
+        post.setDeleted(false);
         setImageUrl(mpf, post);
-        // set image
         return postMapper.postToPostDto(postRepository.save(post));
     }
 
@@ -62,13 +65,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDto update(UUID id, PostDto postDto, MultipartFile mpf) {
+    public PostDto update(UUID id, PostRequestDto postRequestDto, MultipartFile mpf) {
         Optional<PostDto> postDtoDB = getPost(id);
         if (postDtoDB.isPresent()){
             Post post = postMapper.postDtoToPost(postDtoDB.get());
-            post.setTitle(postDto.title());
-            post.setDescription(postDto.description());
-            post.setCategory(postDto.category());
+            post.setTitle(postRequestDto.title());
+            post.setDescription(postRequestDto.description());
+            post.setCategory(postRequestDto.category());
             setImageUrl(mpf,post);
             return postMapper.postToPostDto(postRepository.save(post));
         } else throw new RuntimeException();
