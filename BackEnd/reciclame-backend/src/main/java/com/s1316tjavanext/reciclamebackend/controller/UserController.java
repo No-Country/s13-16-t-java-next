@@ -4,18 +4,23 @@
  */
 package com.s1316tjavanext.reciclamebackend.controller;
 
+import com.s1316tjavanext.reciclamebackend.dto.UserRequestDTO;
+import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
+import com.s1316tjavanext.reciclamebackend.entity.Location;
+import com.s1316tjavanext.reciclamebackend.entity.Province;
 import com.s1316tjavanext.reciclamebackend.entity.User;
 import com.s1316tjavanext.reciclamebackend.repository.UserRepository;
-import com.s1316tjavanext.reciclamebackend.service.impl.UsersServiceImpl;
+import com.s1316tjavanext.reciclamebackend.service.UserService;
 import exception.MiException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,87 +31,61 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RestController
 @Tag(name = "Users", description = "Endpoints for managing users")
-@RequestMapping("/profile")
+@RequestMapping("/users")
 public class UserController {
-  private UserRepository usuarioRepository;
-  private UsersServiceImpl userServiceImpl;
+  private final UserRepository usuarioRepository;
+  private final UserService userService;
+
   
   ////////// CREAR USUARIO GET //////////
-  
-   @GetMapping("/crearUsuario")
-  public String crearUsuario() {
-    return "usuario_registro.html";
+
+  @Operation(summary = "Get all users")
+   @GetMapping
+  public ResponseEntity<List<User>> getUsuario() {
+    return ResponseEntity.ok().body(userService.listUser());
     /*-----Linkear a front----*/
   }
   
   
   
   ///////////  CREAR USUARIO POR POST ////////////
-  @PostMapping("/crearUsuario")
-  public String crearUsuario(@RequestParam String email, @RequestParam String nombre, @RequestParam String apellido, @RequestParam("fechaDeNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate, @RequestParam String password, @RequestParam String password2, @RequestParam String phone, ModelMap modelo) {
+  @Operation(summary = "Create a user")
+  @PostMapping("/crear-usuario")
+  public ResponseEntity<UserResponseDTO> crearUsuario(@RequestBody UserRequestDTO userRequestDTO) {
 
-    try {
-      userServiceImpl.createUser(email, nombre,apellido, birthdate, password, password2, phone);
-      modelo.put("exito", "El Usuario fue registrado correctamente!");
-    } catch (MiException ex) {
-      modelo.put("error", ex.getMessage());
-      modelo.put("email", email);
-      modelo.put("name", nombre);
-      modelo.put("lastName", apellido);
-      modelo.put("birthdate", birthdate);
-      modelo.put("password", password);
-      modelo.put("password2", password2);
-      modelo.put("phone", phone);
-      return "usuario_registro.html";
-      
-    }
-    return "inicio.html";
+  return ResponseEntity.ok().body(userService.createUser(userRequestDTO));
 }
   
-  
-  
   ///////////  PARAR EDITAR EL PERFIL ////////////////////////
-  
+
+  @Operation(summary = "Edit a user")
   @PostMapping("/modificarUsuario/{id}")
-  public String modificarUsuario(@PathVariable UUID id, @RequestParam String email, @RequestParam String nombre, @RequestParam String apellido, @RequestParam("fechaDeNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate, @RequestParam String password, @RequestParam String password2, @RequestParam String phone, ModelMap modelo) {
+  public ResponseEntity<User> modificarUsuario(@PathVariable UUID id,
+                                 @RequestParam String email,
+                                 @RequestParam String nombre,
+                                 @RequestParam String apellido,
+                                 @RequestParam("fechaDeNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate,
+                                 @RequestParam String password,
+                                 @RequestParam String password2,
+                                 @RequestParam String phone,
+                                 ModelMap modelo) {
 
-    try {
-      userServiceImpl.EditUser(id, email, nombre,apellido, birthdate, password, password2, phone);
-      modelo.put("exito", "El Usuario fue modificado correctamente!");
-    } catch (MiException e) {
-
-      modelo.put("error", e.getMessage());
-      modelo.put("email", email);
-      modelo.put("name", nombre);
-      modelo.put("lastName", apellido);
-      modelo.put("birthdate", birthdate);
-      modelo.put("password", password);
-      modelo.put("password2", password2);
-      modelo.put("phone", phone);
-      return "usuario_modificar.html";
-      
-    }
-    return "index.html";
+    return ResponseEntity.ok().body(userService.EditUser(id, email, nombre, apellido, birthdate, password, password2, phone));
   }
   
   
   /////////////////////      PARA ELIMINAR EL USUARIO  /////////////////////
 
-   @GetMapping("/eliminarUsuario/{id}")
-  public String eliminarUsuario(@PathVariable UUID id, ModelMap modelo) {
+  @Operation(summary = "Delete a user")
+   @DeleteMapping("/delete/{id}")
+  public ResponseEntity<Void> eliminarUsuario(@PathVariable UUID id, ModelMap modelo) {
 
     try {
-
-      userServiceImpl.eliminarUsuario(id);
-      List<User> user = userServiceImpl.listUser();
-      modelo.addAttribute("usuarios", user);
-      modelo.put("exito", "El Usuario fue eliminado correctamente!");
-      return "redirect:../index.html";
+      userService.eliminarUsuario(id);
+      return ResponseEntity.noContent().build();
 
     } catch (Exception ex) {
-      modelo.put("error", ex.getMessage());
-      return "index.html";
-      
+        return ResponseEntity.notFound().build();
     }
   }
   

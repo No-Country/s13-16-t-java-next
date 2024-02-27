@@ -4,89 +4,70 @@
  */
 package com.s1316tjavanext.reciclamebackend.service.impl;
 
+import com.s1316tjavanext.reciclamebackend.dto.UserRequestDTO;
+import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
+import com.s1316tjavanext.reciclamebackend.entity.Location;
+import com.s1316tjavanext.reciclamebackend.entity.Province;
 import com.s1316tjavanext.reciclamebackend.entity.User;
+import com.s1316tjavanext.reciclamebackend.mapper.UserMapper;
 import com.s1316tjavanext.reciclamebackend.repository.UserRepository;
+import com.s1316tjavanext.reciclamebackend.service.UserService;
 import exception.MiException;
 
 import java.util.*;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
  * @author mathi
  */
+@AllArgsConstructor
 @Service
-public class UsersServiceImpl {
+public class UsersServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
 
-    public UsersServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-   
-    /*
-  /////////////   ESTO ES PARA VALIDAR LA CONTRASEÑA /////////////
-    
-  public void setPassword(Long userId, String newPassword) {
-       
-        User usuario = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+//    private boolean validarRequisitosPassword(String password) {
+//        // Asegurar que la contraseña tiene al menos 8 caracteres, incluyendo mayúsculas y minúsculas
+//        return password.length() >= 8 && contieneMayuscula(password) && contieneMinuscula(password);
+//    }
+//
+//    private boolean contieneMayuscula(String password) {
+//        return !password.equals(password.toLowerCase());
+//    }
+//
+//    private boolean contieneMinuscula(String password) {
+//        return !password.equals(password.toUpperCase());
+//    }
 
-        if (validarRequisitosPassword(newPassword)) {
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            usuario.setPassword(passwordEncoder.encode(newPassword));
-            userRepository.save(usuario);
-        } else {
-            throw new IllegalArgumentException("La contraseña no cumple con los requisitos mínimos.");
-        }
-    }
+    // Obtener un usuario
 
-   */
-
-    private boolean validarRequisitosPassword(String password) {
-        // Asegurar que la contraseña tiene al menos 8 caracteres, incluyendo mayúsculas y minúsculas
-        return password.length() >= 8 && contieneMayuscula(password) && contieneMinuscula(password);
+    public User getUser(UUID id) {
+        return userRepository.findById(id).orElse(null);
     }
 
-    private boolean contieneMayuscula(String password) {
-        return !password.equals(password.toLowerCase());
-    }
-
-    private boolean contieneMinuscula(String password) {
-        return !password.equals(password.toUpperCase());
-    }
-
-    
-    
     ////////ESTE ES PARA CREAR AL USUARIO USANDO VALIDACIONES //////////
     
     
-    public void createUser(String email, String name, String lastName, Date birthdate, String password, String password2, String phone) throws MiException {
-        validar(email, name,lastName, password, password2, birthdate, phone);
+    public UserResponseDTO createUser(UserRequestDTO userRequestDTO)
+             {
 
-        User user = new User();
+        UserResponseDTO userResponse = userMapper.userRequestDTOToUserResponseDTO(userRequestDTO);
+        User user = userMapper.userResponseDTOToUser(userResponse);
 
-        user.setEmail(email);
-        user.setName(name);
-        user.setLastName(lastName);
-        user.setPhone(phone);
-        user.setPassword(password);
-        user.setBirthdate(birthdate);
-        user.setBirthdate(new Date());
-
-        userRepository.save(user);
+        return userMapper.userToUserResponseDTO(userRepository.save(user));
     }
     
     
     ///////////    ESTO ES PARA EDITA   //////////
     
      @Transactional
-  public void EditUser(UUID id, String email, String name, String lastName, Date birthdate, String password, String password2, String phone) throws MiException {
+  public User EditUser(UUID id, String email, String name, String lastName, Date birthdate, String password, String password2, String phone){
 
     User user = new User() {
     };
@@ -97,7 +78,7 @@ public class UsersServiceImpl {
       user = respuesta.get();
     }
 
-   validar(email, name,lastName, password, password2, birthdate, phone);
+//   validar(email, name,lastName, password, password2, birthdate, phone);
 
     user.setEmail(email);
     user.setName(name);
@@ -106,7 +87,7 @@ public class UsersServiceImpl {
     user.setBirthdate(birthdate);
     user.setPhone(phone);
 
-    userRepository.save(user);
+    return userRepository.save(user);
   }
     
 
@@ -163,8 +144,4 @@ public class UsersServiceImpl {
     usuarios = userRepository.findAll();
     return usuarios;
   }
-  
-   
-    
-    
 }

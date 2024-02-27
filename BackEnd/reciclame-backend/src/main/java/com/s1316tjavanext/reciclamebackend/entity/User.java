@@ -10,11 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 
 /**
@@ -27,6 +23,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(name = "user")
 public class User {
     @Id
@@ -34,8 +31,7 @@ public class User {
     @Column(name = "id", nullable = false)
     private UUID userId;
     
-    @OneToOne
-    @JoinColumn(name = "profile_id")
+    @OneToOne(mappedBy = "user")
     private Profile perfil;
     
     @Column(name = "givenName", nullable=false)
@@ -44,20 +40,22 @@ public class User {
     @Column(name = "givenlastName", nullable=false)
     private String lastName;
     
-    @Column(name = "Email", nullable=false, length = 255)
-    private String Email;
+    @Column(name = "email", nullable=false, length = 255)
+    private String email;
     
     @Column(name = "phone", nullable = false, length = 20)
     private String phone;
     
     @Column(name = "password", nullable = false)
     private String password;
-    
-    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
-    private List<Province> province;
 
-    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
-    private List<Location> location;
+    @OneToOne
+    @JoinColumn(name = "province_id", referencedColumnName = "id")
+    private Province province;
+
+    @OneToOne
+    @JoinColumn(name = "location_id", referencedColumnName = "id")
+    private Location location;
     
     @Column(name = "birthdate", nullable = false)
     private Date birthdate;

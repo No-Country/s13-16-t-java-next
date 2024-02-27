@@ -21,7 +21,6 @@ public class Location {
     @Schema(description = "Nombre de la localidad", example = "Rosario")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
+    @OneToOne(mappedBy = "location")
     private User user;
 }

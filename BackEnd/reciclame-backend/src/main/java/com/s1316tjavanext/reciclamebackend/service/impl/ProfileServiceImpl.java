@@ -24,10 +24,8 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public Profile saveProfile(Profile profile) {
         Profile newProfile = new Profile();
-        System.out.println(profile.getBio());
         newProfile.setId(UUID.randomUUID());
         newProfile.setName(profile.getName());
-        System.out.println(profile.getLastName());
         newProfile.setLastName(profile.getLastName());
         newProfile.setPhotoId(profile.getPhotoId());
         newProfile.setBio(profile.getBio());

@@ -30,7 +30,6 @@ public class ProfileController {
     @Operation(summary = "Register a new user", description = "Register a new user in the system")
     public ResponseEntity<Profile> saveProfile(@RequestBody UserCreateDTO userCreateDTO) {
         Profile profile = profileMapper.userCreateDTOToProfile(userCreateDTO);
-        profile.setId(UUID.randomUUID());
         return ResponseEntity.ok(profile);
     }
 
