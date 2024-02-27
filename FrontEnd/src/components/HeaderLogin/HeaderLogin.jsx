@@ -16,20 +16,20 @@ export default function HeaderLogin() {
           <ul className="m-2 flex items-center gap-4 p-2">
             <Link href={"/"}>
               <Image
-                width={48}
-                height={48}
-                src="/android-chrome-192x192.png"
+                width={150}
+                height={50}
+                src="/image/reciclame.svg"
                 className="mr-10 flex p-2"
                 alt="reciclame"
               ></Image>
             </Link>
-            <Link className="hidden p-1 md:block" href={"/"}>
+            <Link className="hidden p-1 md:block border-secondary-violet hover:border-b-2" href={"/"}>
               Home
             </Link>
-            <Link className="hidden p-1 md:block" href={"/explorar"}>
+            <Link className="hidden p-1 md:block border-secondary-violet hover:border-b-2" href={"/explorar"}>
               Explorar
             </Link>
-            <Link className="hidden p-1 md:block" href={"/blog"}>
+            <Link className="hidden p-1 md:block border-secondary-violet hover:border-b-2" href={"/blog"}>
               Blog
             </Link>
           </ul>

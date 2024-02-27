@@ -101,7 +101,7 @@ export default function Home() {
               </div>
               <Link
                 href="/explorar"
-                className="mx-auto grid h-12 w-full place-items-center rounded-2xl bg-primary-green text-center text-lg leading-5 text-white min-[640px]:max-w-52"
+                className="mx-auto grid h-12 w-full place-items-center rounded-2xl bg-primary-green text-center text-lg leading-5 text-white min-[640px]:max-w-52 hover:bg-green-500 transition duration-300"
               >
                 Explorar
               </Link>
