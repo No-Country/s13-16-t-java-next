@@ -45,7 +45,7 @@ export default function HeaderLogin() {
           <ul className="m-2 flex items-center gap-7 p-2">
             <MenuIconLog />
             <Link
-              className="hidden w-40 rounded-full bg-accent-yellow p-2 text-center font-bold tracking-wider text-black md:block"
+              className="hidden w-40 rounded-full bg-accent-yellow p-2 text-center tracking-wider text-black md:block"
               href={"/nuevopost"}
             >
               Publicar +
