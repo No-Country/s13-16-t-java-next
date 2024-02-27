@@ -273,7 +273,7 @@ function FormRegister() {
       </div>
       <div className="w-full">
         <button
-          className="w-full rounded-3xl bg-primary-green p-3 text-white md:w-[40%] "
+          className="w-full rounded-3xl bg-primary-green p-3 text-white md:w-[40%] transition duration-300 hover:bg-green-500"
           type="submit"
         >
           Registrate

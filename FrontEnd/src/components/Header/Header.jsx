@@ -38,7 +38,7 @@ export default function Header() {
                   Registrarse
                 </Link>
                 <Link
-                  className="hidden w-40  rounded-full bg-primary-green p-1 text-center font-bold text-white md:block"
+                  className="hidden w-40 hover:bg-green-500 rounded-full transition duration-300 bg-primary-green p-1 text-center font-bold text-white md:block"
                   href={"/login"}
                 >
                   Iniciar Sesión

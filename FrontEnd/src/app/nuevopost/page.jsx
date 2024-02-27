@@ -76,7 +76,7 @@ export default function NuevoPost() {
           </button>
           <button
             type="submit"
-            className=" mb-5 w-full rounded-3xl bg-accent-yellow p-2 text-center lg:m-2 lg:w-28"
+            className=" mb-5 w-full rounded-3xl bg-accent-yellow p-2 text-center lg:m-2 lg:w-28 hover:bg-yellow-300 transition duration-300"
             href={""}
           >
             Publicar
