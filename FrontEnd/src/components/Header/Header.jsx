@@ -29,7 +29,7 @@ export default function Header() {
                   alt="reciclame"
                 />
               </Link>
-              <ul className="m-2 flex items-center gap-7 p-2 mr-16">
+              <ul className="m-2 mr-16 flex items-center gap-7 p-2">
                 <MenuIcon />
                 <Link className="hidden p-1 md:block" href={"/explorar"}>
                   Explorar

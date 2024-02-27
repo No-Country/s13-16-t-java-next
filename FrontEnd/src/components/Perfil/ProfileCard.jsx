@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import img from "../assets/profile/Rectangle-2.png";
-import ConfigIcon from "../components/Icons/ConfigIcon";
+import img from "../../assets/profile/Rectangle-2.png";
+import ConfigIcon from "../Icons/ConfigIcon";
 
 export default function ProfileCard() {
   const pathname = usePathname();
@@ -72,7 +72,7 @@ export default function ProfileCard() {
       </nav>
       <Link
         href={"/configuracion/perfil"}
-        className="absolute right-8 top-4 rounded-md bg-gray-dark-bg p-1 hover:scale-105"
+        className="absolute right-8 top-4 rounded-md bg-gray-dark-bg p-1 hover:bg-gray-bg"
       >
         <ConfigIcon width="30" height="30" />
       </Link>
