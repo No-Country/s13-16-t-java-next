@@ -22,23 +22,23 @@ export default function Header() {
             <nav className="relative m-auto flex h-16 max-w-7xl justify-between">
               <Link href={"/"}>
                 <Image
-                  width={48}
-                  height={48}
-                  src="/android-chrome-192x192.png"
+                  width={150}
+                  height={50}
+                  src="/image/reciclame.svg"
                   className="m-2 ml-4 flex gap-4 p-2"
                   alt="reciclame"
                 />
               </Link>
-              <ul className="m-2 flex items-center gap-7 p-2 mr-16">
+              <ul className="m-2 mr-16 flex items-center gap-7 p-2">
                 <MenuIcon />
-                <Link className="hidden p-1 md:block" href={"/explorar"}>
+                <Link className="hidden p-1 md:block border-secondary-violet hover:border-b-2" href={"/explorar"}>
                   Explorar
                 </Link>
-                <Link className="hidden p-1 md:block" href={"/registro"}>
+                <Link className="hidden p-1 md:block border-secondary-violet hover:border-b-2" href={"/registro"}>
                   Registrarse
                 </Link>
                 <Link
-                  className="hidden w-40  rounded-full bg-primary-green p-1 text-center font-bold text-white md:block"
+                  className="hidden w-40 hover:bg-green-500 rounded-full transition duration-300 bg-primary-green p-1 text-center font-bold text-white md:block"
                   href={"/login"}
                 >
                   Iniciar Sesión

@@ -88,7 +88,7 @@ function FormLogin() {
       </div>
       <div className="w-full">
         <button
-          className="w-full rounded-3xl bg-primary-green p-3 text-white md:w-1/3"
+          className="w-full rounded-3xl bg-primary-green p-3 text-white md:w-1/3 transition duration-300 hover:bg-green-500"
           type="submit"
         >
           Ingresar
