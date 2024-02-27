@@ -14,9 +14,36 @@ import { ChevronDownIcon } from "@/src/components/Icons";
 
 import Index from "..";
 import { EyeClose, EyeOpen } from "../../Icons/EyesIcon";
+import { getLocalitiesFromProvince } from "@/src/lib/api";
 
-function FormRegister() {
+function FormRegister({ provinces }) {
   const { showPassword, handleShowPassword } = Index();
+  const Provinces = provinces;
+
+  const [ProvinceSelected, setProvinceSelected] = React.useState("");
+  const [locations, setLocations] = React.useState([]);
+
+  React.useEffect(() => {
+    async function fetchLocationsByProvince() {
+      if (ProvinceSelected) {
+        try {
+          const provinceId = Provinces.find(
+            (p) => p.name === ProvinceSelected,
+          ).id;
+
+          const LocationsByProvince =
+            await getLocalitiesFromProvince(provinceId);
+
+          setLocations(LocationsByProvince);
+          console.log(LocationsByProvince);
+        } catch (error) {
+          console.error("Error fetching locations:", error);
+        }
+      }
+    }
+
+    fetchLocationsByProvince();
+  }, [ProvinceSelected]);
 
   const months = getMonthsOfYear();
   const years = getYears();
@@ -54,7 +81,7 @@ function FormRegister() {
       className="flex h-full w-full max-w-2xl flex-col items-center justify-center gap-6 overflow-y-auto bg-white p-5  md:px-24 md:py-10"
       onSubmit={handleSubmit((data) => {
         console.log(data);
-        // router.push("/configuracion");
+        // router.push("/configuracion/perfil");
       })}
     >
       <p className="text-star w-full text-2xl font-bold uppercase">
@@ -166,41 +193,66 @@ function FormRegister() {
         )}
       </div>
       <div className="relative flex w-full gap-5 ">
-        <div className="flex w-[80%] flex-col justify-center gap-2">
-          <div className="flex items-center justify-between">
-            <label className="font-[400] capitalize">ciudad</label>
-          </div>
-          <div>
-            <input
-              type="text"
-              className={`input-form ${errors.city ? "focus:outline-wrong" : "focus:outline-secondary-violet"}`}
-              placeholder="Ciudad"
-              id="city"
-              {...register("city")}
-            />
-          </div>
-          {errors.city && (
-            <p className="absolute -bottom-6 text-wrong">
-              {errors.city.message}
-            </p>
-          )}
-        </div>
         <div className="relative flex w-[80%] flex-col justify-center gap-2">
           <div className="flex items-center justify-between">
-            <label className="font-[400] capitalize">provincia</label>
+            <label className="font-[400] capitalize">Provincia</label>
           </div>
-          <div>
-            <input
-              type="text"
-              className={`input-form ${errors.province ? "focus:outline-wrong" : "focus:outline-secondary-violet"}`}
-              placeholder="Provincia"
+          <div className="relative">
+            <select
+              className={`input-form truncate pr-8 ${errors.city ? "focus:outline-wrong" : "hover:border-secondary-violet focus:outline-secondary-violet"}`}
+              placeholder="Ciudad"
               id="province"
               {...register("province")}
-            />
+              onChange={(e) => setProvinceSelected(e.target.value)}
+            >
+              <option value="">Provincia</option>
+              <hr />
+              {Provinces.map((province) => {
+                const { id, name } = province;
+                return (
+                  <option key={id} value={name}>
+                    {name}
+                  </option>
+                );
+              })}
+            </select>
+            <ChevronDownIcon className="chevron-down-icon" />
           </div>
           {errors.province && (
             <p className="absolute -bottom-6 text-wrong">
               {errors.province.message}
+            </p>
+          )}
+        </div>
+        <div className="flex w-[80%] flex-col justify-center gap-2">
+          <div className="flex items-center justify-between">
+            <label className="font-[400] capitalize">ciudad</label>
+          </div>
+          <div className="relative">
+            <select
+              className={`input-form ${errors.city ? "focus:outline-wrong" : "hover:border-secondary-violet focus:outline-secondary-violet"}`}
+              placeholder="Ciudad"
+              id="city"
+              {...register("city")}
+            >
+              <option value="">Ciudad</option>
+              <hr />
+              {locations &&
+                locations.map((location) => {
+                  const { id, name } = location;
+                  console.log(location);
+                  return (
+                    <option key={id} value={name}>
+                      {name}
+                    </option>
+                  );
+                })}
+            </select>
+            <ChevronDownIcon className="chevron-down-icon" />
+          </div>
+          {errors.city && (
+            <p className="absolute -bottom-6 text-wrong">
+              {errors.city.message}
             </p>
           )}
         </div>
