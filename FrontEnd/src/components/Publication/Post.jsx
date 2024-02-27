@@ -13,11 +13,10 @@ export default function Post({ post }) {
   const [like, setLike] = useState(post.likes);
   const [liked, setLiked] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => setMounted(true), []);
 
-  const { isLogged, idUser } = useContext(Context);
+  const { isLogged, idUser, isActive, setIsActive } = useContext(Context);
   const router = useRouter();
 
   //Aca luego implementamos en useEffect la logica para actualizar los like ya sea ponga un like o lo quite.
@@ -34,13 +33,18 @@ export default function Post({ post }) {
     setLiked(!liked);
   };
   const isOwner = idUser === post.idUser;
+
   const toggleSwitch = () => {
     setIsActive(!isActive);
+    const newIsActive = !isActive;
+    setIsActive(newIsActive);
+    localStorage.setItem("isActive", JSON.stringify(newIsActive));
   };
+
   return (
     <>
       <div className="flex flex-col gap-8 p-5 lg:p-20 xl:p-24 ">
-        {isOwner && (
+        {isOwner && isLogged && (
           <div className="flex justify-between gap-2 lg:justify-start">
             <Button className="w-3/5  rounded-3xl bg-accent-yellow p-1 font-[500]  lg:w-1/2 lg:p-2">
               Intercambio exitoso
@@ -83,7 +87,7 @@ export default function Post({ post }) {
         </div>
       </div>
       <div className="  flex flex-col gap-4 p-5 lg:gap-8  lg:p-20 xl:p-24 ">
-        {isOwner && (
+        {isOwner && isLogged && (
           <div className=" flex justify-end">
             <Button className="hidden w-1/2 rounded-3xl  bg-wrong p-1 font-[500] text-white lg:block  lg:w-1/2 lg:p-2">
               Eliminar Publicación
@@ -103,7 +107,7 @@ export default function Post({ post }) {
         >
           Me interesa <WspIcon />
         </Link>
-        {isOwner && (
+        {isOwner && isLogged && (
           <div className="flex items-center gap-2">
             <Button
               className={`relative h-6 w-12 rounded-full bg-gray-300 focus:outline-none ${isActive ? "bg-primary-green" : "bg-[#E3E3E3]"}`}
@@ -119,7 +123,7 @@ export default function Post({ post }) {
 
         <Coments coments={post.coments} />
         {isLogged && mounted && isActive && <FormComent />}
-        {isOwner && (
+        {isOwner && isLogged && (
           <div className=" flex w-[90%]">
             <Button className="w-full rounded-3xl bg-wrong p-2 font-[500] text-white lg:hidden  lg:w-1/2 lg:p-2">
               Eliminar Publicación
