@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.UUID;
 
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 
 /**
@@ -24,7 +26,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "user")
+@Table(name = "users")
+@SQLDelete(sql = "UPDATE users SET  deleted = true WHERE id =?")
+@Where(clause = "deleted=false")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -53,11 +57,14 @@ public class User {
     @JoinColumn(name = "province_id", referencedColumnName = "id")
     private Province province;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location location;
     
     @Column(name = "birthdate", nullable = false)
     private Date birthdate;
+
+    @Column(nullable = false)
+    private boolean deleted;
     
 }

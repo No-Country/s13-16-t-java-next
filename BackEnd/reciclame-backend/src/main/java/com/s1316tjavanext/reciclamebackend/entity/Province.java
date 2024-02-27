@@ -11,14 +11,11 @@ import lombok.Data;
 public class Province {
     @Id
     @Schema(description = "Id de la provincia", example = "1")
-    private int id;
+    private Byte id;
 
     @Column(name = "nombre")
     @Schema(description = "Nombre de la provincia", example = "Santa Fe")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
 }

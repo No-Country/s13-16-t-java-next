@@ -12,6 +12,7 @@ import com.s1316tjavanext.reciclamebackend.entity.User;
 import exception.MiException;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -20,15 +21,15 @@ import java.util.UUID;
  */
 public interface UserService {
 
-    public User getUser(UUID id);
+     Optional<UserResponseDTO> getUser(UUID id);
 
-    public UserResponseDTO createUser(UserRequestDTO userRequestDTO);
+     UserResponseDTO createUser(UserRequestDTO userRequestDTO);
 
-    public User EditUser(UUID id, String email, String name, String lastName, Date birthdate, String password, String password2, String phone);
+    UserResponseDTO EditUser(UUID id, UserRequestDTO userRequestDTO);
 
-    public void eliminarUsuario(UUID id);
+    void eliminarUsuario(UUID id);
 
-    public List<User> listUser();
+    List<UserResponseDTO> listUser();
 
 
 

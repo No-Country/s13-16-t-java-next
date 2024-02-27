@@ -47,8 +47,8 @@ public class UsersServiceImpl implements UserService {
 
     // Obtener un usuario
 
-    public User getUser(UUID id) {
-        return userRepository.findById(id).orElse(null);
+    public Optional<UserResponseDTO> getUser(UUID id) {
+        return userRepository.findById(id).map(userMapper::userToUserResponseDTO);
     }
 
     ////////ESTE ES PARA CREAR AL USUARIO USANDO VALIDACIONES //////////
@@ -59,40 +59,36 @@ public class UsersServiceImpl implements UserService {
 
         UserResponseDTO userResponse = userMapper.userRequestDTOToUserResponseDTO(userRequestDTO);
         User user = userMapper.userResponseDTOToUser(userResponse);
+        user.setDeleted(false);
 
         return userMapper.userToUserResponseDTO(userRepository.save(user));
     }
     
     
     ///////////    ESTO ES PARA EDITA   //////////
-    
-     @Transactional
-  public User EditUser(UUID id, String email, String name, String lastName, Date birthdate, String password, String password2, String phone){
 
-    User user = new User() {
-    };
+    @Transactional
+  public UserResponseDTO EditUser(UUID id, UserRequestDTO userRequestDTO) {
 
-    Optional<User> respuesta = userRepository.findById(id);
+
+    Optional<UserResponseDTO> respuesta = getUser(id);
 
     if (respuesta.isPresent()) {
-      user = respuesta.get();
+
+      User user = userMapper.userResponseDTOToUser(respuesta.get());
+        user.setEmail(userRequestDTO.email());
+        user.setName(userRequestDTO.name());
+        user.setLastName(userRequestDTO.lastName());
+        user.setPassword(userRequestDTO.password());
+        user.setBirthdate(userRequestDTO.birthdate());
+        user.setPhone(userRequestDTO.phone());
+//        user.setLocation(userRequestDTO.location_id());
+      return userMapper.userToUserResponseDTO(userRepository.save(user));
+    } else {
+        throw new RuntimeException("no se encontro el usuario");
     }
-
-//   validar(email, name,lastName, password, password2, birthdate, phone);
-
-    user.setEmail(email);
-    user.setName(name);
-    user.setLastName(lastName);
-    user.setPassword(password);
-    user.setBirthdate(birthdate);
-    user.setPhone(phone);
-
-    return userRepository.save(user);
   }
-    
 
-    
-    
     ///////////        ESTO ES PARA LAS VALIDACIONES ///////////////////
     
     
@@ -132,16 +128,14 @@ public class UsersServiceImpl implements UserService {
     Optional<User> respuesta = userRepository.findById(id);
     if (respuesta.isPresent()) {
       userRepository.deleteById(id);
+    } else {
+      throw new RuntimeException("no se encontro el usuario");
     }
   }
-  
-  
-  ///////////////  LISTAR USUARIOS  //////////////
-  
 
-  public List<User> listUser() {
-    List<User> usuarios = new ArrayList();
-    usuarios = userRepository.findAll();
-    return usuarios;
+  ///////////////  LISTAR USUARIOS  //////////////
+
+  public List<UserResponseDTO> listUser() {
+        return userMapper.usersToUsersResponseDTO(userRepository.findAll());
   }
 }

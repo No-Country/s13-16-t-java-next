@@ -6,20 +6,14 @@ package com.s1316tjavanext.reciclamebackend.controller;
 
 import com.s1316tjavanext.reciclamebackend.dto.UserRequestDTO;
 import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
-import com.s1316tjavanext.reciclamebackend.entity.Location;
-import com.s1316tjavanext.reciclamebackend.entity.Province;
-import com.s1316tjavanext.reciclamebackend.entity.User;
 import com.s1316tjavanext.reciclamebackend.repository.UserRepository;
 import com.s1316tjavanext.reciclamebackend.service.UserService;
-import exception.MiException;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -40,17 +34,25 @@ public class UserController {
   ////////// CREAR USUARIO GET //////////
 
   @Operation(summary = "Get all users")
-   @GetMapping
-  public ResponseEntity<List<User>> getUsuario() {
+   @GetMapping("/all")
+  public ResponseEntity<List<UserResponseDTO>> getAll() {
     return ResponseEntity.ok().body(userService.listUser());
     /*-----Linkear a front----*/
+  }
+
+  @Operation(summary = "Get a user")
+  @GetMapping("/{id}")
+  public ResponseEntity<UserResponseDTO> getUserById(@PathVariable UUID id) {
+    return userService.getUser(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
   }
   
   
   
   ///////////  CREAR USUARIO POR POST ////////////
   @Operation(summary = "Create a user")
-  @PostMapping("/crear-usuario")
+  @PostMapping("/save")
   public ResponseEntity<UserResponseDTO> crearUsuario(@RequestBody UserRequestDTO userRequestDTO) {
 
   return ResponseEntity.ok().body(userService.createUser(userRequestDTO));
@@ -59,18 +61,15 @@ public class UserController {
   ///////////  PARAR EDITAR EL PERFIL ////////////////////////
 
   @Operation(summary = "Edit a user")
-  @PostMapping("/modificarUsuario/{id}")
-  public ResponseEntity<User> modificarUsuario(@PathVariable UUID id,
-                                 @RequestParam String email,
-                                 @RequestParam String nombre,
-                                 @RequestParam String apellido,
-                                 @RequestParam("fechaDeNacimiento") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthdate,
-                                 @RequestParam String password,
-                                 @RequestParam String password2,
-                                 @RequestParam String phone,
-                                 ModelMap modelo) {
+  @PutMapping("/update/{id}")
+  public ResponseEntity<UserResponseDTO> modificarUsuario(@PathVariable UUID id,@RequestBody UserRequestDTO userRequestDTO) {
+    try{
 
-    return ResponseEntity.ok().body(userService.EditUser(id, email, nombre, apellido, birthdate, password, password2, phone));
+    return ResponseEntity.ok().body(userService.EditUser(id,userRequestDTO));
+    } catch (RuntimeException ex) {
+      return ResponseEntity.notFound().build();
+    }
+
   }
   
   

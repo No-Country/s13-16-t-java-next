@@ -25,5 +25,7 @@ public interface UserMapper {
 
     @InheritInverseConfiguration
     @Mapping(target = "perfil", ignore = true)
+    @Mapping(source = "location_id", target = "location.id" )
+    @Mapping(target = "deleted", ignore = true)
     User userResponseDTOToUser(UserResponseDTO userResponseDTO);
 }

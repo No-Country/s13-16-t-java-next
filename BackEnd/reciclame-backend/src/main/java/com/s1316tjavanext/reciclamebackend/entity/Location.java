@@ -21,6 +21,4 @@ public class Location {
     @Schema(description = "Nombre de la localidad", example = "Rosario")
     private String name;
 
-    @OneToOne(mappedBy = "location")
-    private User user;
 }
