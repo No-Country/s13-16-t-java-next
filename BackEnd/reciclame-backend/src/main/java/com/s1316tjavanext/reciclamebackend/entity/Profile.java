@@ -3,6 +3,7 @@ package com.s1316tjavanext.reciclamebackend.entity;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +21,9 @@ import java.util.UUID;
 public class Profile implements Serializable {
 
     @Schema(name = "id", description = "Unique identifier of the profile", example = "123e4567-e89b-12d3-a456-426614174000")
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Id
+    @Size(max = 1000)
     private UUID id;
     @Column(name = "given_name")
     @Schema(name = "name", description = "Name of the user", example = "John")
@@ -31,7 +34,7 @@ public class Profile implements Serializable {
     @JsonAlias("last_name")
     private String lastName;
 
-    @Schema(name = "email", description = "Email of the user", example = "1234567")
+    @Schema(name = "photo_id", description = "Photo of the user", example = "1234567")
     @Column(name = "photo_id")
     @JsonAlias("photo_id")
     private String photoId;
@@ -39,6 +42,7 @@ public class Profile implements Serializable {
     @Schema(name = "bio", description = "Biography of the user", example = "I'm a software engineer")
     private String bio;
 
-//    @OneToOne
-//    private Post post;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

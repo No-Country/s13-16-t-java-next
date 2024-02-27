@@ -5,6 +5,7 @@ import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import com.s1316tjavanext.reciclamebackend.mapper.ProfileMapper;
 import com.s1316tjavanext.reciclamebackend.service.ProfileService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
+@Tag(name = "Profile", description = "Endpoints for managing profiles")
 @RequestMapping("/profile")
 public class ProfileController {
 
@@ -28,7 +30,6 @@ public class ProfileController {
     @Operation(summary = "Register a new user", description = "Register a new user in the system")
     public ResponseEntity<Profile> saveProfile(@RequestBody UserCreateDTO userCreateDTO) {
         Profile profile = profileMapper.userCreateDTOToProfile(userCreateDTO);
-        profile.setId(UUID.randomUUID());
         return ResponseEntity.ok(profile);
     }
 

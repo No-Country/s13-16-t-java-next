@@ -20,4 +20,5 @@ public class Location {
     @Column(name = "nombre")
     @Schema(description = "Nombre de la localidad", example = "Rosario")
     private String name;
+
 }
