@@ -4,6 +4,7 @@ import Post from "@/src/components/Publication/Post";
 const Publication = {
   imgPost: "/image/img_Post.png",
   imgProfile: "/image/profile1.png",
+  idUser: 2,
   nameUser: "Usuario que publica",
   titlePost: "Titulo del Articulo",
   likes: 5,

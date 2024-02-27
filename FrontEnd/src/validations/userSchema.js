@@ -12,6 +12,7 @@ export const userSchema = z.object({
 export const userRegisterSchema = z
   .object({
     name: z.string().min(1, { message: "Ingrese su nombre" }),
+    lastname: z.string().min(1, { message: "Ingrese su apellido" }),
     email: z.string().min(1, { message: "Ingrese su mail" }).email({
       message: "Ingrese un mail valido",
     }),

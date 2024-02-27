@@ -87,18 +87,37 @@ function FormRegister({ provinces }) {
       <p className="text-star w-full text-2xl font-bold uppercase">
         registrarse
       </p>
-      <div className="relative flex w-full flex-col justify-center gap-2">
-        <label className="capitalize">nombre</label>
-        <input
-          type="text"
-          className={`input-form ${errors.name ? "focus:outline-wrong" : "focus:outline-secondary-violet"}`}
-          placeholder="Nombre"
-          id="name"
-          {...register("name")}
-        />
-        {errors.name && (
-          <p className="absolute -bottom-6 text-wrong">{errors.name.message}</p>
-        )}
+      <div className="flex w-full items-center justify-center gap-2">
+        <div className="relative flex w-full flex-col justify-center gap-2">
+          <label className="capitalize">nombre</label>
+          <input
+            type="text"
+            className={`input-form ${errors.name ? "focus:outline-wrong" : "focus:outline-secondary-violet"}`}
+            placeholder="Nombre"
+            id="name"
+            {...register("name")}
+          />
+          {errors.name && (
+            <p className="absolute -bottom-6 text-wrong">
+              {errors.name.message}
+            </p>
+          )}
+        </div>
+        <div className="relative flex w-full flex-col justify-center gap-2">
+          <label className="capitalize">apellido</label>
+          <input
+            type="text"
+            className={`input-form ${errors.lastname ? "focus:outline-wrong" : "focus:outline-secondary-violet"}`}
+            placeholder="Apellido"
+            id="lastname"
+            {...register("lastname")}
+          />
+          {errors.lastname && (
+            <p className="absolute -bottom-6 text-wrong">
+              {errors.lastname.message}
+            </p>
+          )}
+        </div>
       </div>
       <div className="relative flex w-full flex-col justify-center gap-2">
         <label className="capitalize">correo electronico</label>
@@ -226,7 +245,7 @@ function FormRegister({ provinces }) {
         </div>
         <div className="flex w-[80%] flex-col justify-center gap-2">
           <div className="flex items-center justify-between">
-            <label className="font-[400] capitalize">ciudad</label>
+            <label className="font-[400] capitalize">localidad</label>
           </div>
           <div className="relative">
             <select
@@ -235,7 +254,7 @@ function FormRegister({ provinces }) {
               id="city"
               {...register("city")}
             >
-              <option value="">Ciudad</option>
+              <option value="">Localidad</option>
               <hr />
               {locations &&
                 locations.map((location) => {
