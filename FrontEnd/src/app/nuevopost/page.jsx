@@ -68,7 +68,7 @@ export default function NuevoPost() {
         </label>
         <div className="w-full text-end">
           <button
-            className="mb-4 mt-4 w-full rounded-3xl border border-secondary-violet p-2 text-center text-secondary-violet lg:m-2 lg:w-28"
+            className="mb-4 mt-4 w-full rounded-3xl border hover:scale-105 transition duration-500 border-secondary-violet p-2 text-center text-secondary-violet lg:m-2 lg:w-28"
             href={""}
             type="submit"
           >
@@ -76,7 +76,7 @@ export default function NuevoPost() {
           </button>
           <button
             type="submit"
-            className=" mb-5 w-full rounded-3xl bg-accent-yellow p-2 text-center lg:m-2 lg:w-28 hover:bg-yellow-300 transition duration-300"
+            className=" mb-5 w-full rounded-3xl bg-accent-yellow p-2 text-center lg:m-2 lg:w-28 hover:scale-105 transition duration-500"
             href={""}
           >
             Publicar
