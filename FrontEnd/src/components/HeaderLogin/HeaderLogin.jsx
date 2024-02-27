@@ -23,20 +23,29 @@ export default function HeaderLogin() {
                 alt="reciclame"
               ></Image>
             </Link>
-            <Link className="hidden p-1 md:block border-secondary-violet hover:border-b-2" href={"/"}>
+            <Link
+              className="hidden border-secondary-violet p-1 hover:border-b-2 md:block"
+              href={"/"}
+            >
               Home
             </Link>
-            <Link className="hidden p-1 md:block border-secondary-violet hover:border-b-2" href={"/explorar"}>
+            <Link
+              className="hidden border-secondary-violet p-1 hover:border-b-2 md:block"
+              href={"/explorar"}
+            >
               Explorar
             </Link>
-            <Link className="hidden p-1 md:block border-secondary-violet hover:border-b-2" href={"/blog"}>
+            <Link
+              className="hidden border-secondary-violet p-1 hover:border-b-2 md:block"
+              href={"/blog"}
+            >
               Blog
             </Link>
           </ul>
           <ul className="m-2 flex items-center gap-7 p-2">
             <MenuIconLog />
             <Link
-              className="hidden w-40 rounded-full bg-accent-yellow p-2 text-center font-bold text-black md:block"
+              className="hidden w-40 rounded-full bg-accent-yellow p-2 text-center font-bold tracking-wider text-black md:block"
               href={"/nuevopost"}
             >
               Publicar +
