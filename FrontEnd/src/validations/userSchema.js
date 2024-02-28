@@ -36,3 +36,10 @@ export const userRegisterSchema = z
     message: "Las contraseñas no coinciden",
     path: ["confirmPassword"],
   });
+
+export const publicationSchema = z.object({
+  title: z.string().min(1, { message: "Ingresa un titulo" }),
+  description: z.string().min(1, { message: "Ingresa una descripción" }),
+  category: z.string().min(1, { message: "Ingresa una categoría" }),
+
+})

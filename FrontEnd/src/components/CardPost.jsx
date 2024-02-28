@@ -4,8 +4,6 @@ import HeartLike from "./Icons/HeartLike";
 import { useState } from "react";
 
 export default function CardPost({ publication }) {
-  console.log(publication);
-
   const [liked, setLiked] = useState(false);
   const handleClickLike = () => {
     setLiked(!liked);
