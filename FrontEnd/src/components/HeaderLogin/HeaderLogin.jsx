@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { IconComment } from "../Icons/SearchIcon";
-import { IconBell } from "../Icons/SearchIcon";
+import NotificationIcon from "../NotificationIcon";
 import MenuIconLog from "../Icons/MenuIconLog";
 import Submenu from "../Submenu";
 
@@ -50,9 +50,7 @@ export default function HeaderLogin() {
             >
               Publicar +
             </Link>
-            <Link href={"/notificaciones"}>
-              <IconBell />
-            </Link>
+            <NotificationIcon />
             <IconComment />
 
             <Submenu />

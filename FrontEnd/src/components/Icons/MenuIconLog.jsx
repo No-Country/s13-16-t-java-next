@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useGetNotifications } from "@/src/hooks/useGetNotifications";
 
 export default function MenuIconLog(props) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { unread } = useGetNotifications();
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
@@ -66,11 +68,16 @@ export default function MenuIconLog(props) {
               Home
             </Link>
             <Link
-              className={`header-mobile-link ${pathname === "/notificaciones" ? "border border-secondary-violet" : ""}`}
+              className={`header-mobile-link ${pathname === "/notificaciones" ? "border border-secondary-violet" : ""} flex justify-between`}
               href={"/notificaciones"}
               onClick={handleLinkClick}
             >
               Notificaciones
+              {unread?.length > 0 && (
+                <div className="unread-notification flex md:hidden">
+                  {unread?.length}
+                </div>
+              )}
             </Link>
             <Link
               className={`header-mobile-link ${pathname === "/mensajes" ? "border border-secondary-violet" : ""}`}
