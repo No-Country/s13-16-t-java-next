@@ -47,7 +47,7 @@ export default function Post({ post }) {
 
   return (
     <>
-      <div className="flex flex-col gap-8 p-5 lg:p-20 xl:p-24 ">
+      <div className="flex w-full max-w-96 flex-col gap-8 p-5 md:max-w-[35rem] lg:p-20 xl:p-24">
         {isOwner && isLogged && (
           <div className="flex justify-between gap-2 lg:justify-start">
             <Button className="w-3/5  rounded-3xl bg-accent-yellow p-2 font-[500]  lg:w-1/2 ">
@@ -59,7 +59,7 @@ export default function Post({ post }) {
           </div>
         )}
 
-        <picture className=" items-center justify-center rounded-2xl lg:flex ">
+        <picture className="mx-auto items-center justify-center rounded-2xl lg:flex ">
           <Image
             src={post.imageUrl}
             alt={"Image Post"}
@@ -76,9 +76,9 @@ export default function Post({ post }) {
               alt="image Profile"
               height={70}
               width={70}
-              className=""
+              className="rounded-full bg-[#b8b8b8]"
             />
-            <p>{post.nameUser}</p>
+            <p>{post.nameUser ? post.nameUser : "Usuario que publica"}</p>
           </div>
           <Button
             props={post.likes}
@@ -90,7 +90,7 @@ export default function Post({ post }) {
           </Button>
         </div>
       </div>
-      <div className="  flex flex-col gap-4 p-5 lg:gap-8  lg:p-20 xl:p-24 ">
+      <div className="flex w-full max-w-96 flex-col gap-4 p-5 md:max-w-[35rem] lg:gap-8 lg:p-20 xl:p-24">
         {isOwner && isLogged && (
           <div className=" flex justify-end">
             <Button className="hidden w-1/2 rounded-3xl  bg-wrong p-1 font-[500] text-white lg:block  lg:w-1/2 lg:p-2">
@@ -99,9 +99,11 @@ export default function Post({ post }) {
           </div>
         )}
 
-        <h3 className="text-xl font-semibold lg:text-4xl">{post.titlePost}</h3>
-        <p className="flex w-[30%] items-center justify-center rounded-3xl bg-[#b8b8b8] p-1">
-          <span>{post.category}</span>
+        <h3 className="text-xl font-semibold lg:text-4xl">
+          {post.titlePost ? post.titlePost : "Título del artículo"}
+        </h3>
+        <p className="flex w-fit items-center justify-center rounded-3xl bg-[#b8b8b8] p-1 px-4">
+          {post.category}
         </p>
         <p className="text-justify">{post.description}</p>
 
