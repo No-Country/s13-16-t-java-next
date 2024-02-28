@@ -7,9 +7,12 @@ package com.s1316tjavanext.reciclamebackend.service.impl;
 import com.s1316tjavanext.reciclamebackend.dto.UserRequestDTO;
 import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
 import com.s1316tjavanext.reciclamebackend.entity.Location;
+import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import com.s1316tjavanext.reciclamebackend.entity.Province;
 import com.s1316tjavanext.reciclamebackend.entity.User;
 import com.s1316tjavanext.reciclamebackend.mapper.UserMapper;
+import com.s1316tjavanext.reciclamebackend.repository.LocationRepository;
+import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
 import com.s1316tjavanext.reciclamebackend.repository.UserRepository;
 import com.s1316tjavanext.reciclamebackend.service.UserService;
 import exception.MiException;
@@ -29,7 +32,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class UsersServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final ProfileRepository profileRepository;
     private final UserMapper userMapper;
+    private final LocationRepository locationRepository;
 
 
 //    private boolean validarRequisitosPassword(String password) {
@@ -60,8 +65,12 @@ public class UsersServiceImpl implements UserService {
         UserResponseDTO userResponse = userMapper.userRequestDTOToUserResponseDTO(userRequestDTO);
         User user = userMapper.userResponseDTOToUser(userResponse);
         user.setDeleted(false);
+        User userSaved = userRepository.save(user);
+        Profile profileUser = new Profile();
+        profileUser.setUser(userSaved);
+        profileRepository.save(profileUser);
 
-        return userMapper.userToUserResponseDTO(userRepository.save(user));
+        return userMapper.userToUserResponseDTO(userSaved);
     }
     
     
@@ -75,14 +84,17 @@ public class UsersServiceImpl implements UserService {
 
     if (respuesta.isPresent()) {
 
-      User user = userMapper.userResponseDTOToUser(respuesta.get());
+        User user = userMapper.userResponseDTOToUser(respuesta.get());
         user.setEmail(userRequestDTO.email());
         user.setName(userRequestDTO.name());
         user.setLastName(userRequestDTO.lastName());
         user.setPassword(userRequestDTO.password());
         user.setBirthdate(userRequestDTO.birthdate());
         user.setPhone(userRequestDTO.phone());
-//        user.setLocation(userRequestDTO.location_id());
+        Optional<Location> locationUpdate =locationRepository
+                .findById(userRequestDTO.location_id());
+        locationUpdate.ifPresent(user::setLocation);
+
       return userMapper.userToUserResponseDTO(userRepository.save(user));
     } else {
         throw new RuntimeException("no se encontro el usuario");

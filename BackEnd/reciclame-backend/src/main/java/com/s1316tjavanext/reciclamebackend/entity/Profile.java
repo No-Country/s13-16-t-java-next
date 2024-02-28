@@ -23,16 +23,16 @@ public class Profile implements Serializable {
     @Schema(name = "id", description = "Unique identifier of the profile", example = "123e4567-e89b-12d3-a456-426614174000")
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id
-    @Size(max = 1000)
+//    @Size(max = 1000)
     private UUID id;
-    @Column(name = "given_name")
-    @Schema(name = "name", description = "Name of the user", example = "John")
-    private String name;
-
-    @Schema(name = "last_name", description = "Last name of the user", example = "Doe")
-    @Column(name = "family_name")
-    @JsonAlias("last_name")
-    private String lastName;
+//    @Column(name = "given_name")
+//    @Schema(name = "name", description = "Name of the user", example = "John")
+//    private String name;
+//
+//    @Schema(name = "last_name", description = "Last name of the user", example = "Doe")
+//    @Column(name = "family_name")
+//    @JsonAlias("last_name")
+//    private String lastName;
 
     @Schema(name = "photo_id", description = "Photo of the user", example = "1234567")
     @Column(name = "photo_id")

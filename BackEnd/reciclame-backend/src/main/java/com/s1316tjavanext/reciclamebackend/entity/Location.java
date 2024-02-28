@@ -13,7 +13,7 @@ public class Location {
     @Schema(description = "Id de la locidad", example = "1")
     private int id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "provincia_id")
     private Province province;
 
