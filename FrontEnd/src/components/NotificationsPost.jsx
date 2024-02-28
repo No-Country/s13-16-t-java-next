@@ -9,7 +9,7 @@ export default function NotificationsPost() {
   const { data, error, isLoading, markAsRead } = useGetNotifications();
 
   useEffect(() => {
-    markAsRead();
+    if (!error) markAsRead();
   });
 
   if (error) {
