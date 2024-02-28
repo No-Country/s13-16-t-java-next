@@ -1,8 +1,10 @@
+import { getAllPublications } from "@/src/lib/api";
 import CardPost from "../CardPost";
 import { Lato } from "next/font/google";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
 
-export default function HomeLogin({ publications }) {
+export default async function HomeLogin() {
+  const publications = await getAllPublications();
   return (
     <main className="mx-auto max-w-7xl pt-20">
       <h2

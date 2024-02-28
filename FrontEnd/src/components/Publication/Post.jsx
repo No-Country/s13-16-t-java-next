@@ -9,11 +9,12 @@ import WspIcon from "../Icons/WspIcon";
 import Link from "next/link";
 import { Context } from "@/src/context/ContextProvider";
 import { useRouter } from "next/navigation";
-export default function Post({ post }) {
-  const [like, setLike] = useState(post.likes);
-  const [liked, setLiked] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
+export default function Post({ post }) {
+  const [like, setLike] = useState(post.love);
+  const [liked, setLiked] = useState(false);
+
+  const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
@@ -60,7 +61,7 @@ export default function Post({ post }) {
 
         <picture className=" items-center justify-center rounded-2xl lg:flex ">
           <Image
-            src={post.imgPost}
+            src={post.imageUrl}
             alt={"Image Post"}
             width={400}
             height={400}
