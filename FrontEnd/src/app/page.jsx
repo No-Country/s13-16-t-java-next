@@ -99,12 +99,12 @@ export default function Home() {
                   <CardPost key={publication.id} publication={publication} />
                 ))}
               </div>
-              <button
-                className="mx-auto block h-12 w-full rounded-2xl bg-primary-green px-8 py-[10px] text-lg leading-5 text-white min-[640px]:max-w-52"
-                type="button"
+              <Link
+                href="/explorar"
+                className="mx-auto grid h-12 w-full place-items-center rounded-2xl bg-primary-green text-center text-lg leading-5 text-white min-[640px]:max-w-52 hover:bg-green-500 transition duration-300"
               >
                 Explorar
-              </button>
+              </Link>
             </div>
           </article>
         </main>
