@@ -6,8 +6,6 @@ package com.s1316tjavanext.reciclamebackend.service.impl;
 
 import com.s1316tjavanext.reciclamebackend.dto.UserRequestDTO;
 import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
-import com.s1316tjavanext.reciclamebackend.entity.Location;
-import com.s1316tjavanext.reciclamebackend.entity.Province;
 import com.s1316tjavanext.reciclamebackend.entity.User;
 import com.s1316tjavanext.reciclamebackend.mapper.UserMapper;
 import com.s1316tjavanext.reciclamebackend.repository.UserRepository;
