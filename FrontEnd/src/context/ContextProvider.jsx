@@ -1,11 +1,9 @@
 "use client";
 import React, { createContext, useState, useEffect } from "react";
-import data from "@/src/data/data.json";
 export const Context = createContext();
 
 export default function ContextProvider({ children }) {
   const [isLogged, setIsLogged] = useState(false);
-  const [publications, setPublications] = React.useState(data);
 
   const [isActive, setIsActive] = useState(() => {
     if (typeof window !== "undefined") {
@@ -29,8 +27,6 @@ export default function ContextProvider({ children }) {
       value={{
         isLogged,
         setIsLogged,
-        publications,
-        setPublications,
         idUser,
         isActive,
         setIsActive,

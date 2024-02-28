@@ -21,7 +21,7 @@ export default function MenuIcon(props) {
         className={`absolute left-0 top-16 w-full md:hidden ${!menuOpen ? "-translate-x-full" : "translate-x-0"}`}
       >
         <div
-          className="relative z-10 h-full w-full translate-x-0 transform bg-white shadow-lg transition-transform duration-[250ms] ease-out md:hidden"
+          className="relative z-10 h-screen w-1/2 translate-x-0 transform bg-white shadow-lg transition-transform duration-[250ms] ease-out md:hidden"
           style={
             menuOpen
               ? { transform: "translateX(0)" }
@@ -31,18 +31,19 @@ export default function MenuIcon(props) {
           <div className="flex flex-col">
             <Link
               onClick={handleClick}
-              className="m-2 border-b border-gray-300 p-1 text-lg hover:text-primary-green "
-              href={"/registro"}
-            >
-              Registrarse
-            </Link>
-            <Link
-              onClick={handleClick}
-              className="m-2 border-b border-gray-300 p-1 text-lg hover:text-primary-green"
+              className="mb-3 mt-4 ml-3 w-[90%] rounded-3xl bg-accent-yellow p-2 text-center tracking-wider text-black shadow-lg"
               href={"/login"}
             >
               Iniciar Sesión
             </Link>
+            <Link
+              onClick={handleClick}
+              className="m-2  p-1 text-lg hover:text-primary-green"
+              href={"/registro"}
+            >
+              Registrarse
+            </Link>
+
             <Link
               onClick={handleClick}
               className="m-2 p-1 text-lg hover:text-primary-green"
