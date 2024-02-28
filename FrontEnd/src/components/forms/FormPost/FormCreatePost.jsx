@@ -1,14 +1,11 @@
 "use client";
-import React, { useState } from "react";
+
 import { ChevronDownIcon } from "@/src/components/Icons";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { publicationSchema } from "@/src/validations/userSchema";
-import { useRouter } from "next/navigation";
-import { fileURLToPath } from "url";
 
 export default function FormCreatePost({ categories }) {
-  const router = useRouter();
   const {
     register,
     handleSubmit,
