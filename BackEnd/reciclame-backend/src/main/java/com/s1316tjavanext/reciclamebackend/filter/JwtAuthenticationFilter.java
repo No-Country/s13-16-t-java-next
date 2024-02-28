@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.s1316tjavanext.reciclamebackend.service.JwtService;
-import com.s1316tjavanext.reciclamebackend.service.impl.UserDetailsImpl;
+import com.s1316tjavanext.reciclamebackend.service.impl.UserDetailsServiceImpl;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -25,7 +25,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
 
-    private final UserDetailsImpl userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
 	@Override
 	protected void doFilterInternal(
