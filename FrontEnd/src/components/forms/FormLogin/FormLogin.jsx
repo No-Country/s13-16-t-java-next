@@ -46,11 +46,7 @@ function FormLogin() {
           id="email"
           {...register("email")}
         />
-        {errors.email && (
-          <p className="absolute -bottom-6 text-wrong">
-            {errors.email.message}
-          </p>
-        )}
+        {errors.email && <p className="text-wrong">{errors.email.message}</p>}
       </div>
       <div className="relative flex w-full flex-col justify-center gap-2">
         <div className="flex items-center justify-between">
@@ -70,9 +66,7 @@ function FormLogin() {
             </Link>
           </div>
           {errors.password && (
-            <p className="absolute -bottom-6 text-wrong">
-              {errors.password.message}
-            </p>
+            <p className="text-wrong">{errors.password.message}</p>
           )}
           <div
             className="absolute right-4 top-8 mt-4 cursor-pointer"
@@ -88,7 +82,7 @@ function FormLogin() {
       </div>
       <div className="w-full">
         <button
-          className="w-full rounded-3xl bg-primary-green p-3 text-white md:w-1/3 transition duration-300 hover:bg-green-500"
+          className="w-full rounded-3xl bg-primary-green p-3 text-white transition duration-300 hover:bg-green-500 md:w-1/3"
           type="submit"
         >
           Ingresar
