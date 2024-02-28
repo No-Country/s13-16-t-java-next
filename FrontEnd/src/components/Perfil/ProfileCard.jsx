@@ -11,15 +11,14 @@ export default function ProfileCard() {
 
   const profileData = {
     name: "Nombre del usuario",
+    publications: { tittle: "Publicaciones", amount: "123" },
     donations: { tittle: "Donaciones", amount: "123" },
-    ratings: { tittle: "Valoraciones", amount: "123" },
     favorites: { tittle: "Favoritos", amount: "123" },
     interests: ["Papeles", "Plásticos", "Maderas", "Botellas de vidrio"],
   };
 
   const links = [
     { name: "Publicaciones", href: "/perfil" },
-    { name: "Valoraciones", href: "/perfil/valoraciones" },
     { name: "Favoritos", href: "/perfil/favoritos" },
   ];
 
@@ -37,12 +36,12 @@ export default function ProfileCard() {
           <h2 className="text-4xl max-[855px]:ml-10">{profileData.name}</h2>
           <div className="mt-6 flex gap-x-10 max-[855px]:mx-auto max-[855px]:mt-12 max-[855px]:w-11/12 max-sm:flex-wrap">
             <LabelCard
-              tittle={profileData.donations.tittle}
-              value={profileData.donations.amount}
+              tittle={profileData.publications.tittle}
+              value={profileData.publications.amount}
             />
             <LabelCard
-              tittle={profileData.ratings.tittle}
-              value={profileData.ratings.amount}
+              tittle={profileData.donations.tittle}
+              value={profileData.donations.amount}
             />
             <LabelCard
               tittle={profileData.favorites.tittle}
@@ -70,12 +69,12 @@ export default function ProfileCard() {
           </Link>
         ))}
       </nav>
-      <Link
+      {/* <Link
         href={"/configuracion/perfil"}
         className="absolute right-8 top-4 rounded-md bg-gray-dark-bg p-1 hover:bg-gray-bg"
       >
         <ConfigIcon width="30" height="30" />
-      </Link>
+      </Link> */}
     </article>
   );
 }
