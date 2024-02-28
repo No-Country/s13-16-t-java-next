@@ -31,7 +31,7 @@ Reciclame es una red social dedicada a promover la reutilización de materiales 
 | Efrén Morales         | [![Efrén Morales]()] |
 | Lihuel    | [![Lihuel]()]() |
 | Rafael Talavera    | [![Rafael Talavera](https://avatars.githubusercontent.com/u/125708112?v=4&s=180)](https://github.com/RafaelTalavera) |
-| Juan Passadore  | <a href="https://github.com/juampypassa"><img src="https://avatars.githubusercontent.com/u/50932852?v=4&s=180" alt="Juan Pablo Passadore" width="180"/></a> |
+
 
 
 ### UX/UI
@@ -46,6 +46,7 @@ Reciclame es una red social dedicada a promover la reutilización de materiales 
 |----------------------|---------------------------------------------|
 | Johana Baccei      | [![Johana Baccei]() |
 | Alejandra Chaves      | [![Alejandra Chaves]()]() |
+| Juan Passadore  | <a href="https://github.com/juampypassa"><img src="https://avatars.githubusercontent.com/u/50932852?v=4&s=180" alt="Juan Pablo Passadore" width="180"/></a> |
 
 
 ## Tecnologías
