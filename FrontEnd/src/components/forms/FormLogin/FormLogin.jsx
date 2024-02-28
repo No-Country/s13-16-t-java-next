@@ -29,8 +29,7 @@ function FormLogin() {
 
   return (
     <form
-      onSubmit={handleSubmit((data) => {
-        console.log(data);
+      onSubmit={handleSubmit(() => {
         router.push("/");
         setIsLogged(true);
       })}

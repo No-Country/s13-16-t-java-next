@@ -35,7 +35,6 @@ function FormRegister({ provinces }) {
             await getLocalitiesFromProvince(provinceId);
 
           setLocations(LocationsByProvince);
-          console.log(LocationsByProvince);
         } catch (error) {
           console.error("Error fetching locations:", error);
         }
@@ -76,13 +75,39 @@ function FormRegister({ provinces }) {
   }, []);
   if (!mounted) return null;
 
+  // const URLPostUser =
+  //   "https://deployreciclame-production.up.railway.app/profile";
+
+  async function onSubmit(data) {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("lastname", data.lastname);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("phone", data.phone);
+    //! Pendiente a ver como guarda el backend la fecha de nacimiento (formato) y provincia y ciudad
+    // formData.append("city", data.city);
+    // formData.append("province", data.province);
+    // formData.append("day", data.day);
+    // formData.append("month", data.month);
+    // formData.append("year", data.year);
+
+    // const response = await fetch(URLPostUser, {
+    //   method: "POST",
+    //   body: formData,
+    // });
+
+    // if (response.ok) {
+    //   alert("Usuario registrado con éxito.");
+    // } else {
+    //   alert("Error al crear el usuario.");
+    // }
+  }
+
   return (
     <form
       className="flex h-full w-full max-w-2xl flex-col items-center justify-center gap-6 overflow-y-auto bg-white p-5  md:px-24 md:py-10"
-      onSubmit={handleSubmit((data) => {
-        console.log(data);
-        // router.push("/configuracion/perfil");
-      })}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <p className="text-star w-full text-2xl font-bold uppercase">
         registrarse
@@ -239,7 +264,6 @@ function FormRegister({ provinces }) {
               {locations &&
                 locations.map((location) => {
                   const { id, name } = location;
-                  console.log(location);
                   return (
                     <option key={id} value={name}>
                       {name}
