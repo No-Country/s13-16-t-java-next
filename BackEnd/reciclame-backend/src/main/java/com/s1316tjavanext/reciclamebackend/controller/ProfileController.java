@@ -16,10 +16,10 @@ import java.util.UUID;
 @RestController
 @Tag(name = "Profile", description = "Endpoints for managing profiles")
 @RequestMapping("/profiles")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProfileController {
 
     private final ProfileService profileService;
-//    private final ProfileMapper profileMapper;
 
     @GetMapping("/{profileId}")
     public ResponseEntity<ProfileResponseDto> getProfile(@PathVariable UUID profileId) {
@@ -33,22 +33,23 @@ public class ProfileController {
 
     }
 
-//    @PostMapping
-//    @Operation(summary = "Register a new user", description = "Register a new user in the system")
-//    public ResponseEntity<Profile> saveProfile(@RequestBody UserCreateDTO userCreateDTO) {
-//        Profile profile = profileMapper.userCreateDTOToProfile(userCreateDTO);
-//        return ResponseEntity.ok(profile);
-//    }
-
     @PutMapping("/update/{profileId}")
     public ResponseEntity<ProfileResponseDto> updateProfile(@PathVariable UUID profileId,
                                                             @RequestBody UserProfileRequestDto userProfileRequestDto) {
-        return ResponseEntity.ok(profileService.updateProfile(profileId, userProfileRequestDto));
+        try {
+            return ResponseEntity.ok(profileService.updateProfile(profileId, userProfileRequestDto));
+        }catch (RuntimeException ignore){
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/delete/{profileId}")
-    public ResponseEntity<Profile> deleteProfile(@PathVariable UUID profileId) {
-        this.profileService.deleteProfile(profileId);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Void> deleteProfile(@PathVariable UUID profileId) {
+        try {
+            profileService.deleteProfile(profileId);
+            return ResponseEntity.noContent().build();
+        }catch (RuntimeException ignore){
+            return ResponseEntity.notFound().build();
+        }
     }
 }

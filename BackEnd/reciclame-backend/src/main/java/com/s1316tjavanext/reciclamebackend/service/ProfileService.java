@@ -10,9 +10,8 @@ import java.util.UUID;
 
 public interface ProfileService {
     Optional<ProfileResponseDto> getProfile(UUID profileId);
-//    public Profile saveProfile(Profile profile);
     ProfileResponseDto updateProfile(UUID profileId, UserProfileRequestDto userProfileRequestDto);
-    public void deleteProfile(UUID profileId);
+    void deleteProfile(UUID profileId);
 
     List<ProfileResponseDto> getProfiles();
 }

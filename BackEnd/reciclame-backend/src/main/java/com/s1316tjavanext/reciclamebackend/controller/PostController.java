@@ -24,6 +24,7 @@ import java.util.UUID;
 @RequestMapping("/posts")
 @AllArgsConstructor
 @Tag(name = "Post", description = "Post management")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PostController {
     private final PostService postService;
 

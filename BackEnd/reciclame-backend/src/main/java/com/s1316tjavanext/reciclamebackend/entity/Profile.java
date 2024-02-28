@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -18,21 +20,14 @@ import java.util.UUID;
 @Entity
 @Table(name = "profiles")
 @Schema(name = "Profile", description = "Profile of a user")
+@SQLDelete(sql = "UPDATE profiles SET  deleted = true WHERE id =?")
+@Where(clause = "deleted=false")
 public class Profile implements Serializable {
 
     @Schema(name = "id", description = "Unique identifier of the profile", example = "123e4567-e89b-12d3-a456-426614174000")
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id
-//    @Size(max = 1000)
     private UUID id;
-//    @Column(name = "given_name")
-//    @Schema(name = "name", description = "Name of the user", example = "John")
-//    private String name;
-//
-//    @Schema(name = "last_name", description = "Last name of the user", example = "Doe")
-//    @Column(name = "family_name")
-//    @JsonAlias("last_name")
-//    private String lastName;
 
     @Schema(name = "photo_id", description = "Photo of the user", example = "1234567")
     @Column(name = "photo_id")
@@ -42,7 +37,10 @@ public class Profile implements Serializable {
     @Schema(name = "bio", description = "Biography of the user", example = "I'm a software engineer")
     private String bio;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Column(nullable = false)
+    private boolean deleted;
 }

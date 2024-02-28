@@ -49,14 +49,15 @@ public class ProfileServiceImpl implements ProfileService {
        Optional<Profile> profileDB = profileRepository.findById(profileId);
        if (profileDB.isPresent()){
            ProfileResponseDto profileData = profileMapper.userProfileRequesDtoToProfileResponseDto(UserProfileRequestDto);
-           //setear campos del profile
            profileDB.get().setBio(profileData.bio());
 
            User userDB = profileDB.get().getUser();
            UserResponseDTO userData = profileMapper.userProfileRequesDtoToUserResponseDTO(UserProfileRequestDto);
            userDB.setName(userData.name());
            userDB.setLastName(userData.lastName());
-           userDB.setEmail(userData.email());
+           if (!userDB.getEmail().equals(userData.email())){
+               userDB.setEmail(userData.email());
+           }
            userDB.setPhone(userData.phone());
            // TODO encoding
            userDB.setPassword(userData.password());
@@ -64,6 +65,7 @@ public class ProfileServiceImpl implements ProfileService {
                    .findById(userData.location_id());
            locationUpdate.ifPresent(userDB::setLocation);
            userDB.setBirthdate(userData.birthdate());
+
            profileDB.get().setUser(userDB);
 
            return profileMapper.profileToProfileResponseDto(profileRepository.save(profileDB.get()));
@@ -73,11 +75,10 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public void deleteProfile(UUID profileId) {
-        Profile optProfile = profileRepository.findById(profileId).orElse(null);
-        if(optProfile != null){
+        Optional<Profile> optProfile = profileRepository.findById(profileId);
+        if(optProfile.isPresent()){
             profileRepository.deleteById(profileId);
-        }
-
+        }else throw new RuntimeException("id no encontrado");
     }
 
     @Override
