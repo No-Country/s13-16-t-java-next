@@ -9,7 +9,7 @@ import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
 import com.s1316tjavanext.reciclamebackend.entity.Location;
 import com.s1316tjavanext.reciclamebackend.entity.Province;
 import com.s1316tjavanext.reciclamebackend.entity.User;
-import exception.MiException;
+import com.s1316tjavanext.reciclamebackend.exception.MiException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
