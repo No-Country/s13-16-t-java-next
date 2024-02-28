@@ -22,8 +22,7 @@ const Publication = {
   ],
 };
 
-// eslint-disable-next-line
-export default function Publications({ params }) {
+export default function Publications() {
   return (
     <main className="mt-[65px] grid justify-items-center lg:grid-cols-2">
       <Post post={Publication} />

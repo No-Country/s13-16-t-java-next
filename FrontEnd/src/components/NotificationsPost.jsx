@@ -1,54 +1,38 @@
 import Image from "next/image";
 import img from "../assets/profile/Rectangle-3.png";
 import Link from "next/link";
+import { useGetNotifications } from "../hooks/useGetNotifications";
+import { NotificationsCartsSkeleton } from "./skeletons";
+import { useEffect } from "react";
 
-// eslint-disable-next-line
-async function fetchNoti() {
-  const res = await fetch("http://localhost:3001/notification");
-  const data = res.json();
-  return data;
-}
+export default function NotificationsPost() {
+  const { data, error, isLoading, markAsRead } = useGetNotifications();
 
-export default async function NotificationsPost() {
-  const notifications = [
-    {
-      id: 1,
-      name: "Usuario 123456",
-      msj: "Le puso me gusta a tu publicación",
-      time: "12:30",
-    },
-    {
-      id: 2,
-      name: "Usuario 123456",
-      msj: "Le puso me gusta a tu publicación",
-      time: "12:30",
-    },
-    {
-      id: 3,
-      name: "Usuario 123456",
-      msj: "Le puso me gusta a tu publicación",
-      time: "12:30",
-    },
-    {
-      id: 4,
-      name: "Usuario 123456",
-      msj: "Le puso me gusta a tu publicación",
-      time: "12:30",
-    },
-  ];
+  useEffect(() => {
+    if (!error) markAsRead();
+  });
 
-  /* const notifications = await fetchNoti();     <--------------- Descomentar para el uso de fetching de datos y eliminar el mock de arriba */
-
+  if (error) {
+    return (
+      <p className="text-center">
+        Algo salió mal:
+        <br /> {error.message}
+      </p>
+    );
+  }
+  if (isLoading) return <NotificationsCartsSkeleton />;
   return (
     <>
-      {notifications.length > 0 ? (
-        notifications.map((notification) => (
+      {data?.length > 0 ? (
+        data.map((notification) => (
           <NotificationCard
             key={notification.id}
             imgProfile={img}
             name={notification.name}
             msj={notification.msj}
             time={notification.time}
+            placeholder="blur"
+            blurDataURL={img}
           />
         ))
       ) : (

@@ -13,11 +13,15 @@
     @apply h-12 w-full appearance-none rounded-3xl border-2 border-primary-green p-3 placeholder-[#838383];
 
     & + .chevron-down-icon {
-      @apply absolute right-2 top-0 grid h-full w-8 place-items-center;
+      @apply absolute right-2 top-3 grid  w-8 place-items-center;
     }
   }
 
   .header-mobile-link {
     @apply m-1 ml-3 w-[90%] rounded-xl p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30;
+  }
+
+  .unread-notification{
+    @apply h-3 w-3 items-center justify-center rounded-full bg-red-500 p-2 text-white;
   }
 }

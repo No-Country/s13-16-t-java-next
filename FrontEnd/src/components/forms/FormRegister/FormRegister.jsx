@@ -97,11 +97,7 @@ function FormRegister({ provinces }) {
             id="name"
             {...register("name")}
           />
-          {errors.name && (
-            <p className="absolute -bottom-6 text-wrong">
-              {errors.name.message}
-            </p>
-          )}
+          {errors.name && <p className="text-wrong">{errors.name.message}</p>}
         </div>
         <div className="relative flex w-full flex-col justify-center gap-2">
           <label className="capitalize">apellido</label>
@@ -113,9 +109,7 @@ function FormRegister({ provinces }) {
             {...register("lastname")}
           />
           {errors.lastname && (
-            <p className="absolute -bottom-6 text-wrong">
-              {errors.lastname.message}
-            </p>
+            <p className="text-wrong">{errors.lastname.message}</p>
           )}
         </div>
       </div>
@@ -128,11 +122,7 @@ function FormRegister({ provinces }) {
           id="email"
           {...register("email")}
         />
-        {errors.email && (
-          <p className="absolute -bottom-6 text-wrong">
-            {errors.email.message}
-          </p>
-        )}
+        {errors.email && <p className="text-wrong">{errors.email.message}</p>}
       </div>
       <div className="relative flex w-full flex-col justify-center gap-2">
         <div className="flex items-center">
@@ -158,9 +148,7 @@ function FormRegister({ provinces }) {
           </div>
         </div>
         {errors.password && (
-          <p className="absolute -bottom-6 text-wrong">
-            {errors.password.message}
-          </p>
+          <p className="text-wrong">{errors.password.message}</p>
         )}
       </div>
       <div className="relative flex w-full flex-col justify-center gap-2">
@@ -187,9 +175,7 @@ function FormRegister({ provinces }) {
           </div>
         </div>
         {errors.confirmPassword && (
-          <p className="absolute -bottom-6 text-wrong">
-            {errors.confirmPassword.message}
-          </p>
+          <p className="text-wrong">{errors.confirmPassword.message}</p>
         )}
       </div>
       <div className="relative flex w-full flex-col justify-center gap-2">
@@ -205,11 +191,7 @@ function FormRegister({ provinces }) {
             e.target.value = e.target.value.replace(/[^0-9]/g, "");
           }}
         />
-        {errors.phone && (
-          <p className="absolute -bottom-6 text-wrong">
-            {errors.phone.message}
-          </p>
-        )}
+        {errors.phone && <p className="text-wrong">{errors.phone.message}</p>}
       </div>
       <div className="relative flex w-full gap-5 ">
         <div className="relative flex w-[80%] flex-col justify-center gap-2">
@@ -238,9 +220,7 @@ function FormRegister({ provinces }) {
             <ChevronDownIcon className="chevron-down-icon" />
           </div>
           {errors.province && (
-            <p className="absolute -bottom-6 text-wrong">
-              {errors.province.message}
-            </p>
+            <p className="text-wrong">{errors.province.message}</p>
           )}
         </div>
         <div className="flex w-[80%] flex-col justify-center gap-2">
@@ -269,11 +249,7 @@ function FormRegister({ provinces }) {
             </select>
             <ChevronDownIcon className="chevron-down-icon" />
           </div>
-          {errors.city && (
-            <p className="absolute -bottom-6 text-wrong">
-              {errors.city.message}
-            </p>
-          )}
+          {errors.city && <p className="text-wrong">{errors.city.message}</p>}
         </div>
       </div>
       <div className="flex w-full flex-col gap-2 ">
@@ -292,11 +268,7 @@ function FormRegister({ provinces }) {
               ))}
             </select>
             <ChevronDownIcon className="chevron-down-icon" />
-            {errors.day && (
-              <p className="absolute -bottom-6 text-wrong">
-                {errors.day.message}
-              </p>
-            )}
+            {errors.day && <p className="text-wrong">{errors.day.message}</p>}
           </div>
           <div className="relative w-full">
             <select
@@ -313,9 +285,7 @@ function FormRegister({ provinces }) {
             </select>
             <ChevronDownIcon className="chevron-down-icon" />
             {errors.month && (
-              <p className="absolute -bottom-6 text-wrong">
-                {errors.month.message}
-              </p>
+              <p className="text-wrong">{errors.month.message}</p>
             )}
           </div>
           <div className="relative w-full">
@@ -334,17 +304,13 @@ function FormRegister({ provinces }) {
               })}
             </select>
             <ChevronDownIcon className="chevron-down-icon" />
-            {errors.year && (
-              <p className="absolute -bottom-6 text-wrong">
-                {errors.year.message}
-              </p>
-            )}
+            {errors.year && <p className="text-wrong">{errors.year.message}</p>}
           </div>
         </div>
       </div>
       <div className="w-full">
         <button
-          className="w-full rounded-3xl bg-primary-green p-3 text-white md:w-[40%] transition duration-300 hover:bg-green-500"
+          className="w-full rounded-3xl bg-primary-green p-3 text-white transition duration-300 hover:bg-green-500 md:w-[40%]"
           type="submit"
         >
           Registrate

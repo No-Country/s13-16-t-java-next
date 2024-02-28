@@ -1,4 +1,5 @@
-# Reciclame
+![Logo de Recíclame](FrontEnd/public/image/reciclame.svg)
+
 Reciclame es una red social dedicada a promover la reutilización de materiales reciclables a través de una comunidad comprometida con la sostenibilidad y la creatividad. Nuestra misión es fomentar el intercambio de materiales reciclables entre los usuarios para inspirar la creación de nuevos productos y reducir el impacto ambiental de los desechos.
 
 ## Características Principales
@@ -27,9 +28,11 @@ Reciclame es una red social dedicada a promover la reutilización de materiales 
 |----------------------|---------------------------------------------|
 | Nicolás Ortiz      | [![Nicolás Ortiz](https://avatars.githubusercontent.com/u/68659234?v=4&s=180)](https://github.com/nico-ortiz) |
 | Jesus Monroy         | [![Jesus Monroy](https://avatars.githubusercontent.com/u/25678161?v=4&s=180)](https://github.com/jdmonroyg) |
-| Efrén Morales         | [![Efrén Morales]()]() |
+| Efrén Morales         | <a href="https://github.com/fr3nm0"><img src="https://avatars.githubusercontent.com/u/61370268?v=4&s=180" alt="Efrén Morales" width="180"/></a> |
 | Lihuel    | [![Lihuel]()]() |
 | Rafael Talavera    | [![Rafael Talavera](https://avatars.githubusercontent.com/u/125708112?v=4&s=180)](https://github.com/RafaelTalavera) |
+
+
 
 ### UX/UI
 
@@ -43,6 +46,7 @@ Reciclame es una red social dedicada a promover la reutilización de materiales 
 |----------------------|---------------------------------------------|
 | Johana Baccei      | [![Johana Baccei]() |
 | Alejandra Chaves      | [![Alejandra Chaves]()]() |
+| Juan Passadore  | <a href="https://github.com/juampypassa"><img src="https://avatars.githubusercontent.com/u/50932852?v=4&s=180" alt="Juan Pablo Passadore" width="180"/></a> |
 
 
 ## Tecnologías
