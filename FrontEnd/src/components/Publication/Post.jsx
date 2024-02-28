@@ -15,6 +15,7 @@ export default function Post({ post }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
 
   const { isLogged, idUser, isActive, setIsActive } = useContext(Context);
   const router = useRouter();
@@ -38,7 +39,9 @@ export default function Post({ post }) {
     setIsActive(!isActive);
     const newIsActive = !isActive;
     setIsActive(newIsActive);
-    localStorage.setItem("isActive", JSON.stringify(newIsActive));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("isActive", JSON.stringify(newIsActive));
+    }
   };
 
   return (

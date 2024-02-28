@@ -9,12 +9,14 @@ export default function ContextProvider({ children }) {
   const [publications, setPublications] = React.useState(data);
 
   const [isActive, setIsActive] = useState(() => {
-    const storedIsActive = localStorage.getItem("isActive");
+    const storedIsActive =
+      typeof window !== "undefined" && localStorage.getItem("isActive");
     return storedIsActive ? JSON.parse(storedIsActive) : false;
   });
 
   useEffect(() => {
-    localStorage.setItem("isActive", JSON.stringify(isActive));
+    typeof window !== "undefined" &&
+      localStorage.setItem("isActive", JSON.stringify(isActive));
   }, [isActive]);
 
   const idUser = 2;
