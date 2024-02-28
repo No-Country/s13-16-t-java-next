@@ -42,13 +42,13 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user")
     private Profile perfil;
     
-    @Column(name = "givenName", nullable=false)
+    @Column(name = "given_name", nullable=false)
     private String name;
     
-    @Column(name = "givenlastName", nullable=false)
+    @Column(name = "family_name", nullable=false)
     private String lastName;
     
-    @Column(name = "email", nullable=false, length = 255)
+    @Column(name = "email", nullable=false, unique = true)
     private String email;
     
     @Column(name = "phone", nullable = false, length = 20)
@@ -57,12 +57,15 @@ public class User implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "province_id", referencedColumnName = "id")
-    private Province province;
+//    @OneToOne
+//    @JoinColumn(name = "province_id", referencedColumnName = "id")
+//    private Province province;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Profile profile;
 
     @ManyToOne
-    @JoinColumn(name = "location_id", referencedColumnName = "id")
+    @JoinColumn(name = "location_id", nullable = false)
     private Location location;
     
     @Column(name = "birthdate", nullable = false)
