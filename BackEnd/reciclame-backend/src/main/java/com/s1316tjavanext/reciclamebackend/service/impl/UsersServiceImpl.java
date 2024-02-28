@@ -12,7 +12,7 @@ import com.s1316tjavanext.reciclamebackend.entity.User;
 import com.s1316tjavanext.reciclamebackend.mapper.UserMapper;
 import com.s1316tjavanext.reciclamebackend.repository.UserRepository;
 import com.s1316tjavanext.reciclamebackend.service.UserService;
-import com.s1316tjavanext.reciclamebackend.exception.MiException;
+import exception.MiException;
 
 import java.util.*;
 
