@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { IconComment } from "../Icons/SearchIcon";
-import { IconBell } from "../Icons/SearchIcon";
+import NotificationIcon from "../NotificationIcon";
 import MenuIconLog from "../Icons/MenuIconLog";
 import Submenu from "../Submenu";
 
@@ -45,14 +45,12 @@ export default function HeaderLogin() {
           <ul className="m-2 flex items-center gap-7 p-2">
             <MenuIconLog />
             <Link
-              className="hidden w-40 rounded-full bg-accent-yellow p-2 text-center font-bold tracking-wider text-black md:block"
+              className="hidden w-40 rounded-full bg-accent-yellow p-2 text-center tracking-wider text-black md:block"
               href={"/nuevopost"}
             >
               Publicar +
             </Link>
-            <Link href={"/notificaciones"}>
-              <IconBell />
-            </Link>
+            <NotificationIcon />
             <IconComment />
 
             <Submenu />
