@@ -11,7 +11,8 @@ import { Context } from "@/src/context/ContextProvider";
 import { useRouter } from "next/navigation";
 
 export default function Post({ post }) {
-  const [like, setLike] = useState(post.love);
+  const { title, category, description, comments, imageUrl, love } = post;
+  const [like, setLike] = useState(love);
   const [liked, setLiked] = useState(false);
 
   const [mounted, setMounted] = useState(false);
@@ -61,7 +62,7 @@ export default function Post({ post }) {
 
         <picture className="mx-auto items-center justify-center rounded-2xl lg:flex ">
           <Image
-            src={post.imageUrl}
+            src={imageUrl}
             alt={"Image Post"}
             width={400}
             height={400}
@@ -81,7 +82,7 @@ export default function Post({ post }) {
             <p>{post.nameUser ? post.nameUser : "Usuario que publica"}</p>
           </div>
           <Button
-            props={post.likes}
+            props={love}
             handle={handleLikeClick}
             className=" flex items-center lg:static"
           >
@@ -100,12 +101,12 @@ export default function Post({ post }) {
         )}
 
         <h3 className="text-xl font-semibold lg:text-4xl">
-          {post.titlePost ? post.titlePost : "Título del artículo"}
+          {title ? title : "Sin título"}
         </h3>
         <p className="flex w-fit items-center justify-center rounded-3xl bg-[#b8b8b8] p-1 px-4">
-          {post.category}
+          {category}
         </p>
-        <p className="text-justify">{post.description}</p>
+        <p className="text-justify">{description}</p>
 
         <Link
           href={isLogged ? "https://wa.me/" : "/login"}
@@ -127,7 +128,7 @@ export default function Post({ post }) {
           </div>
         )}
 
-        <Coments coments={post.coments} />
+        <Coments coments={comments} />
         {isLogged && mounted && isActive && <FormComent />}
         {isOwner && isLogged && (
           <div className=" flex w-[90%]">
