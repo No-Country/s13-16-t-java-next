@@ -46,10 +46,10 @@ export default function Post({ post }) {
       <div className="flex flex-col gap-8 p-5 lg:p-20 xl:p-24 ">
         {isOwner && isLogged && (
           <div className="flex justify-between gap-2 lg:justify-start">
-            <Button className="w-3/5  rounded-3xl bg-accent-yellow p-1 font-[500]  lg:w-1/2 lg:p-2">
+            <Button className="w-3/5  rounded-3xl bg-accent-yellow p-2 font-[500]  lg:w-1/2 ">
               Intercambio exitoso
             </Button>
-            <Button className=" w-1/3 rounded-3xl bg-primary-green p-1  font-[500] text-white lg:p-2">
+            <Button className=" w-1/3 rounded-3xl bg-primary-green p-2  font-[500] text-white ">
               Editar
             </Button>
           </div>

@@ -13,3 +13,11 @@ export async function getLocalitiesFromProvince(provinceID) {
   const data = await response.json();
   return data;
 }
+
+export async function getCategories() {
+  const response = await fetch("https://deployreciclame-production.up.railway.app/posts/categories/all");
+  const data = await response.json();
+  return data;
+
+
+}
