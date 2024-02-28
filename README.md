@@ -28,7 +28,7 @@ Reciclame es una red social dedicada a promover la reutilización de materiales 
 |----------------------|---------------------------------------------|
 | Nicolás Ortiz      | [![Nicolás Ortiz](https://avatars.githubusercontent.com/u/68659234?v=4&s=180)](https://github.com/nico-ortiz) |
 | Jesus Monroy         | [![Jesus Monroy](https://avatars.githubusercontent.com/u/25678161?v=4&s=180)](https://github.com/jdmonroyg) |
-| Efrén Morales         | [![Efrén Morales]()] |
+| Efrén Morales         | <a href="https://github.com/fr3nm0"><img src="https://avatars.githubusercontent.com/u/61370268?v=4&s=180" alt="Efrén Morales" width="180"/></a> |
 | Lihuel    | [![Lihuel]()]() |
 | Rafael Talavera    | [![Rafael Talavera](https://avatars.githubusercontent.com/u/125708112?v=4&s=180)](https://github.com/RafaelTalavera) |
 
