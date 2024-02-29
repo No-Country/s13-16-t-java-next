@@ -1,3 +1,5 @@
+"use client";
+
 import { SearchIcon } from "../components/Icons";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 /* import { useDebouncedCallback } from 'use-debounce'; */

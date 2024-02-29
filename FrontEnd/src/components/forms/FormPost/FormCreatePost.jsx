@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { publicationSchema } from "@/src/validations/userSchema";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const URLPostData =
   "https://deployreciclame-production.up.railway.app/posts/save";
@@ -21,10 +22,12 @@ export const dataBackendFormat = (data, imageData) => {
 };
 
 export default function FormCreatePost({ categories }) {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(publicationSchema),
   });
@@ -44,7 +47,9 @@ export default function FormCreatePost({ categories }) {
     });
 
     if (response.ok) {
+      reset();
       alert("Publicación creada");
+      router.push("/");
     } else {
       alert("Error al crear la publicación");
     }
