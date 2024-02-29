@@ -2,9 +2,7 @@ import { Lato } from "next/font/google";
 import { SearchIcon } from "../components/Icons";
 import Link from "next/link";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
-import { Suspense } from "react";
 import CardPostWrapper from "../components/CardPostWrapper";
-import { CardsPostsSkeleton } from "../components/skeletons";
 
 export default async function HomePage() {
   return (
@@ -81,9 +79,7 @@ export default async function HomePage() {
           >
             Explora nuestra comunidad
           </h2>
-          <Suspense fallback={<CardsPostsSkeleton />}>
-            <CardPostWrapper />
-          </Suspense>
+          <CardPostWrapper />
           <Link
             href="/explorar"
             className="mx-auto grid h-12 w-full place-items-center rounded-2xl bg-primary-green text-center text-lg leading-5 text-white transition duration-300 hover:bg-green-500 min-[640px]:max-w-52"

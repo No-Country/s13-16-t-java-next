@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { HeartLike, HeartDislike, HeartTotal } from "./Icons/HeartLike";
@@ -25,7 +27,7 @@ export default function CardPost({ publication }) {
                 className="rounded-[11px] bg-gray-300 "
               />
             </div>
-            <div className="flex justify-between m-2">
+            <div className="m-2 flex justify-between">
               <p className="text-[16px] font-[500]">{title}</p>
               <HeartTotal />
             </div>
