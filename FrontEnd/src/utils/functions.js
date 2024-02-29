@@ -16,3 +16,16 @@ export function getYears() {
   }
   return years;
 }
+
+export function getDate(cadenaFecha) {
+  const partesFecha = cadenaFecha.split('-'); 
+  const year = parseInt(partesFecha[0], 10); 
+  const month = parseInt(partesFecha[1], 10) - 1; 
+  const day = parseInt(partesFecha[2], 10); 
+  
+
+  const date = new Date(year, month, day);
+ 
+  return date;
+}
+
