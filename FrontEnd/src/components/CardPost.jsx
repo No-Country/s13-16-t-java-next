@@ -14,7 +14,7 @@ export default function CardPost({ publication }) {
   };
   return (
     <>
-      <div>
+      <div className="relative">
         <Link href={`/publicaciones/${id}`}>
           <div className="flex flex-col ">
             <div className="flex h-[200px] w-[250px] items-center justify-center object-cover ">
