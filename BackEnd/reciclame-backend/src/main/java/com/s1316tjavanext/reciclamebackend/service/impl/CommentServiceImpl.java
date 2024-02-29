@@ -1,6 +1,6 @@
 package com.s1316tjavanext.reciclamebackend.service.impl;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,7 +49,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDto createComment(CommentDto commentDto) {
         Comment comment = commentMapper.commentDtoToComment(commentDto);
-        comment.setDate(LocalDate.now());
+        comment.setDate(LocalDateTime.now().withSecond(0).withNano(0));
 
         Post post = postRepository.findById(comment.getPost().getId()).orElse(null);
 
@@ -81,7 +81,7 @@ public class CommentServiceImpl implements CommentService {
             if (post != null) {
                 Comment comment = commentMapper.commentDtoToComment(commentToUpdate);
                 comment.setDescription(commentDto.description());
-                comment.setDate(LocalDate.now());
+//                comment.setDate(LocalDateTime.now());
                 comment.setPost(post);
                 return commentMapper.commentToCommentDto(comment);
             }

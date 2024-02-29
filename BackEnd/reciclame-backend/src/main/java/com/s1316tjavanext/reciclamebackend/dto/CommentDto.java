@@ -1,6 +1,6 @@
 package com.s1316tjavanext.reciclamebackend.dto;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,6 +18,6 @@ public record CommentDto(
     String description,
 
     @Schema(name = "date", description = "Creation date of comment", example = "2024-02-23")
-    LocalDate date
+    LocalDateTime date
 ) {
 }
