@@ -39,9 +39,6 @@ public class User implements UserDetails {
     @Column(name = "id", nullable = false)
     private UUID userId;
     
-    @OneToOne(mappedBy = "user")
-    private Profile perfil;
-    
     @Column(name = "given_name", nullable=false)
     private String name;
     

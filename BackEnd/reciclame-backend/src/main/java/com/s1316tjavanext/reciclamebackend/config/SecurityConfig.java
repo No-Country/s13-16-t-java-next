@@ -32,7 +32,7 @@ public class SecurityConfig {
         return http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(
-                req -> req.requestMatchers(/*Add paths */"")
+                req -> req.requestMatchers("login/**","register/**", "/users/save", "/provinces", "/provinces/{id}/locations", "/users/all")
                     .permitAll()
                     .anyRequest()
                     .authenticated()
