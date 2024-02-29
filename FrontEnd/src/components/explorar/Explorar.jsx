@@ -1,7 +1,9 @@
-import CardPostWrapper from "../CardPostWrapper";
 import { SearchIcon } from "../../components/Icons";
-
+import CardPost from "../CardPost";
+import { getAllPublications } from "@/src/lib/api";
+/* import CardPostWrapper from "../CardPostWrapper"; */
 export default async function Explorar() {
+  const publications = await getAllPublications();
   return (
     <div>
       <div className="mt-32 min-h-[80vh]">
@@ -18,8 +20,13 @@ export default async function Explorar() {
             placeholder="Busca materiales (ej: papel, plástico, etc)"
           />
         </label>
+        <div className="my-10 flex flex-wrap justify-center gap-4 p-2  md:mx-auto md:columns-6">
+          {publications?.map((publication) => (
+            <CardPost key={publication.id} publication={publication} />
+          ))}
+        </div>
+        {/* <CardPostWrapper /> */}
       </div>
-      <CardPostWrapper />
     </div>
   );
 }
