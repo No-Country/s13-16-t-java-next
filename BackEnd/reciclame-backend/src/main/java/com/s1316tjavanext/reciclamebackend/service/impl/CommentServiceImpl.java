@@ -33,6 +33,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public List<CommentDto> getCommentsByPostId(UUID postId) {
+        return commentMapper.commentsToCommentsDto(commentRepository.findAllByPostId(postId));
+    }
+
+    @Override
     public CommentDto getCommentById(UUID commentID) {
         CommentDto commentDto = commentMapper.commentToCommentDto(commentRepository.findById(commentID).orElse(null));
         if (commentDto != null) {
