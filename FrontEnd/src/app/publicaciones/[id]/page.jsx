@@ -5,7 +5,7 @@ import useSWR from "swr";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function Publications({ params }) {
  
-  const { data, error, isValidating } = useSWR(
+  const { data } = useSWR(
     `https://deployreciclame-production.up.railway.app/posts/${params.id}`,
     fetcher,
   );
