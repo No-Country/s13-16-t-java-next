@@ -1,10 +1,7 @@
-"use client";
-import { Suspense } from "react";
 import CardPostWrapper from "../CardPostWrapper";
-import { CardsPostsSkeleton } from "../skeletons";
 import { SearchIcon } from "../../components/Icons";
 
-export default function Explorar() {
+export default async function Explorar() {
   return (
     <div>
       <div className="mt-32 min-h-[80vh]">
@@ -21,10 +18,8 @@ export default function Explorar() {
             placeholder="Busca materiales (ej: papel, plástico, etc)"
           />
         </label>
-        <Suspense fallback={<CardsPostsSkeleton />}>
-          <CardPostWrapper />
-        </Suspense>
       </div>
+      <CardPostWrapper />
     </div>
   );
 }
