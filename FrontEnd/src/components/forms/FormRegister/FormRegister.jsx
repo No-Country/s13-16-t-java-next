@@ -10,11 +10,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userRegisterSchema } from "@/src/validations/userSchema";
 import { ChevronDownIcon } from "@/src/components/Icons";
-// import { useRouter } from "next/navigation";
 
 import Index from "..";
 import { EyeClose, EyeOpen } from "../../Icons/EyesIcon";
-import { getLocalitiesFromProvince } from "@/src/lib/api";
+import { PostNewUser, getLocalitiesFromProvince } from "@/src/lib/api";
 
 function FormRegister({ provinces }) {
   const { showPassword, handleShowPassword } = Index();
@@ -22,6 +21,8 @@ function FormRegister({ provinces }) {
 
   const [ProvinceSelected, setProvinceSelected] = React.useState("");
   const [locations, setLocations] = React.useState([]);
+
+  const [LocationSelected, setLocationSelected] = React.useState(0);
 
   React.useEffect(() => {
     async function fetchLocationsByProvince() {
@@ -57,8 +58,6 @@ function FormRegister({ provinces }) {
     setDaysOfMonth(getDaysInMonth(yearSelected, monthSelected));
   }, [yearSelected, monthSelected]);
 
-  // const router = useRouter();
-
   const {
     register,
     handleSubmit,
@@ -67,41 +66,26 @@ function FormRegister({ provinces }) {
     resolver: zodResolver(userRegisterSchema),
   });
 
-  // ! Esta es una solución alternativa para evitar el error del lado del servidor.
-  // ? Comprobar con "sensors" si persiste el error (Dev tools) -> Me daba errores al obtener el idioma de los meses, en servidor me devolvía en español y el cliente en inglés.
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => {
     setMounted(true);
   }, []);
   if (!mounted) return null;
 
-  // const URLPostUser =
-  //   "https://deployreciclame-production.up.railway.app/profile";
+  function onSubmit(data) {
+    const birthdate = new Date(data.year, data.month - 1, data.day);
 
-  async function onSubmit(data) {
-    const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("lastname", data.lastname);
-    formData.append("email", data.email);
-    formData.append("password", data.password);
-    formData.append("phone", data.phone);
-    //! Pendiente a ver como guarda el backend la fecha de nacimiento (formato) y provincia y ciudad
-    // formData.append("city", data.city);
-    // formData.append("province", data.province);
-    // formData.append("day", data.day);
-    // formData.append("month", data.month);
-    // formData.append("year", data.year);
+    const formData = {
+      name: data.name,
+      lastName: data.lastname,
+      email: data.email,
+      phone: data.phone,
+      password: data.password,
+      location_id: LocationSelected,
+      birthdate: birthdate.toISOString(),
+    };
 
-    // const response = await fetch(URLPostUser, {
-    //   method: "POST",
-    //   body: formData,
-    // });
-
-    // if (response.ok) {
-    //   alert("Usuario registrado con éxito.");
-    // } else {
-    //   alert("Error al crear el usuario.");
-    // }
+    PostNewUser(JSON.stringify(formData));
   }
 
   return (
@@ -258,6 +242,7 @@ function FormRegister({ provinces }) {
               placeholder="Ciudad"
               id="city"
               {...register("city")}
+              onChange={(e) => setLocationSelected(e.target.value)}
             >
               <option value="">Localidad</option>
               <hr />
@@ -265,7 +250,7 @@ function FormRegister({ provinces }) {
                 locations.map((location) => {
                   const { id, name } = location;
                   return (
-                    <option key={id} value={name}>
+                    <option key={id} value={id}>
                       {name}
                     </option>
                   );
