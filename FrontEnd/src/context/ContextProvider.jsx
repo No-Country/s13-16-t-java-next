@@ -20,7 +20,7 @@ export default function ContextProvider({ children }) {
       localStorage.setItem("isActive", JSON.stringify(isActive));
     }
   }, [isActive]);
-  const idUser = 2;
+  const idUser = "ff789b5a-f60e-4830-8081-b6cca433da59";
 
   return (
     <Context.Provider
