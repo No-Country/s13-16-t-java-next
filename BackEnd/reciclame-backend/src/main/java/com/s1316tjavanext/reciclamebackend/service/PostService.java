@@ -2,6 +2,7 @@ package com.s1316tjavanext.reciclamebackend.service;
 
 import com.s1316tjavanext.reciclamebackend.dto.PostDto;
 import com.s1316tjavanext.reciclamebackend.dto.PostRequestDto;
+import com.s1316tjavanext.reciclamebackend.entity.Post;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface PostService {
     void delete(UUID id);
 
     PostDto update(UUID id, PostRequestDto postRequestDto, MultipartFile mpf);
+
+    List<PostDto> findByTitle(String term);
 }
