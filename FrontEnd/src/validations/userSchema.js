@@ -43,3 +43,7 @@ export const publicationSchema = z.object({
   category: z.string().min(1, { message: "Ingresa una categoría" }),
 
 })
+
+export const comentSchema = z.object({
+  description: z.string().min(1, { message: "No se pueden enviar comentarios vacios" }),
+})

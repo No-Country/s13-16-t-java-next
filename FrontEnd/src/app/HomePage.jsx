@@ -3,11 +3,10 @@ import { SearchIcon } from "../components/Icons";
 import Link from "next/link";
 import CardPost from "../components/CardPost";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
+import { useGetPosts } from "../hooks/useGetPost";
 
-import { getAllPublications } from "@/src/lib/api";
-
-export default async function HomePage() {
-  const publications = await getAllPublications();
+export default function HomePage() {
+  const { publications } = useGetPosts();
   return (
     <main>
       <article

@@ -27,6 +27,7 @@ export async function getAllPublications() {
     "https://deployreciclame-production.up.railway.app/posts/all",
   );
   const data = await response.json();
+
   return data;
 }
 
@@ -35,6 +36,7 @@ export async function getPublication(post_id) {
     `https://deployreciclame-production.up.railway.app/posts/${post_id}`,
   );
   const data = await response.json();
+ 
   return data;
 }
 
@@ -56,3 +58,4 @@ export async function PostNewUser(formData) {
     alert("Error al registrar usuario.");
   }
 }
+
