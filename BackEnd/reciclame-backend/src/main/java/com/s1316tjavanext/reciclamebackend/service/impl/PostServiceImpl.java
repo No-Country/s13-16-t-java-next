@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author jdmon on 21/02/2024
@@ -75,6 +76,14 @@ public class PostServiceImpl implements PostService {
             setImageUrl(mpf,post);
             return postMapper.postToPostDto(postRepository.save(post));
         } else throw new RuntimeException();
+    }
+
+    @Override
+    public List<PostDto> findByTitle(String term) {
+        return postRepository.findByTitle(term)
+                .stream()
+                .map(postMapper::postToPostDto)
+                .collect(Collectors.toList());
     }
 
     private boolean isImageNotNullNotEmpty(MultipartFile mpf) {

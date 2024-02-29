@@ -77,4 +77,10 @@ public class PostController {
         }
     }
 
+    @GetMapping("/findByTitle/{term}")
+    @Operation(summary = "Get posts by title", description = "Get posts by title containing the specified term")
+    public ResponseEntity<List<PostDto>> findByTitle(@PathVariable String term) {
+        return ResponseEntity.ok(postService.findByTitle(term));
+    }
+
 }
