@@ -1,11 +1,11 @@
-
-import CardPost from "../CardPost";
+import { Suspense } from "react";
+import CardPostWrapper from "../CardPostWrapper";
+import { CardsPostsSkeleton } from "../skeletons";
 import { Lato } from "next/font/google";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
 import { useGetPosts } from "../../hooks/useGetPost";
 
-export default  function HomeLogin() {
-  const { publications } = useGetPosts();
+export default async function HomeLogin()
   return (
     <main className="mx-auto min-h-[80vh] max-w-7xl pt-20">
       <h2
@@ -13,11 +13,9 @@ export default  function HomeLogin() {
       >
         Te podría interesar
       </h2>
-      <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto  lg:columns-6">
-        {publications?.map((publication) => (
-          <CardPost key={publication.id} publication={publication} />
-        ))}
-      </div>
+      <Suspense fallback={<CardsPostsSkeleton />}>
+        <CardPostWrapper />
+      </Suspense>
     </main>
   );
 }
