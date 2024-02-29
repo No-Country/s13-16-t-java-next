@@ -40,4 +40,6 @@ public interface CommentService {
      * @return updated comment
      */
     public CommentDto updateComment(UUID commentId, CommentDto commentDto);
+
+    List<CommentDto> getCommentsByPostId(UUID postId);
 }

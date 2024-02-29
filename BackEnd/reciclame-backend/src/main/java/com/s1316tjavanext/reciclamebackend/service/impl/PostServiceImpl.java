@@ -72,7 +72,9 @@ public class PostServiceImpl implements PostService {
             post.setTitle(postRequestDto.title());
             post.setDescription(postRequestDto.description());
             post.setCategory(postRequestDto.category());
-            setImageUrl(mpf,post);
+            if (isImageNotNullNotEmpty(mpf)){
+                setImageUrl(mpf,post);
+            }
             return postMapper.postToPostDto(postRepository.save(post));
         } else throw new RuntimeException();
     }

@@ -30,6 +30,12 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getComments());
     }
 
+    @GetMapping("/allByPostId/{postId}")
+    @Operation(summary = "Get all comments", description = "Get all comments existing in system")
+    public ResponseEntity<List<CommentDto>> getComments(@PathVariable UUID postId) {
+        return ResponseEntity.ok(commentService.getCommentsByPostId(postId));
+    }
+
     @PostMapping("/save")
     @Operation(summary = "Create new comment for a post", description = "Add comment in a post, this comment contains message, creator, date of creation")
     public ResponseEntity<CommentDto> createComment(@RequestBody CommentDto commentRequest) {
