@@ -1,13 +1,12 @@
 import { Lato } from "next/font/google";
 import { SearchIcon } from "../components/Icons";
 import Link from "next/link";
-import CardPost from "../components/CardPost";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
-
-import { getAllPublications } from "@/src/lib/api";
+import { Suspense } from "react";
+import CardPostWrapper from "../components/CardPostWrapper";
+import { CardsPostsSkeleton } from "../components/skeletons";
 
 export default async function HomePage() {
-  const publications = await getAllPublications();
   return (
     <main>
       <article
@@ -82,12 +81,9 @@ export default async function HomePage() {
           >
             Explora nuestra comunidad
           </h2>
-          <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto  md:columns-6">
-            {publications &&
-              publications.map((publication) => (
-                <CardPost key={publication.id} publication={publication} />
-              ))}
-          </div>
+          <Suspense fallback={<CardsPostsSkeleton />}>
+            <CardPostWrapper />
+          </Suspense>
           <Link
             href="/explorar"
             className="mx-auto grid h-12 w-full place-items-center rounded-2xl bg-primary-green text-center text-lg leading-5 text-white transition duration-300 hover:bg-green-500 min-[640px]:max-w-52"

@@ -1,11 +1,10 @@
 "use client";
-import { useContext } from "react";
-import CardPost from "../../components/CardPost";
+import { Suspense } from "react";
+import CardPostWrapper from "../CardPostWrapper";
+import { CardsPostsSkeleton } from "../skeletons";
 import { SearchIcon } from "../../components/Icons";
-import { Context } from "../../context/ContextProvider";
 
 export default function Explorar() {
-  const { publications } = useContext(Context);
   return (
     <div>
       <div className="mt-32 min-h-[80vh]">
@@ -22,11 +21,9 @@ export default function Explorar() {
             placeholder="Busca materiales (ej: papel, plástico, etc)"
           />
         </label>
-        <div className="my-10 flex flex-wrap justify-center gap-4 p-2  md:mx-auto md:columns-6">
-          {publications?.map((publication) => (
-            <CardPost key={publication.id} publication={publication} />
-          ))}
-        </div>
+        <Suspense fallback={<CardsPostsSkeleton />}>
+          <CardPostWrapper />
+        </Suspense>
       </div>
     </div>
   );
