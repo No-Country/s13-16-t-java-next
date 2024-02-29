@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 
 export default function Post({ post }) {
   const { title, category, description, comments, imageUrl, love } = post;
+
   const [like, setLike] = useState(love);
   const [liked, setLiked] = useState(false);
 
@@ -35,7 +36,7 @@ export default function Post({ post }) {
     }
     setLiked(!liked);
   };
-  const isOwner = idUser === post.idUser;
+  const isOwner = idUser === post.id;
 
   const toggleSwitch = () => {
     setIsActive(!isActive);
@@ -67,13 +68,13 @@ export default function Post({ post }) {
             width={400}
             height={400}
             priority
-            className=""
+            className="rounded-2xl"
           />
         </picture>
         <div className="max-[750px]:translate-y-30  mt-0 flex justify-between lg:static">
           <div className="flex items-center gap-3">
             <Image
-              src={post.imgProfile}
+              src={post.imgProfile ? post.imgProfile : "/image/profile1.png"}
               alt="image Profile"
               height={70}
               width={70}
@@ -129,7 +130,7 @@ export default function Post({ post }) {
         )}
 
         <Coments coments={comments} />
-        {isLogged && mounted && isActive && <FormComent />}
+        {isLogged && mounted && isActive && <FormComent postId={post.id} />}
         {isOwner && isLogged && (
           <div className=" flex w-[90%]">
             <Button className="w-full rounded-3xl bg-wrong p-2 font-[500] text-white lg:hidden  lg:w-1/2 lg:p-2">
