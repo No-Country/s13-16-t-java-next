@@ -1,5 +1,8 @@
 package com.s1316tjavanext.reciclamebackend.dto;
 
+import com.s1316tjavanext.reciclamebackend.entity.enums.Category;
+
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -11,6 +14,7 @@ public record ProfileResponseDto(
 //        String photoId
 //        Lista Categorias
         String bio,
+        List<Category> categories,
         UserResponseDTO userResponseDTO
 ) {
 }

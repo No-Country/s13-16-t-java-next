@@ -1,9 +1,9 @@
 package com.s1316tjavanext.reciclamebackend.entity;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.s1316tjavanext.reciclamebackend.entity.enums.Category;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +12,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 @Data
 @Builder
@@ -43,4 +44,7 @@ public class Profile implements Serializable {
 
     @Column(nullable = false)
     private boolean deleted;
+
+    @Schema(name = "categories", description = "Categories of the user", example = "{Madera, Vidrio, Plastico}")
+    private List<Category> categories;
 }

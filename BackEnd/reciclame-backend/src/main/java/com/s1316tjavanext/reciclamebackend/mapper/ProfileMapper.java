@@ -20,6 +20,7 @@ public interface ProfileMapper {
     Profile userCreateDTOToProfile(UserCreateDTO userCreateDTO);
     @Mapping(source = "user", target = "userResponseDTO")
     @Mapping(source = "user.location.id", target = "userResponseDTO.location_id")
+    @Mapping(source = "profile.categories", target = "categories")
     ProfileResponseDto profileToProfileResponseDto(Profile profile);
 
     List<ProfileResponseDto> profilesToProfilesResponseDto(List<Profile> profiles);

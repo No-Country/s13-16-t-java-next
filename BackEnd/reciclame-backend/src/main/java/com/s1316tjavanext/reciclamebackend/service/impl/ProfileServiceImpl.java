@@ -45,14 +45,15 @@ public class ProfileServiceImpl implements ProfileService {
 //    }
 
     @Override
-    public ProfileResponseDto updateProfile(UUID profileId, UserProfileRequestDto UserProfileRequestDto) {
+    public ProfileResponseDto updateProfile(UUID profileId, UserProfileRequestDto userProfileRequestDto) {
        Optional<Profile> profileDB = profileRepository.findById(profileId);
        if (profileDB.isPresent()){
-           ProfileResponseDto profileData = profileMapper.userProfileRequesDtoToProfileResponseDto(UserProfileRequestDto);
+           ProfileResponseDto profileData = profileMapper.userProfileRequesDtoToProfileResponseDto(userProfileRequestDto);
            profileDB.get().setBio(profileData.bio());
+           profileDB.get().setCategories(profileData.categories());
 
            User userDB = profileDB.get().getUser();
-           UserResponseDTO userData = profileMapper.userProfileRequesDtoToUserResponseDTO(UserProfileRequestDto);
+           UserResponseDTO userData = profileMapper.userProfileRequesDtoToUserResponseDTO(userProfileRequestDto);
            userDB.setName(userData.name());
            userDB.setLastName(userData.lastName());
            if (!userDB.getEmail().equals(userData.email())){
