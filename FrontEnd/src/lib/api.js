@@ -38,21 +38,10 @@ export async function getPublication(post_id) {
   return data;
 }
 
-export async function PostNewUser(formData) {
-  const response = await fetch(
-    "https://deployreciclame-production.up.railway.app/users/save",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: formData,
-    },
+export async function getAllUsers() {
+  const res = await fetch(
+    "https://deployreciclame-production.up.railway.app/users/all",
   );
-
-  if (response.ok) {
-    alert("Usuario registrado con éxito.");
-  } else {
-    alert("Error al registrar usuario.");
-  }
+  const data = await res.json();
+  return data;
 }

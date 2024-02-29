@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../../../context/ContextProvider";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,15 +9,31 @@ import Link from "next/link";
 import { EyeOpen, EyeClose } from "../../Icons/EyesIcon";
 
 import Index from "..";
+import { getAllUsers } from "@/src/lib/api";
 
-// TODO -> Verificar si ya está logeado, en lugar de mostrarle el login, redirigirlo a la página de configuración de perfil.
-// ! usando useRouter enviarlo a ('/configuracion/perfil')
 function FormLogin() {
   const { showPassword, handleShowPassword } = Index();
 
   const { setIsLogged } = useContext(Context);
 
   const router = useRouter();
+
+  useEffect(() => {
+    async function CheckLogin() {
+      const users = await getAllUsers();
+
+      function validateUserInBD() {
+        const user = users.find((user) => user.email === "user.email");
+        if (user) {
+          router.push("/configuracion/perfil");
+        }
+      }
+
+      validateUserInBD();
+    }
+
+    CheckLogin();
+  });
 
   const {
     register,
