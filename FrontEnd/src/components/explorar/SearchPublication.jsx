@@ -18,7 +18,7 @@ export default function SearchPublication({ query }) {
   return (
     <label
       id="input-search"
-      className="mx-auto flex w-full max-w-[850px] items-center gap-4 text-pretty rounded-full border-2 border-solid border-[#6D6D6D] px-4 py-2"
+      className="mx-auto flex w-11/12 max-w-[850px] items-center gap-4 text-pretty rounded-full border-2 border-solid border-[#6D6D6D] px-4 py-2"
     >
       <SearchIcon className="aspect-square w-[1.875rem] fill-[#6D6D6D]" />
       <input
