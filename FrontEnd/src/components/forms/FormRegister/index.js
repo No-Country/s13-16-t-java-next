@@ -1,4 +1,5 @@
 import { toast } from "sonner";
+import { redirect } from "next/navigation";
 
 export { default as FormRegister } from "./FormRegister";
 
@@ -20,9 +21,7 @@ export async function PostNewUser(formData) {
     toast.success("Usuario registrado con éxito.", {
       action: {
         label: "Iniciar sesión",
-        onClick: () => {
-          window.location.href = "/login";
-        },
+        onClick: () => redirect("/login"),
       },
       actionButtonStyle: {
         backgroundColor: "#956DE4",
@@ -34,6 +33,5 @@ export async function PostNewUser(formData) {
   } else {
     toast.error("Error al registrar usuario.");
     document.getElementById("register-btn-submit").disabled = false;
-    console.log(response);
   }
 }

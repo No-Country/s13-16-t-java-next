@@ -1,10 +1,9 @@
-
 import CardPost from "../CardPost";
 import { Lato } from "next/font/google";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
 import { useGetPosts } from "../../hooks/useGetPost";
 
-export default  function HomeLogin() {
+export default function HomeLogin() {
   const { publications } = useGetPosts();
   return (
     <main className="mx-auto min-h-[80vh] max-w-7xl pt-20">

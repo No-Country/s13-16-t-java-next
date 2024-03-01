@@ -1,18 +1,16 @@
-"use client";
 import React from "react";
 import Post from "@/src/components/Publication/Post";
-import useSWR from "swr";
-const fetcher = (url) => fetch(url).then((res) => res.json());
-export default function Publications({ params }) {
- 
-  const { data } = useSWR(
-    `https://deployreciclame-production.up.railway.app/posts/${params.id}`,
-    fetcher,
-  );
-  console.log(data)
+import { getPublication } from "@/src/lib/api";
+
+export default async function Publications({ params }) {
+
+  const post = await getPublication(params.id);
+  
   return (
-    <main className="mt-[65px] grid justify-items-center lg:grid-cols-2">
-      <Post post={data} />
-    </main>
+    <div className="min-h-dvh">
+      <main className="mt-[65px] grid justify-items-center lg:grid-cols-2">
+        <Post post={post} post_id={params.id}  />
+      </main>
+    </div>
   );
 }

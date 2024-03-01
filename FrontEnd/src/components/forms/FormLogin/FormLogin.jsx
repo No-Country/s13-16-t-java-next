@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Context } from "../../../context/ContextProvider";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,7 +9,8 @@ import Link from "next/link";
 import { EyeOpen, EyeClose } from "../../Icons/EyesIcon";
 
 import Index from "..";
-import { getAllUsers } from "@/src/lib/api";
+import { getAllProfiles, getAllUsers } from "@/src/lib/api";
+import { toast } from "sonner";
 
 function FormLogin() {
   const { showPassword, handleShowPassword } = Index();
@@ -18,22 +19,54 @@ function FormLogin() {
 
   const router = useRouter();
 
-  useEffect(() => {
-    async function CheckLogin() {
-      const users = await getAllUsers();
+  async function onSubmit(data) {
+    const email = data.email;
+    const password = data.password;
 
-      function validateUserInBD() {
-        const user = users.find((user) => user.email === "user.email");
-        if (user) {
-          router.push("/configuracion/perfil");
-        }
-      }
+    const users = await getAllUsers();
 
-      validateUserInBD();
+    function findUser(user) {
+      return user.email === email && user.password === password;
     }
 
-    CheckLogin();
-  });
+    const user = users.find(findUser);
+
+    function searchProfile() {
+      async function searchProfile() {
+        const allProfiles = await getAllProfiles();
+
+        const profile = allProfiles.find(
+          (profile) => profile.userResponseDTO.userId === user.userId,
+        );
+
+        return profile.id;
+      }
+
+      return searchProfile();
+    }
+
+    searchProfile().then((data) => localStorage.setItem("profileId", data));
+
+    if (user) {
+      router.push("/");
+      setIsLogged(true);
+      localStorage.setItem("userLoggedId", user.userId);
+      localStorage.setItem("isLogged", true);
+    } else {
+      toast.error("El usuario no se encuentra registrado.", {
+        action: {
+          label: "Registrarse",
+          onClick: () => {
+            router.push("/registro");
+          },
+        },
+        actionButtonStyle: {
+          backgroundColor: "#956DE4",
+          color: "#fff",
+        },
+      });
+    }
+  }
 
   const {
     register,
@@ -45,10 +78,7 @@ function FormLogin() {
 
   return (
     <form
-      onSubmit={handleSubmit(() => {
-        router.push("/");
-        setIsLogged(true);
-      })}
+      onSubmit={handleSubmit(onSubmit)}
       className="flex h-full w-full max-w-2xl flex-col items-center gap-6 bg-white p-8 md:mt-3 md:p-16  lg:justify-center  lg:p-24"
     >
       <p className="text-star w-full text-2xl font-bold uppercase">ingresar</p>
