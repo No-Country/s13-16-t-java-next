@@ -25,7 +25,7 @@ import java.util.UUID;
 @Where(clause = "deleted=false")
 public class Profile implements Serializable {
 
-    @Schema(name = "id", description = "Unique identifier of the profile", example = "123e4567-e89b-12d3-a456-426614174000")
+    @Schema(name = "id", description = "Unique identifier of the profileResponseDto", example = "123e4567-e89b-12d3-a456-426614174000")
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id
     private UUID id;
@@ -47,4 +47,7 @@ public class Profile implements Serializable {
 
     @Schema(name = "categories", description = "Categories of the user", example = "{Madera, Vidrio, Plastico}")
     private List<Category> categories;
+
+    @OneToMany(mappedBy = "profile")
+    private List<Post> posts;
 }

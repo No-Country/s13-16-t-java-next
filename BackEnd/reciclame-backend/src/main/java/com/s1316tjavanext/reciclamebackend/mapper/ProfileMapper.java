@@ -29,6 +29,7 @@ public interface ProfileMapper {
     ProfileResponseDto userProfileRequesDtoToProfileResponseDto(UserProfileRequestDto userP);
 
     @InheritInverseConfiguration
+    @Mapping(target = "posts", ignore = true)
     Profile profileResponseDtoToProfile(ProfileResponseDto profileResponseDto);
 
 

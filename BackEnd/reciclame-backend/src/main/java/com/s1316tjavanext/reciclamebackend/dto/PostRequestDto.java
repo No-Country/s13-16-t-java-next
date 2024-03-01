@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.UUID;
+
 import static com.s1316tjavanext.reciclamebackend.util.Constants.*;
 
 
@@ -23,7 +25,10 @@ public record PostRequestDto(
                 message = INVALID_CHARACTERS)
         String description,
         MultipartFile multipartFile,
-
         @NotNull
-        Category category) {
+        Category category,
+        @NotNull
+        Boolean enableComments,
+        @NotNull
+        UUID profileId) {
 }
