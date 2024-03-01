@@ -19,13 +19,13 @@ export default function HomePage() {
         <div className="relative px-4">
           <header>
             <h2
-              className={`${lato.className} text-center text-[clamp(50px,_8vw,_82px)] font-semibold`}
+              className={`${lato.className} text-center text-[clamp(50px,_8vw,_82px)] font-semibold tracking-wide`}
             >
               Donar para reciclar juntos
             </h2>
           </header>
           <div className="mx-auto md:w-4/6">
-            <p className="leading mx-auto  text-pretty text-center text-sm leading-[1.625rem] lg:text-[22px]">
+            <p className="leading mx-auto  text-pretty text-center text-sm leading-[1.625rem] tracking-wide lg:text-[22px]">
               Contribuye al cambio donando plásticos, papel y más; juntos
               transformaremos materiales en oportunidades para un futuro más
               sostenible.
@@ -54,7 +54,7 @@ export default function HomePage() {
           >
             Donar, Reciclar, Comunidad
           </h2>
-          <div className="my-10 text-xl leading-6">
+          <div className="my-10 text-xl leading-6 tracking-wide">
             <p>
               En nuestro espacio, conectamos a personas que poseen materiales de
               reciclaje como papel, plástico, madera, cartón y más, con aquellos
