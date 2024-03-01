@@ -58,18 +58,7 @@ public class ProfileServiceImpl implements ProfileService {
            profileDB.get().setBio(profileData.bio());
            setImageUrl(mpf,profileDB.get());
 
-           profileDB.get().setCategories(new ArrayList<>());
-           Arrays.stream(Category.values()).forEach(
-                   enumCategory -> {
-                       userProfileRequestDto.categories().stream().forEach(
-                               category -> {
-                                   if (category.equals(enumCategory.toString())){
-                                       profileDB.get().getCategories().add(enumCategory);
-                                   }
-                               }
-                       );
-                   }
-           );
+           listStringToListEnum(profileDB.get(), userProfileRequestDto.categories());
 
            User userDB = profileDB.get().getUser();
            UserResponseDTO userData = profileMapper.userProfileRequesDtoToUserResponseDTO(userProfileRequestDto);
@@ -91,6 +80,17 @@ public class ProfileServiceImpl implements ProfileService {
            return profileMapper.profileToProfileResponseDto(profileRepository.save(profileDB.get()));
        }
        else throw new RuntimeException("id no encontrado");
+    }
+
+    @Override
+    public ProfileResponseDto completeProfile(UUID profileId, MultipartFile mpf, List<String> categories){
+        Optional<Profile> profileDB = profileRepository.findById(profileId);
+        if (profileDB.isPresent()){
+            setImageUrl(mpf,profileDB.get());
+            listStringToListEnum(profileDB.get(),categories);
+            return profileMapper.profileToProfileResponseDto(profileRepository.save(profileDB.get()));
+        }
+        else throw new RuntimeException("Perfil no encontrado");
     }
 
     @Override
@@ -120,5 +120,21 @@ public class ProfileServiceImpl implements ProfileService {
                 throw new RuntimeException("Photo not loaded");
             }
         }
+    }
+
+    private void listStringToListEnum(Profile profile,List<String> categories){
+        profile.setCategories(new ArrayList<>());
+        Arrays.stream(Category.values()).forEach(
+                enumCategory -> {
+                    categories.stream().forEach(
+                            category -> {
+                                if (category.equals(enumCategory.toString())){
+                                    profile.getCategories().add(enumCategory);
+                                }
+                            }
+                    );
+                }
+        );
+
     }
 }

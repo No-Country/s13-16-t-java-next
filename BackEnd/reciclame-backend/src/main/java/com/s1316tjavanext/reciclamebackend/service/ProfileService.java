@@ -12,6 +12,9 @@ import java.util.UUID;
 public interface ProfileService {
     Optional<ProfileResponseDto> getProfile(UUID profileId);
     ProfileResponseDto updateProfile(UUID profileId, UserProfileRequestDto userProfileRequestDto, MultipartFile mpf);
+
+    ProfileResponseDto completeProfile(UUID profileId, MultipartFile mpf, List<String> categories);
+
     void deleteProfile(UUID profileId);
 
     List<ProfileResponseDto> getProfiles();

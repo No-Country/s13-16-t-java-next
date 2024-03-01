@@ -46,6 +46,17 @@ public class ProfileController {
         }
     }
 
+    @PutMapping("/complete-profile/{profileId}")
+    public ResponseEntity<ProfileResponseDto> completeProfile(@PathVariable UUID profileId,
+                                             @RequestParam("image") MultipartFile mpf,
+                                             @RequestParam("categories") List<String> categories) {
+        try {
+            return ResponseEntity.ok(profileService.completeProfile(profileId, mpf, categories));
+        }catch (RuntimeException ignore){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/delete/{profileId}")
     public ResponseEntity<Void> deleteProfile(@PathVariable UUID profileId) {
         try {
