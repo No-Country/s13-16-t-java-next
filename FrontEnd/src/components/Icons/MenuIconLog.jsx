@@ -20,9 +20,11 @@ export default function MenuIconLog(props) {
 
   function logOut() {
     setIsLogged(false);
-    localStorage.removeItem("isLogged");
-    localStorage.removeItem("userLoggedId");
-    localStorage.removeItem("profileId");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("isLogged");
+      localStorage.removeItem("userLoggedId");
+      localStorage.removeItem("profileId");
+    }
   }
 
   const pathname = usePathname();

@@ -7,9 +7,11 @@ export default function Submenu() {
   const { setIsLogged } = useContext(Context);
   function logOut() {
     setIsLogged(false);
-    localStorage.removeItem("isLogged");
-    localStorage.removeItem("userLoggedId");
-    localStorage.removeItem("profileId");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("isLogged");
+      localStorage.removeItem("userLoggedId");
+      localStorage.removeItem("profileId");
+    }
   }
   return (
     <div className="group relative">

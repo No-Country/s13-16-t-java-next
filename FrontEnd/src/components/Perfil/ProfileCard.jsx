@@ -10,7 +10,8 @@ import { getProfile } from "@/src/lib/api";
 export default function ProfileCard() {
   const pathname = usePathname();
 
-  const profileId = localStorage.getItem("profileId");
+  const profileId =
+    typeof window !== "undefined" && localStorage.getItem("profileId");
 
   const [ProfileData, setProfileData] = useState({});
 

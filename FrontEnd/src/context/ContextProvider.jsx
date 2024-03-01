@@ -4,7 +4,10 @@ export const Context = createContext();
 
 export default function ContextProvider({ children }) {
   const [isLogged, setIsLogged] = useState(
-    () => JSON.parse(localStorage.getItem("isLogged")) || false,
+    () =>
+      JSON.parse(
+        typeof window !== "undefined" && localStorage.getItem("isLogged"),
+      ) || false,
   );
 
   const [isActive, setIsActive] = useState(() => {

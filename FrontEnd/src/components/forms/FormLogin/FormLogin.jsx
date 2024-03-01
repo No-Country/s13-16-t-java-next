@@ -45,13 +45,19 @@ function FormLogin() {
       return searchProfile();
     }
 
-    searchProfile().then((data) => localStorage.setItem("profileId", data));
+    searchProfile().then(
+      (data) =>
+        typeof window !== "undefined" &&
+        localStorage.setItem("profileId", data),
+    );
 
     if (user) {
       router.push("/");
       setIsLogged(true);
-      localStorage.setItem("userLoggedId", user.userId);
-      localStorage.setItem("isLogged", true);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("userLoggedId", user.userId);
+        localStorage.setItem("isLogged", true);
+      }
     } else {
       toast.error("El usuario no se encuentra registrado.", {
         action: {
