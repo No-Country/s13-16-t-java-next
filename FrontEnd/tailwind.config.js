@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -26,6 +27,21 @@ module.exports = {
           transform: "translateX(100%)",
         },
       },
+      pulse:{
+        '0%, 100%' :{
+          opacity:1,
+        },
+        '50%':{
+          opacity:.5
+        }
+      },
+      ping:{
+        '75%, 100%' :{
+          transform:'scale(2)',
+          opacity:0,
+        },
+        
+      }
     },
   },
   plugins: [],
