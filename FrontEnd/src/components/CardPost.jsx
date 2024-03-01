@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { HeartLike, HeartDislike } from "./Icons/HeartLike";
@@ -25,6 +27,9 @@ export default function CardPost({ publication }) {
                 objectFit="cover"
                 className="rounded-[11px] bg-gray-300 "
               />
+            </div>
+            <div className="flex justify-between m-2">
+              <p className="text-[16px] font-[500]">{title}</p>
             </div>
           </div>
           <div className="flex justify-between p-2">

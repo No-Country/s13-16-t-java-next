@@ -3,6 +3,8 @@ import Button from "@/src/components/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { comentSchema } from "@/src/validations/userSchema";
+import { toast } from "sonner";
+import { useState } from "react";
 
 export default function FormComent({ postId }) {
   const urlPostComent =
@@ -16,30 +18,33 @@ export default function FormComent({ postId }) {
     resolver: zodResolver(comentSchema),
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   async function onSubmit(data) {
-    const currentDate = new Date().toISOString().split("T")[0];
+    setIsLoading(true);
+
+    const currentDate = new Date().toISOString();
     const requestBody = {
       postId: postId,
       description: data.description,
       date: currentDate,
     };
 
-    
-
     const response = await fetch(urlPostComent, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify(requestBody),
     });
 
     if (response.ok) {
-      alert("comentario creado");
+      setIsLoading(false);
+      toast.success("Comentario publicado con éxito.");
       reset();
-      
     } else {
-      alert("Error al crear el comentario");
+      setIsLoading(false);
+      toast.error("Error al publicar el comentario.");
     }
   }
   return (
@@ -54,7 +59,8 @@ export default function FormComent({ postId }) {
         <p className=" text-sm text-wrong">{errors.description.message}</p>
       )}
       <Button
-        className="w-1/2  rounded-3xl bg-primary-green p-1 text-lg font-[500] text-white"
+        disabled={isLoading}
+        className="w-1/2 rounded-3xl bg-primary-green p-1 text-lg font-[500] text-white disabled:bg-gray-300 disabled:text-black"
         type="submit"
       >
         Enviar

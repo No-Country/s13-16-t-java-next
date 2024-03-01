@@ -4,12 +4,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import img from "../../assets/profile/Rectangle-2.png";
+import { useEffect, useState } from "react";
+import { getProfile } from "@/src/lib/api";
 
 export default function ProfileCard() {
   const pathname = usePathname();
 
+  const profileId =
+    typeof window !== "undefined" && localStorage.getItem("profileId");
+
+  const [ProfileData, setProfileData] = useState({});
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await getProfile(profileId);
+      setProfileData(res);
+    }
+
+    fetchData();
+  });
+
   const profileData = {
-    name: "Nombre del usuario",
+    name: ProfileData?.userResponseDTO?.name,
     publications: { tittle: "Publicaciones", amount: "123" },
     donations: { tittle: "Donaciones", amount: "123" },
     favorites: { tittle: "Favoritos", amount: "123" },

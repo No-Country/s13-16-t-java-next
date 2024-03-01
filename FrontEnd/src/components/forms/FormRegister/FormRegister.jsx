@@ -13,7 +13,8 @@ import { ChevronDownIcon } from "@/src/components/Icons";
 
 import Index from "..";
 import { EyeClose, EyeOpen } from "../../Icons/EyesIcon";
-import { PostNewUser, getLocalitiesFromProvince } from "@/src/lib/api";
+import { getLocalitiesFromProvince } from "@/src/lib/api";
+import { PostNewUser } from ".";
 
 function FormRegister({ provinces }) {
   const { showPassword, handleShowPassword } = Index();
@@ -90,7 +91,8 @@ function FormRegister({ provinces }) {
 
   return (
     <form
-      className="flex h-full w-full max-w-2xl flex-col items-center justify-center gap-6 overflow-y-auto bg-white p-5  md:px-24 md:py-10"
+      id="form-register"
+      className="flex h-full w-full max-w-2xl flex-col items-center justify-center gap-6 overflow-y-auto bg-white p-5 md:px-24 md:py-10"
       onSubmit={handleSubmit(onSubmit)}
     >
       <p className="text-star w-full text-2xl font-bold uppercase">
@@ -319,7 +321,8 @@ function FormRegister({ provinces }) {
       </div>
       <div className="w-full">
         <button
-          className="w-full rounded-3xl bg-primary-green p-3 text-white transition duration-300 hover:bg-green-500 md:w-[40%]"
+          id="register-btn-submit"
+          className="w-full rounded-3xl bg-primary-green p-3 text-white transition duration-300 hover:bg-green-500 disabled:bg-gray-300 disabled:text-black md:w-[40%]"
           type="submit"
         >
           Registrate
@@ -328,7 +331,7 @@ function FormRegister({ provinces }) {
       <div className="flex w-full justify-center">
         <p className="md:text-star flex w-full justify-center gap-2 text-lg md:justify-normal">
           ¿ Tienes cuenta?{" "}
-          <Link href="/login" className="text-lg  font-[500] underline ">
+          <Link href="/login" className="text-lg font-[500] underline">
             Inicia sesion
           </Link>
         </p>

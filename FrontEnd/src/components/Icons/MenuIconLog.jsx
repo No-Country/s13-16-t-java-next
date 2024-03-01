@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useGetNotifications } from "@/src/hooks/useGetNotifications";
+import { Context } from "@/src/context/ContextProvider";
 
 export default function MenuIconLog(props) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { setIsLogged } = useContext(Context);
   const { unread } = useGetNotifications();
 
   function toggleMenu() {
@@ -14,6 +16,15 @@ export default function MenuIconLog(props) {
 
   function handleLinkClick() {
     toggleMenu();
+  }
+
+  function logOut() {
+    setIsLogged(false);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("isLogged");
+      localStorage.removeItem("userLoggedId");
+      localStorage.removeItem("profileId");
+    }
   }
 
   const pathname = usePathname();
@@ -68,6 +79,13 @@ export default function MenuIconLog(props) {
               Home
             </Link>
             <Link
+              className={`header-mobile-link ${pathname === "/" ? "border border-secondary-violet" : ""}`}
+              href={"/configuracion/perfil"}
+              onClick={handleLinkClick}
+            >
+              Configuración
+            </Link>
+            <Link
               className={`header-mobile-link ${pathname === "/notificaciones" ? "border border-secondary-violet" : ""} flex justify-between`}
               href={"/notificaciones"}
               onClick={handleLinkClick}
@@ -119,7 +137,10 @@ export default function MenuIconLog(props) {
               <Link
                 className="m-1 flex text-wrong"
                 href={""}
-                onClick={handleLinkClick}
+                onClick={() => {
+                  handleLinkClick();
+                  logOut();
+                }}
               >
                 Cerrar sesión
                 <CerrarSesionIcon />
