@@ -8,22 +8,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'primary-green': '#6DE495',
-        'secondary-violet': '#956DE4',
-        'tertiary-gray': '#DADADA',
-        'accent-yellow': '#FFFA87',
-        'wrong': '#E93B3B',
-        'warning': '#EFC900',
-        'success': '#44D94A',
-        'gray-bg': '#F5F5F5',
-        'gray-dark-bg': '#EDEDED',
-        'dark-text': '#39353F',
-      }
+        "primary-green": "#6DE495",
+        "secondary-violet": "#956DE4",
+        "tertiary-gray": "#DADADA",
+        "accent-yellow": "#FFFA87",
+        wrong: "#E93B3B",
+        warning: "#EFC900",
+        success: "#44D94A",
+        "gray-bg": "#F5F5F5",
+        "gray-dark-bg": "#EDEDED",
+        "dark-text": "#39353F",
+      },
     },
     keyframes: {
       shimmer: {
-        '100%': {
-          transform: 'translateX(100%)',
+        "100%": {
+          transform: "translateX(100%)",
         },
       },
     },
