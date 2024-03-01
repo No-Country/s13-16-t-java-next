@@ -1,7 +1,9 @@
 package com.s1316tjavanext.reciclamebackend.mapper;
 
+import com.s1316tjavanext.reciclamebackend.dto.CommentDto;
 import com.s1316tjavanext.reciclamebackend.dto.PostDto;
 import com.s1316tjavanext.reciclamebackend.dto.PostRequestDto;
+import com.s1316tjavanext.reciclamebackend.entity.Comment;
 import com.s1316tjavanext.reciclamebackend.entity.Post;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -17,6 +19,8 @@ import java.util.List;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PostMapper {
     PostDto postToPostDto(Post post);
+    @Mapping(target = "postId",source = "post.id")
+    CommentDto commentToCommentDto(Comment comment);
     List<PostDto> postsToPostsDto(List<Post> posts);
     PostDto postRequestDtoToPostDto(PostRequestDto postRequestDto);
     @InheritInverseConfiguration
