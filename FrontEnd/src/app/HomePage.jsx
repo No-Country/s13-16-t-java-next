@@ -1,12 +1,10 @@
 import { Lato } from "next/font/google";
 import { SearchIcon } from "../components/Icons";
 import Link from "next/link";
-import CardPost from "../components/CardPost";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
-import { useGetPosts } from "../hooks/useGetPost";
+import CardPostWrapper from "../components/CardPostWrapper";
 
-export default function HomePage() {
-  const { publications } = useGetPosts();
+export default async function HomePage() {
   return (
     <main>
       <article
@@ -19,13 +17,13 @@ export default function HomePage() {
         <div className="relative px-4">
           <header>
             <h2
-              className={`${lato.className} text-center text-[clamp(50px,_8vw,_82px)] font-semibold`}
+              className={`${lato.className} text-center text-[clamp(50px,_8vw,_82px)] font-semibold tracking-wide`}
             >
               Donar para reciclar juntos
             </h2>
           </header>
           <div className="mx-auto md:w-4/6">
-            <p className="leading mx-auto  text-pretty text-center text-sm leading-[1.625rem] lg:text-[22px]">
+            <p className="leading mx-auto  text-pretty text-center text-sm leading-[1.625rem] tracking-wide lg:text-[22px]">
               Contribuye al cambio donando plásticos, papel y más; juntos
               transformaremos materiales en oportunidades para un futuro más
               sostenible.
@@ -54,7 +52,7 @@ export default function HomePage() {
           >
             Donar, Reciclar, Comunidad
           </h2>
-          <div className="my-10 text-xl leading-6">
+          <div className="my-10 text-xl leading-6 tracking-wide">
             <p>
               En nuestro espacio, conectamos a personas que poseen materiales de
               reciclaje como papel, plástico, madera, cartón y más, con aquellos
@@ -81,12 +79,7 @@ export default function HomePage() {
           >
             Explora nuestra comunidad
           </h2>
-          <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto  md:columns-6">
-            {publications &&
-              publications.map((publication) => (
-                <CardPost key={publication.id} publication={publication} />
-              ))}
-          </div>
+          <CardPostWrapper />
           <Link
             href="/explorar"
             className="mx-auto grid h-12 w-full place-items-center rounded-2xl bg-primary-green text-center text-lg leading-5 text-white transition duration-300 hover:bg-green-500 min-[640px]:max-w-52"

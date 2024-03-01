@@ -9,7 +9,9 @@ export default function NotificationsPost() {
   const { data, error, isLoading, markAsRead } = useGetNotifications();
 
   useEffect(() => {
-    if (!error) markAsRead();
+    setTimeout(() => {
+      if (!error) markAsRead();
+    }, 3000);
   });
 
   if (error) {
@@ -33,6 +35,7 @@ export default function NotificationsPost() {
             time={notification.time}
             placeholder="blur"
             blurDataURL={img}
+            read={notification.read}
           />
         ))
       ) : (
@@ -50,9 +53,11 @@ export default function NotificationsPost() {
   );
 }
 
-export function NotificationCard({ imgProfile, name, msj, time }) {
+export function NotificationCard({ imgProfile, name, msj, time, read }) {
   return (
-    <article className="relative flex w-full items-center rounded-2xl bg-gray-dark-bg p-2">
+    <article
+      className={` relative flex w-full items-center rounded-2xl bg-gray-dark-bg p-2`}
+    >
       <Image
         src={imgProfile}
         alt={`${name} imagen de perfil`}
@@ -65,6 +70,9 @@ export function NotificationCard({ imgProfile, name, msj, time }) {
         <p>{msj}</p>
       </div>
       <p className="absolute right-3 top-4 md:right-6">{time}</p>
+      <div
+        className={`${!read ? "absolute -right-2 -top-2 block h-3 w-3 animate-ping rounded-full bg-red-500" : ""}`}
+      ></div>
     </article>
   );
 }

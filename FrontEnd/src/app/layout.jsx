@@ -3,7 +3,8 @@ import "./globals.css";
 import { Lato } from "next/font/google";
 import { Header } from "../components/Header";
 import { Providers } from "./Providers";
-import Footer from '../components/footer/Footer'
+import Footer from "../components/footer/Footer";
+import { Toaster } from "../components/ui/sonner/Sonner";
 
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
 
@@ -15,7 +16,7 @@ export const metadata = {
     icon: "/favicon.ico?v=4",
     apple: "/apple-touch-icon.png?v=4",
     shortcut: "/apple-touch-icon.png?v=4",
-  }
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -23,9 +24,10 @@ export default function RootLayout({ children }) {
     <html lang="es">
       <body className={lato.className}>
         <Providers>
+          <Toaster />
           <Header />
           {children}
-          <Footer/>
+          <Footer />
         </Providers>
       </body>
     </html>

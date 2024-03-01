@@ -9,15 +9,70 @@ import Link from "next/link";
 import { EyeOpen, EyeClose } from "../../Icons/EyesIcon";
 
 import Index from "..";
+import { getAllProfiles, getAllUsers } from "@/src/lib/api";
+import { toast } from "sonner";
 
-// TODO -> Verificar si ya está logeado, en lugar de mostrarle el login, redirigirlo a la página de configuración de perfil.
-// ! usando useRouter enviarlo a ('/configuracion/perfil')
 function FormLogin() {
   const { showPassword, handleShowPassword } = Index();
 
   const { setIsLogged } = useContext(Context);
 
   const router = useRouter();
+
+  async function onSubmit(data) {
+    const email = data.email;
+    const password = data.password;
+
+    const users = await getAllUsers();
+
+    function findUser(user) {
+      return user.email === email && user.password === password;
+    }
+
+    const user = users.find(findUser);
+
+    function searchProfile() {
+      async function searchProfile() {
+        const allProfiles = await getAllProfiles();
+
+        const profile = allProfiles.find(
+          (profile) => profile.userResponseDTO.userId === user.userId,
+        );
+
+        return profile.id;
+      }
+
+      return searchProfile();
+    }
+
+    searchProfile().then(
+      (data) =>
+        typeof window !== "undefined" &&
+        localStorage.setItem("profileId", data),
+    );
+
+    if (user) {
+      router.push("/");
+      setIsLogged(true);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("userLoggedId", user.userId);
+        localStorage.setItem("isLogged", true);
+      }
+    } else {
+      toast.error("El usuario no se encuentra registrado.", {
+        action: {
+          label: "Registrarse",
+          onClick: () => {
+            router.push("/registro");
+          },
+        },
+        actionButtonStyle: {
+          backgroundColor: "#956DE4",
+          color: "#fff",
+        },
+      });
+    }
+  }
 
   const {
     register,
@@ -29,10 +84,7 @@ function FormLogin() {
 
   return (
     <form
-      onSubmit={handleSubmit(() => {
-        router.push("/");
-        setIsLogged(true);
-      })}
+      onSubmit={handleSubmit(onSubmit)}
       className="flex h-full w-full max-w-2xl flex-col items-center gap-6 bg-white p-8 md:mt-3 md:p-16  lg:justify-center  lg:p-24"
     >
       <p className="text-star w-full text-2xl font-bold uppercase">ingresar</p>

@@ -9,9 +9,26 @@ import WspIcon from "../Icons/WspIcon";
 import Link from "next/link";
 import { Context } from "@/src/context/ContextProvider";
 import { useRouter } from "next/navigation";
+import { getPublication } from "@/src/lib/api";
 
-export default function Post({ post }) {
-  const { title, category, description, comments, imageUrl, love } = post;
+export default function Post({ post, post_id }) {
+  const [PostData, setPostData] = useState(post);
+  const [intervalId, setIntervalId] = useState(null);
+
+  setInterval(() => {
+    setIntervalId(Math.random());
+  }, 10000);
+
+  useEffect(() => {
+    async function fetchPost() {
+      const data = await getPublication(post_id);
+      setPostData(data);
+      return data;
+    }
+    fetchPost();
+  }, [intervalId]);
+
+  const { title, category, description, comments, imageUrl, love } = PostData;
 
   const [like, setLike] = useState(love);
   const [liked, setLiked] = useState(false);
@@ -23,7 +40,6 @@ export default function Post({ post }) {
   const { isLogged, idUser, isActive, setIsActive } = useContext(Context);
   const router = useRouter();
 
-  //Aca luego implementamos en useEffect la logica para actualizar los like ya sea ponga un like o lo quite.
   const handleLikeClick = () => {
     if (!isLogged) {
       router.push("/login");
@@ -129,8 +145,12 @@ export default function Post({ post }) {
           </div>
         )}
 
-        <Coments coments={comments} />
-        {isLogged && mounted && isActive && <FormComent postId={post.id} />}
+        {isLogged && mounted && isActive && (
+          <>
+            <Coments coments={comments} />
+            <FormComent postId={post.id} />
+          </>
+        )}
         {isOwner && isLogged && (
           <div className=" flex w-[90%]">
             <Button className="w-full rounded-3xl bg-wrong p-2 font-[500] text-white lg:hidden  lg:w-1/2 lg:p-2">
