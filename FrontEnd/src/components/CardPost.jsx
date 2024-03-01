@@ -1,7 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { HeartLike } from "./Icons/HeartLike";
-import HeartDeslike from "./Icons/HeartLike";
+import { HeartLike, HeartDislike, HeartTotal } from "./Icons/HeartLike";
 import { useState } from "react";
 
 export default function CardPost({ publication }) {
@@ -26,14 +27,17 @@ export default function CardPost({ publication }) {
                 className="rounded-[11px] bg-gray-300 "
               />
             </div>
-            <p className="text-[16px] font-[500]">{title}</p>
+            <div className="m-2 flex justify-between">
+              <p className="text-[16px] font-[500]">{title}</p>
+              <HeartTotal />
+            </div>
           </div>
         </Link>
         <button
           onClick={handleClickLike}
           className="absolute right-2 top-5 m-2"
         >
-          {liked ? <HeartLike /> : <HeartDeslike fill={"white"} />}
+          {liked ? <HeartLike /> : <HeartDislike fill={"white"} />}
         </button>
       </div>
     </>

@@ -1,11 +1,9 @@
-"use client";
-import { useContext } from "react";
-import CardPost from "../../components/CardPost";
 import { SearchIcon } from "../../components/Icons";
-import { Context } from "../../context/ContextProvider";
-
-export default function Explorar() {
-  const { publications } = useContext(Context);
+import CardPost from "../CardPost";
+import { getAllPublications } from "@/src/lib/api";
+/* import CardPostWrapper from "../CardPostWrapper"; */
+export default async function Explorar() {
+  const publications = await getAllPublications();
   return (
     <div>
       <div className="mt-32 min-h-[80vh]">
@@ -27,6 +25,7 @@ export default function Explorar() {
             <CardPost key={publication.id} publication={publication} />
           ))}
         </div>
+        {/* <CardPostWrapper /> */}
       </div>
     </div>
   );

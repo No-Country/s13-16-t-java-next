@@ -56,7 +56,55 @@ export function ProfileCardSkeleton() {
         <div className="h-8 w-28 rounded-md bg-gray-bg"></div>
         <div className="h-8 w-28 rounded-md bg-gray-bg"></div>
       </div>
-      <div className="absolute right-8 top-4 h-6 w-6 rounded-md bg-gray-bg p-1"></div>
+    </div>
+  );
+}
+
+export function CardsPostsSkeleton() {
+  return (
+    <div className="my-10 flex flex-wrap justify-center gap-4 md:mx-auto  md:columns-6">
+      <CardPostSkeleton />
+      <CardPostSkeleton />
+      <CardPostSkeleton />
+      <CardPostSkeleton />
+      <CardPostSkeleton />
+      <CardPostSkeleton />
+      <CardPostSkeleton />
+      <CardPostSkeleton />
+    </div>
+  );
+}
+export function CardPostSkeleton() {
+  return (
+    <div
+      className={`${shimmer} relative flex flex-col gap-y-4 overflow-hidden`}
+    >
+      <div className="flex h-[200px] w-[250px] items-center justify-center rounded-md bg-gray-dark-bg object-cover"></div>
+      <div className="h-6 w-28 rounded-md bg-gray-dark-bg"></div>
+    </div>
+  );
+}
+export function BlogsPostsSkeleton() {
+  return (
+    <div className="my-12 flex w-full flex-wrap justify-center gap-x-4 gap-y-10 md:mx-auto min-[1337px]:justify-between">
+      <BlogPostSkeleton />
+      <BlogPostSkeleton />
+      <BlogPostSkeleton />
+      <BlogPostSkeleton />
+      <BlogPostSkeleton />
+      <BlogPostSkeleton />
+      <BlogPostSkeleton />
+      <BlogPostSkeleton />
+    </div>
+  );
+}
+export function BlogPostSkeleton() {
+  return (
+    <div
+      className={`${shimmer} relative flex flex-col gap-y-4 overflow-hidden`}
+    >
+      <div className="flex h-[280px] w-[370px] items-center justify-center rounded-md bg-gray-dark-bg object-cover"></div>
+      <div className="h-6 w-28 rounded-md bg-gray-dark-bg"></div>
     </div>
   );
 }
