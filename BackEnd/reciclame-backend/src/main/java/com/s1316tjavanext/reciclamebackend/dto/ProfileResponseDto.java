@@ -11,8 +11,7 @@ import java.util.UUID;
  */
 public record ProfileResponseDto(
         UUID id,
-//        String photoId
-//        Lista Categorias
+        String photoId,
         String bio,
         List<Category> categories,
         UserResponseDTO userResponseDTO

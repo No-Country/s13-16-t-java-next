@@ -2,12 +2,12 @@ package com.s1316tjavanext.reciclamebackend.controller;
 
 import com.s1316tjavanext.reciclamebackend.dto.ProfileResponseDto;
 import com.s1316tjavanext.reciclamebackend.dto.UserProfileRequestDto;
-import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import com.s1316tjavanext.reciclamebackend.service.ProfileService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,9 +35,12 @@ public class ProfileController {
 
     @PutMapping("/update/{profileId}")
     public ResponseEntity<ProfileResponseDto> updateProfile(@PathVariable UUID profileId,
-                                                            @RequestBody UserProfileRequestDto userProfileRequestDto) {
+                                                            @RequestParam("image") MultipartFile mpf,
+                                                             UserProfileRequestDto userProfileRequestDto
+                                                            ) {
+
         try {
-            return ResponseEntity.ok(profileService.updateProfile(profileId, userProfileRequestDto));
+            return ResponseEntity.ok(profileService.updateProfile(profileId, userProfileRequestDto, mpf));
         }catch (RuntimeException ignore){
             return ResponseEntity.notFound().build();
         }
