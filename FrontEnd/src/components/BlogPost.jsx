@@ -29,9 +29,13 @@ export default async function BlogPost({ query }) {
 
   return (
     <div className="my-12 flex w-full flex-wrap justify-center gap-x-4 gap-y-10 md:mx-auto min-[1337px]:justify-between ">
-      {blogs?.map((blog) => (
-        <BlogArticle key={blog.id} tittle={blog.title} fav={blog.isFav} />
-      ))}
+      {blogs != 0 ? (
+        blogs?.map((blog) => (
+          <BlogArticle key={blog.id} tittle={blog.title} fav={blog.isFav} />
+        ))
+      ) : (
+        <p className="mt-14 text-xl">No hay coincidencias</p>
+      )}
     </div>
   );
 }
