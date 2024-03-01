@@ -79,6 +79,13 @@ export default function MenuIconLog(props) {
               Home
             </Link>
             <Link
+              className={`header-mobile-link ${pathname === "/" ? "border border-secondary-violet" : ""}`}
+              href={"/configuracion/perfil"}
+              onClick={handleLinkClick}
+            >
+              Configuración
+            </Link>
+            <Link
               className={`header-mobile-link ${pathname === "/notificaciones" ? "border border-secondary-violet" : ""} flex justify-between`}
               href={"/notificaciones"}
               onClick={handleLinkClick}
