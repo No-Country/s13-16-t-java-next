@@ -30,6 +30,14 @@ export async function getAllPublications() {
 
   return data;
 }
+export async function getPublicationsByTitle(query) {
+  const response = await fetch(
+    `https://deployreciclame-production.up.railway.app/posts/findByTitle/${query}`,
+  );
+  const data = await response.json();
+
+  return data;
+}
 
 export async function getPublication(post_id) {
   const response = await fetch(
