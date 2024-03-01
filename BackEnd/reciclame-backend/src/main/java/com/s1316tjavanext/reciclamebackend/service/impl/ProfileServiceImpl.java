@@ -6,18 +6,21 @@ import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
 import com.s1316tjavanext.reciclamebackend.entity.Location;
 import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import com.s1316tjavanext.reciclamebackend.entity.User;
+import com.s1316tjavanext.reciclamebackend.entity.enums.Category;
 import com.s1316tjavanext.reciclamebackend.mapper.ProfileMapper;
 import com.s1316tjavanext.reciclamebackend.repository.LocationRepository;
 import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
+import com.s1316tjavanext.reciclamebackend.service.CloudinaryService;
 import com.s1316tjavanext.reciclamebackend.service.ProfileService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -27,6 +30,7 @@ public class ProfileServiceImpl implements ProfileService {
     private final ProfileRepository profileRepository;
     private final ProfileMapper profileMapper;
     private final LocationRepository locationRepository;
+    private final CloudinaryService cloudinaryService;
 
     @Override
     public Optional<ProfileResponseDto> getProfile(UUID profileId) {
@@ -45,12 +49,27 @@ public class ProfileServiceImpl implements ProfileService {
 //    }
 
     @Override
-    public ProfileResponseDto updateProfile(UUID profileId, UserProfileRequestDto userProfileRequestDto) {
+    public ProfileResponseDto updateProfile(UUID profileId,
+                                            UserProfileRequestDto userProfileRequestDto,
+                                            MultipartFile mpf) {
        Optional<Profile> profileDB = profileRepository.findById(profileId);
        if (profileDB.isPresent()){
            ProfileResponseDto profileData = profileMapper.userProfileRequesDtoToProfileResponseDto(userProfileRequestDto);
            profileDB.get().setBio(profileData.bio());
-           profileDB.get().setCategories(profileData.categories());
+           setImageUrl(mpf,profileDB.get());
+
+           profileDB.get().setCategories(new ArrayList<>());
+           Arrays.stream(Category.values()).forEach(
+                   enumCategory -> {
+                       userProfileRequestDto.categories().stream().forEach(
+                               category -> {
+                                   if (category.equals(enumCategory.toString())){
+                                       profileDB.get().getCategories().add(enumCategory);
+                                   }
+                               }
+                       );
+                   }
+           );
 
            User userDB = profileDB.get().getUser();
            UserResponseDTO userData = profileMapper.userProfileRequesDtoToUserResponseDTO(userProfileRequestDto);
@@ -85,5 +104,21 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public List<ProfileResponseDto> getProfiles() {
         return profileMapper.profilesToProfilesResponseDto(profileRepository.findAll());
+    }
+
+    private boolean isImageNotNullNotEmpty(MultipartFile mpf) {
+        return mpf != null &&
+                !mpf.isEmpty();
+    }
+    private void setImageUrl(MultipartFile mpf, Profile profile) {
+        if (isImageNotNullNotEmpty(mpf)){
+            try {
+                BufferedImage bi = ImageIO.read(mpf.getInputStream());
+                Map result = cloudinaryService.upload(mpf);
+                profile.setPhotoId((String) result.get("url"));
+            } catch (IOException e){
+                throw new RuntimeException("Photo not loaded");
+            }
+        }
     }
 }
