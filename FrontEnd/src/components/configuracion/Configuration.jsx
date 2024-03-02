@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { AddIcon } from "../Icons";
 import Link from "next/link";
@@ -10,9 +10,11 @@ export default function Configuration({ categories }) {
   const [selectedCategories, setselectedCategories] = useState([]);
   const [selectedFile, setSelectedFile] = useState({});
   const [imagePreview, setImagePreview] = useState(null);
+  const [perfilId, setPerfilId] = useState("");
   const [mounted, setMounted] = React.useState(false);
-  const perfilId = localStorage.getItem("profileId");
+
   const router = useRouter();
+ 
   const handleCategoriaClick = (categoria) => {
     if (selectedCategories.includes(categoria)) {
       // Si la categoría ya está seleccionada, la eliminamos del estado
@@ -23,10 +25,12 @@ export default function Configuration({ categories }) {
     }
   };
 
-
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
+    const storedPerfilId = localStorage.getItem("profileId");
+    setPerfilId(storedPerfilId);
   }, []);
+
   if (!mounted) return null;
 
   const handleSubmit = async (event) => {
