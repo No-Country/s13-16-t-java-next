@@ -66,7 +66,7 @@ export default async function HomePage() {
           </div>
           <Link
             href="/registro"
-            className="w-full max-w-36 rounded-full bg-secondary-violet px-8 py-[10px] leading-5 text-white"
+            className="w-full max-w-36 rounded-full bg-secondary-violet px-8 py-[10px] leading-5 text-white tracking-wide"
           >
             Unite a nuestra comunidad
           </Link>

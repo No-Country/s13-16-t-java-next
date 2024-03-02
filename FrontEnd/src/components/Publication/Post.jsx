@@ -1,5 +1,5 @@
 "use client";
-import { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "@/src/components/Button";
 import Coments from "@/src/components/Coments";
@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation";
 import { getPublication } from "@/src/lib/api";
 import LikeIcon from "../Icons/LikeIcon";
 import { PencilIcon, DeleteIcon } from "../Icons/EditIcon";
+import { useContext } from "react";
+
 
 export default function Post({ post, post_id }) {
   const [PostData, setPostData] = useState(post);
@@ -35,7 +37,7 @@ export default function Post({ post, post_id }) {
     typeof window !== "undefined" && localStorage.getItem("userLoggedId");
 
   const { title, category, description, comments, imageUrl, love } = PostData;
-
+  console.log(PostData);
   const [like, setLike] = useState(love);
   const [liked, setLiked] = useState(false);
 

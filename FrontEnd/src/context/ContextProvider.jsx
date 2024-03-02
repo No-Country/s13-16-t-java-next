@@ -3,12 +3,16 @@ import React, { createContext, useState, useEffect } from "react";
 export const Context = createContext();
 
 export default function ContextProvider({ children }) {
-  const [isLogged, setIsLogged] = useState(
-    () =>
-      JSON.parse(
-        typeof window !== "undefined" && localStorage.getItem("isLogged"),
-      ) || false,
-  );
+  const [isLogged, setIsLogged] = useState(false);
+
+  ()=>{
+    const userLogged = localStorage.getItem("isLogged");
+    if (userLogged === "true") {
+      setIsLogged(true);
+    } else {
+      return false;
+    }
+  }
 
   const [isActive, setIsActive] = useState(() => {
     if (typeof window !== "undefined") {
