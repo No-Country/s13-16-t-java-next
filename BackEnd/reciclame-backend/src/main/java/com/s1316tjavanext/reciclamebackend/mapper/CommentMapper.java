@@ -6,6 +6,7 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+import org.mapstruct.Mappings;
 
 import com.s1316tjavanext.reciclamebackend.dto.CommentDto;
 import com.s1316tjavanext.reciclamebackend.entity.Comment;
@@ -16,7 +17,10 @@ public interface CommentMapper {
     /*
      * Method to convert comment object to comment dto
      */
-    @Mapping(source = "post.id" , target = "postId")
+    @Mappings({
+        @Mapping(source = "post.id" , target = "postId"),
+        @Mapping(source = "profile.id", target = "profileId")
+    })
     CommentDto commentToCommentDto(Comment comment);
 
     /*
@@ -31,4 +35,3 @@ public interface CommentMapper {
     @Mapping(target = "deleted", ignore = true)
     Comment commentDtoToComment(CommentDto commentDto);
 }
-

@@ -2,6 +2,7 @@ package com.s1316tjavanext.reciclamebackend.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Service;
 import com.s1316tjavanext.reciclamebackend.dto.CommentDto;
 import com.s1316tjavanext.reciclamebackend.entity.Comment;
 import com.s1316tjavanext.reciclamebackend.entity.Post;
+import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import com.s1316tjavanext.reciclamebackend.mapper.CommentMapper;
 import com.s1316tjavanext.reciclamebackend.repository.CommentRepository;
 import com.s1316tjavanext.reciclamebackend.repository.PostRepository;
+import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
 import com.s1316tjavanext.reciclamebackend.service.CommentService;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +26,8 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
 
     private final PostRepository postRepository;
+
+    private final ProfileRepository profileRepository;
 
     private final CommentMapper commentMapper;
 
@@ -50,6 +55,13 @@ public class CommentServiceImpl implements CommentService {
     public CommentDto createComment(CommentDto commentDto) {
         Comment comment = commentMapper.commentDtoToComment(commentDto);
         comment.setDate(LocalDateTime.now().withSecond(0).withNano(0));
+
+        Profile profile = profileRepository.findById(comment.getProfile().getId()).orElse(null);
+
+        if (profile != null) 
+            comment.setProfile(profile);
+        else 
+            return null;
 
         Post post = postRepository.findById(comment.getPost().getId()).orElse(null);
 

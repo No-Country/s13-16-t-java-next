@@ -13,6 +13,8 @@ public record CommentDto(
     
     @Schema(name = "post", description = "Post to which it belongs")
     UUID postId,
+
+    UUID profileId,
     
     @Schema(name = "description", description = "Message of comment", example = "Hola, cuantas latas tienes?")
     String description,
