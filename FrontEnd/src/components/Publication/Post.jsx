@@ -1,5 +1,5 @@
 "use client";
-import { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "@/src/components/Button";
 import Coments from "@/src/components/Coments";
@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation";
 import { getPublication } from "@/src/lib/api";
 import LikeIcon from "../Icons/LikeIcon";
 import { PencilIcon, DeleteIcon } from "../Icons/EditIcon";
+import { useContext } from "react";
+
 
 export default function Post({ post, post_id }) {
   const [PostData, setPostData] = useState(post);
@@ -30,7 +32,7 @@ export default function Post({ post, post_id }) {
   }, [intervalId]);
 
   const { title, category, description, comments, imageUrl, love } = PostData;
-
+  console.log(PostData);
   const [like, setLike] = useState(love);
   const [liked, setLiked] = useState(false);
 
@@ -127,7 +129,7 @@ export default function Post({ post, post_id }) {
         <p className="text-justify">{description}</p>
 
         <Link
-          href={isLogged ? "https://wa.me/" : "/login"}
+          href={isLogged ? `https://wa.me/` : "/login"}
           className={`mt-0 flex w-full justify-center gap-2 rounded-3xl bg-accent-yellow p-2 text-lg font-[500] ${!isLogged && "pointer-events-none opacity-50"}`}
         >
           Me interesa <WspIcon />
@@ -152,7 +154,6 @@ export default function Post({ post, post_id }) {
             <FormComent postId={post.id} />
           </>
         )}
-        
       </div>
     </>
   );

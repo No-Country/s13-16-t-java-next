@@ -1,11 +1,9 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import HeaderLogin from "../HeaderLogin/HeaderLogin";
 import MenuIcon from "../Icons/MenuIcon";
-
 import { Context } from "../../context/ContextProvider";
 import { useContext } from "react";
 
