@@ -1,7 +1,6 @@
 "use client";
 import { useState, useContext, useEffect } from "react";
 import Image from "next/image";
-import HeartFavorite from "@/src/components/Icons/HeartFavorite";
 import Button from "@/src/components/Button";
 import Coments from "@/src/components/Coments";
 import FormComent from "@/src/components/forms/FormComent/FormComent";
@@ -10,6 +9,8 @@ import Link from "next/link";
 import { Context } from "@/src/context/ContextProvider";
 import { useRouter } from "next/navigation";
 import { getPublication } from "@/src/lib/api";
+import LikeIcon from "../Icons/LikeIcon";
+import { PencilIcon, DeleteIcon } from "../Icons/EditIcon";
 
 export default function Post({ post, post_id }) {
   const [PostData, setPostData] = useState(post);
@@ -71,9 +72,6 @@ export default function Post({ post, post_id }) {
             <Button className="w-3/5  rounded-3xl bg-accent-yellow p-2 font-[500]  lg:w-1/2 ">
               Intercambio exitoso
             </Button>
-            <Button className=" w-1/3 rounded-3xl bg-primary-green p-2  font-[500] text-white ">
-              Editar
-            </Button>
           </div>
         )}
 
@@ -101,18 +99,21 @@ export default function Post({ post, post_id }) {
           <Button
             props={love}
             handle={handleLikeClick}
-            className=" flex items-center lg:static"
+            className=" flex items-center gap-2"
           >
             <span>{like}</span>
-            <HeartFavorite />
+            <LikeIcon />
           </Button>
         </div>
       </div>
       <div className="flex w-full max-w-96 flex-col gap-4 p-5 md:max-w-[35rem] lg:gap-8 lg:p-20 xl:p-24">
         {isOwner && isLogged && (
-          <div className=" flex justify-end">
-            <Button className="hidden w-1/2 rounded-3xl  bg-wrong p-1 font-[500] text-white lg:block  lg:w-1/2 lg:p-2">
-              Eliminar Publicación
+          <div className=" flex justify-end gap-3">
+            <Button className="rounded-3xl bg-primary-green p-2  px-5 font-[500] text-white ">
+              <PencilIcon />
+            </Button>
+            <Button className=" rounded-3xl bg-wrong p-1 px-5 font-[500] text-white lg:block">
+              <DeleteIcon />
             </Button>
           </div>
         )}
@@ -120,7 +121,7 @@ export default function Post({ post, post_id }) {
         <h3 className="text-xl font-semibold lg:text-4xl">
           {title ? title : "Sin título"}
         </h3>
-        <p className="flex w-fit items-center justify-center rounded-3xl bg-[#b8b8b8] p-1 px-4">
+        <p className="flex w-fit items-center justify-center rounded-3xl bg-secondary-violet p-1 px-4 text-white">
           {category}
         </p>
         <p className="text-justify">{description}</p>
@@ -151,13 +152,7 @@ export default function Post({ post, post_id }) {
             <FormComent postId={post.id} />
           </>
         )}
-        {isOwner && isLogged && (
-          <div className=" flex w-[90%]">
-            <Button className="w-full rounded-3xl bg-wrong p-2 font-[500] text-white lg:hidden  lg:w-1/2 lg:p-2">
-              Eliminar Publicación
-            </Button>
-          </div>
-        )}
+        
       </div>
     </>
   );

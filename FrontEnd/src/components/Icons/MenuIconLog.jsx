@@ -66,7 +66,7 @@ export default function MenuIconLog(props) {
           </div>
           <div className="flex h-full flex-col items-start justify-start">
             <Link
-              className=" mb-3 ml-3 w-[90%] rounded-3xl bg-accent-yellow p-2 text-center tracking-wider text-black shadow-lg"
+              className=" mb-3 ml-3 w-[90%] rounded-3xl bg-accent-yellow p-1 text-center tracking-wider text-black shadow"
               href={"/nuevopost"}
             >
               Publicar +
@@ -78,13 +78,7 @@ export default function MenuIconLog(props) {
             >
               Home
             </Link>
-            <Link
-              className={`header-mobile-link ${pathname === "/" ? "border border-secondary-violet" : ""}`}
-              href={"/configuracion/perfil"}
-              onClick={handleLinkClick}
-            >
-              Configuración
-            </Link>
+           
             <Link
               className={`header-mobile-link ${pathname === "/notificaciones" ? "border border-secondary-violet" : ""} flex justify-between`}
               href={"/notificaciones"}
@@ -97,13 +91,7 @@ export default function MenuIconLog(props) {
                 </div>
               )}
             </Link>
-            <Link
-              className={`header-mobile-link ${pathname === "/mensajes" ? "border border-secondary-violet" : ""}`}
-              href={"/mensajes"}
-              onClick={handleLinkClick}
-            >
-              Mensajes
-            </Link>
+          
             <Link
               className={`header-mobile-link ${pathname === "/explorar" ? "border border-secondary-violet" : ""}`}
               href={"/explorar"}
@@ -120,20 +108,8 @@ export default function MenuIconLog(props) {
             </Link>
 
             <div className="absolute bottom-20 flex flex-col justify-start p-2">
-              <Link
-                className={`header-mobile-link ${pathname === "/preguntas-frecuentes" ? "border border-secondary-violet" : ""}`}
-                href={"/preguntas-frecuentes"}
-                onClick={handleLinkClick}
-              >
-                Preguntas Frecuentes
-              </Link>
-              <Link
-                className={`header-mobile-link ${pathname === "/soporte" ? "border border-secondary-violet" : ""}`}
-                href={"/soporte"}
-                onClick={handleLinkClick}
-              >
-                Soporte
-              </Link>
+             
+             
               <Link
                 className="m-1 flex text-wrong"
                 href={""}

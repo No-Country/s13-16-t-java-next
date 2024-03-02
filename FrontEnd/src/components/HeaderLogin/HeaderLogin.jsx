@@ -3,10 +3,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { IconComment } from "../Icons/SearchIcon";
 import NotificationIcon from "../NotificationIcon";
 import MenuIconLog from "../Icons/MenuIconLog";
 import Submenu from "../Submenu";
+import SubmenuPublication from "../SubmenuPublication";
 
 export default function HeaderLogin() {
   return (
@@ -42,16 +42,10 @@ export default function HeaderLogin() {
               Blog
             </Link>
           </ul>
-          <ul className="m-2 flex items-center gap-7 p-2">
+          <ul className="m-4 flex items-center p-2 md:gap-6">
             <MenuIconLog />
-            <Link
-              className="hidden w-40 rounded-full bg-accent-yellow p-2 text-center tracking-wider text-black md:block"
-              href={"/nuevopost"}
-            >
-              Publicar +
-            </Link>
+            <SubmenuPublication />
             <NotificationIcon />
-            <IconComment />
 
             <Submenu />
           </ul>

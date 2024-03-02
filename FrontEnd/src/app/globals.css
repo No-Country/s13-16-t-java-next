@@ -18,7 +18,7 @@
   }
 
   .header-mobile-link {
-    @apply m-1 ml-3 w-[90%] rounded-xl p-2 transition-colors duration-300 hover:bg-secondary-violet hover:bg-opacity-30;
+    @apply m-1 ml-3 w-[90%] rounded-xl p-[5px] transition-colors duration-300 hover:bg-[#32AEE1] hover:bg-opacity-20;
   }
 
   .unread-notification{
