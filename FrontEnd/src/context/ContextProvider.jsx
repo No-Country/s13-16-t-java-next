@@ -19,7 +19,6 @@ export default function ContextProvider({ children }) {
     }
   });
 
-  const idUser = "ff789b5a-f60e-4830-8081-b6cca433da59";
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -34,7 +33,6 @@ export default function ContextProvider({ children }) {
         setIsLogged,
         isActive,
         setIsActive,
-        idUser,
       }}
     >
       {children}
