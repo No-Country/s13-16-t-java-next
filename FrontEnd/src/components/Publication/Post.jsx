@@ -13,8 +13,9 @@ import LikeIcon from "../Icons/LikeIcon";
 import { PencilIcon, DeleteIcon } from "../Icons/EditIcon";
 import { useContext } from "react";
 
-
 export default function Post({ post, post_id }) {
+  const { isActive, setIsActive } = useContext(Context);
+
   const [PostData, setPostData] = useState(post);
   const [intervalId, setIntervalId] = useState(null);
 
@@ -37,7 +38,6 @@ export default function Post({ post, post_id }) {
     typeof window !== "undefined" && localStorage.getItem("userLoggedId");
 
   const { title, category, description, comments, imageUrl, love } = PostData;
-  console.log(PostData);
   const [like, setLike] = useState(love);
   const [liked, setLiked] = useState(false);
 
@@ -45,7 +45,6 @@ export default function Post({ post, post_id }) {
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
-  const { isActive, setIsActive } = useContext(Context);
   const router = useRouter();
 
   const isLogged =
@@ -69,10 +68,8 @@ export default function Post({ post, post_id }) {
 
   const toggleSwitch = () => {
     setIsActive(!isActive);
-    const newIsActive = !isActive;
-    setIsActive(newIsActive);
     if (typeof window !== "undefined") {
-      localStorage.setItem("isActive", JSON.stringify(newIsActive));
+      localStorage.setItem("isActive", JSON.stringify(!isActive));
     }
   };
 

@@ -5,24 +5,24 @@ export const Context = createContext();
 export default function ContextProvider({ children }) {
   const [isLogged, setIsLogged] = useState(false);
 
-  ()=>{
-    const userLogged = localStorage.getItem("isLogged");
-    if (userLogged === "true") {
+  () => {
+    const userLogged =
+      typeof window !== "undefined" && localStorage.getItem("isLogged");
+    if (userLogged === true) {
       setIsLogged(true);
     } else {
       return false;
     }
-  }
+  };
 
   const [isActive, setIsActive] = useState(() => {
     if (typeof window !== "undefined") {
       const storedIsActive = localStorage.getItem("isActive");
-      return storedIsActive ? JSON.parse(storedIsActive) : false;
+      return storedIsActive;
     } else {
       return false;
     }
   });
-
 
   useEffect(() => {
     if (typeof window !== "undefined") {

@@ -6,8 +6,8 @@ import { useGetNotifications } from "@/src/hooks/useGetNotifications";
 import { Context } from "@/src/context/ContextProvider";
 
 export default function MenuIconLog(props) {
-  const [menuOpen, setMenuOpen] = useState(false);
   const { setIsLogged } = useContext(Context);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { unread } = useGetNotifications();
 
   function toggleMenu() {
@@ -78,7 +78,7 @@ export default function MenuIconLog(props) {
             >
               Home
             </Link>
-           
+
             <Link
               className={`header-mobile-link ${pathname === "/notificaciones" ? "border border-secondary-violet" : ""} flex justify-between`}
               href={"/notificaciones"}
@@ -91,7 +91,7 @@ export default function MenuIconLog(props) {
                 </div>
               )}
             </Link>
-          
+
             <Link
               className={`header-mobile-link ${pathname === "/explorar" ? "border border-secondary-violet" : ""}`}
               href={"/explorar"}
@@ -108,8 +108,6 @@ export default function MenuIconLog(props) {
             </Link>
 
             <div className="absolute bottom-20 flex flex-col justify-start p-2">
-             
-             
               <Link
                 className="m-1 flex text-wrong"
                 href={""}

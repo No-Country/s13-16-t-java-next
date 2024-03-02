@@ -6,7 +6,7 @@ import CardPostWrapper from "../components/CardPostWrapper";
 
 export default async function HomePage() {
   return (
-    <main>
+    <>
       <article
         className="grid h-dvh w-full place-items-center text-white"
         style={{
@@ -66,7 +66,7 @@ export default async function HomePage() {
           </div>
           <Link
             href="/registro"
-            className="w-full max-w-36 rounded-full bg-secondary-violet px-8 py-[10px] leading-5 text-white tracking-wide"
+            className="w-full max-w-36 rounded-full bg-secondary-violet px-8 py-[10px] leading-5 tracking-wide text-white"
           >
             Unite a nuestra comunidad
           </Link>
@@ -88,6 +88,6 @@ export default async function HomePage() {
           </Link>
         </div>
       </article>
-    </main>
+    </>
   );
 }

@@ -10,12 +10,12 @@ import { Suspense } from "react";
 import img from "../../assets/profile/Rectangle-2.png";
 
 export default function ProfileLayout() {
+  const { isLogged } = useContext(Context);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
   const router = useRouter();
-  const { isLogged } = useContext(Context);
   if (!isLogged) router.push("/");
 
   return (
