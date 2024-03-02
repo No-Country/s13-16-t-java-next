@@ -81,26 +81,6 @@ export default function Post({ post, post_id }) {
               <DeleteIcon />
             </Button>
           </div>
-<<<<<<< HEAD
-        )}
-
-        <h3 className="text-xl font-semibold lg:text-4xl">
-          {title ? title : "Sin título"}
-        </h3>
-        <p className="flex w-fit items-center justify-center rounded-3xl bg-secondary-violet p-1 px-4 text-white">
-          {category}
-        </p>
-        <p className="text-justify">{description}</p>
-
-        <Link
-          href={isLogged ? `https://wa.me/` : "/login"}
-          className={`mt-0 flex w-full justify-center gap-2 rounded-3xl bg-accent-yellow p-2 text-lg font-[500] ${!isLogged && "pointer-events-none opacity-50"}`}
-        >
-          Me interesa <WspIcon />
-        </Link>
-        {isOwner && isLogged && (
-          <div className="flex items-center gap-2">
-=======
         </div>
       )}
       <div className="grid lg:grid-cols-2">
@@ -126,7 +106,6 @@ export default function Post({ post, post_id }) {
               />
               <p>{post.nameUser ? post.nameUser : "Usuario que publica"}</p>
             </div>
->>>>>>> 665800aa36382df7cfd8a59a3eeed5a6f2db15ae
             <Button
               props={love}
               handle={handleLikeClick}
@@ -146,14 +125,6 @@ export default function Post({ post, post_id }) {
           </p>
           <p className="text-justify">{description}</p>
 
-<<<<<<< HEAD
-        {isLogged && mounted && isActive && (
-          <>
-            <Coments coments={comments} />
-            <FormComent postId={post.id} />
-          </>
-        )}
-=======
           <Link
             href={isLogged ? "https://wa.me/" : "/login"}
             className={`mt-0 flex w-full justify-center gap-2 rounded-3xl bg-accent-yellow p-2 text-lg font-[500] ${!isLogged && "pointer-events-none opacity-50"}`}
@@ -181,7 +152,6 @@ export default function Post({ post, post_id }) {
             </>
           )}
         </div>
->>>>>>> 665800aa36382df7cfd8a59a3eeed5a6f2db15ae
       </div>
     </>
   );

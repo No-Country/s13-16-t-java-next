@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 "use client";
-=======
-
-
->>>>>>> 665800aa36382df7cfd8a59a3eeed5a6f2db15ae
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
