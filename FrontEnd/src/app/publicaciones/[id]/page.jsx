@@ -8,7 +8,7 @@ export default async function Publications({ params }) {
   
   return (
     <div className="min-h-dvh">
-      <main className="mt-[65px] grid justify-items-center lg:grid-cols-2">
+      <main className="mt-[65px] flex flex-col justify-items-center ">
         <Post post={post} post_id={params.id}  />
       </main>
     </div>
