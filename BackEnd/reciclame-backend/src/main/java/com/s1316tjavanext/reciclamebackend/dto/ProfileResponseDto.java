@@ -14,6 +14,7 @@ public record ProfileResponseDto(
         String photoId,
         String bio,
         List<Category> categories,
-        UserResponseDTO userResponseDTO
+        UserResponseDTO userResponseDTO,
+        List<PostDto> posts
 ) {
 }

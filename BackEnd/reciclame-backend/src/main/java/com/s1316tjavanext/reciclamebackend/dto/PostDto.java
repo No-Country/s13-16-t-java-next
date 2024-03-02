@@ -4,8 +4,7 @@ import com.s1316tjavanext.reciclamebackend.entity.enums.Category;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Status;
 
 
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,8 +19,9 @@ public record PostDto(
         String imageUrl,
         Integer love,
         Category category,
-        //Profile
-        LocalDate date,
+        Boolean enableComments,
+        LocalDateTime date,
         Status status,
+        ProfileResponseDto profileResponseDto,
         List<CommentDto> comments) {
 }

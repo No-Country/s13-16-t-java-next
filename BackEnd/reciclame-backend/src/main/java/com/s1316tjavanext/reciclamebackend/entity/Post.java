@@ -8,7 +8,8 @@ import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import java.time.LocalDate;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,7 +22,7 @@ import java.util.UUID;
 @Data
 @SQLDelete(sql = "UPDATE posts SET  deleted = true WHERE id =?")
 @Where(clause = "deleted=false")
-public class Post {
+public class Post implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -38,14 +39,19 @@ public class Post {
     @Column(nullable = false)
     private int love;
 
-    //private Profile profile;
+    @Column(nullable = false)
+    private boolean enableComments;
+
+    @ManyToOne
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 
     @Enumerated (EnumType.STRING)
     @Column(nullable = false)
     private Category category;
 
     @Column (nullable = false)
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Enumerated (EnumType.STRING)
     @Column(nullable = false)

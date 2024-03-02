@@ -13,7 +13,6 @@ public record UserResponseDTO(
         String phone,
         String password,
         int location_id,
-        Date birthdate,
-        String photoId
+        Date birthdate
 ) {
 }

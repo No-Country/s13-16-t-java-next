@@ -38,13 +38,13 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
 //    @Override
-//    public Profile saveProfile(Profile profile) {
+//    public Profile saveProfile(Profile profileResponseDto) {
 //        Profile newProfile = new Profile();
 //        newProfile.setId(UUID.randomUUID());
-////        newProfile.setName(profile.getName());
-////        newProfile.setLastName(profile.getLastName());
-//        newProfile.setPhotoId(profile.getPhotoId());
-//        newProfile.setBio(profile.getBio());
+////        newProfile.setName(profileResponseDto.getName());
+////        newProfile.setLastName(profileResponseDto.getLastName());
+//        newProfile.setPhotoId(profileResponseDto.getPhotoId());
+//        newProfile.setBio(profileResponseDto.getBio());
 //        return profileRepository.save(newProfile);
 //    }
 

@@ -18,6 +18,12 @@ import java.util.List;
  */
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PostMapper {
+    @Mapping(target = "profileResponseDto" , source = "profile")
+    @Mapping(target = "profileResponseDto.userResponseDTO",
+            source = "profile.user")
+    @Mapping(target = "profileResponseDto.userResponseDTO.location_id",
+            source = "profile.user.location.id")
+    @Mapping(target = "profileResponseDto.posts" , ignore = true)
     PostDto postToPostDto(Post post);
     @Mapping(target = "postId",source = "post.id")
     CommentDto commentToCommentDto(Comment comment);
