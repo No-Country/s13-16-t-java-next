@@ -35,8 +35,9 @@ public class Comment {
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
 
-    //private Photo photo;
-    //private Profile profileResponseDto;
+    @ManyToOne
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
