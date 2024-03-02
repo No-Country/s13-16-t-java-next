@@ -66,49 +66,12 @@ export default function Post({ post, post_id }) {
 
   return (
     <>
-      <div className="flex w-full max-w-96 flex-col gap-8 p-5 md:max-w-[35rem] lg:p-20 xl:p-24">
-        {isOwner && isLogged && (
-          <div className="flex justify-between gap-2 lg:justify-start">
-            <Button className="w-3/5  rounded-3xl bg-accent-yellow p-2 font-[500]  lg:w-1/2 ">
-              Intercambio exitoso
-            </Button>
-          </div>
-        )}
-
-        <picture className="mx-auto items-center justify-center rounded-2xl lg:flex ">
-          <Image
-            src={imageUrl}
-            alt={"Image Post"}
-            width={400}
-            height={400}
-            priority
-            className="rounded-2xl"
-          />
-        </picture>
-        <div className="max-[750px]:translate-y-30  mt-0 flex justify-between lg:static">
-          <div className="flex items-center gap-3">
-            <Image
-              src={post.imgProfile ? post.imgProfile : "/image/profile1.png"}
-              alt="image Profile"
-              height={70}
-              width={70}
-              className="rounded-full bg-[#b8b8b8]"
-            />
-            <p>{post.nameUser ? post.nameUser : "Usuario que publica"}</p>
-          </div>
-          <Button
-            props={love}
-            handle={handleLikeClick}
-            className=" flex items-center gap-2"
-          >
-            <span>{like}</span>
-            <LikeIcon />
+      {isOwner && isLogged && (
+        <div className="flex justify-between gap-2 lg:px-24  p-5">
+          <Button className=" lg:w-[25%] w-[45%]  rounded-3xl bg-accent-yellow p-2 font-[500]  ">
+            Intercambio exitoso
           </Button>
-        </div>
-      </div>
-      <div className="flex w-full max-w-96 flex-col gap-4 p-5 md:max-w-[35rem] lg:gap-8 lg:p-20 xl:p-24">
-        {isOwner && isLogged && (
-          <div className=" flex justify-end gap-3">
+          <div className=" flex justify-end gap-3 lg:col-span-2">
             <Button className="rounded-3xl bg-primary-green p-2  px-5 font-[500] text-white ">
               <PencilIcon />
             </Button>
@@ -116,43 +79,77 @@ export default function Post({ post, post_id }) {
               <DeleteIcon />
             </Button>
           </div>
-        )}
-
-        <h3 className="text-xl font-semibold lg:text-4xl">
-          {title ? title : "Sin título"}
-        </h3>
-        <p className="flex w-fit items-center justify-center rounded-3xl bg-secondary-violet p-1 px-4 text-white">
-          {category}
-        </p>
-        <p className="text-justify">{description}</p>
-
-        <Link
-          href={isLogged ? "https://wa.me/" : "/login"}
-          className={`mt-0 flex w-full justify-center gap-2 rounded-3xl bg-accent-yellow p-2 text-lg font-[500] ${!isLogged && "pointer-events-none opacity-50"}`}
-        >
-          Me interesa <WspIcon />
-        </Link>
-        {isOwner && isLogged && (
-          <div className="flex items-center gap-2">
+        </div>
+      )}
+      <div className="grid lg:grid-cols-2">
+        <div className="flex w-full max-w-96 flex-col gap-8 p-5 md:max-w-[35rem] lg:p-20 xl:p-24">
+          <picture className="mx-auto items-center justify-center rounded-2xl lg:flex ">
+            <Image
+              src={imageUrl}
+              alt={"Image Post"}
+              width={400}
+              height={400}
+              priority
+              className="rounded-2xl"
+            />
+          </picture>
+          <div className="max-[750px]:translate-y-30  mt-0 flex justify-between lg:static">
+            <div className="flex items-center gap-3">
+              <Image
+                src={post.imgProfile ? post.imgProfile : "/image/profile1.png"}
+                alt="image Profile"
+                height={70}
+                width={70}
+                className="rounded-full bg-[#b8b8b8]"
+              />
+              <p>{post.nameUser ? post.nameUser : "Usuario que publica"}</p>
+            </div>
             <Button
-              className={`relative h-6 w-12 rounded-full bg-gray-300 focus:outline-none ${isActive ? "bg-primary-green" : "bg-[#E3E3E3]"}`}
-              handle={toggleSwitch}
+              props={love}
+              handle={handleLikeClick}
+              className=" flex items-center gap-2"
             >
-              <span
-                className={`absolute bottom-0 left-0 h-6 w-6 transform rounded-full bg-white shadow-md transition-transform duration-300 ${isActive ? "translate-x-full" : ""}`}
-              ></span>
+              <span>{like}</span>
+              <LikeIcon />
             </Button>
-            <p className="text-[#D9D9D9]">Activar Comentarios</p>
           </div>
-        )}
+        </div>
+        <div className="flex w-full max-w-96 flex-col gap-4 p-5 md:max-w-[35rem] lg:gap-8 lg:p-20 xl:p-24">
+          <h3 className="text-xl font-semibold lg:text-4xl">
+            {title ? title : "Sin título"}
+          </h3>
+          <p className="flex w-fit items-center justify-center rounded-3xl bg-secondary-violet p-1 px-4 text-white">
+            {category}
+          </p>
+          <p className="text-justify">{description}</p>
 
-        {isLogged && mounted && isActive && (
-          <>
-            <Coments coments={comments} />
-            <FormComent postId={post.id} />
-          </>
-        )}
-        
+          <Link
+            href={isLogged ? "https://wa.me/" : "/login"}
+            className={`mt-0 flex w-full justify-center gap-2 rounded-3xl bg-accent-yellow p-2 text-lg font-[500] ${!isLogged && "pointer-events-none opacity-50"}`}
+          >
+            Me interesa <WspIcon />
+          </Link>
+          {isOwner && isLogged && (
+            <div className="flex items-center gap-2">
+              <Button
+                className={`relative h-6 w-12 rounded-full bg-gray-300 focus:outline-none ${isActive ? "bg-primary-green" : "bg-[#E3E3E3]"}`}
+                handle={toggleSwitch}
+              >
+                <span
+                  className={`absolute bottom-0 left-0 h-6 w-6 transform rounded-full bg-white shadow-md transition-transform duration-300 ${isActive ? "translate-x-full" : ""}`}
+                ></span>
+              </Button>
+              <p className="text-[#D9D9D9]">Activar Comentarios</p>
+            </div>
+          )}
+
+          {isLogged && mounted && isActive && (
+            <>
+              <Coments coments={comments} />
+              <FormComent postId={post.id} />
+            </>
+          )}
+        </div>
       </div>
     </>
   );
