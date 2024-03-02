@@ -51,7 +51,7 @@ export default function FormComent({ postId }) {
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
       <textarea
         rows="2"
-        className="w-full resize-none rounded-xl bg-[#d9d9d9] p-3"
+        className="w-full resize-none rounded-xl bg-[#F0F0F0] p-3 text-sm"
         placeholder="Comentar"
         {...register("description")}
       ></textarea>
