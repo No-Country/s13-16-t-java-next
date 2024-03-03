@@ -79,13 +79,8 @@ public class CommentServiceImpl implements CommentService {
         if (commentToDelete != null) {
             Post post = postRepository.findById(commentToDelete.getPost().getId()).orElse(null);
             if (post != null) {
-                int indexOfComment = searchIndexOfComment(post.getComments(), commentToDelete);
-                if (indexOfComment != -1) {
-                    post.deleteComment(indexOfComment);
-                    postRepository.save(post);
-                    commentRepository.deleteById(commentId);
-                    return commentMapper.commentToCommentDto(commentToDelete);
-                }
+                commentRepository.deleteById(commentId);
+                return commentMapper.commentToCommentDto(commentToDelete);
             }
         }
         return null;
@@ -96,34 +91,11 @@ public class CommentServiceImpl implements CommentService {
         CommentDto commentToUpdate = this.getCommentById(commentId);
 
         if (commentToUpdate != null) {
-            Post post = postRepository.findById(commentDto.postId()).orElse(null);
-            if (post != null) {
                 Comment comment = commentMapper.commentDtoToComment(commentToUpdate);
                 comment.setDescription(commentDto.description());
-                comment.setDate(LocalDateTime.now().withSecond(0).withNano(0));
-                comment.setPost(post);
-                
-                int index = searchIndexOfComment(post.getComments(), comment);
-
-                if (index != -1) {
-                    post.setComment(index, comment);
-                }
-
                 commentRepository.save(comment);
-                postRepository.save(post);
-                return commentMapper.commentToCommentDto(comment);
-            }
+                return commentMapper.commentToCommentDto(comment); 
         }
         return null;
-    }
-
-    private int searchIndexOfComment(List<Comment> list, Comment comment) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getId().equals(comment.getId()))
-                return i;
-        }
-        return -1;
-    }
-
-    
+    }  
 }
