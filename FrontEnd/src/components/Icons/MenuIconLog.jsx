@@ -11,6 +11,7 @@ export default function MenuIconLog(props) {
   const [profile, setProfile] = useState({});
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const [name, setName] = useState("");
   const { unread } = useGetNotifications();
 
   useEffect(() => {
@@ -22,10 +23,10 @@ export default function MenuIconLog(props) {
         )
           .then((response) => response.json())
           .then((data) => setProfile(data));
+        setName(profile.userResponseDTO?.name);
       }
     }
-  }, []);
-  const name = profile.userResponseDTO.name;
+  }, [profile]);
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
@@ -65,8 +66,8 @@ export default function MenuIconLog(props) {
           <div className="flex items-center gap-2 p-2">
             <Image
               src={profile.photoId}
-              width={60}
-              height={60}
+              width={50}
+              height={50}
               alt="Imagen de Perfil"
               className="rounded-full"
             />
@@ -77,7 +78,7 @@ export default function MenuIconLog(props) {
                 className={`text-sm text-primary-green underline hover:cursor-pointer`}
                 onClick={handleLinkClick}
               >
-                Mi Perfil →
+                Mi Perfil <span>→</span> 
               </Link>
             </div>
           </div>
