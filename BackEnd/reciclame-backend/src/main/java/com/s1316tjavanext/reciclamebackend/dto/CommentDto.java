@@ -14,6 +14,7 @@ public record CommentDto(
     @Schema(name = "post", description = "Post to which it belongs")
     UUID postId,
 
+    @Schema(name = "profile", description = "Creator of comment")
     UUID profileId,
     
     @Schema(name = "description", description = "Message of comment", example = "Hola, cuantas latas tienes?")
