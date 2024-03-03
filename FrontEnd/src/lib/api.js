@@ -86,3 +86,10 @@ export async function getAllProfiles() {
   const data = await res.json();
   return data;
 }
+
+export async function getPublicationById(user_id) {
+  const API_URL = `https://deployreciclame-production.up.railway.app/posts/${user_id}`;
+  const res = await fetch(API_URL);
+  const data = await res.json();
+  return data;
+}

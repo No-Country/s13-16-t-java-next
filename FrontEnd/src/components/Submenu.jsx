@@ -42,7 +42,7 @@ export default function Submenu() {
       />
       <div className="absolute -bottom-[144px] right-0 hidden h-36 w-40 flex-col justify-between rounded-xl border bg-white p-3 shadow-lg md:group-hover:flex">
         <Link
-          href={"/perfil"}
+          href={`/perfil/${profile.id}`}
           className="border-secondary-violet hover:border-b-2"
         >
           Perfil
