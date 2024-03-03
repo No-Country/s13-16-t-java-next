@@ -133,7 +133,7 @@ export default function Post({ post, post_id }) {
           </div>
         </>
       )}
-      <div className="grid lg:grid-cols-2">
+      <div className="grid max-lg:mx-auto lg:grid-cols-2">
         <div className="flex w-full max-w-96 flex-col gap-8 p-5 md:max-w-[35rem] lg:p-20 xl:p-24">
           <picture className="mx-auto items-center justify-center rounded-2xl lg:flex ">
             <Image
