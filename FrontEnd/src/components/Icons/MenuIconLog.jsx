@@ -12,6 +12,7 @@ export default function MenuIconLog(props) {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [name, setName] = useState("");
+
   const { unread } = useGetNotifications();
 
   useEffect(() => {
@@ -78,7 +79,7 @@ export default function MenuIconLog(props) {
                 className={`text-sm text-primary-green underline hover:cursor-pointer`}
                 onClick={handleLinkClick}
               >
-                Mi Perfil <span>→</span> 
+                Mi Perfil <span>→</span>
               </Link>
             </div>
           </div>
