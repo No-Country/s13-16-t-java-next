@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import com.s1316tjavanext.reciclamebackend.dto.CommentDto;
 import com.s1316tjavanext.reciclamebackend.entity.Comment;
 import com.s1316tjavanext.reciclamebackend.entity.Post;
+import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import com.s1316tjavanext.reciclamebackend.mapper.CommentMapper;
 import com.s1316tjavanext.reciclamebackend.repository.CommentRepository;
 import com.s1316tjavanext.reciclamebackend.repository.PostRepository;
+import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
 import com.s1316tjavanext.reciclamebackend.service.CommentService;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +25,8 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
 
     private final PostRepository postRepository;
+
+    private final ProfileRepository profileRepository;
 
     private final CommentMapper commentMapper;
 
@@ -51,6 +55,13 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = commentMapper.commentDtoToComment(commentDto);
         comment.setDate(LocalDateTime.now().withSecond(0).withNano(0));
 
+        Profile profile = profileRepository.findById(comment.getProfile().getId()).orElse(null);
+
+        if (profile != null) 
+            comment.setProfile(profile);
+        else 
+            return null;
+
         Post post = postRepository.findById(comment.getPost().getId()).orElse(null);
 
         if (post != null) {
@@ -66,8 +77,11 @@ public class CommentServiceImpl implements CommentService {
         Comment commentToDelete = commentRepository.findById(commentId).orElse(null);
         
         if (commentToDelete != null) {
-            commentRepository.deleteById(commentId);
-            return commentMapper.commentToCommentDto(commentToDelete);
+            Post post = postRepository.findById(commentToDelete.getPost().getId()).orElse(null);
+            if (post != null) {
+                commentRepository.deleteById(commentId);
+                return commentMapper.commentToCommentDto(commentToDelete);
+            }
         }
         return null;
     }
@@ -77,17 +91,11 @@ public class CommentServiceImpl implements CommentService {
         CommentDto commentToUpdate = this.getCommentById(commentId);
 
         if (commentToUpdate != null) {
-            Post post = postRepository.findById(commentDto.postId()).orElse(null);
-            if (post != null) {
                 Comment comment = commentMapper.commentDtoToComment(commentToUpdate);
                 comment.setDescription(commentDto.description());
-//                comment.setDate(LocalDateTime.now());
-                comment.setPost(post);
-                return commentMapper.commentToCommentDto(comment);
-            }
+                commentRepository.save(comment);
+                return commentMapper.commentToCommentDto(comment); 
         }
         return null;
-    }
-
-    
+    }  
 }
