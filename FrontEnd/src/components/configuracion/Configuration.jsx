@@ -27,6 +27,7 @@ export default function Configuration({ categories }) {
 
   useEffect(() => {
     setMounted(true);
+    
     const storedPerfilId = localStorage.getItem("profileId");
     setPerfilId(storedPerfilId);
   }, []);
