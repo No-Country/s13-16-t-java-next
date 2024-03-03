@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -7,9 +7,29 @@ import { Context } from "@/src/context/ContextProvider";
 
 export default function MenuIconLog(props) {
   const { setIsLogged } = useContext(Context);
+
+  const [profile, setProfile] = useState({});
+
   const [menuOpen, setMenuOpen] = useState(false);
+
   const { unread } = useGetNotifications();
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const perfilId = localStorage.getItem("profileId");
+      if (perfilId) {
+        fetch(
+          `https://deployreciclame-production.up.railway.app/profiles/${perfilId}`,
+        )
+          .then((response) => response.json())
+          .then((data) => setProfile(data));
+        
+      }
+    }
+  }, []);	
+  const name = profile.userResponseDTO.name
+ 
+ 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
   }
@@ -47,14 +67,14 @@ export default function MenuIconLog(props) {
         >
           <div className="flex items-center gap-2 p-2">
             <Image
-              src={"/image/profileHeader.png"}
-              width={50}
-              height={50}
+              src={profile.photoId}
+              width={60}
+              height={60}
               alt="Imagen de Perfil"
               className="rounded-full"
             />
             <div className=" w-full flex-col p-2">
-              <h3 className="">Usuario Fulano</h3>
+              <h3 className="">{name}</h3>
               <Link
                 href={"/perfil"}
                 className={`text-sm text-primary-green underline hover:cursor-pointer`}

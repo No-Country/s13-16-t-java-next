@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useContext } from "react";
@@ -5,6 +7,7 @@ import { Context } from "../context/ContextProvider";
 
 export default function Submenu() {
   const { setIsLogged } = useContext(Context);
+  const [profile, setProfile] = useState({});
   function logOut() {
     setIsLogged(false);
     if (typeof window !== "undefined") {
@@ -13,13 +16,27 @@ export default function Submenu() {
       localStorage.removeItem("profileId");
     }
   }
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const perfilId = localStorage.getItem("profileId");
+      if (perfilId) {
+        fetch(
+          `https://deployreciclame-production.up.railway.app/profiles/${perfilId}`,
+        )
+          .then((response) => response.json())
+          .then((data) => setProfile(data));
+          
+        
+      }
+    }
+  });
   return (
     <div className="group relative">
       <Image
-        width={60}
-        height={60}
+        width={80}
+        height={80}
         className="hidden rounded-full p-2 hover:cursor-pointer md:block"
-        src="/image/profileHeader.png"
+        src={profile.photoId}
         alt="imagen perfil usuario"
         priority
       />
