@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, } from "react";
 export const Context = createContext();
 
 export default function ContextProvider({ children }) {
@@ -15,28 +15,11 @@ export default function ContextProvider({ children }) {
     }
   };
 
-  const [isActive, setIsActive] = useState(() => {
-    if (typeof window !== "undefined") {
-      const storedIsActive = localStorage.getItem("isActive");
-      return storedIsActive;
-    } else {
-      return false;
-    }
-  });
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("isActive", JSON.stringify(isActive));
-    }
-  }, [isActive]);
-
   return (
     <Context.Provider
       value={{
         isLogged,
         setIsLogged,
-        isActive,
-        setIsActive,
       }}
     >
       {children}
