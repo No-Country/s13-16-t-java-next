@@ -62,4 +62,12 @@ public class Post implements Serializable {
 
     @Column(nullable = false)
     private boolean deleted;
+
+    public Comment setComment(int index, Comment comment) {
+        return this.comments.set(index, comment);
+    }
+
+    public Comment deleteComment(int index) {
+        return this.comments.remove(index);
+    }
 }

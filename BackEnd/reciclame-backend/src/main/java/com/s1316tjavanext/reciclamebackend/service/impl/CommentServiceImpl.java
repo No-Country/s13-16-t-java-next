@@ -2,7 +2,6 @@ package com.s1316tjavanext.reciclamebackend.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -78,8 +77,16 @@ public class CommentServiceImpl implements CommentService {
         Comment commentToDelete = commentRepository.findById(commentId).orElse(null);
         
         if (commentToDelete != null) {
-            commentRepository.deleteById(commentId);
-            return commentMapper.commentToCommentDto(commentToDelete);
+            Post post = postRepository.findById(commentToDelete.getPost().getId()).orElse(null);
+            if (post != null) {
+                int indexOfComment = searchIndexOfComment(post.getComments(), commentToDelete);
+                if (indexOfComment != -1) {
+                    post.deleteComment(indexOfComment);
+                    postRepository.save(post);
+                    commentRepository.deleteById(commentId);
+                    return commentMapper.commentToCommentDto(commentToDelete);
+                }
+            }
         }
         return null;
     }
@@ -93,12 +100,29 @@ public class CommentServiceImpl implements CommentService {
             if (post != null) {
                 Comment comment = commentMapper.commentDtoToComment(commentToUpdate);
                 comment.setDescription(commentDto.description());
-//                comment.setDate(LocalDateTime.now());
+                comment.setDate(LocalDateTime.now().withSecond(0).withNano(0));
                 comment.setPost(post);
+                
+                int index = searchIndexOfComment(post.getComments(), comment);
+
+                if (index != -1) {
+                    post.setComment(index, comment);
+                }
+
+                commentRepository.save(comment);
+                postRepository.save(post);
                 return commentMapper.commentToCommentDto(comment);
             }
         }
         return null;
+    }
+
+    private int searchIndexOfComment(List<Comment> list, Comment comment) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getId().equals(comment.getId()))
+                return i;
+        }
+        return -1;
     }
 
     
