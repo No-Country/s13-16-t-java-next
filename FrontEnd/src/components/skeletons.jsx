@@ -108,3 +108,29 @@ export function BlogPostSkeleton() {
     </div>
   );
 }
+export function PostPageSkeleton() {
+  return (
+    <div
+      className={`${shimmer} relative   grid overflow-hidden lg:grid-cols-2`}
+    >
+      <div className="flex w-full max-w-96 flex-col gap-8 p-5 max-lg:mx-auto lg:max-w-[35rem] lg:p-20 xl:p-24">
+        <div className="mx-auto h-full max-h-72 min-h-40 w-full items-center justify-center rounded-2xl bg-gray-dark-bg lg:flex "></div>
+        <div className=" mt-0 flex w-full items-center justify-between gap-3">
+          <div className="flex w-full items-center gap-3">
+            <div className="h-16 w-16 rounded-full bg-gray-dark-bg"></div>
+            <div className="h-8 w-36 rounded-lg bg-gray-dark-bg"></div>
+          </div>
+          <div className="flex h-8 w-8 items-center gap-2 rounded-lg bg-gray-dark-bg"></div>
+        </div>
+      </div>
+      <div className="flex w-full max-w-96 flex-col gap-4 p-5 max-lg:mx-auto lg:max-w-[35rem] lg:gap-8 lg:p-20 xl:p-24">
+        <div className="h-12 w-full rounded-lg bg-gray-dark-bg text-xl font-semibold lg:text-4xl"></div>
+        <div className="flex h-8 w-28 items-center justify-center rounded-3xl bg-gray-dark-bg p-1 px-4 text-white"></div>
+        <div className="h-36 w-full rounded-lg bg-gray-dark-bg text-justify"></div>
+        <div
+          className={`mt-0 flex h-12 w-full justify-center gap-2 rounded-3xl bg-gray-dark-bg p-2 text-lg font-[500]`}
+        ></div>
+      </div>
+    </div>
+  );
+}
