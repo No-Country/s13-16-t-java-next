@@ -65,7 +65,11 @@ export async function getProfile(profile_id) {
   const API_URL = `https://deployreciclame-production.up.railway.app/profiles/${profile_id}`;
 
   try {
-    const res = await fetch(API_URL);
+    const res = await fetch(API_URL, {
+      next: {
+        revalidate: 5,
+      },
+    });
 
     if (!res.ok) {
       throw new Error("Error al obtener datos del perfil.");

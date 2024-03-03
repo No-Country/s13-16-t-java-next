@@ -6,8 +6,9 @@ import { usePathname } from "next/navigation";
 import CardPost from "../CardPost";
 
 export default function ProfileCard({ profile }) {
-  console.log(profile);
   const pathname = usePathname();
+
+  console.log(profile);
 
   const profileData = {
     publications: { tittle: "Publicaciones", amount: "123" },
@@ -27,7 +28,7 @@ export default function ProfileCard({ profile }) {
         <div className="mb-8 flex flex-col justify-between min-[855px]:flex-row">
           <Image
             src={profile.photoId}
-            alt=""
+            alt="Foto de perfil"
             height={200}
             width={200}
             className="ml-10 -translate-y-16 rounded-full border-4 border-solid border-white bg-gray-300"
@@ -55,11 +56,13 @@ export default function ProfileCard({ profile }) {
           </div>
           <div className="mt-8 max-[855px]:mx-auto max-[855px]:mt-12 max-[855px]:w-11/12 lg:pr-20">
             <h3 className="mb-4">Intereses</h3>
-            <div className="flex w-52 flex-wrap gap-4 max-[855px]:w-full">
-              {profile.categories.map((interest, index) => (
-                <InterestCard key={index} tittle={interest} />
-              ))}
-            </div>
+            {profile.categories && (
+              <div className="flex w-52 flex-wrap gap-4 max-[855px]:w-full">
+                {profile.categories.map((interest, index) => (
+                  <InterestCard key={index} tittle={interest} />
+                ))}
+              </div>
+            )}
           </div>
         </div>
         <nav className="mx-auto flex w-11/12 border-t-2  border-gray-bg max-[855px]:w-full max-[855px]:justify-center max-[855px]:border-b-2 min-[855px]:gap-x-6">
@@ -74,11 +77,13 @@ export default function ProfileCard({ profile }) {
           ))}
         </nav>
       </article>
-      <div className="grid grid-cols-4 px-16">
-        {profile.posts.map((post) => (
-          <CardPost key={post.id} publication={post} />
-        ))}
-      </div>
+      {profile.posts && (
+        <div className="grid grid-cols-4 px-16">
+          {profile.posts.map((post) => (
+            <CardPost key={post.id} publication={post} />
+          ))}
+        </div>
+      )}
     </>
   );
 }

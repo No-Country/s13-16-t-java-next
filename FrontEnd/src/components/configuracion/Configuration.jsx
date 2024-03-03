@@ -14,7 +14,7 @@ export default function Configuration({ categories }) {
   const [mounted, setMounted] = React.useState(false);
 
   const router = useRouter();
- 
+
   const handleCategoriaClick = (categoria) => {
     if (selectedCategories.includes(categoria)) {
       // Si la categoría ya está seleccionada, la eliminamos del estado
@@ -27,7 +27,7 @@ export default function Configuration({ categories }) {
 
   useEffect(() => {
     setMounted(true);
-    
+
     const storedPerfilId = localStorage.getItem("profileId");
     setPerfilId(storedPerfilId);
   }, []);

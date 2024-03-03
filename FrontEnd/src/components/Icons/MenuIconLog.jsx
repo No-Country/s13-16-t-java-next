@@ -65,13 +65,23 @@ export default function MenuIconLog(props) {
           }
         >
           <div className="flex items-center gap-2 p-2">
-            <Image
-              src={profile.photoId}
-              width={50}
-              height={50}
-              alt="Imagen de Perfil"
-              className="rounded-full"
-            />
+            {profile.photoId ? (
+              <Image
+                src={profile.photoId}
+                width={50}
+                height={50}
+                alt="Imagen de Perfil"
+                className="rounded-full"
+              />
+            ) : (
+              <Image
+                width={40}
+                height={40}
+                className="rounded-full"
+                src="/image/profile1.png"
+                alt="Foto de perfil"
+              />
+            )}
             <div className=" w-full flex-col p-2">
               <h3 className="">{name}</h3>
               <Link

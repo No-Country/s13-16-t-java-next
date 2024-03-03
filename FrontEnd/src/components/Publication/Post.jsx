@@ -6,18 +6,16 @@ import Coments from "@/src/components/Coments";
 import FormComent from "@/src/components/forms/FormComent/FormComent";
 import WspIcon from "../Icons/WspIcon";
 import Link from "next/link";
-import { Context } from "@/src/context/ContextProvider";
 import { useRouter } from "next/navigation";
 import { getPublication } from "@/src/lib/api";
 import LikeIcon from "../Icons/LikeIcon";
 import { PencilIcon, DeleteIcon } from "../Icons/EditIcon";
-import { useContext } from "react";
 
 export default function Post({ post, post_id }) {
-  const { isActive, setIsActive } = useContext(Context);
-
   const [PostData, setPostData] = useState(post);
   const [intervalId, setIntervalId] = useState(null);
+
+  const { enableComments, id } = post;
 
   setInterval(() => {
     setIntervalId(Math.random());
@@ -66,12 +64,19 @@ export default function Post({ post, post_id }) {
   const isOwner =
     userLoggedId === post?.profileResponseDto?.userResponseDTO?.userId;
 
-  const toggleSwitch = () => {
-    setIsActive(!isActive);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("isActive", JSON.stringify(!isActive));
-    }
-  };
+  async function toggleSwitch() {
+    const form = new FormData();
+    form.append("enableComments", !enableComments);
+
+    const res = await fetch(
+      `https://deployreciclame-production.up.railway.app/posts/update/${id}`,
+      {
+        body: form,
+      },
+    );
+    const data = await res.json();
+    return data;
+  }
 
   async function DeletePost() {
     setOpenDeleteMenu(false);
@@ -183,19 +188,27 @@ export default function Post({ post, post_id }) {
           </Link>
           {isOwner && isLogged && (
             <div className="flex items-center gap-2">
-              <Button
-                className={`relative h-6 w-12 rounded-full bg-gray-300 focus:outline-none ${isActive ? "bg-primary-green" : "bg-[#E3E3E3]"}`}
-                handle={toggleSwitch}
+              <label
+                onChange={() => toggleSwitch}
+                className={`relative h-6 w-12 rounded-full bg-gray-300 focus:outline-none ${enableComments ? "bg-primary-green" : "bg-[#E3E3E3]"}`}
+                htmlFor="checkbox-enable-comment"
               >
+                <input
+                  checked={enableComments}
+                  className="hidden"
+                  type="checkbox"
+                  name="checkbox-enable-comment"
+                  id="checkbox-enable-comment"
+                />
                 <span
-                  className={`absolute bottom-0 left-0 h-6 w-6 transform rounded-full bg-white shadow-md transition-transform duration-300 ${isActive ? "translate-x-full" : ""}`}
+                  className={`absolute bottom-0 left-0 h-6 w-6 transform rounded-full bg-white shadow-md transition-transform duration-300 ${enableComments ? "translate-x-full" : ""}`}
                 ></span>
-              </Button>
+              </label>
               <p className="text-[#D9D9D9]">Activar Comentarios</p>
             </div>
           )}
 
-          {isLogged && mounted && isActive && (
+          {isLogged && mounted && enableComments && (
             <>
               <Coments coments={comments} />
               <FormComent postId={post.id} />
