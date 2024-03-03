@@ -6,8 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { publicationSchema } from "@/src/validations/userSchema";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import Button from "../../Button";
+import { toast } from "sonner";
+import Link from "next/link";
 
 const URLPostData =
   "https://deployreciclame-production.up.railway.app/posts/save";
@@ -26,22 +27,25 @@ export const dataBackendFormat = (data, imageData) => {
 export default function FormCreatePost({ categories }) {
   const [isActive, setIsActive] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
+
   const router = useRouter();
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm({
     resolver: zodResolver(publicationSchema),
   });
 
+  const profileId =
+    typeof window !== "undefined" && localStorage.getItem("profileId");
+
   const [objectImage, setObjectImage] = useState({});
 
   const toggleSwitch = () => {
     setIsActive(!isActive);
-    const newIsActive = !isActive;
-    setIsActive(newIsActive);
   };
 
   async function onSubmit(data) {
@@ -50,6 +54,8 @@ export default function FormCreatePost({ categories }) {
     formData.append("category", data.category);
     formData.append("description", data.description);
     formData.append("image", objectImage);
+    formData.append("enableComments", isActive);
+    formData.append("profileId", profileId);
 
     const response = await fetch(URLPostData, {
       method: "POST",
@@ -58,17 +64,18 @@ export default function FormCreatePost({ categories }) {
 
     if (response.ok) {
       reset();
-      alert("Publicación creada");
-      router.push("/");
+      toast.success("Publicación creada");
+      setTimeout(() => {
+        router.push("/");
+      }, 3000);
     } else {
-      alert("Error al crear la publicación");
+      toast.error("Error al crear la publicación");
     }
   }
 
   const handleChange = (e) => {
     const file = e.target.files[0];
     setObjectImage(file);
-    // Crear una URL para la previsualización de la imagen
     const reader = new FileReader();
     reader.onloadend = () => {
       setImagePreview(reader.result);
@@ -130,8 +137,9 @@ export default function FormCreatePost({ categories }) {
             <p className="mb-2 text-wrong">{errors.description.message}</p>
           )}
 
-          <div className="flex items-center gap-2 mb-3">
+          <div className="mb-3 flex items-center gap-2">
             <Button
+              type="button"
               className={`relative h-6 w-12 rounded-full bg-gray-300 focus:outline-none ${isActive ? "bg-primary-green" : "bg-[#E3E3E3]"}`}
               handle={toggleSwitch}
             >
@@ -142,29 +150,28 @@ export default function FormCreatePost({ categories }) {
             <p className="text-[#D9D9D9]">Activar Comentarios</p>
           </div>
           <div className="hidden w-full text-end md:block">
-            <button
+            <Link
+              href={"/"}
               className="mb-4 w-full rounded-3xl border border-secondary-violet p-2 text-center text-secondary-violet transition duration-500 hover:scale-105 lg:m-2 lg:w-28"
-              type="submit"
             >
               Cancelar
-            </button>
+            </Link>
             <button
+              disabled={isSubmitting}
               type="submit"
-              className="mb-5 mt-4 w-full rounded-3xl bg-accent-yellow p-2 text-center transition duration-500 hover:scale-105 lg:m-2 lg:w-28"
+              className="mb-5 mt-4 w-full rounded-3xl bg-accent-yellow p-2 text-center transition duration-500 hover:scale-105 disabled:bg-gray-300 disabled:text-black lg:m-2 lg:w-28"
             >
               Publicar
             </button>
           </div>
         </div>
-        <label className="dark:hover:bg-bray-800 grid aspect-square h-32 w-full cursor-pointer place-items-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 md:h-[400px] md:w-[400px] dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-          <div className="flex h-[100px] w-[100px] items-center justify-center object-cover md:h-[120px] md:w-[120px]">
-            <Image
+        <label className="dark:hover:bg-bray-800 grid aspect-square w-full cursor-pointer place-items-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 md:h-[400px] md:w-[400px] dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+          <div className="flex items-center justify-center object-cover p-10">
+            {/* eslint-disable-next-line */}
+            <img
               src={imagePreview ? imagePreview : "/image/imagePost.png"}
-              width={120}
-              height={120}
               alt="foto de publicacion"
-              className="rounded-xl object-cover"
-              objectFit="cover"
+              className="w-full rounded-xl object-cover"
             />
           </div>
           <input
@@ -175,24 +182,25 @@ export default function FormCreatePost({ categories }) {
             {...register("image", {
               onChange: (e) => {
                 setObjectImage(e.target.files[0]);
+                handleChange(e);
               },
             })}
-            onChange={handleChange}
           />
         </label>
         <div className="w-full text-end md:hidden">
           <button
+            disabled={isSubmitting}
             type="submit"
-            className="mb-5 mt-4 w-full rounded-3xl bg-accent-yellow p-2 text-center transition duration-500 hover:scale-105 lg:m-2 lg:w-28"
+            className="mb-5 mt-4 w-full rounded-3xl bg-accent-yellow p-2 text-center transition duration-500 hover:scale-105 disabled:bg-gray-300 disabled:text-black lg:m-2 lg:w-28"
           >
             Publicar
           </button>
-          <button
+          <Link
+            href={"/"}
             className="mb-4 w-full rounded-3xl border border-secondary-violet p-2 text-center text-secondary-violet transition duration-500 hover:scale-105 lg:m-2 lg:w-28"
-            type="submit"
           >
             Cancelar
-          </button>
+          </Link>
         </div>
       </form>
     </main>

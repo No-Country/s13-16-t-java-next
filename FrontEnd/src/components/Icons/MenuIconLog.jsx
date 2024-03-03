@@ -6,9 +6,11 @@ import { useGetNotifications } from "@/src/hooks/useGetNotifications";
 import { Context } from "@/src/context/ContextProvider";
 
 export default function MenuIconLog(props) {
-  const [menuOpen, setMenuOpen] = useState(false);
   const { setIsLogged } = useContext(Context);
+
   const [profile, setProfile] = useState({});
+
+  const [menuOpen, setMenuOpen] = useState(false);
   const { unread } = useGetNotifications();
 
   useEffect(() => {
@@ -20,13 +22,11 @@ export default function MenuIconLog(props) {
         )
           .then((response) => response.json())
           .then((data) => setProfile(data));
-        
       }
     }
-  }, []);	
-  const name = profile.userResponseDTO.name
- 
- 
+  }, []);
+  const name = profile.userResponseDTO.name;
+
   function toggleMenu() {
     setMenuOpen(!menuOpen);
   }

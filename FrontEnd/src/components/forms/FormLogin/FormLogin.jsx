@@ -55,7 +55,7 @@ function FormLogin() {
       router.push("/");
       setIsLogged(true);
       if (typeof window !== "undefined") {
-        localStorage.setItem("userLoggedId", user.userId);
+        localStorage.setItem("userLoggedId", user?.userId);
         localStorage.setItem("isLogged", true);
       }
     } else {
