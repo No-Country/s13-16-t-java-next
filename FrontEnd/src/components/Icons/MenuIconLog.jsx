@@ -6,9 +6,12 @@ import { useGetNotifications } from "@/src/hooks/useGetNotifications";
 import { Context } from "@/src/context/ContextProvider";
 
 export default function MenuIconLog(props) {
-  const [menuOpen, setMenuOpen] = useState(false);
   const { setIsLogged } = useContext(Context);
+
   const [profile, setProfile] = useState({});
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const { unread } = useGetNotifications();
 
   useEffect(() => {

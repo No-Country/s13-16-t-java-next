@@ -14,7 +14,7 @@ export default function SubmenuPublication() {
           className="flex gap-3 border-secondary-violet hover:border-b-2"
         >
           <NewPostIcon />
-          <span>Publicación</span>
+          <span href={"/nuevopost"}>Publicación</span>
         </Link>
         <Link
           href={""}
