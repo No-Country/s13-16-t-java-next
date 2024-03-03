@@ -4,7 +4,7 @@ import Link from "next/link";
 const lato = Lato({ subsets: ["latin"], weight: ["400", "900"] });
 import CardPostWrapper from "../components/CardPostWrapper";
 
-export default async function HomePage() {
+export default function HomePage() {
   return (
     <>
       <article
