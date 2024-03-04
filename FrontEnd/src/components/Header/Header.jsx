@@ -1,14 +1,13 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HeaderLogin from "../HeaderLogin/HeaderLogin";
 import MenuIcon from "../Icons/MenuIcon";
-
+import { Context } from "@/src/context/ContextProvider";
 
 export default function Header() {
-
-
+  const { isLogged } = useContext(Context);
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);

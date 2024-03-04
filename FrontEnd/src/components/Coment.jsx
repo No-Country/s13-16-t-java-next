@@ -9,7 +9,7 @@ import { useGetProfile } from "../hooks/useGetProfile";
 export default function Coment({ coment }) {
   const { description, date: dateTime } = coment;
 
-  const profileId = typeof window !== 'undefined' && localStorage.getItem('userLoggedId');
+  const profileId = typeof window !== 'undefined' && localStorage.getItem('profileId');
 
   const { profile } = useGetProfile(coment.profileId);
 

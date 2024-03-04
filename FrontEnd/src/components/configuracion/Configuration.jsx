@@ -20,21 +20,21 @@ export default function Configuration({ categories }) {
       selectedCategories.length === 0 &&
       !selectedCategories.includes(categoria)
     ) {
-      // Si no hay categorías seleccionadas y la categoría actual no está seleccionada,
-      // permitimos la selección de la primera categoría
+     
+     
       setselectedCategories([categoria]);
     } else if (selectedCategories.includes(categoria)) {
-      // Si la categoría ya está seleccionada, la eliminamos del estado
+     
       setselectedCategories(selectedCategories.filter((c) => c !== categoria));
     } else if (selectedCategories.length < 3) {
-      // Si hay menos de tres categorías seleccionadas, agregamos la nueva categoría
+     
       setselectedCategories([...selectedCategories, categoria]);
     } else {
-      // Si ya hay tres categorías seleccionadas, mostramos un mensaje de error
+    
       toast.error("Solo se pueden seleccionar hasta tres categorías");
     }
 
-    // Verificar si no hay categorías seleccionadas y mostrar un mensaje
+    
    
   };
 
@@ -50,16 +50,6 @@ export default function Configuration({ categories }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    document.getElementById('image').addEventListener('change', function() {
-      const files = this.files;
-      if (files.length === 0) {
-        // El campo está vacío, puedes mostrar un mensaje de error o deshabilitar un botón de envío.
-        console.log('El campo de archivo está vacío.');
-      } else {
-        // El campo contiene archivos, puedes habilitar el botón de envío u otra acción.
-        console.log('Se seleccionaron archivos.');
-      }
-    });
 
     if (selectedCategories.length === 0 && selectedFile == null) {
       toast.error("Debe seleccionar al menos una categoría");
@@ -68,7 +58,7 @@ export default function Configuration({ categories }) {
     const formData = new FormData();
     formData.append("image", selectedFile ? selectedFile : new Blob());
     formData.append("categories", selectedCategories);
-    console.log(selectedFile)
+  
     // Enviar la solicitud de formulario con el archivo y las categorías seleccionadas
     try {
       const response = await fetch(
