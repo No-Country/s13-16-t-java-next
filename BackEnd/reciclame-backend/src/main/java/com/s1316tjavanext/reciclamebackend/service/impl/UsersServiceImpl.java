@@ -15,6 +15,7 @@ import com.s1316tjavanext.reciclamebackend.repository.LocationRepository;
 import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
 import com.s1316tjavanext.reciclamebackend.repository.UserRepository;
 import com.s1316tjavanext.reciclamebackend.service.UserService;
+import com.s1316tjavanext.reciclamebackend.validator.ObjectsValidator;
 import exception.MiException;
 
 import java.util.*;
@@ -35,6 +36,7 @@ public class UsersServiceImpl implements UserService {
     private final ProfileRepository profileRepository;
     private final UserMapper userMapper;
     private final LocationRepository locationRepository;
+    private final ObjectsValidator<UserRequestDTO> userValidator;
 
 
 //    private boolean validarRequisitosPassword(String password) {
@@ -61,7 +63,7 @@ public class UsersServiceImpl implements UserService {
     
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO)
              {
-
+                 userValidator.validate(userRequestDTO);
         UserResponseDTO userResponse = userMapper.userRequestDTOToUserResponseDTO(userRequestDTO);
         User user = userMapper.userResponseDTOToUser(userResponse);
         user.setDeleted(false);
