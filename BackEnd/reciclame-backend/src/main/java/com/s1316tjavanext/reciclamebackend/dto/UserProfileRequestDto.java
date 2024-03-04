@@ -1,6 +1,5 @@
 package com.s1316tjavanext.reciclamebackend.dto;
 
-import com.s1316tjavanext.reciclamebackend.entity.enums.Category;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;

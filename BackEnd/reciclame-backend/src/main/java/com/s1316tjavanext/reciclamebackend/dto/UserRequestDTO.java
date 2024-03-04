@@ -41,6 +41,7 @@ public record UserRequestDTO(
         int location_id,
 
         @NotNull(message = INVALID_BIRTHDAY)
+        @Past(message = INVALID_BIRTHDAY)
         Date birthdate
 ) {
 }

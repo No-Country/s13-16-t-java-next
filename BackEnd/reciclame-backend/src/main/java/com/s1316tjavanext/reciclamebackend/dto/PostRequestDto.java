@@ -16,19 +16,19 @@ import static com.s1316tjavanext.reciclamebackend.util.Constants.*;
  * @project reciclame-backend
  */
 public record PostRequestDto(
-        @NotBlank
+        @NotBlank(message = INVALID_TITLE)
         @Pattern(regexp = REGEX_TITLE,
                 message = INVALID_CHARACTERS)
         String title,
-        @NotBlank
+        @NotBlank(message = INVALID_DESCRIPTION)
         @Pattern(regexp = REGEX_DESCRIPTION,
                 message = INVALID_CHARACTERS)
         String description,
         MultipartFile multipartFile,
-        @NotNull
+        @NotNull(message = INVALID_CATEGORY)
         Category category,
-        @NotNull
+        @NotNull(message = INVALID_ENABLE_COMMENTS)
         Boolean enableComments,
-        @NotNull
+        @NotNull(message = INVALID_PROFILE_ID)
         UUID profileId) {
 }
