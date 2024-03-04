@@ -4,10 +4,12 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import HeaderLogin from "../HeaderLogin/HeaderLogin";
 import MenuIcon from "../Icons/MenuIcon";
+import { useContext } from "react";
+import { Context } from "@/src/context/ContextProvider";
 
 export default function Header() {
-  const isLogged =
-    typeof window !== "undefined" && localStorage.getItem("isLogged");
+  const { isLogged } = useContext(Context);
+
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);

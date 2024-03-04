@@ -6,16 +6,9 @@ import { useContext } from "react";
 import { Context } from "../context/ContextProvider";
 
 export default function Submenu({ profile }) {
-  const { setIsLogged } = useContext(Context);
+  const { logOut } = useContext(Context);
 
-  function logOut() {
-    setIsLogged(false);
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("isLogged");
-      localStorage.removeItem("userLoggedId");
-      localStorage.removeItem("profileId");
-    }
-  }
+
  
   return (
     <div className="group relative">
