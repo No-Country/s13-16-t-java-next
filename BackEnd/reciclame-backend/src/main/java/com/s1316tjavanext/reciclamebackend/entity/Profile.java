@@ -53,4 +53,7 @@ public class Profile implements Serializable {
 
     @OneToMany(mappedBy = "profile")
     private List<Comment> comments;
+
+    @OneToMany (mappedBy = "profile")
+    private List<Like> postsLiked;
 }

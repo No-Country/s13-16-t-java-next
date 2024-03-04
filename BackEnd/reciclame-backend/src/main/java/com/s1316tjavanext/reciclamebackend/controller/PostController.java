@@ -2,6 +2,7 @@ package com.s1316tjavanext.reciclamebackend.controller;
 
 import com.s1316tjavanext.reciclamebackend.dto.PostDto;
 import com.s1316tjavanext.reciclamebackend.dto.PostRequestDto;
+import com.s1316tjavanext.reciclamebackend.dto.ProfileLikeRequestDto;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Category;
 import com.s1316tjavanext.reciclamebackend.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -81,6 +82,18 @@ public class PostController {
     @Operation(summary = "Get posts by title", description = "Get posts by title containing the specified term")
     public ResponseEntity<List<PostDto>> findByTitle(@PathVariable String term) {
         return ResponseEntity.ok(postService.findByTitle(term));
+    }
+
+    @PostMapping("/{postId}/likes")
+    public ResponseEntity<Void> updateProfilesLiked(@PathVariable UUID postId,
+                                                    @RequestBody ProfileLikeRequestDto profileLikeRequestDto){
+        try {
+            postService.updateProfilesLiked(postId,profileLikeRequestDto.profileId());
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException ignore){
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
 }
