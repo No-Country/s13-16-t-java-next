@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import { useState } from "react";
 
 export default function FormComent({ postId }) {
+  const profileId = typeof window !== 'undefined' && localStorage.getItem('profileId');
+
   const urlPostComent =
     "https://deployreciclame-production.up.railway.app/comments/save";
   const {
@@ -28,7 +30,9 @@ export default function FormComent({ postId }) {
       postId: postId,
       description: data.description,
       date: currentDate,
+      profileId: profileId,
     };
+
 
     const response = await fetch(urlPostComent, {
       method: "POST",
@@ -51,7 +55,7 @@ export default function FormComent({ postId }) {
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
       <textarea
         rows="2"
-        className="w-full resize-none rounded-xl bg-[#d9d9d9] p-3"
+        className="w-full resize-none rounded-xl bg-[#F0F0F0] p-3 text-sm"
         placeholder="Comentar"
         {...register("description")}
       ></textarea>

@@ -1,15 +1,20 @@
+"use client"
+
 import React from "react";
-import Post from "@/src/components/Publication/Post";
-import { getPublication } from "@/src/lib/api";
+import PostIntermediaryLayer from "@/src/components/Publication/PostIntermediaryLayer";
 
-export default async function Publications({ params }) {
+import { useGetPostById } from '@/src/hooks/useGetPostById';
+import { PostPageSkeleton } from "@/src/components/skeletons";
 
-  const post = await getPublication(params.id);
-  
+export default function Publications({ params }) {
+  const { post, isLoading } = useGetPostById(params.id);
+
+  if (isLoading) return (<PostPageSkeleton />)
+
   return (
     <div className="min-h-dvh">
-      <main className="mt-[65px] grid justify-items-center lg:grid-cols-2">
-        <Post post={post} post_id={params.id}  />
+      <main className="mt-[65px] flex flex-col justify-items-center ">
+        {post?.id && <PostIntermediaryLayer post={post} />}
       </main>
     </div>
   );

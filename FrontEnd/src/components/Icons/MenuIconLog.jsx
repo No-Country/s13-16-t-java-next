@@ -5,9 +5,11 @@ import { usePathname } from "next/navigation";
 import { useGetNotifications } from "@/src/hooks/useGetNotifications";
 import { Context } from "@/src/context/ContextProvider";
 
-export default function MenuIconLog(props) {
-  const [menuOpen, setMenuOpen] = useState(false);
+export default function MenuIconLog({ profile }) {
   const { setIsLogged } = useContext(Context);
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const { unread } = useGetNotifications();
 
   function toggleMenu() {
@@ -32,7 +34,7 @@ export default function MenuIconLog(props) {
   return (
     <>
       <div className="cursor-pointer" onClick={toggleMenu}>
-        {menuOpen ? <XMarkIcon {...props} /> : <MenuIcon {...props} />}
+        {menuOpen ? <XMarkIcon  /> : <MenuIcon />}
       </div>
       <div
         className={`fixed left-0 top-16 z-50 h-full w-full md:hidden ${!menuOpen ? "-translate-x-full" : "translate-x-0"}`}
@@ -46,27 +48,37 @@ export default function MenuIconLog(props) {
           }
         >
           <div className="flex items-center gap-2 p-2">
-            <Image
-              src={"/image/profileHeader.png"}
-              width={50}
-              height={50}
-              alt="Imagen de Perfil"
-              className="rounded-full"
-            />
+            {profile?.photoId ? (
+              <Image
+                src={profile?.photoId}
+                width={50}
+                height={50}
+                alt="Imagen de Perfil"
+                className="rounded-full"
+              />
+            ) : (
+              <Image
+                width={40}
+                height={40}
+                className="rounded-full"
+                src="/image/profile1.png"
+                alt="Foto de perfil"
+              />
+            )}
             <div className=" w-full flex-col p-2">
-              <h3 className="">Usuario Fulano</h3>
+              <h3 className="">{profile?.userResponseDTO?.name + " " + profile?.userResponseDTO?.lastName}</h3>
               <Link
                 href={"/perfil"}
                 className={`text-sm text-primary-green underline hover:cursor-pointer`}
                 onClick={handleLinkClick}
               >
-                Mi Perfil →
+                Mi Perfil <span>→</span>
               </Link>
             </div>
           </div>
           <div className="flex h-full flex-col items-start justify-start">
             <Link
-              className=" mb-3 ml-3 w-[90%] rounded-3xl bg-accent-yellow p-2 text-center tracking-wider text-black shadow-lg"
+              className=" mb-3 ml-3 w-[90%] rounded-3xl bg-accent-yellow p-1 text-center tracking-wider text-black shadow"
               href={"/nuevopost"}
             >
               Publicar +
@@ -78,13 +90,7 @@ export default function MenuIconLog(props) {
             >
               Home
             </Link>
-            <Link
-              className={`header-mobile-link ${pathname === "/" ? "border border-secondary-violet" : ""}`}
-              href={"/configuracion/perfil"}
-              onClick={handleLinkClick}
-            >
-              Configuración
-            </Link>
+
             <Link
               className={`header-mobile-link ${pathname === "/notificaciones" ? "border border-secondary-violet" : ""} flex justify-between`}
               href={"/notificaciones"}
@@ -97,13 +103,7 @@ export default function MenuIconLog(props) {
                 </div>
               )}
             </Link>
-            <Link
-              className={`header-mobile-link ${pathname === "/mensajes" ? "border border-secondary-violet" : ""}`}
-              href={"/mensajes"}
-              onClick={handleLinkClick}
-            >
-              Mensajes
-            </Link>
+
             <Link
               className={`header-mobile-link ${pathname === "/explorar" ? "border border-secondary-violet" : ""}`}
               href={"/explorar"}
@@ -120,20 +120,6 @@ export default function MenuIconLog(props) {
             </Link>
 
             <div className="absolute bottom-20 flex flex-col justify-start p-2">
-              <Link
-                className={`header-mobile-link ${pathname === "/preguntas-frecuentes" ? "border border-secondary-violet" : ""}`}
-                href={"/preguntas-frecuentes"}
-                onClick={handleLinkClick}
-              >
-                Preguntas Frecuentes
-              </Link>
-              <Link
-                className={`header-mobile-link ${pathname === "/soporte" ? "border border-secondary-violet" : ""}`}
-                href={"/soporte"}
-                onClick={handleLinkClick}
-              >
-                Soporte
-              </Link>
               <Link
                 className="m-1 flex text-wrong"
                 href={""}

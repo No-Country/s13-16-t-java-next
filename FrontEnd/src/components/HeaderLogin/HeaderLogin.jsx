@@ -1,14 +1,16 @@
 "use client";
-
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { IconComment } from "../Icons/SearchIcon";
 import NotificationIcon from "../NotificationIcon";
 import MenuIconLog from "../Icons/MenuIconLog";
 import Submenu from "../Submenu";
+import SubmenuPublication from "../SubmenuPublication";
+import { useGetProfile } from "@/src/hooks/useGetProfile";
 
 export default function HeaderLogin() {
+  const profileId = typeof window !== 'undefined' && localStorage.getItem('profileId');
+  const {profile}= useGetProfile(profileId);
   return (
     <div className="fixed left-0 top-0 z-50 -mb-12 w-full bg-white">
       <header className="shadow-xl">
@@ -42,18 +44,12 @@ export default function HeaderLogin() {
               Blog
             </Link>
           </ul>
-          <ul className="m-2 flex items-center gap-7 p-2">
-            <MenuIconLog />
-            <Link
-              className="hidden w-40 rounded-full bg-accent-yellow p-2 text-center tracking-wider text-black md:block"
-              href={"/nuevopost"}
-            >
-              Publicar +
-            </Link>
-            <NotificationIcon />
-            <IconComment />
+          <ul className="m-4 flex items-center p-2 md:gap-6">
+            <MenuIconLog profile={profile} />
+            <SubmenuPublication />
+            <NotificationIcon  />
 
-            <Submenu />
+            <Submenu  profile={profile}/>
           </ul>
         </nav>
       </header>

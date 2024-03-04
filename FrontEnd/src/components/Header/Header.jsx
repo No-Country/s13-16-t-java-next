@@ -1,16 +1,19 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeaderLogin from "../HeaderLogin/HeaderLogin";
 import MenuIcon from "../Icons/MenuIcon";
-
-import { Context } from "../../context/ContextProvider";
 import { useContext } from "react";
+import { Context } from "@/src/context/ContextProvider";
 
 export default function Header() {
   const { isLogged } = useContext(Context);
+
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
 
   return (
     <>
@@ -31,14 +34,20 @@ export default function Header() {
               </Link>
               <ul className="m-2 mr-16 flex items-center gap-7 p-2">
                 <MenuIcon />
-                <Link className="hidden p-1 md:block border-secondary-violet hover:border-b-2" href={"/explorar"}>
+                <Link
+                  className="hidden border-secondary-violet p-1 hover:border-b-2 md:block"
+                  href={"/explorar"}
+                >
                   Explorar
                 </Link>
-                <Link className="hidden p-1 md:block border-secondary-violet hover:border-b-2" href={"/registro"}>
+                <Link
+                  className="hidden border-secondary-violet p-1 hover:border-b-2 md:block"
+                  href={"/registro"}
+                >
                   Registrarse
                 </Link>
                 <Link
-                  className="hidden w-40 hover:bg-green-500 rounded-full transition duration-300 bg-primary-green p-1 text-center font-bold text-white md:block"
+                  className="hidden w-40 rounded-full bg-primary-green p-1 text-center font-bold text-white transition duration-300 hover:bg-green-500 md:block"
                   href={"/login"}
                 >
                   Iniciar Sesión
