@@ -13,11 +13,21 @@ export default function ContextProvider({ children }) {
     return storedLogged ? storedLogged : false
   });
 
+  function logOut() {
+    setIsLogged(false);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("isLogged");
+      localStorage.removeItem("userLoggedId");
+      localStorage.removeItem("profileId");
+    }
+  }
+
   return (
     <Context.Provider
       value={{
         isLogged,
         setIsLogged,
+        logOut
       }}
     >
       {children}

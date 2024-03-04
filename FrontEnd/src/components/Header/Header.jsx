@@ -7,7 +7,7 @@ import MenuIcon from "../Icons/MenuIcon";
 import { Context } from "@/src/context/ContextProvider";
 
 export default function Header() {
-  const { isLogged } = useContext(Context)
+  const { isLogged } = useContext(Context);
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
