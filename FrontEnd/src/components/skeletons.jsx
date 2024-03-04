@@ -11,6 +11,36 @@ export function NotificationsCartsSkeleton() {
     </>
   );
 }
+
+export function ProfileMobileSkeleton() {
+  return (
+    <div
+      className={`${shimmer} relative w-full overflow-hidden flex items-center gap-2 p-2`}
+    >
+      <div className="min-w-10 h-10 bg-gray-bg rounded-full" />
+      <div className="w-full flex-col p-2">
+        <div className="w-full h-6 bg-gray-bg" />
+        <a
+          href={"/perfil"}
+          className={`text-sm text-primary-green underline hover:cursor-pointer`}
+        >
+          Mi Perfil <span>→</span>
+        </a>
+      </div>
+
+    </div>
+  )
+}
+
+export function ProfileImageSkeleton () {
+  return (
+    <div
+      className={`${shimmer} hidden md:block min-w-10 h-10 rounded-full bg-gray-dark-bg`}
+    >
+    </div>
+  )
+}
+
 export function NotificationCartSkeleton() {
   return (
     <div

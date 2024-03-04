@@ -10,7 +10,8 @@ import { useGetProfile } from "@/src/hooks/useGetProfile";
 
 export default function HeaderLogin() {
   const profileId = typeof window !== 'undefined' && localStorage.getItem('profileId');
-  const {profile}= useGetProfile(profileId);
+  const { profile } = useGetProfile(profileId);
+
   return (
     <div className="fixed left-0 top-0 z-50 -mb-12 w-full bg-white">
       <header className="shadow-xl">
@@ -48,7 +49,6 @@ export default function HeaderLogin() {
             <MenuIconLog profile={profile} />
             <SubmenuPublication />
             <NotificationIcon  />
-
             <Submenu  profile={profile}/>
           </ul>
         </nav>
