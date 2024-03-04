@@ -13,8 +13,6 @@ export default function PostComponent({post}) {
 
   const router = useRouter();
 
-  console.log(post);
-
   const isLogged =
     typeof window !== "undefined" && localStorage.getItem("isLogged");
 
@@ -54,7 +52,7 @@ export default function PostComponent({post}) {
   return (
     <>
       {post && (
-        <div className="grid max-lg:mx-auto lg:grid-cols-2">
+        <div className="max-lg:mx-auto flex justify-center flex-wrap">
           <div className="flex w-full max-w-96 flex-col gap-8 p-5 md:max-w-[35rem] lg:p-20 xl:p-24">
             <picture className="mx-auto items-center justify-center rounded-2xl lg:flex ">
               {post?.imageUrl && (
@@ -95,16 +93,13 @@ export default function PostComponent({post}) {
                     : "Usuario que publica"}
                 </p>
               </div>
-              {post?.love && (
-                <Button
-                  props={post.love}
-                  handle={handleLikeClick}
-                  className=" flex items-center gap-2"
-                >
-                  <span>{post.love}</span>
-                  <LikeIcon />
-                </Button>
-              )}
+              <Button
+                handle={handleLikeClick}
+                className="flex items-center gap-2"
+              >
+                <span>{post.love}</span>
+                <LikeIcon />
+              </Button>
             </div>
           </div>
           <div className="flex w-full max-w-96 flex-col gap-4 p-5 md:max-w-[35rem] lg:gap-8 lg:p-20 xl:p-24">

@@ -111,7 +111,7 @@ export function BlogPostSkeleton() {
 export function PostPageSkeleton() {
   return (
     <div
-      className={`${shimmer} relative   grid overflow-hidden lg:grid-cols-2`}
+      className={`${shimmer} relative overflow-hidden flex justify-center flex-wrap`}
     >
       <div className="flex w-full max-w-96 flex-col gap-8 p-5 max-lg:mx-auto lg:max-w-[35rem] lg:p-20 xl:p-24">
         <div className="mx-auto h-full max-h-72 min-h-40 w-full items-center justify-center rounded-2xl bg-gray-dark-bg lg:flex "></div>
