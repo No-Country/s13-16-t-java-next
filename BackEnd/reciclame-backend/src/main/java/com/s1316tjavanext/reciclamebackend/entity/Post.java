@@ -65,4 +65,7 @@ public class Post implements Serializable {
 
     @OneToMany (mappedBy = "post")
     private List<Like> profilesLiked;
+
+    @OneToMany (mappedBy = "post")
+    private List<Favorite> profilesMarkedFavorite;
 }

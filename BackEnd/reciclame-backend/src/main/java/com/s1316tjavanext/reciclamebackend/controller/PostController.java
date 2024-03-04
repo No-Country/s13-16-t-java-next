@@ -84,7 +84,7 @@ public class PostController {
         return ResponseEntity.ok(postService.findByTitle(term));
     }
 
-    @PostMapping("/{postId}/likes")
+    @PutMapping("/{postId}/likes")
     public ResponseEntity<Void> updateProfilesLiked(@PathVariable UUID postId,
                                                     @RequestBody ProfileLikeRequestDto profileLikeRequestDto){
         try {

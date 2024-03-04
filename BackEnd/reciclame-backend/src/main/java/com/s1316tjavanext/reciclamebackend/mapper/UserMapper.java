@@ -1,9 +1,7 @@
 package com.s1316tjavanext.reciclamebackend.mapper;
 
-import com.s1316tjavanext.reciclamebackend.dto.UserCreateDTO;
 import com.s1316tjavanext.reciclamebackend.dto.UserRequestDTO;
 import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
-import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import com.s1316tjavanext.reciclamebackend.entity.User;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

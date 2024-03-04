@@ -7,7 +7,6 @@ package com.s1316tjavanext.reciclamebackend.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import lombok.*;
