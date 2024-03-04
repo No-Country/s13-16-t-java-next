@@ -53,7 +53,7 @@ export default function FormCreatePost({ categories }) {
     formData.append("title", data.title);
     formData.append("category", data.category);
     formData.append("description", data.description);
-    formData.append("image", objectImage);
+    formData.append("image", objectImage ? objectImage : new Blob());
     formData.append("enableComments", isActive);
     formData.append("profileId", profileId);
 

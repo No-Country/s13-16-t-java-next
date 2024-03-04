@@ -8,21 +8,34 @@ import { useRouter } from "next/navigation";
 
 export default function Configuration({ categories }) {
   const [selectedCategories, setselectedCategories] = useState([]);
-  const [selectedFile, setSelectedFile] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null)
   const [imagePreview, setImagePreview] = useState(null);
-  const [perfilId, setPerfilId] = useState("");
+  const [ setPerfilId] = useState("");
   const [mounted, setMounted] = React.useState(false);
 
   const router = useRouter();
-
+  const profId = "	2b650518-3d02-427a-9eb6-679665226302";
   const handleCategoriaClick = (categoria) => {
-    if (selectedCategories.includes(categoria)) {
+    if (
+      selectedCategories.length === 0 &&
+      !selectedCategories.includes(categoria)
+    ) {
+      // Si no hay categorías seleccionadas y la categoría actual no está seleccionada,
+      // permitimos la selección de la primera categoría
+      setselectedCategories([categoria]);
+    } else if (selectedCategories.includes(categoria)) {
       // Si la categoría ya está seleccionada, la eliminamos del estado
       setselectedCategories(selectedCategories.filter((c) => c !== categoria));
     } else if (selectedCategories.length < 3) {
       // Si hay menos de tres categorías seleccionadas, agregamos la nueva categoría
       setselectedCategories([...selectedCategories, categoria]);
+    } else {
+      // Si ya hay tres categorías seleccionadas, mostramos un mensaje de error
+      toast.error("Solo se pueden seleccionar hasta tres categorías");
     }
+
+    // Verificar si no hay categorías seleccionadas y mostrar un mensaje
+   
   };
 
   useEffect(() => {
@@ -36,14 +49,30 @@ export default function Configuration({ categories }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append("image", selectedFile);
-    formData.append("categories", selectedCategories);
+  
+    document.getElementById('image').addEventListener('change', function() {
+      const files = this.files;
+      if (files.length === 0) {
+        // El campo está vacío, puedes mostrar un mensaje de error o deshabilitar un botón de envío.
+        console.log('El campo de archivo está vacío.');
+      } else {
+        // El campo contiene archivos, puedes habilitar el botón de envío u otra acción.
+        console.log('Se seleccionaron archivos.');
+      }
+    });
 
+    if (selectedCategories.length === 0 && selectedFile == null) {
+      toast.error("Debe seleccionar al menos una categoría");
+    }
+    // Crear el objeto FormData y agregar la imagen y las categorías
+    const formData = new FormData();
+    formData.append("image", selectedFile ? selectedFile : new Blob());
+    formData.append("categories", selectedCategories);
+    console.log(selectedFile)
     // Enviar la solicitud de formulario con el archivo y las categorías seleccionadas
     try {
       const response = await fetch(
-        `https://deployreciclame-production.up.railway.app/profiles/complete-profile/${perfilId}`,
+        `https://deployreciclame-production.up.railway.app/profiles/complete-profile/${profId}`,
         {
           method: "PUT",
           body: formData,
@@ -56,7 +85,7 @@ export default function Configuration({ categories }) {
         throw new Error("Error al configurar cuenta");
       }
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
       toast.error("Error al configurar cuenta");
     }
   };
@@ -95,7 +124,7 @@ export default function Configuration({ categories }) {
             alt="foto de perfil"
           />
           <label className="absolute bottom-0 right-0 h-10 w-10 rounded-full bg-accent-yellow p-2 hover:cursor-pointer">
-            <input type="file" className="hidden" onChange={handleChange} />
+            <input type="file" className="hidden" id="image"  onChange={handleChange} />
             <AddIcon />
           </label>
         </div>

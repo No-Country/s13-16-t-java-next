@@ -353,6 +353,7 @@ function FormRegister({ provinces, categories }) {
           </p>
         </div>
       </form>
+      <button onClick={() => setModalVisible(true)}>abrir modal</button>
       {modalVisible && (
         <div className="fixed inset-0 z-50 grid h-full w-full place-items-center bg-white backdrop-blur-sm" onClick={()=>closeModal}>
           <Configuration categories={categories} setModalVisible={setModalVisible} />
