@@ -1,10 +1,11 @@
 import Image from "next/image";
 import { FormRegister } from "@/src/components/forms/FormRegister";
 import RegisterBackground from "@/src/assets/background/background-1.png";
-import { getProvinces } from "@/src/lib/api";
+import { getProvinces, getCategories } from "@/src/lib/api";
 
 export default async function Register() {
   const Provinces = await getProvinces();
+  const categories = await getCategories()
 
   return (
     <main className="relative grid items-center justify-items-center md:mt-[55px] lg:grid-cols-2">
@@ -17,7 +18,7 @@ export default async function Register() {
           priority
         />
       </picture>
-      <FormRegister provinces={Provinces} />
+      <FormRegister provinces={Provinces} categories={categories} />
     </main>
   );
 }

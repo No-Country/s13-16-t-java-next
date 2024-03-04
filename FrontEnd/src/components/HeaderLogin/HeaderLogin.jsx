@@ -6,8 +6,11 @@ import NotificationIcon from "../NotificationIcon";
 import MenuIconLog from "../Icons/MenuIconLog";
 import Submenu from "../Submenu";
 import SubmenuPublication from "../SubmenuPublication";
+import { useGetProfile } from "@/src/hooks/useGetProfile";
 
 export default function HeaderLogin() {
+  const profileId = typeof window !== 'undefined' && localStorage.getItem('profileId');
+  const {profile}= useGetProfile(profileId);
   return (
     <div className="fixed left-0 top-0 z-50 -mb-12 w-full bg-white">
       <header className="shadow-xl">
@@ -42,11 +45,11 @@ export default function HeaderLogin() {
             </Link>
           </ul>
           <ul className="m-4 flex items-center p-2 md:gap-6">
-            <MenuIconLog />
+            <MenuIconLog profile={profile} />
             <SubmenuPublication />
-            <NotificationIcon />
+            <NotificationIcon  />
 
-            <Submenu />
+            <Submenu  profile={profile}/>
           </ul>
         </nav>
       </header>
