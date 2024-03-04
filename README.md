@@ -39,7 +39,7 @@ Reciclame es una red social dedicada a promover la reutilización de materiales 
 
 | Nombre               | GitHub                                      |
 |----------------------|---------------------------------------------|
-| Eliana Garaventa      | [![Eliana Garaventa]()]() |
+| Eliana Garaventa      | <a href="https://www.linkedin.com/in/eliana-garaventa-906b83207/"><img src="https://media.licdn.com/dms/image/D4D35AQHZZRue3jMKqQ/profile-framedphoto-shrink_800_800/0/1703432184849?e=1710198000&v=beta&t=awLUDDPCv78F5PMKxGq6L38JfyFdJ7f5G7oZUwMCKcI" alt="Eliana Garaventa" width="180"/></a> |
 
 ### QA
 
