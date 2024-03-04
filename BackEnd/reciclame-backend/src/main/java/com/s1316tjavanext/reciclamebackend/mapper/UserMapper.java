@@ -18,13 +18,13 @@ public interface UserMapper {
 
 //    @Mapping(source = "province.id", target = "province_id" )
     @Mapping(source = "location.id", target = "location_id" )
+    @Mapping(target = "profileId", source = "profile.id")
     UserResponseDTO userToUserResponseDTO(User user);
     UserResponseDTO userRequestDTOToUserResponseDTO(UserRequestDTO userRequestDTO);
 
     List<UserResponseDTO> usersToUsersResponseDTO(List<User> users);
 
     @InheritInverseConfiguration
-    @Mapping(target = "perfil", ignore = true)
     @Mapping(source = "location_id", target = "location.id" )
     @Mapping(target = "deleted", ignore = true)
     User userResponseDTOToUser(UserResponseDTO userResponseDTO);
