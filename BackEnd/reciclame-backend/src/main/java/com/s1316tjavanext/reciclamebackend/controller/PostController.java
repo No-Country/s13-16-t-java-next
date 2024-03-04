@@ -24,6 +24,7 @@ import java.util.UUID;
 @RequestMapping("/posts")
 @AllArgsConstructor
 @Tag(name = "Post", description = "Post management")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PostController {
     private final PostService postService;
 
@@ -74,6 +75,12 @@ public class PostController {
         }catch (RuntimeException ignore){
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/findByTitle/{term}")
+    @Operation(summary = "Get posts by title", description = "Get posts by title containing the specified term")
+    public ResponseEntity<List<PostDto>> findByTitle(@PathVariable String term) {
+        return ResponseEntity.ok(postService.findByTitle(term));
     }
 
 }

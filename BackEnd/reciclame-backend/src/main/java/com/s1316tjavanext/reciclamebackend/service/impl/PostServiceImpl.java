@@ -3,9 +3,11 @@ package com.s1316tjavanext.reciclamebackend.service.impl;
 import com.s1316tjavanext.reciclamebackend.dto.PostDto;
 import com.s1316tjavanext.reciclamebackend.dto.PostRequestDto;
 import com.s1316tjavanext.reciclamebackend.entity.Post;
+import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Status;
 import com.s1316tjavanext.reciclamebackend.mapper.PostMapper;
 import com.s1316tjavanext.reciclamebackend.repository.PostRepository;
+import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
 import com.s1316tjavanext.reciclamebackend.service.CloudinaryService;
 import com.s1316tjavanext.reciclamebackend.service.PostService;
 import lombok.AllArgsConstructor;
@@ -14,11 +16,12 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author jdmon on 21/02/2024
@@ -29,7 +32,7 @@ import java.util.UUID;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
-
+    private final ProfileRepository profileRepository;
     private final PostMapper postMapper;
     private final CloudinaryService cloudinaryService;
 
@@ -42,10 +45,13 @@ public class PostServiceImpl implements PostService {
     public PostDto save(PostRequestDto postRequestDto, MultipartFile mpf) {
         PostDto postDto = postMapper.postRequestDtoToPostDto(postRequestDto);
         Post post = postMapper.postDtoToPost(postDto);
-        post.setDate(LocalDate.now());
+        post.setDate(LocalDateTime.now().withNano(0));
         post.setStatus(Status.Abierto);
         post.setLove(0);
+        post.setEnableComments(postRequestDto.enableComments());
         post.setDeleted(false);
+        Optional<Profile> profile = profileRepository.findById(postRequestDto.profileId());
+        profile.ifPresent(post::setProfile);
         setImageUrl(mpf, post);
         return postMapper.postToPostDto(postRepository.save(post));
     }
@@ -72,9 +78,20 @@ public class PostServiceImpl implements PostService {
             post.setTitle(postRequestDto.title());
             post.setDescription(postRequestDto.description());
             post.setCategory(postRequestDto.category());
-            setImageUrl(mpf,post);
+            post.setEnableComments(postRequestDto.enableComments());
+            if (isImageNotNullNotEmpty(mpf)){
+                setImageUrl(mpf,post);
+            }
             return postMapper.postToPostDto(postRepository.save(post));
         } else throw new RuntimeException();
+    }
+
+    @Override
+    public List<PostDto> findByTitle(String term) {
+        return postRepository.findByTitle(term)
+                .stream()
+                .map(postMapper::postToPostDto)
+                .collect(Collectors.toList());
     }
 
     private boolean isImageNotNullNotEmpty(MultipartFile mpf) {

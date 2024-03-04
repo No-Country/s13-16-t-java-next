@@ -8,7 +8,7 @@ import org.hibernate.annotations.Where;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
@@ -30,13 +30,14 @@ public class Comment {
     private String description;
 
     @Column(nullable = false)
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Column(nullable = false)
     private boolean deleted = Boolean.FALSE;
 
-    //private Photo photo;
-    //private Profile profile;
+    @ManyToOne
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
