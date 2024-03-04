@@ -41,7 +41,7 @@ export default function FormCreatePost({ categories }) {
 
   const profileId =
     typeof window !== "undefined" && localStorage.getItem("profileId");
-    
+
   const [objectImage, setObjectImage] = useState({});
 
   const toggleSwitch = () => {
@@ -56,8 +56,6 @@ export default function FormCreatePost({ categories }) {
     formData.append("image", objectImage);
     formData.append("enableComments", isActive);
     formData.append("profileId", profileId);
-
-
 
     const response = await fetch(URLPostData, {
       method: "POST",
@@ -168,7 +166,7 @@ export default function FormCreatePost({ categories }) {
           </div>
         </div>
         <label className="dark:hover:bg-bray-800 grid aspect-square w-full cursor-pointer place-items-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 md:h-[400px] md:w-[400px] dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-          <div className="flex items-center justify-center object-cover p-10">
+          <div className="flex max-w-72 items-center justify-center object-cover p-10">
             {/* eslint-disable-next-line */}
             <img
               src={imagePreview ? imagePreview : "/image/imagePost.png"}
