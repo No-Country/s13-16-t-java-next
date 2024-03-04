@@ -3,17 +3,15 @@ import React, { createContext, useState, } from "react";
 export const Context = createContext();
 
 export default function ContextProvider({ children }) {
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(() => {
+    let storedLogged
 
-  () => {
-    const userLogged =
-      typeof window !== "undefined" && localStorage.getItem("isLogged");
-    if (userLogged === true) {
-      setIsLogged(true);
-    } else {
-      return false;
+    if (typeof window !== 'undefined') {
+      storedLogged = localStorage.getItem('isLogged')
     }
-  };
+
+    return storedLogged ? storedLogged : false
+  });
 
   return (
     <Context.Provider
