@@ -8,7 +8,6 @@ import { Context } from "../context/ContextProvider";
 export default function Submenu({ profile }) {
   const { logOut } = useContext(Context);
 
-
  
   return (
     <div className="group relative">
