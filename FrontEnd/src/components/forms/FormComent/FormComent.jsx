@@ -6,7 +6,9 @@ import { comentSchema } from "@/src/validations/userSchema";
 import { toast } from "sonner";
 import { useState } from "react";
 
-export default function FormComent({ postId, profileId }) {
+export default function FormComent({ postId }) {
+  const profileId = typeof window !== 'undefined' && localStorage.getItem('profileId');
+
   const urlPostComent =
     "https://deployreciclame-production.up.railway.app/comments/save";
   const {
