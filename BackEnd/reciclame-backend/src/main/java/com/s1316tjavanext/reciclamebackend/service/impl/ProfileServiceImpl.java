@@ -1,14 +1,16 @@
 package com.s1316tjavanext.reciclamebackend.service.impl;
 
+import com.s1316tjavanext.reciclamebackend.dto.PostDto;
 import com.s1316tjavanext.reciclamebackend.dto.ProfileResponseDto;
 import com.s1316tjavanext.reciclamebackend.dto.UserProfileRequestDto;
 import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
-import com.s1316tjavanext.reciclamebackend.entity.Location;
-import com.s1316tjavanext.reciclamebackend.entity.Profile;
-import com.s1316tjavanext.reciclamebackend.entity.User;
+import com.s1316tjavanext.reciclamebackend.entity.*;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Category;
+import com.s1316tjavanext.reciclamebackend.mapper.PostMapper;
 import com.s1316tjavanext.reciclamebackend.mapper.ProfileMapper;
+import com.s1316tjavanext.reciclamebackend.repository.FavoriteRepository;
 import com.s1316tjavanext.reciclamebackend.repository.LocationRepository;
+import com.s1316tjavanext.reciclamebackend.repository.PostRepository;
 import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
 import com.s1316tjavanext.reciclamebackend.service.CloudinaryService;
 import com.s1316tjavanext.reciclamebackend.service.ProfileService;
@@ -31,6 +33,9 @@ public class ProfileServiceImpl implements ProfileService {
     private final ProfileMapper profileMapper;
     private final LocationRepository locationRepository;
     private final CloudinaryService cloudinaryService;
+    private final FavoriteRepository favoriteRepository;
+    private final PostRepository postRepository;
+    private final PostMapper postMapper;
 
     @Override
     public Optional<ProfileResponseDto> getProfile(UUID profileId) {
@@ -104,6 +109,36 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public List<ProfileResponseDto> getProfiles() {
         return profileMapper.profilesToProfilesResponseDto(profileRepository.findAll());
+    }
+
+    @Override
+    public List<PostDto> getFavoritePosts(UUID profileId) {
+        Optional<Profile> profile = profileRepository.findById(profileId);
+        if (profile.isPresent()){
+            List<Favorite> favorites = favoriteRepository.findAllByProfileId(profileId);
+
+            List <Post> posts = favorites.stream().map(Favorite::getPost).toList();
+            return postMapper.postsToPostsDto(posts);
+        }else throw new RuntimeException("profile id no encontrado");
+    }
+
+    @Override
+    public void updateFavoritePost(UUID profileId, UUID postId) {
+        Optional<Post> post = postRepository.findById(postId);
+        Optional<Profile> profile = profileRepository.findById(profileId);
+        if (post.isPresent() && profile.isPresent()){
+            Optional<Favorite> favoriteDB = favoriteRepository.findByPostIdAndProfileId(postId,profileId);
+            if (favoriteDB.isPresent()){
+                favoriteRepository.delete(favoriteDB.get());
+            }else {
+                Favorite favorite = new Favorite();
+                favorite.setPost(post.get());
+                favorite.setProfile(profile.get());
+                favoriteRepository.save(favorite);
+            }
+        }else{
+            throw new RuntimeException("ids not found");
+        }
     }
 
     private boolean isImageNotNullNotEmpty(MultipartFile mpf) {

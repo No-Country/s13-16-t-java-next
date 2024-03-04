@@ -7,7 +7,6 @@ package com.s1316tjavanext.reciclamebackend.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import lombok.*;
@@ -35,9 +34,6 @@ public class User {
     @Column(name = "id", nullable = false)
     private UUID userId;
     
-    @OneToOne(mappedBy = "user")
-    private Profile perfil;
-    
     @Column(name = "given_name", nullable=false)
     private String name;
     
@@ -52,10 +48,6 @@ public class User {
     
     @Column(name = "password", nullable = false)
     private String password;
-
-//    @OneToOne
-//    @JoinColumn(name = "province_id", referencedColumnName = "id")
-//    private Province province;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Profile profile;

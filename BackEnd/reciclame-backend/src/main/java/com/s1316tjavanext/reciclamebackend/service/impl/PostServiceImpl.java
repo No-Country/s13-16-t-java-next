@@ -2,10 +2,13 @@ package com.s1316tjavanext.reciclamebackend.service.impl;
 
 import com.s1316tjavanext.reciclamebackend.dto.PostDto;
 import com.s1316tjavanext.reciclamebackend.dto.PostRequestDto;
+import com.s1316tjavanext.reciclamebackend.entity.Comment;
+import com.s1316tjavanext.reciclamebackend.entity.Like;
 import com.s1316tjavanext.reciclamebackend.entity.Post;
 import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Status;
 import com.s1316tjavanext.reciclamebackend.mapper.PostMapper;
+import com.s1316tjavanext.reciclamebackend.repository.LikeRepository;
 import com.s1316tjavanext.reciclamebackend.repository.PostRepository;
 import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
 import com.s1316tjavanext.reciclamebackend.service.CloudinaryService;
@@ -17,10 +20,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -33,6 +33,7 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final ProfileRepository profileRepository;
+    private final LikeRepository likeRepository;
     private final PostMapper postMapper;
     private final CloudinaryService cloudinaryService;
 
@@ -58,8 +59,12 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Optional<PostDto> getPost(UUID id) {
-        return postRepository.findById(id)
-                .map(postMapper::postToPostDto);
+        Optional<Post> post = postRepository.findById(id);
+        post.ifPresent( post2 -> post2.getComments()
+                .sort(Comparator.comparing(Comment::getDate).reversed()
+                )
+        );
+        return post.map(postMapper::postToPostDto);
     }
 
     @Override
@@ -92,6 +97,28 @@ public class PostServiceImpl implements PostService {
                 .stream()
                 .map(postMapper::postToPostDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateProfilesLiked(UUID postId, UUID profileId) {
+        Optional<Post> post = postRepository.findById(postId);
+        Optional<Profile> profile = profileRepository.findById(profileId);
+        if (post.isPresent() && profile.isPresent()){
+            Optional<Like> likeDB = likeRepository.findByPostIdAndProfileId(postId,profileId);
+            if (likeDB.isPresent()){
+                likeRepository.delete(likeDB.get());
+            }else {
+                Like like = new Like();
+                like.setPost(post.get());
+                like.setProfile(profile.get());
+                likeRepository.save(like);
+            }
+            post.get().setLove(post.get().getProfilesLiked().size());
+            postRepository.save(post.get());
+        }else{
+            throw new RuntimeException("ids not found");
+        }
+
     }
 
     private boolean isImageNotNullNotEmpty(MultipartFile mpf) {

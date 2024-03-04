@@ -1,9 +1,7 @@
 package com.s1316tjavanext.reciclamebackend.mapper;
 
-import com.s1316tjavanext.reciclamebackend.dto.ProfileResponseDto;
-import com.s1316tjavanext.reciclamebackend.dto.UserCreateDTO;
-import com.s1316tjavanext.reciclamebackend.dto.UserProfileRequestDto;
-import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
+import com.s1316tjavanext.reciclamebackend.dto.*;
+import com.s1316tjavanext.reciclamebackend.entity.Post;
 import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -21,7 +19,8 @@ public interface ProfileMapper {
     @Mapping(source = "user", target = "userResponseDTO")
     @Mapping(source = "user.location.id", target = "userResponseDTO.location_id")
     ProfileResponseDto profileToProfileResponseDto(Profile profile);
-
+    @Mapping(target = "comments",ignore = true)
+    PostDto postToPostDto(Post post);
     List<ProfileResponseDto> profilesToProfilesResponseDto(List<Profile> profiles);
 
     UserResponseDTO userProfileRequesDtoToUserResponseDTO(UserProfileRequestDto userP);
@@ -30,6 +29,7 @@ public interface ProfileMapper {
 
     @InheritInverseConfiguration
     @Mapping(target = "posts", ignore = true)
+    @Mapping(target = "postsFavorite", ignore = true)
     Profile profileResponseDtoToProfile(ProfileResponseDto profileResponseDto);
 
 

@@ -1,7 +1,6 @@
 package com.s1316tjavanext.reciclamebackend.controller;
 
-import com.s1316tjavanext.reciclamebackend.dto.ProfileResponseDto;
-import com.s1316tjavanext.reciclamebackend.dto.UserProfileRequestDto;
+import com.s1316tjavanext.reciclamebackend.dto.*;
 import com.s1316tjavanext.reciclamebackend.service.ProfileService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -30,7 +29,22 @@ public class ProfileController {
     @GetMapping("/all")
     public ResponseEntity<List<ProfileResponseDto>> getProfiles(){
         return ResponseEntity.ok(profileService.getProfiles());
+    }
 
+    @GetMapping("/{profileId}/favoritePosts")
+    public ResponseEntity<List<PostDto>> getFavoritePosts(@PathVariable UUID profileId){
+        return ResponseEntity.ok(profileService.getFavoritePosts(profileId));
+    }
+
+    @PutMapping("/{profileId}/favorites")
+    public ResponseEntity<Void> updateFavoritePost(@PathVariable UUID profileId,
+                                                            @RequestBody PostFavoriteRequestDto postFavoriteRequestDto){
+        try {
+            profileService.updateFavoritePost(profileId,postFavoriteRequestDto.postId());
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException ignore){
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/update/{profileId}")
