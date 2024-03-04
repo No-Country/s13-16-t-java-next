@@ -1,10 +1,12 @@
 package com.s1316tjavanext.reciclamebackend.handler;
 
+import com.s1316tjavanext.reciclamebackend.exception.IdNotFoundException;
 import com.s1316tjavanext.reciclamebackend.exception.ObjectNotValidException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,13 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .badRequest()
                 .body(getErrorsMap(exception.getErrorMessages().stream().collect(Collectors.toList())));
+    }
+
+    @ExceptionHandler(IdNotFoundException.class)
+    public ResponseEntity<?> handleObjectNotValidException(IdNotFoundException exception) {   
+        return ResponseEntity
+                .badRequest()
+                .body(getErrorsMap(Arrays.asList(exception.getMessage())));
     }
 
     private Map<String, List<String>> getErrorsMap(List<String> errors) {

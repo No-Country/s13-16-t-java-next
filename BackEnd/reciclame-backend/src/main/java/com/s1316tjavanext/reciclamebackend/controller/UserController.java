@@ -64,12 +64,13 @@ public class UserController {
   @Operation(summary = "Edit a user")
   @PutMapping("/update/{id}")
   public ResponseEntity<UserResponseDTO> modificarUsuario(@PathVariable UUID id,@RequestBody UserRequestDTO userRequestDTO) {
-    try{
+    /*try{
 
     return ResponseEntity.ok().body(userService.EditUser(id,userRequestDTO));
     } catch (RuntimeException ex) {
       return ResponseEntity.notFound().build();
-    }
+    }*/
+    return ResponseEntity.ok().body(userService.EditUser(id,userRequestDTO));
 
   }
   

@@ -10,6 +10,7 @@ import com.s1316tjavanext.reciclamebackend.entity.Location;
 import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import com.s1316tjavanext.reciclamebackend.entity.Province;
 import com.s1316tjavanext.reciclamebackend.entity.User;
+import com.s1316tjavanext.reciclamebackend.exception.IdNotFoundException;
 import com.s1316tjavanext.reciclamebackend.mapper.UserMapper;
 import com.s1316tjavanext.reciclamebackend.repository.LocationRepository;
 import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
@@ -37,20 +38,6 @@ public class UsersServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final LocationRepository locationRepository;
     private final ObjectsValidator<UserRequestDTO> userValidator;
-
-
-//    private boolean validarRequisitosPassword(String password) {
-//        // Asegurar que la contraseña tiene al menos 8 caracteres, incluyendo mayúsculas y minúsculas
-//        return password.length() >= 8 && contieneMayuscula(password) && contieneMinuscula(password);
-//    }
-//
-//    private boolean contieneMayuscula(String password) {
-//        return !password.equals(password.toLowerCase());
-//    }
-//
-//    private boolean contieneMinuscula(String password) {
-//        return !password.equals(password.toUpperCase());
-//    }
 
     // Obtener un usuario
 
@@ -80,7 +67,7 @@ public class UsersServiceImpl implements UserService {
 
     @Transactional
   public UserResponseDTO EditUser(UUID id, UserRequestDTO userRequestDTO) {
-
+    userValidator.validate(userRequestDTO);
 
     Optional<UserResponseDTO> respuesta = getUser(id);
 
@@ -99,7 +86,7 @@ public class UsersServiceImpl implements UserService {
 
       return userMapper.userToUserResponseDTO(userRepository.save(user));
     } else {
-        throw new RuntimeException("no se encontro el usuario");
+        throw new IdNotFoundException("Usuario con id: " + id + " no encontrado");
     }
   }
 
