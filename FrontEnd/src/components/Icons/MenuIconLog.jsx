@@ -1,33 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useGetNotifications } from "@/src/hooks/useGetNotifications";
 import { Context } from "@/src/context/ContextProvider";
 
-export default function MenuIconLog(props) {
+export default function MenuIconLog({ profile }) {
   const { setIsLogged } = useContext(Context);
 
-  const [profile, setProfile] = useState({});
-
   const [menuOpen, setMenuOpen] = useState(false);
-  const [name, setName] = useState("");
 
   const { unread } = useGetNotifications();
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const perfilId = localStorage.getItem("profileId");
-      if (perfilId) {
-        fetch(
-          `https://deployreciclame-production.up.railway.app/profiles/${perfilId}`,
-        )
-          .then((response) => response.json())
-          .then((data) => setProfile(data));
-        setName(profile.userResponseDTO?.name);
-      }
-    }
-  }, [profile]);
 
   function toggleMenu() {
     setMenuOpen(!menuOpen);
@@ -51,7 +34,7 @@ export default function MenuIconLog(props) {
   return (
     <>
       <div className="cursor-pointer" onClick={toggleMenu}>
-        {menuOpen ? <XMarkIcon {...props} /> : <MenuIcon {...props} />}
+        {menuOpen ? <XMarkIcon  /> : <MenuIcon />}
       </div>
       <div
         className={`fixed left-0 top-16 z-50 h-full w-full md:hidden ${!menuOpen ? "-translate-x-full" : "translate-x-0"}`}
@@ -65,9 +48,9 @@ export default function MenuIconLog(props) {
           }
         >
           <div className="flex items-center gap-2 p-2">
-            {profile.photoId ? (
+            {profile?.photoId ? (
               <Image
-                src={profile.photoId}
+                src={profile?.photoId}
                 width={50}
                 height={50}
                 alt="Imagen de Perfil"
@@ -83,7 +66,7 @@ export default function MenuIconLog(props) {
               />
             )}
             <div className=" w-full flex-col p-2">
-              <h3 className="">{name}</h3>
+              <h3 className="">{profile?.userResponseDTO?.name + " " + profile?.userResponseDTO?.lastName}</h3>
               <Link
                 href={"/perfil"}
                 className={`text-sm text-primary-green underline hover:cursor-pointer`}

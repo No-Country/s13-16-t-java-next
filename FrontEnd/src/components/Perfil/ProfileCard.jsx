@@ -78,7 +78,7 @@ export default function ProfileCard({ profile }) {
         </nav>
       </article>
       {profile.posts && (
-        <div className="grid grid-cols-4 px-16">
+        <div className="grid grid-cols-4 px-16 gap-5">
           {profile.posts.map((post) => (
             <CardPost key={post.id} publication={post} />
           ))}
