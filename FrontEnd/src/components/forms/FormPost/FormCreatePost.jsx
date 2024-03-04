@@ -41,7 +41,7 @@ export default function FormCreatePost({ categories }) {
 
   const profileId =
     typeof window !== "undefined" && localStorage.getItem("profileId");
-
+    
   const [objectImage, setObjectImage] = useState({});
 
   const toggleSwitch = () => {
@@ -56,6 +56,8 @@ export default function FormCreatePost({ categories }) {
     formData.append("image", objectImage);
     formData.append("enableComments", isActive);
     formData.append("profileId", profileId);
+
+
 
     const response = await fetch(URLPostData, {
       method: "POST",

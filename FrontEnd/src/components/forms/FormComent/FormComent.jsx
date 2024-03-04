@@ -6,7 +6,7 @@ import { comentSchema } from "@/src/validations/userSchema";
 import { toast } from "sonner";
 import { useState } from "react";
 
-export default function FormComent({ postId }) {
+export default function FormComent({ postId, profileId }) {
   const urlPostComent =
     "https://deployreciclame-production.up.railway.app/comments/save";
   const {
@@ -28,7 +28,9 @@ export default function FormComent({ postId }) {
       postId: postId,
       description: data.description,
       date: currentDate,
+      profileId: profileId,
     };
+
 
     const response = await fetch(urlPostComent, {
       method: "POST",

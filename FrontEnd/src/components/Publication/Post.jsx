@@ -12,10 +12,11 @@ import LikeIcon from "../Icons/LikeIcon";
 import { PencilIcon, DeleteIcon } from "../Icons/EditIcon";
 
 export default function Post({ post, post_id }) {
+  const { enableComments, id, profileResponseDto } = post;
   const [PostData, setPostData] = useState(post);
+  const [openDeleteMenu, setOpenDeleteMenu] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
-
-  const { enableComments, id } = post;
+  const [checked, setChecked] = useState(enableComments);
 
   setInterval(() => {
     setIntervalId(Math.random());
@@ -24,43 +25,30 @@ export default function Post({ post, post_id }) {
   useEffect(() => {
     async function fetchPost() {
       const data = await getPublication(post_id);
-      setPostData(data);
-      return data;
+      setPostData((prevData) => ({ ...prevData, ...data }));
     }
     fetchPost();
   }, [intervalId]);
-
-  const [openDeleteMenu, setOpenDeleteMenu] = useState(false);
+  const { title, category, description, comments, imageUrl, love } = PostData;
 
   const userLoggedId =
     typeof window !== "undefined" && localStorage.getItem("userLoggedId");
 
-  const { title, category, description, comments, imageUrl, love } = PostData;
-  const [like, setLike] = useState(love);
-  const [liked, setLiked] = useState(false);
+  const isLogged =
+    typeof window !== "undefined" && localStorage.getItem("isLogged");
+
+  const router = useRouter();
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
-
-  const router = useRouter();
-
-  const isLogged =
-    typeof window !== "undefined" && localStorage.getItem("isLogged");
 
   const handleLikeClick = () => {
     if (!isLogged) {
       router.push("/login");
       return;
     }
-    if (liked) {
-      setLike(like - 1);
-    } else {
-      setLike(like + 1);
-    }
-    setLiked(!liked);
   };
-
   const isOwner =
     userLoggedId === post?.profileResponseDto?.userResponseDTO?.userId;
 
@@ -77,6 +65,11 @@ export default function Post({ post, post_id }) {
     const data = await res.json();
     return data;
   }
+
+  const handleChangeChecked = () => {
+    // Cambia el estado cuando se hace clic en el checkbox
+    setChecked(!checked);
+  };
 
   async function DeletePost() {
     setOpenDeleteMenu(false);
@@ -148,20 +141,30 @@ export default function Post({ post, post_id }) {
           <div className="max-[750px]:translate-y-30  mt-0 flex justify-between lg:static">
             <div className="flex items-center gap-3">
               <Image
-                src={post.imgProfile ? post.imgProfile : "/image/profile1.png"}
+                src={
+                  post?.profileResponseDto.photoId
+                    ? post?.profileResponseDto.photoId
+                    : "/image/profile1.png"
+                }
                 alt="image Profile"
                 height={70}
                 width={70}
                 className="rounded-full bg-[#b8b8b8]"
               />
-              <p>{post.nameUser ? post.nameUser : "Usuario que publica"}</p>
+              <p>
+                {profileResponseDto?.userResponseDTO.name
+                  ? profileResponseDto?.userResponseDTO.name +
+                    " " +
+                    profileResponseDto?.userResponseDTO.lastName
+                  : "Usuario que publica"}
+              </p>
             </div>
             <Button
               props={love}
               handle={handleLikeClick}
               className=" flex items-center gap-2"
             >
-              <span>{like}</span>
+              <span>{love}</span>
               <LikeIcon />
             </Button>
           </div>
@@ -199,6 +202,7 @@ export default function Post({ post, post_id }) {
                   type="checkbox"
                   name="checkbox-enable-comment"
                   id="checkbox-enable-comment"
+                  onChange={handleChangeChecked}
                 />
                 <span
                   className={`absolute bottom-0 left-0 h-6 w-6 transform rounded-full bg-white shadow-md transition-transform duration-300 ${enableComments ? "translate-x-full" : ""}`}
@@ -208,10 +212,10 @@ export default function Post({ post, post_id }) {
             </div>
           )}
 
-          {isLogged && mounted && enableComments && (
+          {isLogged && mounted && (
             <>
-              <Coments coments={comments} />
-              <FormComent postId={post.id} />
+              <Coments coments={comments} profileId={profileResponseDto?.id} />
+              <FormComent postId={post.id} profileId={profileResponseDto?.id} />
             </>
           )}
         </div>
