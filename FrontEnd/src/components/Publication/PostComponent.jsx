@@ -15,7 +15,7 @@ export default function PostComponent({ post }) {
   const isLogged =
     typeof window !== "undefined" && localStorage.getItem("isLogged");
 
-  const [checked, setChecked] = useState(true);
+  
   const [isEdit, setIsEdit] = useState(false);
   const [commentEdit, setCommentEdit] = useState();
 
@@ -24,7 +24,7 @@ export default function PostComponent({ post }) {
       router.push("/login");
       return;
     }
-  };
+  }
 
   const userLoggedId =
     typeof window !== "undefined" && localStorage.getItem("userLoggedId");
@@ -32,23 +32,9 @@ export default function PostComponent({ post }) {
   const isOwner =
     userLoggedId === post?.profileResponseDto?.userResponseDTO?.userId;
 
-  async function toggleSwitch() {
-    const form = new FormData();
-    form.append("enableComments", checked);
+ 
 
-    const res = await fetch(
-      `https://deployreciclame-production.up.railway.app/posts/update/${post?.id}`,
-      {
-        body: form,
-      },
-    );
-    const data = await res.json();
-    return data;
-  }
-
-  const handleChangeChecked = () => {
-    setChecked(!checked);
-  };
+ 
 
   return (
     <>
@@ -118,7 +104,7 @@ export default function PostComponent({ post }) {
               <Link
                 target="_blank"
                 href={
-                  isLogged
+                  isLogged && isOwner
                     ? `https://wa.me/${post.profileResponseDto.userResponseDTO.phone}?text=Hola%20${post.profileResponseDto.userResponseDTO.name}%20me%20interesa%20tu%20publicación%20de%20${post.title}`
                     : "/login"
                 }
@@ -129,30 +115,7 @@ export default function PostComponent({ post }) {
             )}
             {isLogged && (
               <>
-                {isOwner && (
-                  <div className="flex items-center gap-2">
-                    {post?.enableComments && (
-                      <label
-                        onChange={() => toggleSwitch}
-                        className={`relative h-6 w-12 rounded-full bg-gray-300 focus:outline-none ${post.enableComments ? "bg-primary-green" : "bg-[#E3E3E3]"}`}
-                        htmlFor="checkbox-enable-comment"
-                      >
-                        <input
-                          checked={post.enableComments}
-                          className="hidden"
-                          type="checkbox"
-                          name="checkbox-enable-comment"
-                          id="checkbox-enable-comment"
-                          onChange={handleChangeChecked}
-                        />
-                        <span
-                          className={`absolute bottom-0 left-0 h-6 w-6 transform rounded-full bg-white shadow-md transition-transform duration-300 ${post.enableComments ? "translate-x-full" : ""}`}
-                        ></span>
-                      </label>
-                    )}
-                    <p className="text-[#D9D9D9]">Activar Comentarios</p>
-                  </div>
-                )}
+               
                 {post?.comments && (
                   <Coments
                     coments={post.comments}
@@ -160,7 +123,7 @@ export default function PostComponent({ post }) {
                     setCommentEdit={setCommentEdit}
                   />
                 )}
-                {post?.id && (
+                {post?.id && post?.enableComments && (
                   <FormComent
                     postId={post.id}
                     isEdit={isEdit}
