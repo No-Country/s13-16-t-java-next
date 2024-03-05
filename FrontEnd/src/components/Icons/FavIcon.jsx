@@ -1,12 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
+import { toast } from "sonner";
+
 export default function FavIcon({ isFav }) {
   const [isFilled, setIsFilled] = useState(isFav);
 
   const handleClick = () => {
     setIsFilled(!isFilled);
-    alert("Añadido a favoritos");
+    if (!isFilled == true) {
+      toast.success("Agregado a favoritos");
+    }
   };
   return (
     <svg
