@@ -126,7 +126,7 @@ export default function FormComent({ postId, isEdit, setIsEdit, commentEdit }) {
               className="w-1/2 rounded-3xl bg-primary-green p-1 text-lg font-[500] text-white disabled:bg-gray-300 disabled:text-black"
               type="submit"
             >
-              Enviar
+              Editar
             </button>
             <button
               className="w-1/2 rounded-3xl bg-red-300 p-1 text-lg font-[500] text-white disabled:bg-gray-300 disabled:text-black"
