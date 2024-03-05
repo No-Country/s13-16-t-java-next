@@ -38,7 +38,7 @@ export default function Submenu({ profile }) {
             Donaciones
           </Link>
           <Link
-            href={"/configuracion"}
+            href={`/configuracion/perfil/${profile?.id}`}
             className="border-secondary-violet hover:border-b-2"
           >
             Configuración

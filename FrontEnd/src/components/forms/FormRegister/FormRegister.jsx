@@ -53,6 +53,7 @@ function FormRegister({ provinces, categories }) {
 
   const [monthSelected, setMonthSelected] = React.useState(0);
   const [yearSelected, setYearSelected] = React.useState(2000);
+  const [profileId, setProfileId] = React.useState("");
   const [DaysOfMonth, setDaysOfMonth] = React.useState(
     getDaysInMonth(yearSelected, monthSelected),
   );
@@ -89,15 +90,13 @@ function FormRegister({ provinces, categories }) {
     };
 
     try {
-      await PostNewUser(JSON.stringify(formData));
+      const ProfileID = await PostNewUser(JSON.stringify(formData));
+      console.log(ProfileID);
+      setProfileId(ProfileID);
       setModalVisible(true);
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
     }
-  };
-
-  const closeModal = () => {
-    setModalVisible(false);
   };
 
   return (
@@ -354,8 +353,8 @@ function FormRegister({ provinces, categories }) {
         </div>
       </form>
       {modalVisible && (
-        <div className="fixed inset-0 z-50 grid h-full w-full place-items-center bg-white backdrop-blur-sm" onClick={()=>closeModal}>
-          <Configuration categories={categories} setModalVisible={setModalVisible} />
+        <div className="fixed inset-0 z-50 grid h-full w-full place-items-center bg-white backdrop-blur-sm">
+          <Configuration categories={categories} profileId={profileId} />
         </div>
       )}
     </>
