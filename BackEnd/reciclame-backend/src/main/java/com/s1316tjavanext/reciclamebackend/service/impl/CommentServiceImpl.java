@@ -2,6 +2,7 @@ package com.s1316tjavanext.reciclamebackend.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -88,13 +89,11 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDto updateComment(UUID commentId, CommentDto commentDto) {
-        CommentDto commentToUpdate = this.getCommentById(commentId);
+        Optional<Comment> comment = commentRepository.findById(commentId);
 
-        if (commentToUpdate != null) {
-                Comment comment = commentMapper.commentDtoToComment(commentToUpdate);
-                comment.setDescription(commentDto.description());
-                commentRepository.save(comment);
-                return commentMapper.commentToCommentDto(comment); 
+        if (comment.isPresent()) {
+                comment.get().setDescription(commentDto.description());
+                return commentMapper.commentToCommentDto(commentRepository.save(comment.get()));
         }
         return null;
     }  
