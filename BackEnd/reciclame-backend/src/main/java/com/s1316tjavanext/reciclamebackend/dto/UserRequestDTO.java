@@ -22,6 +22,7 @@ public record UserRequestDTO(
 
         @NotBlank(message = INVALID_NAME)
         @Length(min = 3, message = INVALID_LENGTH_NAME)
+//        @NotBlank(message = "Este es un campo obligatorio")
         String lastName,
 
         @NotBlank(message = INVALID_EMAIL)
@@ -30,6 +31,7 @@ public record UserRequestDTO(
 
         @NotBlank(message = INVALID_PHONE_NUMBER)
         @Length(min = 9, max = 30, message = INVALID_LENGTH_PHONE_NUMBER)
+//        @NotBlank(message = "Este es un campo obligatorio")
         String phone,
 
         @NotBlank(message = INVALID_PASSWORD)

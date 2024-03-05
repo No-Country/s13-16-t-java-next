@@ -10,17 +10,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ObjectNotValidException.class)
-    public ResponseEntity<?> handleObjectNotValidException(ObjectNotValidException exception) {
-        return ResponseEntity
-                .badRequest()
-                .body(getErrorsMap(exception.getErrorMessages().stream().collect(Collectors.toList())));
-    }
 
     @ExceptionHandler(IdNotFoundException.class)
     public ResponseEntity<?> handleObjectNotValidException(IdNotFoundException exception) {   
@@ -29,8 +22,16 @@ public class GlobalExceptionHandler {
                 .body(getErrorsMap(Arrays.asList(exception.getMessage())));
     }
 
-    private Map<String, List<String>> getErrorsMap(List<String> errors) {
-        Map<String, List<String>> errorResponse = new HashMap<>();
+    @ExceptionHandler(ObjectNotValidException.class)
+    public ResponseEntity<?> handleObjectNotValidException(ObjectNotValidException exception) {
+
+        return ResponseEntity
+                .badRequest()
+                .body(getErrorsMap(exception.getErrorMessages()));
+    }
+
+    private Map<String, Object> getErrorsMap(Object errors) {
+        Map<String, Object> errorResponse = new HashMap<>();
         errorResponse.put("errors", errors);
         return errorResponse;
     }

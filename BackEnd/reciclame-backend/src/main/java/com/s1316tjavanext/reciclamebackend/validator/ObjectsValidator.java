@@ -17,14 +17,14 @@ public class ObjectsValidator<T> {
 
     public void validate(T objectToValidate) {
         Set<ConstraintViolation<T>> violations = validator.validate(objectToValidate);
-
-        if (!violations.isEmpty()) {
-            var errorMessages = violations
-                    .stream()
-                    .map(ConstraintViolation::getMessage)
-                    .collect(Collectors.toSet());
-
-            throw new ObjectNotValidException(errorMessages);
+        Map<String, List<String>> errorResponse = new HashMap<>();
+        if(!violations.isEmpty()){
+            violations.forEach(violation -> {
+                String property = violation.getPropertyPath().toString();
+                String message = violation.getMessage();
+                errorResponse.put(property, Arrays.asList(message));
+            });
+            throw new ObjectNotValidException(errorResponse);
         }
     }
 }

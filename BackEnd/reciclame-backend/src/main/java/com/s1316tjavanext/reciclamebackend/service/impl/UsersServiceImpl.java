@@ -47,9 +47,9 @@ public class UsersServiceImpl implements UserService {
     ////////ESTE ES PARA CREAR AL USUARIO USANDO VALIDACIONES //////////
     
     
-    public UserResponseDTO createUser(UserRequestDTO userRequestDTO)
-             {
-                 userValidator.validate(userRequestDTO);
+    public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
+
+        userValidator.validate(userRequestDTO);
         UserResponseDTO userResponse = userMapper.userRequestDTOToUserResponseDTO(userRequestDTO);
         User user = userMapper.userResponseDTOToUser(userResponse);
         user.setDeleted(false);

@@ -6,13 +6,12 @@ import lombok.Setter;
 import java.util.List;
 import java.util.Map;
 
-import java.util.Set;
 
 @RequiredArgsConstructor
 @Setter
 @Getter
 public class ObjectNotValidException extends RuntimeException{
 
-    private final Set<String> ErrorMessages;
+    private final Map<String, List<String>> ErrorMessages;
 
 }
