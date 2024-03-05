@@ -39,14 +39,14 @@ Reciclame es una red social dedicada a promover la reutilización de materiales 
 
 | Nombre               | GitHub                                      |
 |----------------------|---------------------------------------------|
-| Eliana Garaventa      | <a href="https://www.linkedin.com/in/eliana-garaventa-906b83207/"><img src="https://media.licdn.com/dms/image/D4D35AQHZZRue3jMKqQ/profile-framedphoto-shrink_800_800/0/1703432184849?e=1710198000&v=beta&t=awLUDDPCv78F5PMKxGq6L38JfyFdJ7f5G7oZUwMCKcI" alt="Eliana Garaventa" width="180"/></a> |
+| Eliana Garaventa      | [![Eliana Garaventa](https://avatars.githubusercontent.com/u/114009849?v=4&s=180)](https://github.com/EliGaraventa) |
 
 ### QA
 
 | Nombre               | GitHub                                      |
 |----------------------|---------------------------------------------|
-| Johana Baccei      | [![Johana Baccei]() |
-| Alejandra Chaves      | [![Alejandra Chaves]()]() |
+| Johana Baccei      | [![Johana Baccei](https://avatars.githubusercontent.com/u/126679754?v=4&s=180)](https://github.com/bacc708) |
+| Alejandra Chaves      | [![Alejandra Chaves](https://avatars.githubusercontent.com/u/145710127?v=4&s=180)](https://github.com/Alejita1971) |
 | Juan Passadore  | <a href="https://github.com/juampypassa"><img src="https://avatars.githubusercontent.com/u/50932852?v=4&s=180" alt="Juan Pablo Passadore" width="180"/></a> |
 
 

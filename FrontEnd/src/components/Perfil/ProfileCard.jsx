@@ -8,8 +8,6 @@ import CardPost from "../CardPost";
 export default function ProfileCard({ profile }) {
   const pathname = usePathname();
 
-  console.log(profile);
-
   const profileData = {
     publications: { tittle: "Publicaciones", amount: "123" },
     donations: { tittle: "Donaciones", amount: "123" },

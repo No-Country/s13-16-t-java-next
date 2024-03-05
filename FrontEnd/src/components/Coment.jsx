@@ -6,17 +6,17 @@ import CommentSubmenu from "./CommentSubmenu";
 import { toast } from "sonner";
 import { useGetProfile } from "../hooks/useGetProfile";
 
-export default function Coment({ coment }) {
+export default function Coment({ coment, setIsEdit, setCommentEdit }) {
   const { description, date: dateTime } = coment;
 
-  const profileId = typeof window !== 'undefined' && localStorage.getItem('userLoggedId');
+  const profileId =
+    typeof window !== "undefined" && localStorage.getItem("profileId");
 
   const { profile } = useGetProfile(coment.profileId);
 
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   const DATE = tzDate(`${dateTime}Z`, userTimeZone);
-
 
   const dateLongFormated = format(DATE, "h:mm A · MMMM D, YYYY");
 
@@ -30,25 +30,24 @@ export default function Coment({ coment }) {
     const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
 
     if (years > 0) {
-      return `${years} ${years === 1 ? 'año' : 'años'}`;
-    }
-    else if (months > 0) {
-      return `${months} ${months === 1 ? 'mes' : 'meses'}`;
+      return `${years} ${years === 1 ? "año" : "años"}`;
+    } else if (months > 0) {
+      return `${months} ${months === 1 ? "mes" : "meses"}`;
     } else if (days > 0) {
-      return `${days} ${days === 1 ? 'día' : 'días'}`;
+      return `${days} ${days === 1 ? "día" : "días"}`;
     } else if (hours > 0) {
-      return `${hours} ${hours === 1 ? 'hora' : 'horas'}`;
+      return `${hours} ${hours === 1 ? "hora" : "horas"}`;
     } else if (minutes > 0) {
-      return `${minutes} ${minutes === 1 ? 'minuto' : 'minutos'}`;
+      return `${minutes} ${minutes === 1 ? "minuto" : "minutos"}`;
     } else {
-      return `${seconds} ${seconds === 1 ? 'segundo' : 'segundos'}`;
+      return `${seconds} ${seconds === 1 ? "segundo" : "segundos"}`;
     }
   }
 
   const endDate = new Date();
   const dateShortFormated = dateDiff(DATE, endDate);
 
-  async function handleDeleteComment () {
+  async function handleDeleteComment() {
     try {
       const response = await fetch(
         `https://deployreciclame-production.up.railway.app/comments/delete/${coment.id}`,
@@ -69,13 +68,13 @@ export default function Coment({ coment }) {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-3 p-3">
         <div className="flex items-center gap-2">
-          {profile?.photoId && profile?.userResponseDTO.name && profile?.userResponseDTO.lastName && (
+          {profile?.photoId &&
+            profile?.userResponseDTO.name &&
+            profile?.userResponseDTO.lastName && (
             <>
               <Image
                 src={
-                  profile.photoId
-                    ? profile.photoId
-                    : "/image/profile1.png"
+                  profile.photoId ? profile.photoId : "/image/profile1.png"
                 }
                 alt={`Imagen de usuario ${profile.userResponseDTO.name}`}
                 height={50}
@@ -86,8 +85,8 @@ export default function Coment({ coment }) {
                 <p>
                   {profile?.userResponseDTO.name
                     ? profile.userResponseDTO.name +
-                  " " +
-                  profile.userResponseDTO.lastName
+                      " " +
+                      profile.userResponseDTO.lastName
                     : "usuario"}
                 </p>
                 <span
@@ -102,7 +101,12 @@ export default function Coment({ coment }) {
           )}
         </div>
         {profileId === coment.profileId && (
-          <CommentSubmenu onDeleteComment={handleDeleteComment} />
+          <CommentSubmenu
+            onDeleteComment={handleDeleteComment}
+            setIsEdit={setIsEdit}
+            coment={coment}
+            setCommentEdit={setCommentEdit}
+          />
         )}
       </div>
       <p className="mb-2 text-justify text-sm">{description}</p>

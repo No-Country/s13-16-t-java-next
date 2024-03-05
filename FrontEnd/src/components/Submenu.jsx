@@ -4,11 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useContext } from "react";
 import { Context } from "../context/ContextProvider";
+import { ProfileImageSkeleton } from "./skeletons";
 
 export default function Submenu({ profile }) {
   const { logOut } = useContext(Context);
-
-
  
   return (
     <div className="group relative">
@@ -22,13 +21,7 @@ export default function Submenu({ profile }) {
           priority
         />
       ) : (
-        <Image
-          width={40}
-          height={40}
-          className="rounded-full"
-          src="/image/profile1.png"
-          alt="Foto de perfil"
-        />
+        <ProfileImageSkeleton />
       )}
       <div className="absolute -bottom-[164px] right-0 pt-5">
         <div className="hidden h-36 w-40 flex-col justify-between rounded-xl border bg-white p-3 shadow-lg md:group-hover:flex">
@@ -45,7 +38,7 @@ export default function Submenu({ profile }) {
             Donaciones
           </Link>
           <Link
-            href={"/configuracion"}
+            href={`/configuracion/perfil/${profile?.id}`}
             className="border-secondary-violet hover:border-b-2"
           >
             Configuración

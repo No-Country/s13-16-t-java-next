@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import React, { useState } from 'react'
-import Button from '../Button';
+import Image from "next/image";
+import React, { useState } from "react";
+import Button from "../Button";
 import Coments from "@/src/components/Coments";
 import FormComent from "@/src/components/forms/FormComent/FormComent";
 import WspIcon from "../Icons/WspIcon";
@@ -9,21 +9,22 @@ import LikeIcon from "../Icons/LikeIcon";
 
 import { useRouter } from "next/navigation";
 
-export default function PostComponent({post}) {
-
+export default function PostComponent({ post }) {
   const router = useRouter();
 
   const isLogged =
     typeof window !== "undefined" && localStorage.getItem("isLogged");
 
-  const [checked, setChecked] = useState(true);
+  
+  const [isEdit, setIsEdit] = useState(false);
+  const [commentEdit, setCommentEdit] = useState();
 
   const handleLikeClick = () => {
     if (!isLogged) {
       router.push("/login");
       return;
     }
-  };
+  }
 
   const userLoggedId =
     typeof window !== "undefined" && localStorage.getItem("userLoggedId");
@@ -31,28 +32,14 @@ export default function PostComponent({post}) {
   const isOwner =
     userLoggedId === post?.profileResponseDto?.userResponseDTO?.userId;
 
-  async function toggleSwitch() {
-    const form = new FormData();
-    form.append("enableComments", checked);
+ 
 
-    const res = await fetch(
-      `https://deployreciclame-production.up.railway.app/posts/update/${post?.id}`,
-      {
-        body: form,
-      },
-    );
-    const data = await res.json();
-    return data;
-  }
-
-  const handleChangeChecked = () => {
-    setChecked(!checked);
-  };
+ 
 
   return (
     <>
       {post && (
-        <div className="max-lg:mx-auto flex justify-center flex-wrap">
+        <div className="flex flex-wrap justify-center max-lg:mx-auto">
           <div className="flex w-full max-w-96 flex-col gap-8 p-5 md:max-w-[35rem] lg:p-20 xl:p-24">
             <picture className="mx-auto items-center justify-center rounded-2xl lg:flex ">
               {post?.imageUrl && (
@@ -110,12 +97,14 @@ export default function PostComponent({post}) {
               {post?.category}
             </p>
             <p className="text-justify">{post?.description}</p>
-  
-            {post?.title && post?.profileResponseDto.userResponseDTO.phone && post?.profileResponseDto.userResponseDTO.name && (
+
+            {post?.title &&
+              post?.profileResponseDto.userResponseDTO.phone &&
+              post?.profileResponseDto.userResponseDTO.name && (
               <Link
                 target="_blank"
                 href={
-                  isLogged
+                  isLogged && isOwner
                     ? `https://wa.me/${post.profileResponseDto.userResponseDTO.phone}?text=Hola%20${post.profileResponseDto.userResponseDTO.name}%20me%20interesa%20tu%20publicación%20de%20${post.title}`
                     : "/login"
                 }
@@ -126,35 +115,22 @@ export default function PostComponent({post}) {
             )}
             {isLogged && (
               <>
-                {isOwner && (
-                  <div className="flex items-center gap-2">
-                    {post?.enableComments && (
-                      <label
-                        onChange={() => toggleSwitch}
-                        className={`relative h-6 w-12 rounded-full bg-gray-300 focus:outline-none ${post.enableComments ? "bg-primary-green" : "bg-[#E3E3E3]"}`}
-                        htmlFor="checkbox-enable-comment"
-                      >
-                        <input
-                          checked={post.enableComments}
-                          className="hidden"
-                          type="checkbox"
-                          name="checkbox-enable-comment"
-                          id="checkbox-enable-comment"
-                          onChange={handleChangeChecked}
-                        />
-                        <span
-                          className={`absolute bottom-0 left-0 h-6 w-6 transform rounded-full bg-white shadow-md transition-transform duration-300 ${post.enableComments ? "translate-x-full" : ""}`}
-                        ></span>
-                      </label>
-                    )}
-                    <p className="text-[#D9D9D9]">Activar Comentarios</p>
-                  </div>
-                )}
+               
                 {post?.comments && (
-                  <Coments coments={post.comments} />
+                  <Coments
+                    coments={post.comments}
+                    setIsEdit={setIsEdit}
+                    setCommentEdit={setCommentEdit}
+                  />
                 )}
-                {post?.id && (
-                  <FormComent postId={post.id} />
+                {post?.id && post?.enableComments && (
+                  <FormComent
+                    postId={post.id}
+                    isEdit={isEdit}
+                    setIsEdit={setIsEdit}
+                    commentEdit={commentEdit}
+                    setCommentEdit={setCommentEdit}
+                  />
                 )}
               </>
             )}
@@ -162,5 +138,5 @@ export default function PostComponent({post}) {
         </div>
       )}
     </>
-  )
+  );
 }

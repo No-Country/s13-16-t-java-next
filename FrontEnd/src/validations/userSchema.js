@@ -16,11 +16,17 @@ export const userRegisterSchema = z
     email: z.string().min(1, { message: "Ingrese su mail" }).email({
       message: "Ingrese un mail valido",
     }),
-    password: z.string().min(8, {
-      message: "La contraseña debe tener minimo  8 caracteres",
-    }),
+    password: z
+      .string()
+      .min(8, {
+        message: "La contraseña debe tener mínimo 8 caracteres",
+      })
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, {
+        message:
+          "La contraseña debe tener al menos una mayuscula, una minuscula y un carácter especial.",
+      }),
     confirmPassword: z.string().min(8, {
-      message: "La contraseña debe tener minimo  8 caracteres",
+      message: "La contraseña debe tener mínimo 8 caracteres",
     }),
     phone: z
       .string()
@@ -37,6 +43,7 @@ export const userRegisterSchema = z
     path: ["confirmPassword"],
   });
 
+
 export const publicationSchema = z.object({
   title: z.string().min(1, { message: "Ingresa un titulo" }),
   description: z.string().min(1, { message: "Ingresa una descripción" }),
@@ -47,3 +54,4 @@ export const publicationSchema = z.object({
 export const comentSchema = z.object({
   description: z.string().min(1, { message: "No se pueden enviar comentarios vacios" }),
 })
+
