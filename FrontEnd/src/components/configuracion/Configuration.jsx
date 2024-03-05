@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { AddIcon } from "../Icons";
 import Link from "next/link";
@@ -10,42 +10,23 @@ export default function Configuration({ categories }) {
   const [selectedCategories, setselectedCategories] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null)
   const [imagePreview, setImagePreview] = useState(null);
-  const [ setPerfilId] = useState("");
-  const [mounted, setMounted] = React.useState(false);
-
   const router = useRouter();
-  const profId = "	2b650518-3d02-427a-9eb6-679665226302";
   const handleCategoriaClick = (categoria) => {
     if (
       selectedCategories.length === 0 &&
       !selectedCategories.includes(categoria)
     ) {
-     
-     
       setselectedCategories([categoria]);
     } else if (selectedCategories.includes(categoria)) {
-     
       setselectedCategories(selectedCategories.filter((c) => c !== categoria));
     } else if (selectedCategories.length < 3) {
-     
       setselectedCategories([...selectedCategories, categoria]);
     } else {
-    
       toast.error("Solo se pueden seleccionar hasta tres categorías");
     }
-
-    
-   
   };
 
-  useEffect(() => {
-    setMounted(true);
-
-    const storedPerfilId = localStorage.getItem("profileId");
-    setPerfilId(storedPerfilId);
-  }, []);
-
-  if (!mounted) return null;
+  const profileId = typeof window !== "undefined" && localStorage.getItem("profileId");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -54,15 +35,13 @@ export default function Configuration({ categories }) {
     if (selectedCategories.length === 0 && selectedFile == null) {
       toast.error("Debe seleccionar al menos una categoría");
     }
-    // Crear el objeto FormData y agregar la imagen y las categorías
     const formData = new FormData();
     formData.append("image", selectedFile ? selectedFile : new Blob());
     formData.append("categories", selectedCategories);
   
-    // Enviar la solicitud de formulario con el archivo y las categorías seleccionadas
     try {
       const response = await fetch(
-        `https://deployreciclame-production.up.railway.app/profiles/complete-profile/${profId}`,
+        `https://deployreciclame-production.up.railway.app/profiles/complete-profile/${profileId}`,
         {
           method: "PUT",
           body: formData,

@@ -89,15 +89,18 @@ function FormRegister({ provinces, categories }) {
     };
 
     try {
-      await PostNewUser(JSON.stringify(formData));
-      setModalVisible(true);
+      const data = await PostNewUser(JSON.stringify(formData));
+      
+      if (typeof window !== "undefined" && data) {
+        localStorage.setItem("userLoggedId", data.userId);
+        localStorage.setItem("profileId", data.profileId);
+        localStorage.setItem("isLogged", true)
+        setModalVisible(true);
+      }
+
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
     }
-  };
-
-  const closeModal = () => {
-    setModalVisible(false);
   };
 
   return (
@@ -354,8 +357,8 @@ function FormRegister({ provinces, categories }) {
         </div>
       </form>
       {modalVisible && (
-        <div className="fixed inset-0 z-50 grid h-full w-full place-items-center bg-white backdrop-blur-sm" onClick={()=>closeModal}>
-          <Configuration categories={categories} setModalVisible={setModalVisible} />
+        <div className="fixed inset-0 z-50 grid h-full w-full place-items-center bg-white backdrop-blur-sm">
+          <Configuration categories={categories} />
         </div>
       )}
     </>

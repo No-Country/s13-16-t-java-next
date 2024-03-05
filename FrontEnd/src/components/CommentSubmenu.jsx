@@ -2,18 +2,26 @@ import React from "react";
 import { CommentMenuIcon } from "./Icons/CommentMenuIcon";
 import TrashIcon, { EditIcon } from "./Icons/EditIcon";
 
-export default function CommentSubmenu({onDeleteComment}) {
+export default function CommentSubmenu({
+  onDeleteComment,
+  setIsEdit,
+  coment,
+  setCommentEdit,
+}) {
   return (
     <div className="group relative">
-      <div className="hover:cursor-pointer p-5 md:block">
+      <div className="p-5 hover:cursor-pointer">
         <CommentMenuIcon />
       </div>
-      <div className="absolute bottom-0 right-0 hidden h-[82px] w-32 flex-col gap-2 rounded-xl border justify-between bg-white p-4 shadow-lg md:group-hover:flex">
+      <div className="absolute -bottom-14 right-2 hidden h-[82px] w-32 flex-col justify-between gap-2 rounded-xl border bg-white p-4 shadow-lg group-hover:flex">
         <button
-          href={"/nuevopost"}
-          className="flex gap-3 border-secondary-violet hover:border-b-2 items-center"
+          onClick={() => {
+            setIsEdit(true);
+            setCommentEdit(coment);
+          }}
+          className="flex items-center gap-3 border-secondary-violet hover:border-b-2"
         >
-          <EditIcon />  
+          <EditIcon />
           <span>Editar</span>
         </button>
         <button
@@ -21,7 +29,7 @@ export default function CommentSubmenu({onDeleteComment}) {
           className="flex gap-3 border-secondary-violet hover:border-b-2"
           onClick={onDeleteComment}
         >
-          <TrashIcon /> 
+          <TrashIcon />
           <span>Eliminar</span>
         </button>
       </div>
