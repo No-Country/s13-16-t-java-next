@@ -95,9 +95,9 @@ function FormRegister({ provinces, categories }) {
         localStorage.setItem("userLoggedId", data.userId);
         localStorage.setItem("profileId", data.profileId);
         localStorage.setItem("isLogged", true)
+        setModalVisible(true);
       }
 
-      setModalVisible(true);
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
     }
