@@ -23,9 +23,9 @@ export default function Header() {
             <nav className="relative py-2 px-4 m-auto flex h-16 max-w-7xl justify-between">
               <Link href={"/"}>
                 <Image
-                  width={150}
+                  width={50}
                   height={50}
-                  src="/image/reciclame.svg"
+                  src="/image/logo.png"
                   alt="reciclame"
                 />
               </Link>

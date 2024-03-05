@@ -29,23 +29,24 @@ Reciclame es una red social dedicada a promover la reutilización de materiales 
 | Nicolás Ortiz      | [![Nicolás Ortiz](https://avatars.githubusercontent.com/u/68659234?v=4&s=180)](https://github.com/nico-ortiz) |
 | Jesus Monroy         | [![Jesus Monroy](https://avatars.githubusercontent.com/u/25678161?v=4&s=180)](https://github.com/jdmonroyg) |
 | Efrén Morales         | <a href="https://github.com/fr3nm0"><img src="https://avatars.githubusercontent.com/u/61370268?v=4&s=180" alt="Efrén Morales" width="180"/></a> |
-| Lihuel    | [![Lihuel]()]() |
+| Lihuel Mujica    | [![Lihuel Mujica](https://avatars.githubusercontent.com/u/62969028?v=4&s=180)](https://github.com/LihuelMujica) |
 | Rafael Talavera    | [![Rafael Talavera](https://avatars.githubusercontent.com/u/125708112?v=4&s=180)](https://github.com/RafaelTalavera) |
-
+| Matias Reid    | [![Matias Reid](https://avatars.githubusercontent.com/u/79427241?v=4&s=180)](https://github.com/mathiax63) |
+| Marcos Esteban    | [![Marcos Esteban](https://avatars.githubusercontent.com/u/83374363?v=4&s=180)](https://github.com/MarcosEstebanDev) |
 
 
 ### UX/UI
 
 | Nombre               | GitHub                                      |
 |----------------------|---------------------------------------------|
-| Eliana Garaventa      | [![Eliana Garaventa]()]() |
+| Eliana Garaventa      | [![Eliana Garaventa](https://avatars.githubusercontent.com/u/114009849?v=4&s=180)](https://github.com/EliGaraventa) |
 
 ### QA
 
 | Nombre               | GitHub                                      |
 |----------------------|---------------------------------------------|
-| Johana Baccei      | [![Johana Baccei]() |
-| Alejandra Chaves      | [![Alejandra Chaves]()]() |
+| Johana Baccei      | [![Johana Baccei](https://avatars.githubusercontent.com/u/126679754?v=4&s=180)](https://github.com/bacc708) |
+| Alejandra Chaves      | [![Alejandra Chaves](https://avatars.githubusercontent.com/u/145710127?v=4&s=180)](https://github.com/Alejita1971) |
 | Juan Passadore  | <a href="https://github.com/juampypassa"><img src="https://avatars.githubusercontent.com/u/50932852?v=4&s=180" alt="Juan Pablo Passadore" width="180"/></a> |
 
 

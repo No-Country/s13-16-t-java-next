@@ -19,9 +19,9 @@ export default function HeaderLogin() {
           <ul className="m-2 flex items-center gap-4 p-2">
             <Link href={"/"}>
               <Image
-                width={150}
-                height={50}
-                src="/image/reciclame.svg"
+                width={60}
+                height={60}
+                src="/image/logo.png"
                 className="mr-10 flex p-2"
                 alt="reciclame"
               ></Image>
