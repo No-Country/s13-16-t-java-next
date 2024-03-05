@@ -76,7 +76,7 @@ public class ProfileServiceImpl implements ProfileService {
            // TODO encoding
            userDB.setPassword(userData.password());
            Optional<Location> locationUpdate =locationRepository
-                   .findById(userData.location_id());
+                   .findById(userProfileRequestDto.location_id());
            locationUpdate.ifPresent(userDB::setLocation);
            userDB.setBirthdate(userData.birthdate());
 

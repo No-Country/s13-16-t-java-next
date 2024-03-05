@@ -17,7 +17,7 @@ public interface ProfileMapper {
 
     Profile userCreateDTOToProfile(UserCreateDTO userCreateDTO);
     @Mapping(source = "user", target = "userResponseDTO")
-    @Mapping(source = "user.location.id", target = "userResponseDTO.location_id")
+    @Mapping(source = "user.location", target = "userResponseDTO.location")
     ProfileResponseDto profileToProfileResponseDto(Profile profile);
     @Mapping(target = "comments",ignore = true)
     PostDto postToPostDto(Post post);

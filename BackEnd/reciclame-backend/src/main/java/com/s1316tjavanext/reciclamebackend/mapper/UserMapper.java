@@ -14,8 +14,6 @@ import java.util.List;
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-//    @Mapping(source = "province.id", target = "province_id" )
-    @Mapping(source = "location.id", target = "location_id" )
     @Mapping(target = "profileId", source = "profile.id")
     UserResponseDTO userToUserResponseDTO(User user);
     UserResponseDTO userRequestDTOToUserResponseDTO(UserRequestDTO userRequestDTO);
@@ -23,7 +21,6 @@ public interface UserMapper {
     List<UserResponseDTO> usersToUsersResponseDTO(List<User> users);
 
     @InheritInverseConfiguration
-    @Mapping(source = "location_id", target = "location.id" )
     @Mapping(target = "deleted", ignore = true)
     User userResponseDTOToUser(UserResponseDTO userResponseDTO);
 }

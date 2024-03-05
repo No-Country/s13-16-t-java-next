@@ -65,6 +65,9 @@ public class UsersServiceImpl implements UserService {
         UserResponseDTO userResponse = userMapper.userRequestDTOToUserResponseDTO(userRequestDTO);
         User user = userMapper.userResponseDTOToUser(userResponse);
         user.setDeleted(false);
+        Optional<Location> locationUpdate =locationRepository
+                .findById(userRequestDTO.location_id());
+        locationUpdate.ifPresent(user::setLocation);
         User userSaved = userRepository.save(user);
         Profile profileUser = new Profile();
         profileUser.setUser(userSaved);
