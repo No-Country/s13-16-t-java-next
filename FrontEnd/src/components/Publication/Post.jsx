@@ -54,7 +54,7 @@ export default function Post({ post }) {
         <PostComponent post={post} />
       )}
       {isOwner && (
-        <div className="flex justify-between gap-2 p-5  lg:px-24">
+        <div className="flex justify-between gap-2 p-5 -order-1 lg:px-24">
           <Button className=" w-[45%] rounded-3xl  bg-accent-yellow p-2 font-[500] lg:w-[25%]  ">
               Intercambio exitoso
           </Button>
