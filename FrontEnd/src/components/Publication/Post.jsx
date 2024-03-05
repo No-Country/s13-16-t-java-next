@@ -64,7 +64,7 @@ export default function Post({ post }) {
       {post?.id && <PostComponent post={post} />}
       {isOwner && (
         <div className="-order-1 flex justify-between gap-1 p-5 lg:px-24">
-          <Button className=" w-[60%] p-1 rounded-3xl text-sm md:text-base bg-accent-yellow font-[500] lg:w-[30%]  ">
+          <Button className="p-1 rounded-3xl text-sm md:text-base bg-accent-yellow font-[500] lg:w-[30%]">
             Intercambio exitoso
           </Button>
           <div className=" flex justify-end gap-2 lg:col-span-2">
@@ -84,7 +84,7 @@ export default function Post({ post }) {
         </div>
       )}
       {openEditMenu && isOwner && (
-        <div className="fixed inset-0 z-50 grid h-full w-full  bg-white">
+        <div className="fixed inset-0 z-40 grid h-full w-full  bg-white">
           <FormCreatePost categories={categories} post={post} modeEdit={modeEdit} />
         </div>
       )}

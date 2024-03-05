@@ -1,19 +1,56 @@
 "use client"
-import React,{ useState} from "react";
+import React,{ useEffect, useState} from "react";
 import Image from "next/image";
-import { AddIcon } from "@/src/components/Icons";
+import { AddIcon, ChevronDownIcon } from "@/src/components/Icons";
 import Link from "next/link";
 import { toast } from "sonner";
+import { getLocalitiesFromProvince, getProvinces } from "@/src/lib/api";
 
 export default function ConfigurationProfile({ categories, profile }) {
   const [imagePreview, setImagePreview] = useState(profile?.photoId);
   const [selectedCategories, setselectedCategories] = React.useState(profile.categories);
   const [, setSelectedFile] = useState({});
+
+  const [locations, setLocations] = useState([]);
+  const [LocationSelected, setLocationSelected] = useState(0);
+
+  console.log('Id de localidad seleccionada:', LocationSelected);
+  const [ProvinceSelected, setProvinceSelected] = React.useState("");
+  const [Provinces, setProvinces] = useState([]);
+
+  React.useEffect(() => {
+    async function fetchLocationsByProvince() {
+      if (ProvinceSelected) {
+        try {
+          const provinceId = Provinces.find(
+            (p) => p.name === ProvinceSelected,
+          ).id;
+
+          const LocationsByProvince =
+            await getLocalitiesFromProvince(provinceId);
+
+          setLocations(LocationsByProvince);
+        } catch (error) {
+          console.error("Error fetching locations:", error);
+        }
+      }
+    }
+
+    fetchLocationsByProvince();
+  }, [ProvinceSelected]);
+
+  useEffect(() => {
+    async function getProvincesData() {
+      const data = await getProvinces()
+      setProvinces(data);
+    }
+
+    getProvincesData()
+  })
   
   const handleChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
-    // Crear una URL para la previsualización de la imagen
     const reader = new FileReader();
     reader.onloadend = () => {
       setImagePreview(reader.result);
@@ -40,7 +77,7 @@ export default function ConfigurationProfile({ categories, profile }) {
     }
   };
   return (
-    <section className=" mx-auto mt-[65px] min-h-dvh w-full p-3 md:w-[70%] lg:w-full  ">
+    <section className="max-w-7xl mx-auto mt-[65px] min-h-dvh w-full p-3 md:w-[70%] lg:w-full">
       <div className="w-full">
         <h2 className="mb-5 p-3 text-2xl">Editar Perfil</h2>
 
@@ -72,7 +109,7 @@ export default function ConfigurationProfile({ categories, profile }) {
                     value={profile?.userResponseDTO?.name}
                   />
                 </div>
-                <div className="relative flex w-full flex-col justify-center gap-1 px-4 py-2">
+                <div className="relative flex w-full flex-col justify-center gap-2 p-4">
                   <label className="capitalize">apellido</label>
                   <input
                     type="text"
@@ -84,7 +121,7 @@ export default function ConfigurationProfile({ categories, profile }) {
                 </div>
               </div>
               <div className="lg:w-full">
-                <div className="relative flex w-full flex-col justify-center gap-1 px-4 py-2">
+                <div className="relative flex w-full flex-col justify-center gap-2 p-4">
                   <label className="capitalize">télefono</label>
                   <input
                     type="tel"
@@ -98,15 +135,62 @@ export default function ConfigurationProfile({ categories, profile }) {
                     }}
                   />
                 </div>
-                <div className="relative flex w-full flex-col justify-center gap-1 px-4 py-2">
-                  <label className="capitalize">Localidad</label>
-                  <input
-                    type="text"
-                    className={`input-form "focus:outline-wrong" : "focus:outline-secondary-violet"}`}
-                    placeholder="Localidad"
-                    id="location"
-                    value={profile?.userResponseDTO?.location_id}
-                  />
+                <div className="relative w-full flex gap-4 p-4">
+                  <div className="relative flex w-[80%] flex-col justify-center gap-2">
+                    <div className="flex items-center justify-between">
+                      <label className="font-[400] capitalize">Provincia</label>
+                    </div>
+                    <div className="relative">
+                      <select
+                        className={`input-form truncate pr-8}`}
+                        placeholder="Ciudad"
+                        id="province"
+                        onChange={(e) => setProvinceSelected(e.target.value)}
+                      >
+                        <option value="">Provincia</option>
+                        <hr />
+                        {Provinces.map((province) => {
+                          const { id, name } = province;
+                          return (
+                            <option key={id} value={name}>
+                              {name}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      <ChevronDownIcon className="chevron-down-icon" />
+                    </div>
+                    {/* {errors.province && (
+                      <p className="text-wrong">{errors.province.message}</p>
+                    )} */}
+                  </div>
+                  <div className="flex w-[80%] flex-col justify-center gap-2">
+                    <div className="flex items-center justify-between">
+                      <label className="font-[400] capitalize">localidad</label>
+                    </div>
+                    <div className="relative">
+                      <select
+                        className={`input-form truncate pr-8"}`}
+                        placeholder="Ciudad"
+                        id="city"
+                        onChange={(e) => setLocationSelected(e.target.value)}
+                      >
+                        <option value="">Localidad</option>
+                        <hr />
+                        {locations &&
+                  locations.map((location) => {
+                    const { id, name } = location;
+                    return (
+                      <option key={id} value={id}>
+                        {name}
+                      </option>
+                    );
+                  })}
+                      </select>
+                      <ChevronDownIcon className="chevron-down-icon" />
+                    </div>
+                    {/* {errors.city && <p className="text-wrong">{errors.city.message}</p>} */}
+                  </div>
                 </div>
               </div>
             </div>

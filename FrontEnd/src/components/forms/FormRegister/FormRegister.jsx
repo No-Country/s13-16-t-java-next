@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import {
   getDaysInMonth,
@@ -16,10 +16,13 @@ import { EyeClose, EyeOpen } from "../../Icons/EyesIcon";
 import { getLocalitiesFromProvince } from "@/src/lib/api";
 import { PostNewUser } from ".";
 import Configuration from "../../configuracion/Configuration";
+import { Context } from "@/src/context/ContextProvider";
 
 function FormRegister({ provinces, categories }) {
   const { showPassword, handleShowPassword } = Index();
   const Provinces = provinces;
+
+  const { setIsLogged } = useContext(Context);
 
   const [ProvinceSelected, setProvinceSelected] = React.useState("");
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -95,6 +98,7 @@ function FormRegister({ provinces, categories }) {
         localStorage.setItem("userLoggedId", data.userId);
         localStorage.setItem("profileId", data.profileId);
         localStorage.setItem("isLogged", true)
+        setIsLogged(true);
         setModalVisible(true);
       }
 
@@ -357,7 +361,7 @@ function FormRegister({ provinces, categories }) {
         </div>
       </form>
       {modalVisible && (
-        <div className="fixed inset-0 z-50 grid h-full w-full place-items-center bg-white backdrop-blur-sm">
+        <div className="fixed inset-0 z-40 grid h-full w-full place-items-center bg-white backdrop-blur-sm">
           <Configuration categories={categories} />
         </div>
       )}
