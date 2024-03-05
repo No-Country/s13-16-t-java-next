@@ -29,6 +29,9 @@ public record PostRequestDto(
         Category category,
         @NotNull(message = INVALID_ENABLE_COMMENTS)
         Boolean enableComments,
+
         @NotNull(message = INVALID_PROFILE_ID)
-        UUID profileId) {
+        @Pattern(regexp = REGEX_UUID,
+                message = INVALID_UUID)
+        UUID profileId ){
 }

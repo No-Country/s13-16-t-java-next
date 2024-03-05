@@ -6,6 +6,7 @@ package com.s1316tjavanext.reciclamebackend.util;
  */
 public class Constants {
     public final static String REGEX_TITLE = "[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ ]{3,50}";
+    public final  static String REGEX_UUID = "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}";
     public final static String INVALID_TITLE = "El título no es valido";
     public final static String REGEX_DESCRIPTION = "[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ!¡¿?,.\\-_ ]{3,500}";
     public final static String INVALID_DESCRIPTION = "La descripción no es valida";
@@ -21,6 +22,8 @@ public class Constants {
             "al menos una letra mayúscula, " + 
             "y opcionalmente solo se permite los siguientes caracteres especiales: " + 
             ".!@#$&*%_-=''";
+
+    public final static String INVALID_UUID = "El UUID no es valido";
 
     public final static String INVALID_PHONE_NUMBER = "El numero de telefono no es valido";
     public final static String INVALID_LENGTH_PHONE_NUMBER = "La longitud del numero de telefono no es valida";

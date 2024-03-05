@@ -51,7 +51,7 @@ public class PostController {
     @PostMapping("/save")
     @Operation(summary = "Create a new post", description = "Create a post from a system user")
     public ResponseEntity<PostDto> save(@RequestParam("image")MultipartFile mpf,
-                                        @Valid PostRequestDto postRequestDto){
+                                        PostRequestDto postRequestDto){
         return ResponseEntity.ok(postService.save(postRequestDto,mpf));
     }
 
