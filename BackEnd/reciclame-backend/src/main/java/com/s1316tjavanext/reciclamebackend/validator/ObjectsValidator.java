@@ -7,7 +7,7 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component

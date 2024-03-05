@@ -76,6 +76,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDto update(UUID id, PostRequestDto postRequestDto, MultipartFile mpf) {
+        postValidator.validate(postRequestDto);
         Optional<PostDto> postDtoDB = getPost(id);
         if (postDtoDB.isPresent()){
             Post post = postMapper.postDtoToPost(postDtoDB.get());
