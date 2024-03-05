@@ -15,11 +15,11 @@ export function NotificationsCartsSkeleton() {
 export function ProfileMobileSkeleton() {
   return (
     <div
-      className={`${shimmer} relative w-full overflow-hidden flex items-center gap-2 p-2`}
+      className={`${shimmer} relative flex w-full items-center gap-2 overflow-hidden p-2`}
     >
-      <div className="min-w-10 h-10 bg-gray-bg rounded-full" />
+      <div className="h-10 min-w-10 rounded-full bg-gray-bg" />
       <div className="w-full flex-col p-2">
-        <div className="w-full h-6 bg-gray-bg" />
+        <div className="h-6 w-full bg-gray-bg" />
         <a
           href={"/perfil"}
           className={`text-sm text-primary-green underline hover:cursor-pointer`}
@@ -27,18 +27,16 @@ export function ProfileMobileSkeleton() {
           Mi Perfil <span>→</span>
         </a>
       </div>
-
     </div>
-  )
+  );
 }
 
-export function ProfileImageSkeleton () {
+export function ProfileImageSkeleton() {
   return (
     <div
-      className={`${shimmer} hidden md:block min-w-10 h-10 rounded-full bg-gray-dark-bg`}
-    >
-    </div>
-  )
+      className={`${shimmer} hidden h-10 min-w-10 rounded-full bg-gray-dark-bg md:block`}
+    ></div>
+  );
 }
 
 export function NotificationCartSkeleton() {
@@ -133,7 +131,7 @@ export function BlogPostSkeleton() {
     <div
       className={`${shimmer} relative flex flex-col gap-y-4 overflow-hidden`}
     >
-      <div className="flex h-[280px] w-[370px] items-center justify-center rounded-md bg-gray-dark-bg object-cover"></div>
+      <div className="flex h-[250px] w-[370px] items-center justify-center rounded-md bg-gray-dark-bg object-cover"></div>
       <div className="h-6 w-28 rounded-md bg-gray-dark-bg"></div>
     </div>
   );
@@ -141,7 +139,7 @@ export function BlogPostSkeleton() {
 export function PostPageSkeleton() {
   return (
     <div
-      className={`${shimmer} relative overflow-hidden flex justify-center flex-wrap`}
+      className={`${shimmer} relative flex flex-wrap justify-center overflow-hidden`}
     >
       <div className="flex w-full max-w-96 flex-col gap-8 p-5 max-lg:mx-auto lg:max-w-[35rem] lg:p-20 xl:p-24">
         <div className="mx-auto h-full max-h-72 min-h-40 w-full items-center justify-center rounded-2xl bg-gray-dark-bg lg:flex "></div>
