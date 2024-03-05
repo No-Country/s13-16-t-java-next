@@ -6,7 +6,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export default function Configuration({ categories, profileId }) {
+export default function Configuration({ categories }) {
   const [selectedCategories, setselectedCategories] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null)
   const [imagePreview, setImagePreview] = useState(null);
@@ -16,24 +16,17 @@ export default function Configuration({ categories, profileId }) {
       selectedCategories.length === 0 &&
       !selectedCategories.includes(categoria)
     ) {
-     
-     
       setselectedCategories([categoria]);
     } else if (selectedCategories.includes(categoria)) {
-     
       setselectedCategories(selectedCategories.filter((c) => c !== categoria));
     } else if (selectedCategories.length < 3) {
-     
       setselectedCategories([...selectedCategories, categoria]);
     } else {
-    
       toast.error("Solo se pueden seleccionar hasta tres categorías");
     }
-
-    
-   
   };
 
+  const profileId = typeof window !== "undefined" && localStorage.getItem("profileId");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -42,13 +35,10 @@ export default function Configuration({ categories, profileId }) {
     if (selectedCategories.length === 0 && selectedFile == null) {
       toast.error("Debe seleccionar al menos una categoría");
     }
-    console.log(selectedFile)
-    console.log(selectedCategories)   // Crear el objeto FormData y agregar la imagen y las categorías
     const formData = new FormData();
     formData.append("image", selectedFile ? selectedFile : new Blob());
     formData.append("categories", selectedCategories);
   
-    // Enviar la solicitud de formulario con el archivo y las categorías seleccionadas
     try {
       const response = await fetch(
         `https://deployreciclame-production.up.railway.app/profiles/complete-profile/${profileId}`,
