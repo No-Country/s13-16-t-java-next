@@ -26,4 +26,6 @@ public interface PostService {
     PostDto update(UUID id, PostRequestDto postRequestDto, MultipartFile mpf);
 
     List<PostDto> findByTitle(String term);
+
+    void updateProfilesLiked(UUID postId, UUID profileId);
 }

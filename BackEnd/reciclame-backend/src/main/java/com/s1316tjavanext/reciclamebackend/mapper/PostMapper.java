@@ -22,8 +22,8 @@ public interface PostMapper {
     @Mapping(target = "profileResponseDto" , source = "profile")
     @Mapping(target = "profileResponseDto.userResponseDTO",
             source = "profile.user")
-    @Mapping(target = "profileResponseDto.userResponseDTO.location_id",
-            source = "profile.user.location.id")
+    @Mapping(target = "profileResponseDto.userResponseDTO.location",
+            source = "profile.user.location")
     @Mapping(target = "profileResponseDto.posts" , ignore = true)
     PostDto postToPostDto(Post post);
 
@@ -37,5 +37,6 @@ public interface PostMapper {
     @InheritInverseConfiguration
     @Mapping(target = "comments", ignore = true)
     @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "profilesMarkedFavorite", ignore = true)
     Post postDtoToPost(PostDto postDto);
 }

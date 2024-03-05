@@ -62,4 +62,10 @@ public class Post implements Serializable {
 
     @Column(nullable = false)
     private boolean deleted;
+
+    @OneToMany (mappedBy = "post")
+    private List<Like> profilesLiked;
+
+    @OneToMany (mappedBy = "post")
+    private List<Favorite> profilesMarkedFavorite;
 }
