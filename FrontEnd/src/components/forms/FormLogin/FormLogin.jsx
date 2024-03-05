@@ -34,9 +34,9 @@ function FormLogin() {
     function searchProfile() {
       async function searchProfile() {
         const allProfiles = await getAllProfiles();
-
+        
         const profile = allProfiles.find(
-          (profile) => profile.userResponseDTO.userId === user.userId,
+          (profile) => profile?.userResponseDTO?.userId === user.userId,
         );
 
         return profile.id;
