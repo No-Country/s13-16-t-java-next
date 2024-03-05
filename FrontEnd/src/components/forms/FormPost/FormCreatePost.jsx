@@ -13,6 +13,9 @@ import Link from "next/link";
 const URLPostData =
   "https://deployreciclame-production.up.railway.app/posts/save";
 
+const URLUpdateData =
+  "https://deployreciclame-production.up.railway.app/posts/update";
+
 export const dataBackendFormat = (data, imageData) => {
   const allData = {
     title: data.title,
@@ -24,9 +27,15 @@ export const dataBackendFormat = (data, imageData) => {
   return allData;
 };
 
-export default function FormCreatePost({ categories }) {
-  const [isActive, setIsActive] = useState(false);
-  const [imagePreview, setImagePreview] = useState(null);
+export default function FormCreatePost({ categories, post, modeEdit }) {
+  const [isActive, setIsActive] = useState(
+    modeEdit ? post?.enableComments : false,
+  );
+  const [imagePreview, setImagePreview] = useState(
+    modeEdit ? post?.imageUrl : null,
+  );
+
+  const [objectImage, setObjectImage] = useState(null);
 
   const router = useRouter();
 
@@ -35,6 +44,7 @@ export default function FormCreatePost({ categories }) {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    setValue,
   } = useForm({
     resolver: zodResolver(publicationSchema),
   });
@@ -42,7 +52,7 @@ export default function FormCreatePost({ categories }) {
   const profileId =
     typeof window !== "undefined" && localStorage.getItem("profileId");
 
-  const [objectImage, setObjectImage] = useState({});
+ 
 
   const toggleSwitch = () => {
     setIsActive(!isActive);
@@ -56,20 +66,25 @@ export default function FormCreatePost({ categories }) {
     formData.append("image", objectImage ? objectImage : new Blob());
     formData.append("enableComments", isActive);
     formData.append("profileId", profileId);
-
-    const response = await fetch(URLPostData, {
-      method: "POST",
+  
+    const method = modeEdit ? "PUT" : "POST";
+    const url = modeEdit ? `${URLUpdateData}/${post?.id}` : URLPostData;
+   
+    const response = await fetch(url, {
+      method: method,
       body: formData,
     });
 
     if (response.ok) {
       reset();
-      toast.success("Publicación creada");
+      toast.success(
+        modeEdit ? "Publicación actualizada" : "Publicación creada",
+      );
       setTimeout(() => {
         router.push("/");
       }, 3000);
     } else {
-      toast.error("Error al crear la publicación");
+      toast.error("Error al guardar la publicación");
     }
   }
 
@@ -100,7 +115,9 @@ export default function FormCreatePost({ categories }) {
             type="text"
             placeholder="Título"
             id="title"
+            defaultValue={modeEdit ? post?.title : ""}
             {...register("title")}
+            onChange={(e) => setValue("title", e.target.value)}
           />
           {errors.title && (
             <p className="mb-2 text-wrong">{errors.title.message}</p>
@@ -111,6 +128,7 @@ export default function FormCreatePost({ categories }) {
               type="select"
               placeholder="Categoría"
               id="category"
+              defaultValue={modeEdit ? post?.category : ""}
               {...register("category")}
             >
               <option value="">Categoría</option>
@@ -131,6 +149,7 @@ export default function FormCreatePost({ categories }) {
             type="text"
             placeholder="Desripción"
             id="description"
+            defaultValue={modeEdit ? post?.description : ""}
             {...register("description")}
           />
           {errors.description && (
@@ -152,7 +171,7 @@ export default function FormCreatePost({ categories }) {
           <div className="hidden w-full text-end md:block">
             <Link
               href={"/"}
-              className="mb-4 w-full rounded-3xl border border-secondary-violet p-2 text-center text-secondary-violet transition duration-500 hover:scale-105 lg:m-2 lg:w-28"
+              className="mb-4 w-full rounded-3xl border border-secondary-violet p-2 text-center text-secondary-violet transition duration-500 hover:scale-105 lg:m-2 "
             >
               Cancelar
             </Link>
@@ -161,7 +180,7 @@ export default function FormCreatePost({ categories }) {
               type="submit"
               className="mb-5 mt-4 w-full rounded-3xl bg-accent-yellow p-2 text-center transition duration-500 hover:scale-105 disabled:bg-gray-300 disabled:text-black lg:m-2 lg:w-28"
             >
-              Publicar
+              {modeEdit ? "Guardar" : "Publicar"}
             </button>
           </div>
         </div>

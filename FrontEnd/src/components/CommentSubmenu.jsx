@@ -10,10 +10,10 @@ export default function CommentSubmenu({
 }) {
   return (
     <div className="group relative">
-      <div className="p-5 hover:cursor-pointer md:block">
+      <div className="p-5 hover:cursor-pointer">
         <CommentMenuIcon />
       </div>
-      <div className="absolute -bottom-5 right-0 hidden h-[82px] w-32 flex-col justify-between gap-2 rounded-xl border bg-white p-4 shadow-lg md:group-hover:flex">
+      <div className="absolute -bottom-14 right-2 hidden h-[82px] w-32 flex-col justify-between gap-2 rounded-xl border bg-white p-4 shadow-lg group-hover:flex">
         <button
           onClick={() => {
             setIsEdit(true);
