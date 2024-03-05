@@ -1,5 +1,6 @@
-![Logo de Recíclame](FrontEnd/public/image/reciclame.svg)
+![Logo de Recíclame](FrontEnd/public/image/logo.png)
 
+# RECÍCLAME
 Reciclame es una red social dedicada a promover la reutilización de materiales reciclables a través de una comunidad comprometida con la sostenibilidad y la creatividad. Nuestra misión es fomentar el intercambio de materiales reciclables entre los usuarios para inspirar la creación de nuevos productos y reducir el impacto ambiental de los desechos.
 
 ## Características Principales
