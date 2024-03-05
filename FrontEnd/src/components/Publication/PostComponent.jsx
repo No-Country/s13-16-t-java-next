@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import React, { useState } from 'react'
-import Button from '../Button';
+import Image from "next/image";
+import React, { useState } from "react";
+import Button from "../Button";
 import Coments from "@/src/components/Coments";
 import FormComent from "@/src/components/forms/FormComent/FormComent";
 import WspIcon from "../Icons/WspIcon";
@@ -9,14 +9,15 @@ import LikeIcon from "../Icons/LikeIcon";
 
 import { useRouter } from "next/navigation";
 
-export default function PostComponent({post}) {
-
+export default function PostComponent({ post }) {
   const router = useRouter();
 
   const isLogged =
     typeof window !== "undefined" && localStorage.getItem("isLogged");
 
   const [checked, setChecked] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
+  const [commentEdit, setCommentEdit] = useState();
 
   const handleLikeClick = () => {
     if (!isLogged) {
@@ -52,7 +53,7 @@ export default function PostComponent({post}) {
   return (
     <>
       {post && (
-        <div className="max-lg:mx-auto flex justify-center flex-wrap">
+        <div className="flex flex-wrap justify-center max-lg:mx-auto">
           <div className="flex w-full max-w-96 flex-col gap-8 p-5 md:max-w-[35rem] lg:p-20 xl:p-24">
             <picture className="mx-auto items-center justify-center rounded-2xl lg:flex ">
               {post?.imageUrl && (
@@ -110,8 +111,10 @@ export default function PostComponent({post}) {
               {post?.category}
             </p>
             <p className="text-justify">{post?.description}</p>
-  
-            {post?.title && post?.profileResponseDto.userResponseDTO.phone && post?.profileResponseDto.userResponseDTO.name && (
+
+            {post?.title &&
+              post?.profileResponseDto.userResponseDTO.phone &&
+              post?.profileResponseDto.userResponseDTO.name && (
               <Link
                 target="_blank"
                 href={
@@ -151,10 +154,20 @@ export default function PostComponent({post}) {
                   </div>
                 )}
                 {post?.comments && (
-                  <Coments coments={post.comments} />
+                  <Coments
+                    coments={post.comments}
+                    setIsEdit={setIsEdit}
+                    setCommentEdit={setCommentEdit}
+                  />
                 )}
                 {post?.id && (
-                  <FormComent postId={post.id} />
+                  <FormComent
+                    postId={post.id}
+                    isEdit={isEdit}
+                    setIsEdit={setIsEdit}
+                    commentEdit={commentEdit}
+                    setCommentEdit={setCommentEdit}
+                  />
                 )}
               </>
             )}
@@ -162,5 +175,5 @@ export default function PostComponent({post}) {
         </div>
       )}
     </>
-  )
+  );
 }
