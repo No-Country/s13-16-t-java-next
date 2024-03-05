@@ -4,6 +4,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useGetNotifications } from "@/src/hooks/useGetNotifications";
 import { Context } from "@/src/context/ContextProvider";
+import { ProfileMobileSkeleton } from "../skeletons";
 
 export default function MenuIconLog({ profile }) {
   const { setIsLogged } = useContext(Context);
@@ -47,35 +48,30 @@ export default function MenuIconLog({ profile }) {
               : { transform: "translateX(-100%)" }
           }
         >
-          <div className="flex items-center gap-2 p-2">
-            {profile?.photoId ? (
+          {profile?.photoId && profile?.userResponseDTO?.name && profile?.userResponseDTO?.lastName ? (
+            <div className="flex items-center gap-2 p-2">
               <Image
-                src={profile?.photoId}
-                width={50}
-                height={50}
+                src={profile.photoId}
+                width={40}
+                height={40}
                 alt="Imagen de Perfil"
                 className="rounded-full"
               />
-            ) : (
-              <Image
-                width={40}
-                height={40}
-                className="rounded-full"
-                src="/image/profile1.png"
-                alt="Foto de perfil"
-              />
-            )}
-            <div className=" w-full flex-col p-2">
-              <h3 className="">{profile?.userResponseDTO?.name + " " + profile?.userResponseDTO?.lastName}</h3>
-              <Link
-                href={"/perfil"}
-                className={`text-sm text-primary-green underline hover:cursor-pointer`}
-                onClick={handleLinkClick}
-              >
+              <div className=" w-full flex-col p-2">
+                <h3>{profile?.userResponseDTO?.name + " " + profile?.userResponseDTO?.lastName}</h3>
+                <Link
+                  href={"/perfil"}
+                  className={`text-sm text-primary-green underline hover:cursor-pointer`}
+                  onClick={handleLinkClick}
+                >
                 Mi Perfil <span>→</span>
-              </Link>
+                </Link>
+              </div>
             </div>
-          </div>
+          )
+            : (
+              <ProfileMobileSkeleton />
+            )}
           <div className="flex h-full flex-col items-start justify-start">
             <Link
               className=" mb-3 ml-3 w-[90%] rounded-3xl bg-accent-yellow p-1 text-center tracking-wider text-black shadow"

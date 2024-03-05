@@ -20,17 +20,16 @@ export default function Header() {
       ) : (
         <div className="fixed left-0 top-0 z-10 -mb-12 w-full bg-white">
           <header className="shadow-xl">
-            <nav className="relative m-auto flex h-16 max-w-7xl justify-between">
+            <nav className="relative py-2 px-4 m-auto flex h-16 max-w-7xl justify-between">
               <Link href={"/"}>
                 <Image
                   width={150}
                   height={50}
                   src="/image/reciclame.svg"
-                  className="m-2 ml-4 flex gap-4 p-2"
                   alt="reciclame"
                 />
               </Link>
-              <ul className="m-2 mr-16 flex items-center gap-7 p-2">
+              <ul className="flex items-center gap-7">
                 <MenuIcon />
                 <Link
                   className="hidden border-secondary-violet p-1 hover:border-b-2 md:block"
