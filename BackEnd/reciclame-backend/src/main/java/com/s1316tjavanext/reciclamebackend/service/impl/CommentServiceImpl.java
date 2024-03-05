@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.s1316tjavanext.reciclamebackend.dto.CommentDto;
+import com.s1316tjavanext.reciclamebackend.dto.CommentUpdateDto;
 import com.s1316tjavanext.reciclamebackend.entity.Comment;
 import com.s1316tjavanext.reciclamebackend.entity.Post;
 import com.s1316tjavanext.reciclamebackend.entity.Profile;
@@ -16,6 +17,7 @@ import com.s1316tjavanext.reciclamebackend.repository.CommentRepository;
 import com.s1316tjavanext.reciclamebackend.repository.PostRepository;
 import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
 import com.s1316tjavanext.reciclamebackend.service.CommentService;
+import com.s1316tjavanext.reciclamebackend.validator.ObjectsValidator;
 
 import lombok.AllArgsConstructor;
 
@@ -30,6 +32,10 @@ public class CommentServiceImpl implements CommentService {
     private final ProfileRepository profileRepository;
 
     private final CommentMapper commentMapper;
+
+    private final ObjectsValidator<CommentDto> commentValidator;
+
+    private final ObjectsValidator<CommentUpdateDto> commentUpdateValidator;
 
     @Override
     public List<CommentDto> getComments() {
@@ -53,6 +59,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDto createComment(CommentDto commentDto) {
+        commentValidator.validate(commentDto);
         Comment comment = commentMapper.commentDtoToComment(commentDto);
         comment.setDate(LocalDateTime.now().withSecond(0).withNano(0));
 
@@ -88,7 +95,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentDto updateComment(UUID commentId, CommentDto commentDto) {
+    public CommentDto updateComment(UUID commentId, CommentUpdateDto commentDto) {
+        commentUpdateValidator.validate(commentDto);
         Optional<Comment> comment = commentRepository.findById(commentId);
 
         if (comment.isPresent()) {

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.s1316tjavanext.reciclamebackend.dto.CommentDto;
+import com.s1316tjavanext.reciclamebackend.dto.CommentUpdateDto;
 import com.s1316tjavanext.reciclamebackend.service.CommentService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -56,7 +57,7 @@ public class CommentController {
 
     @PutMapping("/update/{commentId}")
     @Operation(summary = "Update a comment", description = "This endpoint allow to update a comment")
-    public ResponseEntity<CommentDto> updateComment(@PathVariable UUID commentId, @RequestBody CommentDto commentRequest) {
+    public ResponseEntity<CommentDto> updateComment(@PathVariable UUID commentId, @RequestBody CommentUpdateDto commentRequest) {
         CommentDto commentDto = commentService.updateComment(commentId, commentRequest);
 
         if (commentDto != null) {

@@ -8,13 +8,14 @@ import com.s1316tjavanext.reciclamebackend.dto.UserRequestDTO;
 import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
 import com.s1316tjavanext.reciclamebackend.entity.Location;
 import com.s1316tjavanext.reciclamebackend.entity.Profile;
-import com.s1316tjavanext.reciclamebackend.entity.Province;
 import com.s1316tjavanext.reciclamebackend.entity.User;
+import com.s1316tjavanext.reciclamebackend.exception.IdNotFoundException;
 import com.s1316tjavanext.reciclamebackend.mapper.UserMapper;
 import com.s1316tjavanext.reciclamebackend.repository.LocationRepository;
 import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
 import com.s1316tjavanext.reciclamebackend.repository.UserRepository;
 import com.s1316tjavanext.reciclamebackend.service.UserService;
+import com.s1316tjavanext.reciclamebackend.validator.ObjectsValidator;
 import exception.MiException;
 
 import java.util.*;
@@ -35,20 +36,7 @@ public class UsersServiceImpl implements UserService {
     private final ProfileRepository profileRepository;
     private final UserMapper userMapper;
     private final LocationRepository locationRepository;
-
-
-//    private boolean validarRequisitosPassword(String password) {
-//        // Asegurar que la contraseña tiene al menos 8 caracteres, incluyendo mayúsculas y minúsculas
-//        return password.length() >= 8 && contieneMayuscula(password) && contieneMinuscula(password);
-//    }
-//
-//    private boolean contieneMayuscula(String password) {
-//        return !password.equals(password.toLowerCase());
-//    }
-//
-//    private boolean contieneMinuscula(String password) {
-//        return !password.equals(password.toUpperCase());
-//    }
+    private final ObjectsValidator<UserRequestDTO> userValidator;
 
     // Obtener un usuario
 
@@ -59,9 +47,9 @@ public class UsersServiceImpl implements UserService {
     ////////ESTE ES PARA CREAR AL USUARIO USANDO VALIDACIONES //////////
     
     
-    public UserResponseDTO createUser(UserRequestDTO userRequestDTO)
-             {
+    public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
 
+        userValidator.validate(userRequestDTO);
         UserResponseDTO userResponse = userMapper.userRequestDTOToUserResponseDTO(userRequestDTO);
         User user = userMapper.userResponseDTOToUser(userResponse);
         user.setDeleted(false);
@@ -81,7 +69,7 @@ public class UsersServiceImpl implements UserService {
 
     @Transactional
   public UserResponseDTO EditUser(UUID id, UserRequestDTO userRequestDTO) {
-
+    userValidator.validate(userRequestDTO);
 
     Optional<UserResponseDTO> respuesta = getUser(id);
 
@@ -100,7 +88,7 @@ public class UsersServiceImpl implements UserService {
 
       return userMapper.userToUserResponseDTO(userRepository.save(user));
     } else {
-        throw new RuntimeException("no se encontro el usuario");
+        throw new IdNotFoundException("Usuario con id: " + id + " no encontrado");
     }
   }
 

@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.s1316tjavanext.reciclamebackend.controller;
 
 import com.s1316tjavanext.reciclamebackend.dto.UserRequestDTO;
 import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
-import com.s1316tjavanext.reciclamebackend.repository.UserRepository;
 import com.s1316tjavanext.reciclamebackend.service.UserService;
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
-  private final UserRepository usuarioRepository;
   private final UserService userService;
 
   
@@ -64,12 +58,13 @@ public class UserController {
   @Operation(summary = "Edit a user")
   @PutMapping("/update/{id}")
   public ResponseEntity<UserResponseDTO> modificarUsuario(@PathVariable UUID id,@RequestBody UserRequestDTO userRequestDTO) {
-    try{
+    /*try{
 
     return ResponseEntity.ok().body(userService.EditUser(id,userRequestDTO));
     } catch (RuntimeException ex) {
       return ResponseEntity.notFound().build();
-    }
+    }*/
+    return ResponseEntity.ok().body(userService.EditUser(id,userRequestDTO));
 
   }
   

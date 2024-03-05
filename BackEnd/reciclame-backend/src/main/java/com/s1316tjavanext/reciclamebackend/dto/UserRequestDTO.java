@@ -1,19 +1,47 @@
 package com.s1316tjavanext.reciclamebackend.dto;
 
-import com.s1316tjavanext.reciclamebackend.entity.Location;
-import com.s1316tjavanext.reciclamebackend.entity.Profile;
-import com.s1316tjavanext.reciclamebackend.entity.Province;
+import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_BIRTHDAY;
+import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_EMAIL;
+import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_LENGTH_NAME;
+import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_LENGTH_PHONE_NUMBER;
+import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_NAME;
+import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_PASSWORD;
+import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_PHONE_NUMBER;
 
 import java.util.Date;
-import java.util.UUID;
 
 public record UserRequestDTO(
+        @NotBlank(message = INVALID_NAME)
+        @Length(min = 3, message = INVALID_LENGTH_NAME)
         String name,
+
+        @NotBlank(message = INVALID_NAME)
+        @Length(min = 3, message = INVALID_LENGTH_NAME)
         String lastName,
+
+        @NotBlank(message = INVALID_EMAIL)
+        @Email(message = INVALID_EMAIL)
         String email,
+
+        @NotBlank(message = INVALID_PHONE_NUMBER)
+        @Length(min = 9, max = 30, message = INVALID_LENGTH_PHONE_NUMBER)
         String phone,
+
+        @NotBlank(message = INVALID_PASSWORD)
+        @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d)[a-zA-Z0-9.!@#$&*%_\\-=]+$", message = INVALID_PASSWORD)
+        @Length(min = 8, message = INVALID_PASSWORD)
         String password,
+
+        @Positive
+        @Max(2410)
         int location_id,
+
+        @NotNull
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
         Date birthdate
 ) {
 }

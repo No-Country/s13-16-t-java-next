@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.s1316tjavanext.reciclamebackend.dto.CommentDto;
+import com.s1316tjavanext.reciclamebackend.dto.CommentUpdateDto;
 
 public interface CommentService {
  
@@ -39,7 +40,7 @@ public interface CommentService {
      * @param commentDto comment with updated fields
      * @return updated comment
      */
-    public CommentDto updateComment(UUID commentId, CommentDto commentDto);
+    public CommentDto updateComment(UUID commentId, CommentUpdateDto commentDto);
 
     List<CommentDto> getCommentsByPostId(UUID postId);
 }

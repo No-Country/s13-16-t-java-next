@@ -13,6 +13,8 @@ import com.s1316tjavanext.reciclamebackend.repository.PostRepository;
 import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
 import com.s1316tjavanext.reciclamebackend.service.CloudinaryService;
 import com.s1316tjavanext.reciclamebackend.service.PostService;
+import com.s1316tjavanext.reciclamebackend.validator.ObjectsValidator;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,6 +38,7 @@ public class PostServiceImpl implements PostService {
     private final LikeRepository likeRepository;
     private final PostMapper postMapper;
     private final CloudinaryService cloudinaryService;
+    private final ObjectsValidator<PostRequestDto> postValidator;
 
     @Override
     public List<PostDto> getPosts() {
@@ -44,6 +47,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDto save(PostRequestDto postRequestDto, MultipartFile mpf) {
+        postValidator.validate(postRequestDto);
         PostDto postDto = postMapper.postRequestDtoToPostDto(postRequestDto);
         Post post = postMapper.postDtoToPost(postDto);
         post.setDate(LocalDateTime.now().withNano(0));
@@ -77,6 +81,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDto update(UUID id, PostRequestDto postRequestDto, MultipartFile mpf) {
+        postValidator.validate(postRequestDto);
         Optional<PostDto> postDtoDB = getPost(id);
         if (postDtoDB.isPresent()){
             Post post = postMapper.postDtoToPost(postDtoDB.get());
