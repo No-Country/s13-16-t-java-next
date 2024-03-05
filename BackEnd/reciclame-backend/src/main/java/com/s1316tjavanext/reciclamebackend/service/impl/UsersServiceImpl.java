@@ -69,7 +69,7 @@ public class UsersServiceImpl implements UserService {
                 .findById(userRequestDTO.location_id());
         locationUpdate.ifPresent(user::setLocation);
         User userSaved = userRepository.save(user);
-        Profile profileUser = new Profile();
+        Profile profileUser = userSaved.getProfile();
         profileUser.setUser(userSaved);
         profileRepository.save(profileUser);
 
