@@ -21,7 +21,7 @@ export const userRegisterSchema = z
       .min(8, {
         message: "La contraseña debe tener mínimo 8 caracteres",
       })
-      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, {
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\S]{8,}$/, {
         message:
           "La contraseña debe tener al menos una mayuscula, una minuscula y un carácter especial.",
       }),
@@ -43,15 +43,25 @@ export const userRegisterSchema = z
     path: ["confirmPassword"],
   });
 
-
 export const publicationSchema = z.object({
   title: z.string().min(1, { message: "Ingresa un titulo" }),
   description: z.string().min(1, { message: "Ingresa una descripción" }),
   category: z.string().min(1, { message: "Ingresa una categoría" }),
-
-})
+});
 
 export const comentSchema = z.object({
-  description: z.string().min(1, { message: "No se pueden enviar comentarios vacios" }),
-})
+  description: z
+    .string()
+    .min(1, { message: "No se pueden enviar comentarios vacios" }),
+});
 
+export const profileSchema = z.object({
+  name: z.string().min(1, { message: "Ingrese su nombre" }),
+  lastname: z.string().min(1, { message: "Ingrese su apellido" }),
+  phone: z
+    .string()
+    .min(1, { message: "Ingrese un telefono" })
+    .regex(/^[0-9]{8,14}$/, { message: "Ingrese un telefono valido" }),
+  city: z.string().min(1, { message: "Ingrese una ciudad" }),
+  province: z.string().min(1, { message: "Ingrese una provincia" }),
+});

@@ -1,12 +1,12 @@
 import React from "react";
 
-export default function LikeIcon() {
+export default function LikeIcon({ fill }) {
   return (
     <svg
       width="22"
       height="20"
       viewBox="0 0 22 20"
-      fill="none"
+      fill={fill}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

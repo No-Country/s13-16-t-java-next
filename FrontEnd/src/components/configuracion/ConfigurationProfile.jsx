@@ -1,19 +1,66 @@
-"use client"
-import React,{ useState} from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { AddIcon } from "@/src/components/Icons";
+import { AddIcon, ChevronDownIcon } from "@/src/components/Icons";
 import Link from "next/link";
 import { toast } from "sonner";
+import { getLocalitiesFromProvince, getProvinces } from "@/src/lib/api";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { profileSchema } from "@/src/validations/userSchema";
+import { useRouter } from "next/navigation";
+import  { DeleteIcon } from "../Icons/EditIcon";
 
 export default function ConfigurationProfile({ categories, profile }) {
   const [imagePreview, setImagePreview] = useState(profile?.photoId);
-  const [selectedCategories, setselectedCategories] = React.useState(profile.categories);
-  const [, setSelectedFile] = useState({});
-  
+  const [selectedCategories, setselectedCategories] = React.useState(
+    profile.categories,
+  );
+  const [selectedFile, setSelectedFile] = useState(null);
+  const router = useRouter();
+  const [locations, setLocations] = useState([]);
+  const [LocationSelected, setLocationSelected] = useState(
+    profile?.userResponseDTO?.location?.id,
+  );
+
+  const [ProvinceSelected, setProvinceSelected] = React.useState(
+    profile?.userResponseDTO?.location?.province?.name,
+  );
+  const [Provinces, setProvinces] = useState([]);
+
+  React.useEffect(() => {
+    async function fetchLocationsByProvince() {
+      if (ProvinceSelected) {
+        try {
+          const provinceId = Provinces.find(
+            (p) => p.name === ProvinceSelected,
+          ).id;
+
+          const LocationsByProvince =
+            await getLocalitiesFromProvince(provinceId);
+
+          setLocations(LocationsByProvince);
+        } catch (error) {
+          console.error("Error fetching locations:", error);
+        }
+      }
+    }
+
+    fetchLocationsByProvince();
+  }, [ProvinceSelected]);
+
+  useEffect(() => {
+    async function getProvincesData() {
+      const data = await getProvinces();
+      setProvinces(data);
+    }
+
+    getProvincesData();
+  });
+
   const handleChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
-    // Crear una URL para la previsualización de la imagen
     const reader = new FileReader();
     reader.onloadend = () => {
       setImagePreview(reader.result);
@@ -39,12 +86,63 @@ export default function ConfigurationProfile({ categories, profile }) {
       toast.error("Solo se pueden seleccionar hasta tres categorías");
     }
   };
-  return (
-    <section className=" mx-auto mt-[65px] min-h-dvh w-full p-3 md:w-[70%] lg:w-full  ">
-      <div className="w-full">
-        <h2 className="mb-5 p-3 text-2xl">Editar Perfil</h2>
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("lastName", data.lastname);
+    formData.append("phone", data.phone);
+    formData.append("password", profile?.userResponseDTO?.password);
+    formData.append("email", profile?.userResponseDTO?.email);
+    formData.append("birthdate", profile?.userResponseDTO?.birthdate);
+    formData.append("location_id", LocationSelected);
+    formData.append("image", selectedFile ? selectedFile : new Blob());
+    formData.append("categories", selectedCategories);
 
-        <form action="" className="justify-center lg:flex">
+    try {
+      const response = await fetch(
+        `https://deployreciclame-production.up.railway.app/profiles/update/${profile?.id}`,
+        {
+          method: "PUT",
+          body: formData,
+        },
+      );
+      if (response.ok) {
+        reset();
+        toast.success("Se actualizo el perfil correctamente");
+        setTimeout(() => {
+          router.push("/");
+        }, 3000);
+      } else {
+        toast.error("Error al actualizar el perfil");
+      }
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+    }
+  };
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(profileSchema),
+  });
+
+  return (
+    <section className="mx-auto mt-[65px] min-h-dvh w-full max-w-7xl p-3 md:w-[70%] lg:w-full">
+      <div className="mb-5 flex w-full items-center justify-between">
+        <h2 className=" p-3 text-2xl">Editar Perfil</h2>
+        <button className="rounded-full bg-wrong p-2 lg:flex lg:rounded-3xl lg:gap-2 lg:text-white lg:px-3 py-2 items-center justify-center">
+          <DeleteIcon />
+          <span className="hidden lg:block">Eliminar Perfil</span>
+        </button>
+      </div>
+      <div className="w-full">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="justify-center lg:flex"
+        >
           <div className="relative mx-auto h-full w-max lg:p-2">
             <p className="absolute -top-5 left-10">Foto de Perfil</p>
             <Image
@@ -54,7 +152,7 @@ export default function ConfigurationProfile({ categories, profile }) {
               src={imagePreview || "/image/profileComent.png"}
               alt="foto de perfil"
             />
-            <label className="absolute bottom-0 right-0 lg:bottom-5 left-28 h-10 w-10 rounded-full bg-accent-yellow p-2 hover:cursor-pointer">
+            <label className="absolute bottom-0 left-28 right-0 h-10 w-10 rounded-full bg-accent-yellow p-2 hover:cursor-pointer lg:bottom-5">
               <input type="file" className="hidden" onChange={handleChange} />
               <AddIcon />
             </label>
@@ -69,22 +167,31 @@ export default function ConfigurationProfile({ categories, profile }) {
                     className={`input-form "focus:outline-wrong" : "focus:outline-secondary-violet"}`}
                     placeholder="Nombre"
                     id="name"
-                    value={profile?.userResponseDTO?.name}
+                    defaultValue={profile?.userResponseDTO?.name}
+                    {...register("name")}
                   />
+                  {errors.name && (
+                    <p className="text-wrong">{errors.name.message}</p>
+                  )}
                 </div>
-                <div className="relative flex w-full flex-col justify-center gap-1 px-4 py-2">
+                {}
+                <div className="relative flex w-full flex-col justify-center gap-2 p-4">
                   <label className="capitalize">apellido</label>
                   <input
                     type="text"
                     className={`input-form "focus:outline-wrong" : "focus:outline-secondary-violet"}`}
                     placeholder="Apellido"
-                    id="lastName"
-                    value={profile?.userResponseDTO?.lastName}
+                    id="lastname"
+                    defaultValue={profile?.userResponseDTO?.lastName}
+                    {...register("lastname")}
                   />
+                  {errors.lastname && (
+                    <p className="text-wrong">{errors.lastname.message}</p>
+                  )}
                 </div>
               </div>
               <div className="lg:w-full">
-                <div className="relative flex w-full flex-col justify-center gap-1 px-4 py-2">
+                <div className="relative flex w-full flex-col justify-center gap-2 p-4">
                   <label className="capitalize">télefono</label>
                   <input
                     type="tel"
@@ -96,17 +203,74 @@ export default function ConfigurationProfile({ categories, profile }) {
                     onChange={(e) => {
                       e.target.value = e.target.value.replace(/[^0-9]/g, "");
                     }}
+                    {...register("phone")}
                   />
+                  {errors.phone && (
+                    <p className="text-wrong">{errors.phone.message}</p>
+                  )}
                 </div>
-                <div className="relative flex w-full flex-col justify-center gap-1 px-4 py-2">
-                  <label className="capitalize">Localidad</label>
-                  <input
-                    type="text"
-                    className={`input-form "focus:outline-wrong" : "focus:outline-secondary-violet"}`}
-                    placeholder="Localidad"
-                    id="location"
-                    value={profile?.userResponseDTO?.location_id}
-                  />
+                <div className="relative flex w-full gap-4 p-4">
+                  <div className="relative flex w-[80%] flex-col justify-center gap-2">
+                    <div className="flex items-center justify-between">
+                      <label className="font-[400] capitalize">Provincia</label>
+                    </div>
+                    <div className="relative">
+                      <select
+                        className={`input-form pr-8} truncate`}
+                        placeholder="Ciudad"
+                        id="province"
+                        value={ProvinceSelected}
+                        {...register("province")}
+                        onChange={(e) => setProvinceSelected(e.target.value)}
+                      >
+                        <option value="">Provincia</option>
+                        <hr />
+                        {Provinces.map((province) => {
+                          const { id, name } = province;
+                          return (
+                            <option key={id} value={name}>
+                              {name}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      <ChevronDownIcon className="chevron-down-icon" />
+                    </div>
+                    {errors.province && (
+                      <p className="text-wrong">{errors.province.message}</p>
+                    )}
+                  </div>
+                  <div className="flex w-[80%] flex-col justify-center gap-2">
+                    <div className="flex items-center justify-between">
+                      <label className="font-[400] capitalize">localidad</label>
+                    </div>
+                    <div className="relative">
+                      <select
+                        className={`input-form pr-8"} truncate`}
+                        placeholder="Ciudad"
+                        id="city"
+                        value={LocationSelected}
+                        {...register("city")}
+                        onChange={(e) => setLocationSelected(e.target.value)}
+                      >
+                        <option value="">Localidad</option>
+                        <hr />
+                        {locations &&
+                          locations.map((location) => {
+                            const { id, name } = location;
+                            return (
+                              <option key={id} value={id}>
+                                {name}
+                              </option>
+                            );
+                          })}
+                      </select>
+                      <ChevronDownIcon className="chevron-down-icon" />
+                    </div>
+                    {errors.city && (
+                      <p className="text-wrong">{errors.city.message}</p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -141,6 +305,7 @@ export default function ConfigurationProfile({ categories, profile }) {
                 <button
                   className=" w-full rounded-full bg-primary-green px-4 py-2 text-white lg:w-1/4  "
                   type="submit"
+                  disabled={isSubmitting}
                 >
                   Guardar
                 </button>

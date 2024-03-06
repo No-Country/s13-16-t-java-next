@@ -18,7 +18,7 @@ export default function Header() {
       {isLogged ? (
         <HeaderLogin />
       ) : (
-        <div className="fixed left-0 top-0 z-10 -mb-12 w-full bg-white">
+        <div className="fixed left-0 top-0 z-50 -mb-12 w-full bg-white">
           <header className="shadow-xl">
             <nav className="relative py-2 px-4 m-auto flex h-16 max-w-7xl justify-between">
               <Link href={"/"}>

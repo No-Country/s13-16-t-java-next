@@ -36,16 +36,15 @@ export default function blogPost() {
             placeholder="Desripción"
             id="description"
           />
-          <div className="hidden w-full text-end md:block">
+          <div className="hidden w-full  gap-2 md:flex md:justify-end">
             <Link
               href={"/"}
-              className="mb-4 w-full rounded-3xl border border-secondary-violet p-2 text-center text-secondary-violet transition duration-500 hover:scale-105 lg:m-2 lg:w-28"
-            >
+              className=" w-full rounded-3xl border border-secondary-violet p-2 text-center text-secondary-violet transition duration-500 hover:scale-105 md:w-1/3 ">
               Cancelar
             </Link>
             <button
               type="submit"
-              className="mb-5 mt-4 w-full rounded-3xl bg-accent-yellow p-2 text-center transition duration-500 hover:scale-105 disabled:bg-gray-300 disabled:text-black lg:m-2 lg:w-28"
+              className=" w-full rounded-3xl bg-accent-yellow p-2 text-center transition duration-500 hover:scale-105 disabled:bg-gray-300 disabled:text-black lg:w-1/3 "
             >
               Publicar
             </button>
@@ -62,7 +61,7 @@ export default function blogPost() {
           </div>
           <input name="file" id="file" type="file" className="hidden" />
         </label>
-        <div className="w-full text-end md:hidden">
+        <div className="lg:flex-end flex w-full flex-col md:hidden">
           <button
             type="submit"
             className="mb-5 mt-4 w-full rounded-3xl bg-accent-yellow p-2 text-center transition duration-500 hover:scale-105 disabled:bg-gray-300 disabled:text-black lg:m-2 lg:w-28"
