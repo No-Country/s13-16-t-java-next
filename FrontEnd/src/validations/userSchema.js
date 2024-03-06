@@ -21,7 +21,7 @@ export const userRegisterSchema = z
       .min(8, {
         message: "La contraseña debe tener mínimo 8 caracteres",
       })
-      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, {
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\S]{8,}$/, {
         message:
           "La contraseña debe tener al menos una mayuscula, una minuscula y un carácter especial.",
       }),
