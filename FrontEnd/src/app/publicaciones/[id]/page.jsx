@@ -13,7 +13,7 @@ export default function Publications({ params }) {
 
   return (
     <div className="min-h-dvh">
-      <main className="mt-[65px] flex flex-col justify-items-center ">
+      <main className="mt-[65px] max-w-7xl mx-auto flex flex-col justify-items-center ">
         {post?.id && <PostIntermediaryLayer post={post} />}
       </main>
     </div>

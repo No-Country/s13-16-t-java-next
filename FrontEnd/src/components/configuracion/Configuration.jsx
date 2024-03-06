@@ -62,7 +62,6 @@ export default function Configuration({ categories }) {
   const handleChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
-    // Crear una URL para la previsualización de la imagen
     const reader = new FileReader();
     reader.onloadend = () => {
       setImagePreview(reader.result);

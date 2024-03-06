@@ -9,7 +9,7 @@ export default async function Register() {
 
   return (
     <main className="relative grid items-center justify-items-center md:mt-[55px] lg:grid-cols-2">
-      <picture className="min-h-full self-start pt-16 lg:pt-0">
+      <picture className="min-h-full self-start pt-16 md:pt-0">
         <Image
           width={1416}
           height={1574}
