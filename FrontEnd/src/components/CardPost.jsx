@@ -10,20 +10,17 @@ export default function CardPost({ publication, profileId, favorites }) {
   const [isFav, setIsFav] = useState(false);
   const { id, imageUrl, title } = publication;
 
+  function validarIdEnArray(idBuscado, arrayBuscado) {
+    return arrayBuscado?.some(function (objeto) {
+      return objeto.id === idBuscado;
+    });
+  }
+
   useEffect(() => {
-    if (favorites?.includes(id)) {
+    if (validarIdEnArray(id, favorites)) {
       setIsFav(true);
     }
-  }, [publication, favorites]);
-
-  /*   const handleClickFav = (e) => {
-    e.preventDefault();
-    setIsFav(!isFav);
-    if (isFav == true) toast.success("Agregado a favoritos");
-    const requestBody = {
-      postId: id,
-    };
-  }; */
+  }, [publication, favorites, id]);
 
   async function handleClickFav() {
     const requestBody = {
@@ -43,7 +40,7 @@ export default function CardPost({ publication, profileId, favorites }) {
 
       if (response.ok) {
         setIsFav(!isFav);
-        if (isFav) {
+        if (!isFav) {
           toast.success("Agregado a favoritos");
         } else {
           toast.success("Eliminado de favoritos");
@@ -60,9 +57,9 @@ export default function CardPost({ publication, profileId, favorites }) {
   }
   return (
     <>
-      <Link href={`/publicaciones/${id}`}>
-        <div className="flex flex-col">
-          <div className="relative">
+      <div className="flex flex-col">
+        <div className="relative">
+          <Link href={`/publicaciones/${id}`}>
             <div className="flex h-[180px] w-[250px] items-center justify-center object-cover">
               <Image
                 src={imageUrl}
@@ -72,18 +69,20 @@ export default function CardPost({ publication, profileId, favorites }) {
                 className="rounded-[11px] bg-gray-300 "
               />
             </div>
-            <div className="m-2 flex justify-between">
-              <p className="text-[16px] font-[500]">{title}</p>
-            </div>
+          </Link>
+          <div className="m-2 flex justify-between">
+            <p className="text-[16px] font-[500]">{title}</p>
           </div>
-          <div className="flex justify-between p-2">
-            <p className="text-[16px] font-[500] tracking-wider">{title}</p>
+        </div>
+        <div className="flex justify-between p-2">
+          <p className="text-[16px] font-[500] tracking-wider">{title}</p>
+          {profileId && (
             <button onClick={handleClickFav} className="">
               {isFav ? <HeartLike /> : <HeartDislike />}
             </button>
-          </div>
+          )}
         </div>
-      </Link>
+      </div>
     </>
   );
 }
