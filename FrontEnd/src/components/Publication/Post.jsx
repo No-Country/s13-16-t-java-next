@@ -84,7 +84,7 @@ export default function Post({ post }) {
         </div>
       )}
       {openEditMenu && isOwner && (
-        <div className="fixed inset-0 z-40 grid h-full w-full  bg-white">
+        <div className="fixed inset-0 z-40 grid h-full w-full  bg-white overflow-y-auto">
           <FormCreatePost categories={categories} post={post} modeEdit={modeEdit} />
         </div>
       )}
