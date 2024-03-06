@@ -29,7 +29,7 @@ function FormRegister({ provinces, categories }) {
   const [locations, setLocations] = React.useState([]);
 
   const [LocationSelected, setLocationSelected] = React.useState(0);
-
+ 
   React.useEffect(() => {
     async function fetchLocationsByProvince() {
       if (ProvinceSelected) {
@@ -40,6 +40,7 @@ function FormRegister({ provinces, categories }) {
 
           const LocationsByProvince =
             await getLocalitiesFromProvince(provinceId);
+        
 
           setLocations(LocationsByProvince);
         } catch (error) {
@@ -90,19 +91,19 @@ function FormRegister({ provinces, categories }) {
       location_id: LocationSelected,
       birthdate: birthdate.toISOString(),
     };
-
+    
     try {
       const data = await PostNewUser(JSON.stringify(formData));
-      
+
       if (typeof window !== "undefined" && data) {
         localStorage.setItem("userLoggedId", data.userId);
         localStorage.setItem("profileId", data.profileId);
-        localStorage.setItem("isLogged", true)
+        localStorage.setItem("isLogged", true);
         setIsLogged(true);
         setModalVisible(true);
       }
-
     } catch (error) {
+      console.log(error);
       console.error("Error al enviar el formulario:", error);
     }
   };
