@@ -48,7 +48,7 @@ public class CloudinaryServiceImpl implements CloudinaryService {
         Map result = cloudinary.uploader()
                 .upload(
                         file,
-                        ObjectUtils.asMap("folder", "Reciclame/"));  //,"resource_type", "image"
+                        ObjectUtils.asMap("folder", "Reciclame/"));
         file.delete();
         return result;
     }

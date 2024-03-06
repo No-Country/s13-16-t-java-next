@@ -7,6 +7,7 @@ import com.s1316tjavanext.reciclamebackend.entity.Like;
 import com.s1316tjavanext.reciclamebackend.entity.Post;
 import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Status;
+import com.s1316tjavanext.reciclamebackend.exception.IdNotFoundException;
 import com.s1316tjavanext.reciclamebackend.mapper.PostMapper;
 import com.s1316tjavanext.reciclamebackend.repository.LikeRepository;
 import com.s1316tjavanext.reciclamebackend.repository.PostRepository;
@@ -24,6 +25,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.s1316tjavanext.reciclamebackend.util.Constants.POST_IMAGE_DEFAULT;
 
 /**
  * @author jdmon on 21/02/2024
@@ -75,7 +78,7 @@ public class PostServiceImpl implements PostService {
     public void delete(UUID id) {
         if (postRepository.existsById(id)){
             postRepository.deleteById(id);
-        }else throw new RuntimeException();
+        }else throw new IdNotFoundException("id no encontrado");
 
     }
 
@@ -93,7 +96,7 @@ public class PostServiceImpl implements PostService {
                 setImageUrl(mpf,post);
             }
             return postMapper.postToPostDto(postRepository.save(post));
-        } else throw new RuntimeException();
+        } else throw new IdNotFoundException("id no encontrado");
     }
 
     @Override
@@ -121,7 +124,7 @@ public class PostServiceImpl implements PostService {
             post.get().setLove(post.get().getProfilesLiked().size());
             postRepository.save(post.get());
         }else{
-            throw new RuntimeException("ids not found");
+            throw new IdNotFoundException("ids no encontrados");
         }
 
     }
@@ -139,6 +142,8 @@ public class PostServiceImpl implements PostService {
             } catch (IOException e){
                 throw new RuntimeException("Image not loaded");
             }
+        }else {
+            post.setImageUrl(POST_IMAGE_DEFAULT);
         }
     }
 }

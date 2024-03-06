@@ -31,7 +31,5 @@ public record PostRequestDto(
         Boolean enableComments,
 
         @NotNull(message = INVALID_PROFILE_ID)
-        @Pattern(regexp = REGEX_UUID,
-                message = INVALID_UUID)
         UUID profileId ){
 }

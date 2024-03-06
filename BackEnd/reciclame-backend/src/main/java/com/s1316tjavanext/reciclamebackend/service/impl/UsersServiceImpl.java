@@ -16,7 +16,6 @@ import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
 import com.s1316tjavanext.reciclamebackend.repository.UserRepository;
 import com.s1316tjavanext.reciclamebackend.service.UserService;
 import com.s1316tjavanext.reciclamebackend.validator.ObjectsValidator;
-import exception.MiException;
 
 import java.util.*;
 
@@ -92,36 +91,6 @@ public class UsersServiceImpl implements UserService {
     }
   }
 
-    ///////////        ESTO ES PARA LAS VALIDACIONES ///////////////////
-    
-    
-    public void validar(String email, String name, String lastName, String password, String password2, Date birthdate , String phone  ) throws MiException {
-
-    if (name.isEmpty()) {
-      throw new MiException("el nombre no puede ser nulo o estar vacio");
-    }
-    if (lastName.isEmpty()) {
-      throw new MiException("el apellido no puede ser nulo o estar vacio");
-    }
-
-    if (email.isEmpty()) {
-      throw new MiException("el email no puede ser nulo o estar vacio");
-    }
-    
-     if (phone.isEmpty()) {
-      throw new MiException("el telefono no puede ser nulo o estar vacio");
-    }
-     if (birthdate == null) {
-      throw new MiException("su fecha de nacimiento deve ser valida");
-    }
-
-    if (password.isEmpty() || password == null || password.length() <= 5) {
-      throw new MiException("la contraseña no puede estar vacia, y debe tener mas de 5 digitos");
-    }
-    if (!password.equals(password2)) {
-      throw new MiException("las contraseñas ingresadas deben ser iguales");
-    }
-    }
     
     //////////    BORRAR USUARIO            /////////////
     
@@ -132,7 +101,7 @@ public class UsersServiceImpl implements UserService {
     if (respuesta.isPresent()) {
       userRepository.deleteById(id);
     } else {
-      throw new RuntimeException("no se encontro el usuario");
+      throw new IdNotFoundException("id no encontrado");
     }
   }
 

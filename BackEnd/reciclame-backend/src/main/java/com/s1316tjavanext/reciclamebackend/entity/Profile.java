@@ -30,7 +30,7 @@ public class Profile implements Serializable {
     @Id
     private UUID id;
 
-    @Schema(name = "photo_id", description = "Photo of the user", example = "1234567")
+    @Schema(name = "image", description = "Photo of the user", example = "1234567")
     @Column(name = "photo_id")
     @JsonAlias("photo_id")
     private String photoId;

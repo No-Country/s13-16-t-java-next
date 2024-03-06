@@ -6,6 +6,7 @@ import com.s1316tjavanext.reciclamebackend.dto.UserProfileRequestDto;
 import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
 import com.s1316tjavanext.reciclamebackend.entity.*;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Category;
+import com.s1316tjavanext.reciclamebackend.exception.IdNotFoundException;
 import com.s1316tjavanext.reciclamebackend.mapper.PostMapper;
 import com.s1316tjavanext.reciclamebackend.mapper.ProfileMapper;
 import com.s1316tjavanext.reciclamebackend.repository.FavoriteRepository;
@@ -24,6 +25,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.*;
 
+import static com.s1316tjavanext.reciclamebackend.util.Constants.PROFILE_IMAGE_DEFAULT;
+
 @Service
 @AllArgsConstructor
 @Transactional
@@ -41,17 +44,6 @@ public class ProfileServiceImpl implements ProfileService {
     public Optional<ProfileResponseDto> getProfile(UUID profileId) {
         return profileRepository.findById(profileId).map(profileMapper::profileToProfileResponseDto);
     }
-
-//    @Override
-//    public Profile saveProfile(Profile profileResponseDto) {
-//        Profile newProfile = new Profile();
-//        newProfile.setId(UUID.randomUUID());
-////        newProfile.setName(profileResponseDto.getName());
-////        newProfile.setLastName(profileResponseDto.getLastName());
-//        newProfile.setPhotoId(profileResponseDto.getPhotoId());
-//        newProfile.setBio(profileResponseDto.getBio());
-//        return profileRepository.save(newProfile);
-//    }
 
     @Override
     public ProfileResponseDto updateProfile(UUID profileId,
@@ -84,7 +76,7 @@ public class ProfileServiceImpl implements ProfileService {
 
            return profileMapper.profileToProfileResponseDto(profileRepository.save(profileDB.get()));
        }
-       else throw new RuntimeException("id no encontrado");
+       else throw new IdNotFoundException("id no encontrado");
     }
 
     @Override
@@ -95,7 +87,7 @@ public class ProfileServiceImpl implements ProfileService {
             listStringToListEnum(profileDB.get(),categories);
             return profileMapper.profileToProfileResponseDto(profileRepository.save(profileDB.get()));
         }
-        else throw new RuntimeException("Perfil no encontrado");
+        else throw new IdNotFoundException("id no encontrado");
     }
 
     @Override
@@ -103,7 +95,7 @@ public class ProfileServiceImpl implements ProfileService {
         Optional<Profile> optProfile = profileRepository.findById(profileId);
         if(optProfile.isPresent()){
             profileRepository.deleteById(profileId);
-        }else throw new RuntimeException("id no encontrado");
+        }else throw new IdNotFoundException("id no encontrado");
     }
 
     @Override
@@ -119,7 +111,7 @@ public class ProfileServiceImpl implements ProfileService {
 
             List <Post> posts = favorites.stream().map(Favorite::getPost).toList();
             return postMapper.postsToPostsDto(posts);
-        }else throw new RuntimeException("profile id no encontrado");
+        }else throw new IdNotFoundException("profile id no encontrado");
     }
 
     @Override
@@ -137,7 +129,7 @@ public class ProfileServiceImpl implements ProfileService {
                 favoriteRepository.save(favorite);
             }
         }else{
-            throw new RuntimeException("ids not found");
+            throw new IdNotFoundException("ids not found");
         }
     }
 
@@ -154,6 +146,8 @@ public class ProfileServiceImpl implements ProfileService {
             } catch (IOException e){
                 throw new RuntimeException("Photo not loaded");
             }
+        }else {
+            profile.setPhotoId(PROFILE_IMAGE_DEFAULT);
         }
     }
 

@@ -4,15 +4,9 @@ import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_BIRTHDAY;
-import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_EMAIL;
-import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_LENGTH_NAME;
-import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_LENGTH_PHONE_NUMBER;
-import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_NAME;
-import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_PASSWORD;
-import static com.s1316tjavanext.reciclamebackend.util.Constants.INVALID_PHONE_NUMBER;
-
 import java.util.Date;
+
+import static com.s1316tjavanext.reciclamebackend.util.Constants.*;
 
 public record UserRequestDTO(
         @NotBlank(message = INVALID_NAME)
@@ -32,12 +26,12 @@ public record UserRequestDTO(
         String phone,
 
         @NotBlank(message = INVALID_PASSWORD)
-        @Pattern(regexp = "^(?=.*[A-Z])(?=.*\\d)[a-zA-Z0-9.!@#$&*%_\\-=]+$", message = INVALID_PASSWORD)
+        @Pattern(regexp = REGEX_PASSWORD, message = INVALID_PASSWORD)
         @Length(min = 8, message = INVALID_PASSWORD)
         String password,
 
-        @Positive
-        @Max(2410)
+        @Positive(message = INVALID_LOCATION_ID)
+        @Max(value = 2410, message = INVALID_LOCATION_ID)
         int location_id,
 
         @NotNull

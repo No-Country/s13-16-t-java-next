@@ -14,8 +14,6 @@ import java.util.List;
 public interface ProfileMapper {
     ProfileMapper INSTANCE = Mappers.getMapper(ProfileMapper.class);
 
-
-    Profile userCreateDTOToProfile(UserCreateDTO userCreateDTO);
     @Mapping(source = "user", target = "userResponseDTO")
     @Mapping(source = "user.location", target = "userResponseDTO.location")
     ProfileResponseDto profileToProfileResponseDto(Profile profile);
