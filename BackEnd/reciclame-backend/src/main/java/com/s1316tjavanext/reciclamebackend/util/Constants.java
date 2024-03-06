@@ -28,7 +28,7 @@ public class Constants {
 
     public final static String INVALID_PHONE_NUMBER = "El numero de telefono no es valido";
     public final static String INVALID_LENGTH_PHONE_NUMBER = "La longitud del numero de telefono no es valida";
-    public final static String INVALID_LOCATION_ID = "La localidad ingresada no es valida";
+    public final static String INVALID_LOCATION_ID = "La localidad ingresada no es valida (1-2382)";
     public final static String INVALID_BIRTHDAY = "La fecha de nacimiento no es valida";
     public final static String INVALID_POST_ID = "Id de publicacion requerido";
     public final static String INVALID_PROFILE_ID = "Id de perfil requerido";

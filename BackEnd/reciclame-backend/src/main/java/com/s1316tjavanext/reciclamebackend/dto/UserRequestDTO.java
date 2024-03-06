@@ -30,8 +30,8 @@ public record UserRequestDTO(
         @Length(min = 8, message = INVALID_PASSWORD)
         String password,
 
-        @Positive(message = INVALID_LOCATION_ID)
-        @Max(value = 10000, message = INVALID_LOCATION_ID)
+        @Min(value = 1, message = INVALID_LOCATION_ID)
+        @Max(value = 2382, message = INVALID_LOCATION_ID)
         int location_id,
 
         @NotNull
