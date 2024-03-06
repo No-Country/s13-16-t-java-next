@@ -124,7 +124,7 @@ export default function ConfigurationProfile({ categories, profile }) {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(profileSchema),
   });
@@ -305,6 +305,7 @@ export default function ConfigurationProfile({ categories, profile }) {
                 <button
                   className=" w-full rounded-full bg-primary-green px-4 py-2 text-white lg:w-1/4  "
                   type="submit"
+                  disabled={isSubmitting}
                 >
                   Guardar
                 </button>
