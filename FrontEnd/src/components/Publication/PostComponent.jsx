@@ -8,6 +8,7 @@ import Link from "next/link";
 import LikeIcon from "../Icons/LikeIcon";
 
 import { useRouter } from "next/navigation";
+import { ok } from "assert";
 
 export default function PostComponent({ post }) {
   const router = useRouter();
@@ -15,22 +16,43 @@ export default function PostComponent({ post }) {
   const isLogged =
     typeof window !== "undefined" && localStorage.getItem("isLogged");
 
+  const profileId =
+    typeof window !== "undefined" && localStorage.getItem("profileId");
+
   
   const [isEdit, setIsEdit] = useState(false);
   const [commentEdit, setCommentEdit] = useState();
 
-  const handleLikeClick = () => {
+  const handleLikeClick = async () => {
     if (!isLogged) {
       router.push("/login");
       return;
     }
+
+    try{
+      const response = await fetch(`https://deployreciclame-production.up.railway.app/posts/${post.id}/likes`,{
+        method: 'PUT',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ profileId }) 
+      })
+      if( response.status === ok ){
+        console.log('Like enviado exitosamente')
+      }
+    } catch{
+      console.log('Error al enviar el like')
+    }
   }
+  
+
 
   const userLoggedId =
     typeof window !== "undefined" && localStorage.getItem("userLoggedId");
 
   const isOwner =
     userLoggedId === post?.profileResponseDto?.userResponseDTO?.userId;
+
 
  
 
