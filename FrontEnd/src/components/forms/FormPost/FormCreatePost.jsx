@@ -52,8 +52,6 @@ export default function FormCreatePost({ categories, post, modeEdit }) {
   const profileId =
     typeof window !== "undefined" && localStorage.getItem("profileId");
 
- 
-
   const toggleSwitch = () => {
     setIsActive(!isActive);
   };
@@ -66,10 +64,10 @@ export default function FormCreatePost({ categories, post, modeEdit }) {
     formData.append("image", objectImage ? objectImage : new Blob());
     formData.append("enableComments", isActive);
     formData.append("profileId", profileId);
-  
+
     const method = modeEdit ? "PUT" : "POST";
     const url = modeEdit ? `${URLUpdateData}/${post?.id}` : URLPostData;
-   
+
     const response = await fetch(url, {
       method: method,
       body: formData,
@@ -168,17 +166,17 @@ export default function FormCreatePost({ categories, post, modeEdit }) {
             </Button>
             <p className="text-[#D9D9D9]">Activar Comentarios</p>
           </div>
-          <div className="hidden w-full text-end md:block">
+          <div className="hidden w-full  md:flex md:justify-end gap-2">
             <Link
               href={"/"}
-              className="mb-4 w-full rounded-3xl border border-secondary-violet p-2 text-center text-secondary-violet transition duration-500 hover:scale-105 lg:m-2 "
+              className=" w-full rounded-3xl border border-secondary-violet p-2 text-center text-secondary-violet transition duration-500 hover:scale-105 md:w-1/3 "
             >
               Cancelar
             </Link>
             <button
               disabled={isSubmitting}
               type="submit"
-              className="mb-5 mt-4 w-full rounded-3xl bg-accent-yellow p-2 text-center transition duration-500 hover:scale-105 disabled:bg-gray-300 disabled:text-black lg:m-2 lg:w-28"
+              className=" w-full rounded-3xl bg-accent-yellow p-2 text-center transition duration-500 hover:scale-105 disabled:bg-gray-300 disabled:text-black lg:w-1/3 "
             >
               {modeEdit ? "Guardar" : "Publicar"}
             </button>
@@ -206,13 +204,13 @@ export default function FormCreatePost({ categories, post, modeEdit }) {
             })}
           />
         </label>
-        <div className="w-full text-end md:hidden">
+        <div className="lg:flex-end flex w-full flex-col md:hidden">
           <button
             disabled={isSubmitting}
             type="submit"
             className="mb-5 mt-4 w-full rounded-3xl bg-accent-yellow p-2 text-center transition duration-500 hover:scale-105 disabled:bg-gray-300 disabled:text-black lg:m-2 lg:w-28"
           >
-            Publicar
+            {modeEdit ? "Guardar" : "Publicar"}
           </button>
           <Link
             href={"/"}

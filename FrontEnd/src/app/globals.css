@@ -10,7 +10,7 @@
 
 @layer components {
   .input-form {
-    @apply h-12 w-full appearance-none rounded-3xl border-2 border-primary-green p-3 placeholder-[#838383];
+    @apply h-12 w-full appearance-none rounded-3xl border-2  p-3 bg-tertiary-gray placeholder-[D8D8D8];
 
     & + .chevron-down-icon {
       @apply absolute right-2 top-3 grid  w-8 place-items-center;
