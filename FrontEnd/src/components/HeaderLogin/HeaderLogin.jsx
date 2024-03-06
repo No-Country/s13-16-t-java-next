@@ -7,10 +7,13 @@ import MenuIconLog from "../Icons/MenuIconLog";
 import Submenu from "../Submenu";
 import SubmenuPublication from "../SubmenuPublication";
 import { useGetProfile } from "@/src/hooks/useGetProfile";
+import { usePathname } from "next/navigation";
 
 export default function HeaderLogin() {
   const profileId = typeof window !== 'undefined' && localStorage.getItem('profileId');
   const { profile } = useGetProfile(profileId);
+
+  const pathname = usePathname();
 
   return (
     <div className="fixed left-0 top-0 z-50 -mb-12 w-full bg-white">
@@ -27,19 +30,19 @@ export default function HeaderLogin() {
               ></Image>
             </Link>
             <Link
-              className="hidden border-secondary-violet p-1 hover:border-b-2 md:block"
+              className={`hidden ${pathname === "/" ? "text-secondary-violet border-b border-secondary-violet " : ""}  border-secondary-violet p-1 hover:border-b-2 md:block`}
               href={"/"}
             >
               Home
             </Link>
             <Link
-              className="hidden border-secondary-violet p-1 hover:border-b-2 md:block"
+              className={`hidden ${pathname === "/explorar" ? "text-secondary-violet border-b border-secondary-violet " : ""}  border-secondary-violet p-1 hover:border-b-2 md:block`}
               href={"/explorar"}
             >
               Explorar
             </Link>
             <Link
-              className="hidden border-secondary-violet p-1 hover:border-b-2 md:block"
+              className={`hidden ${pathname === "/blog" ? "text-secondary-violet border-b border-secondary-violet " : ""}  border-secondary-violet p-1 hover:border-b-2 md:block`}
               href={"/blog"}
             >
               Blog
