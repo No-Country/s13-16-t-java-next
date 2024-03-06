@@ -31,7 +31,7 @@ public record UserRequestDTO(
         String password,
 
         @Positive(message = INVALID_LOCATION_ID)
-        @Max(value = 2410, message = INVALID_LOCATION_ID)
+        @Max(value = 10000, message = INVALID_LOCATION_ID)
         int location_id,
 
         @NotNull
