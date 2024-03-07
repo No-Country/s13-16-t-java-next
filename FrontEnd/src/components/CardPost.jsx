@@ -77,7 +77,9 @@ export default function CardPost({ publication, profileId, favorites }) {
           </div>
         </div>
         <div className="flex justify-between p-2">
-          <p className="text-[16px] font-[500] tracking-wider">{title}</p>
+          <Link href={`/publicaciones/${id}`}>
+            <p className="text-[16px] font-[500] tracking-wider">{title}</p>
+          </Link>
           {profileId && (
             <button onClick={handleClickFav} className="">
               {isFav ? <HeartLike /> : <HeartDislike />}
