@@ -216,14 +216,17 @@ export default function ConfigurationProfile({ categories, profile }) {
                     </div>
                     <div className="relative">
                       <select
+                        defaultValue={profile?.userResponseDTO?.location?.province?.name}
                         className={`input-form pr-8} truncate`}
                         placeholder="Ciudad"
                         id="province"
-                        value={ProvinceSelected}
                         {...register("province")}
-                        onChange={(e) => setProvinceSelected(e.target.value)}
+                        onChange={(e) => {
+                          setProvinceSelected(e.target.value)
+                          console.log(e.target.value);
+                        }}
                       >
-                        <option value="">Provincia</option>
+                        <option value={profile?.userResponseDTO?.location?.province?.name}>{profile?.userResponseDTO?.location?.province?.name}</option>
                         <hr />
                         {Provinces.map((province) => {
                           const { id, name } = province;
@@ -246,6 +249,7 @@ export default function ConfigurationProfile({ categories, profile }) {
                     </div>
                     <div className="relative">
                       <select
+                        defaultValue={profile?.userResponseDTO?.location?.name}
                         className={`input-form pr-8"} truncate`}
                         placeholder="Ciudad"
                         id="city"
@@ -253,7 +257,11 @@ export default function ConfigurationProfile({ categories, profile }) {
                         {...register("city")}
                         onChange={(e) => setLocationSelected(e.target.value)}
                       >
-                        <option value="">Localidad</option>
+                        {locations.length < 1 && profile?.userResponseDTO?.location?.id && (
+                          <option value={profile?.userResponseDTO?.location?.id}>
+                            {profile?.userResponseDTO?.location?.name}
+                          </option>
+                        )}
                         <hr />
                         {locations &&
                           locations.map((location) => {
