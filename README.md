@@ -62,3 +62,9 @@ Reciclame es una red social dedicada a promover la reutilización de materiales 
 [![spring](https://img.shields.io/badge/spring-000?style=for-the-badge&logo=spring&logoColor)](https://spring.io/)
 [![swagger](https://img.shields.io/badge/swagger-000?style=for-the-badge&logo=swagger&logoColor)](https://swagger.io/)
 
+### UX/UI
+[![figma](https://img.shields.io/badge/figma-000?style=for-the-badge&logo=figma&logoColor)](https://www.figma.com/file/QsLdkIKVKVgZi0BojXOy1J/Proyecto-Reciclame?type=design&node-id=10-3331&mode=design)
+
+### QA
+[![trello](https://img.shields.io/badge/trello-000?style=for-the-badge&logo=trello&logoColor)](https://swagger.io/)
+

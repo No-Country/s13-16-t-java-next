@@ -97,3 +97,10 @@ export async function getPublicationById(user_id) {
   const data = await res.json();
   return data;
 }
+
+export async function getFavorites(profile_id) {
+  const API_URL = `https://deployreciclame-production.up.railway.app/profiles/${profile_id}/favoritePosts`;
+  const res = await fetch(API_URL);
+  const data = await res.json();
+  return data;
+}

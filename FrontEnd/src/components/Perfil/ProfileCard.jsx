@@ -3,21 +3,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import CardPost from "../CardPost";
 
-export default function ProfileCard({ profile }) {
+export default function ProfileCard({ profile, favs }) {
   const pathname = usePathname();
-
   const profileData = {
-    publications: { tittle: "Publicaciones", amount: "123" },
-    donations: { tittle: "Donaciones", amount: "123" },
-    favorites: { tittle: "Favoritos", amount: "123" },
-    interests: ["Papeles", "Plásticos", "Maderas", "Botellas de vidrio"],
+    publications: { tittle: "Publicaciones", amount: profile.posts.length },
+    donations: { tittle: "Donaciones", amount: "2" },
+    favorites: { tittle: "Favoritos", amount: favs.length },
   };
 
   const links = [
-    { name: "Publicaciones", href: "/perfil" },
-    { name: "Favoritos", href: "/perfil/favoritos" },
+    { name: "Publicaciones", href: `/perfil/${profile.id}` },
+    { name: "Favoritos", href: `/perfil/${profile.id}/favoritos` },
   ];
 
   return (
@@ -75,13 +72,6 @@ export default function ProfileCard({ profile }) {
           ))}
         </nav>
       </article>
-      {profile.posts && (
-        <div className="grid grid-cols-4 px-16 gap-5">
-          {profile.posts.map((post) => (
-            <CardPost key={post.id} publication={post} />
-          ))}
-        </div>
-      )}
     </>
   );
 }

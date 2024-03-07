@@ -18,14 +18,16 @@ export const userRegisterSchema = z
     }),
     password: z
       .string()
-      .min(8, {
-        message: "La contraseña debe tener mínimo 8 caracteres",
-      })
 
-      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\S]{8,}$/, {
-        message:
-          "La contraseña debe tener al menos una mayuscula, una minuscula y un carácter especial.",
-      }),
+      .min(8, { message: "La contraseña debe tener mínimo 8 caracteres" })
+      .max(15, { message: "La contraseña debe tener máximo 15 caracteres" })
+      .refine(
+        (data) => data.match(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[.!@#$&%\-_=]).*$/) !== null,
+        {
+          message: "La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial",
+        }
+      ),
+
     confirmPassword: z.string().min(8, {
       message: "La contraseña debe tener mínimo 8 caracteres",
     }),
