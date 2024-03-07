@@ -111,7 +111,7 @@ export default function ConfigurationProfile({ categories, profile }) {
         toast.success("Se actualizo el perfil correctamente");
         setTimeout(() => {
           router.push("/");
-        }, 3000);
+        }, 2000);
       } else {
         toast.error("Error al actualizar el perfil");
       }
@@ -128,7 +128,7 @@ export default function ConfigurationProfile({ categories, profile }) {
   } = useForm({
     resolver: zodResolver(profileSchema),
   });
-
+  console.log(isSubmitting);
   return (
     <section className="mx-auto mt-[65px] min-h-dvh w-full max-w-7xl p-3 md:w-[70%] lg:w-full">
       <div className="mb-5 flex w-full items-center justify-between">
@@ -303,7 +303,7 @@ export default function ConfigurationProfile({ categories, profile }) {
                   Cancelar
                 </Link>
                 <button
-                  className=" w-full rounded-full bg-primary-green px-4 py-2 text-white lg:w-1/4  "
+                  className=" w-full rounded-full bg-primary-green px-4 py-2 text-white lg:w-1/4 disabled:bg-gray-300 disabled:text-black "
                   type="submit"
                   disabled={isSubmitting}
                 >
