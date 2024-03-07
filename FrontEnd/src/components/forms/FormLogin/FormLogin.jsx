@@ -26,7 +26,7 @@ function FormLogin() {
     const users = await getAllUsers();
 
     function findUser(user) {
-      return user.email === email && user.password === password;
+      return user?.email === email && user?.password === password;
     }
 
     const user = users.find(findUser);
