@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.s1316tjavanext.reciclamebackend.service.NotificationService;
 import org.springframework.stereotype.Service;
 
 import com.s1316tjavanext.reciclamebackend.dto.CommentDto;
@@ -36,6 +37,8 @@ public class CommentServiceImpl implements CommentService {
     private final ObjectsValidator<CommentDto> commentValidator;
 
     private final ObjectsValidator<CommentUpdateDto> commentUpdateValidator;
+
+    private final NotificationService notificationService;
 
     @Override
     public List<CommentDto> getComments() {
@@ -75,6 +78,12 @@ public class CommentServiceImpl implements CommentService {
         if (post != null) {
             comment.setPost(post);
             CommentDto commentResult = commentMapper.commentToCommentDto(commentRepository.save(comment));
+            String contentNotification =  String.format("""
+                        %s %s ha comentado tu publicación %s""",
+                    profile.getUser().getName(),
+                    profile.getUser().getLastName(),
+                    post.getTitle());
+            notificationService.createNotification(profile,contentNotification,post.getId());
             return commentResult;
         }
         return null;
@@ -88,6 +97,12 @@ public class CommentServiceImpl implements CommentService {
             Post post = postRepository.findById(commentToDelete.getPost().getId()).orElse(null);
             if (post != null) {
                 commentRepository.deleteById(commentId);
+                String contentNotification =  String.format("""
+                        %s %s ha comentado tu publicación %s""",
+                        commentToDelete.getProfile().getUser().getName(),
+                        commentToDelete.getProfile().getUser().getLastName(),
+                        post.getTitle());
+                notificationService.deleteNotification(contentNotification);
                 return commentMapper.commentToCommentDto(commentToDelete);
             }
         }

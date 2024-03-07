@@ -1,6 +1,7 @@
 package com.s1316tjavanext.reciclamebackend.controller;
 
 import com.s1316tjavanext.reciclamebackend.dto.*;
+import com.s1316tjavanext.reciclamebackend.service.NotificationService;
 import com.s1316tjavanext.reciclamebackend.service.ProfileService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.UUID;
 public class ProfileController {
 
     private final ProfileService profileService;
+    private final NotificationService notificationService;
 
     @GetMapping("/{profileId}")
     public ResponseEntity<ProfileResponseDto> getProfile(@PathVariable UUID profileId) {
@@ -79,5 +81,15 @@ public class ProfileController {
         }catch (RuntimeException ignore){
             return ResponseEntity.notFound().build();
         }
+    }
+    @GetMapping("/notifications/{profileId}")
+    public ResponseEntity<List<NotificationDto>> getNotificationByProfileId(@PathVariable UUID profileId) {
+        return ResponseEntity.ok(notificationService.getNotificationsByProfileId(profileId));
+    }
+
+    @PutMapping("/updateNotification/{notificationId}")
+    public ResponseEntity<Void> updateNotification(@PathVariable UUID notificationId) {
+        notificationService.updateNotificationRead(notificationId);
+        return ResponseEntity.noContent().build();
     }
 }

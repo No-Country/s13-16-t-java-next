@@ -13,6 +13,7 @@ import com.s1316tjavanext.reciclamebackend.repository.LikeRepository;
 import com.s1316tjavanext.reciclamebackend.repository.PostRepository;
 import com.s1316tjavanext.reciclamebackend.repository.ProfileRepository;
 import com.s1316tjavanext.reciclamebackend.service.CloudinaryService;
+import com.s1316tjavanext.reciclamebackend.service.NotificationService;
 import com.s1316tjavanext.reciclamebackend.service.PostService;
 import com.s1316tjavanext.reciclamebackend.validator.ObjectsValidator;
 
@@ -42,10 +43,15 @@ public class PostServiceImpl implements PostService {
     private final PostMapper postMapper;
     private final CloudinaryService cloudinaryService;
     private final ObjectsValidator<PostRequestDto> postValidator;
+    private final NotificationService notificationService;
 
     @Override
     public List<PostDto> getPosts() {
-        return postMapper.postsToPostsDto(postRepository.findAll());
+        return postMapper.postsToPostsDto(
+                postRepository.findAll()
+                        .stream()
+                        .filter(post -> post.getStatus().equals(Status.Abierto))
+                        .toList());
     }
 
     @Override
@@ -113,13 +119,20 @@ public class PostServiceImpl implements PostService {
         Optional<Profile> profile = profileRepository.findById(profileId);
         if (post.isPresent() && profile.isPresent()){
             Optional<Like> likeDB = likeRepository.findByPostIdAndProfileId(postId,profileId);
+            String contentNotification =  String.format("""
+                        %s %s le ha dado like a tu publicación %s""",
+                    profile.get().getUser().getName(),
+                    profile.get().getUser().getLastName(),
+                    post.get().getTitle());
             if (likeDB.isPresent()){
                 likeRepository.delete(likeDB.get());
+                notificationService.deleteNotification(contentNotification);
             }else {
                 Like like = new Like();
                 like.setPost(post.get());
                 like.setProfile(profile.get());
                 likeRepository.save(like);
+                notificationService.createNotification(profile.get(),contentNotification, post.get().getId());
             }
             post.get().setLove(post.get().getProfilesLiked().size());
             postRepository.save(post.get());
