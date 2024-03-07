@@ -132,7 +132,11 @@ public class PostServiceImpl implements PostService {
                 like.setPost(post.get());
                 like.setProfile(profile.get());
                 likeRepository.save(like);
-                notificationService.createNotification(post.get().getProfile(),contentNotification, post.get().getId());
+                notificationService.createNotification(
+                        post.get().getProfile(),
+                        contentNotification,
+                        post.get().getId(),
+                        profile.get());
             }
             post.get().setLove(post.get().getProfilesLiked().size());
             postRepository.save(post.get());

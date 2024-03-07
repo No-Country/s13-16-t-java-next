@@ -31,19 +31,25 @@ public class NotificationServiceImpl implements NotificationService {
                         notification.getContent(),
                         notification.getDate(),
                         notification.isRead(),
-                        notification.getAffectedPostId())
+                        notification.getAffectedPostId(),
+                        notification.getActorProfileName(),
+                        notification.getActorProfileUrl())
                 )
                 .toList();
     }
 
     @Override
-    public void createNotification(Profile recipient, String content, UUID postId) {
+    public void createNotification(Profile recipient, String content, UUID postId, Profile actor) {
         Notification notification = new Notification();
         notification.setContent(content);
         notification.setRecipient(recipient);
         notification.setRead(false);
         notification.setDate(LocalDateTime.now().withNano(0));
         notification.setAffectedPostId(postId);
+        String name = actor.getUser().getName()+ " " +
+                actor.getUser().getLastName();
+        notification.setActorProfileName(name);
+        notification.setActorProfileUrl(actor.getPhotoId());
         notificationRepository.save(notification);
     }
 
