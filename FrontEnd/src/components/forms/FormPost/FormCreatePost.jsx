@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { publicationSchema } from "@/src/validations/userSchema";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Button from "../../Button";
 import { toast } from "sonner";
 import Link from "next/link";
 
@@ -155,15 +154,15 @@ export default function FormCreatePost({ categories, post, modeEdit }) {
           )}
 
           <div className="mb-3 flex items-center gap-2">
-            <Button
+            <button
               type="button"
               className={`relative h-6 w-12 rounded-full bg-gray-300 focus:outline-none ${isActive ? "bg-primary-green" : "bg-[#E3E3E3]"}`}
-              handle={toggleSwitch}
+              onClick={toggleSwitch}
             >
               <span
                 className={`absolute bottom-0 left-0 h-6 w-6 transform rounded-full bg-white shadow-md transition-transform duration-300 ${isActive ? "translate-x-full" : ""}`}
               ></span>
-            </Button>
+            </button>
             <p className="text-[#D9D9D9]">Activar Comentarios</p>
           </div>
           <div className="hidden w-full  gap-2 md:flex md:justify-end">

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import Button from "../Button";
 import Coments from "@/src/components/Coments";
 import FormComent from "@/src/components/forms/FormComent/FormComent";
 import WspIcon from "../Icons/WspIcon";
@@ -97,13 +96,14 @@ export default function PostComponent({ post }) {
                     : "Usuario que publica"}
                 </p>
               </div>
-              <Button
-                handle={handleLikeClick}
+              <button
+                onClick={handleLikeClick}
                 className="flex items-center gap-2"
+                disabled={post?.status === "Abierto" ? true : false}
               >
                 <span>{post.love}</span>
                 <LikeIcon />
-              </Button>
+              </button>
             </div>
           </div>
           <div className="flex w-full max-w-96 flex-col gap-4 p-5 md:max-w-[35rem] lg:gap-8 lg:p-20 xl:p-24">
@@ -125,7 +125,7 @@ export default function PostComponent({ post }) {
                     ? `https://wa.me/${post.profileResponseDto.userResponseDTO.phone}?text=Hola%20${post.profileResponseDto.userResponseDTO.name}%20me%20interesa%20tu%20publicación%20de%20${post.title}`
                     : "/login"
                 }
-                className={`mt-0 flex w-full justify-center gap-2 rounded-3xl bg-accent-yellow p-2 text-lg font-[500] ${!isLogged && "pointer-events-none opacity-50"}`}
+                className={`mt-0 flex w-full justify-center gap-2 rounded-3xl bg-accent-yellow p-2 text-lg font-[500] ${!isLogged || post?.status === "Cerrado" ? "pointer-events-none opacity-50" : ""}`}
               >
                 Me interesa <WspIcon />
               </Link>
@@ -139,7 +139,7 @@ export default function PostComponent({ post }) {
                     setCommentEdit={setCommentEdit}
                   />
                 )}
-                {post?.id && post?.enableComments && (
+                {post?.id && post?.enableComments && post?.status === "Abierto" && (
                   <FormComent
                     postId={post.id}
                     isEdit={isEdit}
