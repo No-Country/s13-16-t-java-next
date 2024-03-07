@@ -8,14 +8,14 @@ import { ProfileImageSkeleton } from "./skeletons";
 
 export default function Submenu({ profile }) {
   const { logOut } = useContext(Context);
- 
+
   return (
     <div className="group relative">
       {profile?.photoId ? (
         <Image
           width={40}
           height={40}
-          className="hidden rounded-full hover:cursor-pointer md:block"
+          className="hidden max-h-[40px] max-w-[40px] rounded-full object-cover hover:cursor-pointer md:block"
           src={profile?.photoId}
           alt="imagen perfil usuario"
           priority
