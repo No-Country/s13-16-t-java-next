@@ -60,7 +60,7 @@ export default function MenuIconLog({ profile }) {
               <div className=" w-full flex-col p-2">
                 <h3>{profile?.userResponseDTO?.name + " " + profile?.userResponseDTO?.lastName}</h3>
                 <Link
-                  href={"/perfil"}
+                  href={`/perfil/${profile?.id}`}
                   className={`text-sm text-primary-green underline hover:cursor-pointer`}
                   onClick={handleLinkClick}
                 >

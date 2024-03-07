@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Button from "@/src/components/Button";
 import { PencilIcon, DeleteIcon } from "../Icons/EditIcon";
 import { useRouter } from "next/navigation";
 import PostComponent from "./PostComponent";
 import { useCategies } from "@/src/hooks/useCategies";
 import FormCreatePost from "../forms/FormPost/FormCreatePost";
+import { toast } from "sonner";
 
 export default function Post({ post }) {
   const [openDeleteMenu, setOpenDeleteMenu] = useState(false);
@@ -20,6 +20,27 @@ export default function Post({ post }) {
     userLoggedId === post.profileResponseDto.userResponseDTO.userId;
 
   const { categories } = useCategies();
+
+  const handleClosePost = async () => {
+    try {
+      const res = await fetch(
+        `https://deployreciclame-production.up.railway.app/posts/${post?.id}/close-post`,
+        {
+          method: "PUT",
+        },
+      );
+      if (res.ok) {
+        toast.success("Se realizo con exito el intercambio");
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
+      } else {
+        toast.error("Ocurrio un error al cerrar el post");
+      }
+    } catch (error) {
+      toast.error("Ocurrio un error al cerrar el post");
+    }
+  };
   async function DeletePost() {
     setOpenDeleteMenu(false);
     router.push("/explorar");
@@ -40,7 +61,6 @@ export default function Post({ post }) {
     setModeEdit(true);
     setOpenEditMenu(!openEditMenu);
   };
-  
 
   return (
     <>
@@ -85,31 +105,47 @@ export default function Post({ post }) {
           </div>
         </div>
       )}
-      {post?.id && <PostComponent post={post} />}
+      {post?.id && <PostComponent post={post}/>}
       {isOwner && (
         <div className="-order-1 flex justify-between gap-1 p-5 lg:px-24">
-          <Button className="p-1 rounded-3xl text-sm md:text-base bg-accent-yellow font-[500] lg:w-[30%]">
-            Intercambio exitoso
-          </Button>
-          <div className=" flex justify-end gap-2 lg:col-span-2">
-            <Button
-              className="rounded-3xl bg-primary-green  px-3 md:px-5 md:py-2 font-[500] text-white "
-              handle={() => handleEdit()}
+          {post?.status == "Abierto" ? (
+            <button
+              className="rounded-3xl bg-accent-yellow px-3 py-2 text-sm font-[500] hover:scale-105 hover:cursor-pointer disabled:bg-gray-300 disabled:text-black md:text-base lg:w-[30%]"
+              onClick={() => handleClosePost()}
             >
-              <PencilIcon />
-            </Button>
-            <Button
-              handle={() => setOpenDeleteMenu(true)}
-              className=" rounded-3xl bg-wrong  px-3 md:px-5 md:py-2  font-[500] text-white lg:block"
-            >
-              <DeleteIcon />
-            </Button>
-          </div>
+              Intercambio exitoso
+            </button>
+          ) : (
+            <div className="rounded-3xl bg-primary-green px-3 py-2 font-[500]  lg:w-[30%] ">
+              <span>Publicación Cerrada</span>
+            </div>
+          )}
+
+          {post?.status == "Abierto" && (
+            <div className=" flex justify-end gap-2 lg:col-span-2">
+              <button
+                className="rounded-3xl bg-primary-green  px-3 font-[500] text-white md:px-5 md:py-2 "
+                onClick={() => handleEdit()}
+              >
+                <PencilIcon />
+              </button>
+              <button
+                onClick={() => setOpenDeleteMenu(true)}
+                className=" rounded-3xl bg-wrong  px-3 font-[500] text-white  md:px-5 md:py-2 lg:block"
+              >
+                <DeleteIcon />
+              </button>
+            </div>
+          )}
         </div>
       )}
-      {openEditMenu && isOwner && (
-        <div className="fixed inset-0 z-40 grid h-full w-full  bg-white overflow-y-auto">
-          <FormCreatePost categories={categories} post={post} modeEdit={modeEdit} />
+      {openEditMenu && isOwner &&(
+        <div className="fixed inset-0 z-40 grid h-full w-full  overflow-y-auto bg-white">
+          <FormCreatePost
+            categories={categories}
+            post={post}
+            modeEdit={modeEdit}
+          />
         </div>
       )}
     </>
