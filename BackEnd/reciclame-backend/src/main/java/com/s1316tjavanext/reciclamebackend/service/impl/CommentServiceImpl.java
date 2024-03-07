@@ -83,15 +83,7 @@ public class CommentServiceImpl implements CommentService {
                     profile.getUser().getName(),
                     profile.getUser().getLastName(),
                     post.getTitle());
-            String fullName= comment.getProfile().getUser().getName() +
-                    " "+
-                    comment.getProfile().getUser().getLastName();
-            String url= comment.getProfile().getPhotoId();
-            notificationService.createNotification(comment.getPost().getProfile(),
-                    contentNotification,
-                    post.getId(),
-                    fullName,
-                    url);
+            notificationService.createNotification(comment.getPost().getProfile(),contentNotification,post);
             return commentResult;
         }
         return null;

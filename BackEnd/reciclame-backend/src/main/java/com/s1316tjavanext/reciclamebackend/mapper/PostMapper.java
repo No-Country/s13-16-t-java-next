@@ -37,6 +37,8 @@ public interface PostMapper {
     @InheritInverseConfiguration
     @Mapping(target = "comments", ignore = true)
     @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "profilesLiked", ignore = true)
     @Mapping(target = "profilesMarkedFavorite", ignore = true)
+    @Mapping(target = "notifications", ignore = true)
     Post postDtoToPost(PostDto postDto);
 }

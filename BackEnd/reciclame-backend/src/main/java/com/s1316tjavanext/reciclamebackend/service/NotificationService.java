@@ -2,6 +2,7 @@ package com.s1316tjavanext.reciclamebackend.service;
 
 
 import com.s1316tjavanext.reciclamebackend.dto.NotificationDto;
+import com.s1316tjavanext.reciclamebackend.entity.Post;
 import com.s1316tjavanext.reciclamebackend.entity.Profile;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.UUID;
 public interface NotificationService {
 
     List<NotificationDto> getNotificationsByProfileId(UUID profileId);
-    void createNotification(Profile recipient, String content, UUID id, String name, String url);
+    void createNotification(Profile recipient, String content, Post affectedPost);
     void updateNotificationRead(UUID profileId);
     void deleteNotification(String contentNotification);
 }

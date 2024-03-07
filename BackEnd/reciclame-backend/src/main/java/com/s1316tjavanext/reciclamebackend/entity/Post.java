@@ -68,4 +68,7 @@ public class Post implements Serializable {
 
     @OneToMany (mappedBy = "post", cascade = CascadeType.ALL)
     private List<Favorite> profilesMarkedFavorite;
+
+    @OneToMany (mappedBy = "affectedPost", cascade = CascadeType.ALL)
+    private List<Notification> notifications;
 }

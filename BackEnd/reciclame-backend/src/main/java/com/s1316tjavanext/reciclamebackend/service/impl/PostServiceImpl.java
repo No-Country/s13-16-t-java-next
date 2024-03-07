@@ -118,34 +118,24 @@ public class PostServiceImpl implements PostService {
         Optional<Post> post = postRepository.findById(postId);
         Optional<Profile> profile = profileRepository.findById(profileId);
         if (post.isPresent() && profile.isPresent()){
-            Profile profile1 = profile.get();
-            Post post1 = post.get();
             Optional<Like> likeDB = likeRepository.findByPostIdAndProfileId(postId,profileId);
             String contentNotification =  String.format("""
                         %s %s le ha dado like a tu publicación %s""",
                     profile.get().getUser().getName(),
                     profile.get().getUser().getLastName(),
                     post.get().getTitle());
-            String fullName= profile1.getUser().getName() +
-                    " "+
-                    profile1.getUser().getLastName();
             if (likeDB.isPresent()){
                 likeRepository.delete(likeDB.get());
                 notificationService.deleteNotification(contentNotification);
             }else {
                 Like like = new Like();
-                like.setPost(post1);
-                like.setProfile(profile1);
+                like.setPost(post.get());
+                like.setProfile(profile.get());
                 likeRepository.save(like);
-                notificationService.createNotification(
-                        post1.getProfile(),
-                        contentNotification,
-                        post1.getId(),
-                        fullName,
-                        profile1.getPhotoId());
+                notificationService.createNotification(post.get().getProfile(),contentNotification, post.get());
             }
-            post1.setLove(post1.getProfilesLiked().size());
-            postRepository.save(post1);
+            post.get().setLove(post.get().getProfilesLiked().size());
+            postRepository.save(post.get());
         }else{
             throw new IdNotFoundException("ids no encontrados");
         }

@@ -23,7 +23,7 @@ public class Notification {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "profile_id", nullable = false)
+    @JoinColumn(name = "recipient_profile_id", nullable = false)
     private Profile recipient;
 
     @Column(nullable = false)
@@ -32,12 +32,7 @@ public class Notification {
     @Column(name = "is_read", nullable = false)
     private boolean isRead;
 
-    @Column(name = "affect_post_id", nullable = false)
-    private UUID affectedPostId;
-
-//    @Column(name = "actor_profile_name", nullable = false)
-//    private String actorProfileName;
-//
-//    @Column(name = "actor_profile_url", nullable = false)
-//    private String actorProfileUrl;
+    @ManyToOne
+    @JoinColumn(name = "affect_post_id", nullable = false)
+    private Post affectedPost;
 }

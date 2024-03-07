@@ -13,8 +13,5 @@ public record NotificationDto(
         LocalDateTime date,
         Boolean isRead,
         UUID postId
-//        ,
-//        String actorProfileName,
-//        String actorProfileUrl
         ){
 }

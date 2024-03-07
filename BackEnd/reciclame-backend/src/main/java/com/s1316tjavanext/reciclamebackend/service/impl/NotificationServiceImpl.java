@@ -2,6 +2,7 @@ package com.s1316tjavanext.reciclamebackend.service.impl;
 
 import com.s1316tjavanext.reciclamebackend.dto.NotificationDto;
 import com.s1316tjavanext.reciclamebackend.entity.Notification;
+import com.s1316tjavanext.reciclamebackend.entity.Post;
 import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import com.s1316tjavanext.reciclamebackend.repository.NotificationRepository;
 import com.s1316tjavanext.reciclamebackend.service.NotificationService;
@@ -32,25 +33,20 @@ public class NotificationServiceImpl implements NotificationService {
                         notification.getContent(),
                         notification.getDate(),
                         notification.isRead(),
-                        notification.getAffectedPostId()
-//                        ,
-//                        notification.getActorProfileName(),
-//                        notification.getActorProfileUrl()
+                        notification.getAffectedPost().getId()
                         )
                 )
                 .toList();
     }
 
     @Override
-    public void createNotification(Profile recipient, String content, UUID postId, String name, String url) {
+    public void createNotification(Profile recipient, String content, Post affectedPost) {
         Notification notification = new Notification();
         notification.setContent(content);
         notification.setRecipient(recipient);
         notification.setRead(false);
         notification.setDate(LocalDateTime.now().withNano(0));
-        notification.setAffectedPostId(postId);
-//        notification.setActorProfileName(name);
-//        notification.setActorProfileUrl(url);
+        notification.setAffectedPost(affectedPost);
         notificationRepository.save(notification);
     }
 
