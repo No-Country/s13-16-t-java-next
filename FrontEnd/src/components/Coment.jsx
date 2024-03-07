@@ -56,7 +56,7 @@ export default function Coment({ coment, setIsEdit, setCommentEdit }) {
                 alt={`Imagen de usuario ${profile.userResponseDTO.name}`}
                 height={50}
                 width={50}
-                className=" rounded-full"
+                className=" max-h-[50px] max-w-[50px] rounded-full object-cover object-center"
               />
               <div className="flex flex-col">
                 <p>
