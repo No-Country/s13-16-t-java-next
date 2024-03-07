@@ -35,7 +35,7 @@ export default function MenuIconLog({ profile }) {
   return (
     <>
       <div className="cursor-pointer" onClick={toggleMenu}>
-        {menuOpen ? <XMarkIcon  /> : <MenuIcon />}
+        {menuOpen ? <XMarkIcon /> : <MenuIcon />}
       </div>
       <div
         className={`fixed left-0 top-16 z-50 h-full w-full md:hidden ${!menuOpen ? "-translate-x-full" : "translate-x-0"}`}
@@ -48,28 +48,33 @@ export default function MenuIconLog({ profile }) {
               : { transform: "translateX(-100%)" }
           }
         >
-          {profile?.photoId && profile?.userResponseDTO?.name && profile?.userResponseDTO?.lastName ? (
-            <div className="flex items-center gap-2 p-2">
-              <Image
-                src={profile.photoId}
-                width={40}
-                height={40}
-                alt="Imagen de Perfil"
-                className="rounded-full"
-              />
-              <div className=" w-full flex-col p-2">
-                <h3>{profile?.userResponseDTO?.name + " " + profile?.userResponseDTO?.lastName}</h3>
-                <Link
-                  href={`/perfil/${profile?.id}`}
-                  className={`text-sm text-primary-green underline hover:cursor-pointer`}
-                  onClick={handleLinkClick}
-                >
-                Mi Perfil <span>→</span>
-                </Link>
+          {profile?.photoId &&
+          profile?.userResponseDTO?.name &&
+          profile?.userResponseDTO?.lastName ? (
+              <div className="flex items-center gap-2 p-2">
+                <Image
+                  src={profile.photoId}
+                  width={40}
+                  height={40}
+                  alt="Imagen de Perfil"
+                  className="max-h-[40px] min-h-[40px] min-w-[40px] max-w-[40px] rounded-full object-cover object-center"
+                />
+                <div className=" w-full flex-col p-2">
+                  <h3>
+                    {profile?.userResponseDTO?.name +
+                      " " +
+                      profile?.userResponseDTO?.lastName}
+                  </h3>
+                  <Link
+                    href={`/perfil/${profile?.id}`}
+                    className={`text-sm text-primary-green underline hover:cursor-pointer`}
+                    onClick={handleLinkClick}
+                  >
+                    Mi Perfil <span>→</span>
+                  </Link>
+                </div>
               </div>
-            </div>
-          )
-            : (
+            ) : (
               <ProfileMobileSkeleton />
             )}
           <div className="flex h-full flex-col items-start justify-start">
@@ -115,12 +120,15 @@ export default function MenuIconLog({ profile }) {
               Blog
             </Link>
             <Link
-              className={`header-mobile-link ${pathname === `/configuracion/perfil/${profile?.id}` ?
-                "border border-secondary-violet" : ""}`} 
+              className={`header-mobile-link ${
+                pathname === `/configuracion/perfil/${profile?.id}`
+                  ? "border border-secondary-violet"
+                  : ""
+              }`}
               href={`/configuracion/perfil/${profile?.id}`}
               onClick={handleLinkClick}
             >
-            Configuración
+              Configuración
             </Link>
 
             <div className="absolute bottom-20 flex flex-col justify-start p-2">
