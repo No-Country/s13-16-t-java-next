@@ -10,14 +10,16 @@ export default function CardPost({ publication, profileId, favorites }) {
   const [isFav, setIsFav] = useState(false);
   const { id, imageUrl, title } = publication;
 
-  function validarIdEnArray(idBuscado, arrayBuscado) {
-    return arrayBuscado?.some(function (objeto) {
-      return objeto.id === idBuscado;
-    });
+  function postIsInFav(id, favs) {
+    if (Array.isArray(favs) && id) {
+      return favs?.some(function (objeto) {
+        return objeto.id === id;
+      });
+    } else return false;
   }
 
   useEffect(() => {
-    if (validarIdEnArray(id, favorites)) {
+    if (postIsInFav(id, favorites)) {
       setIsFav(true);
     }
   }, [publication, favorites, id]);
