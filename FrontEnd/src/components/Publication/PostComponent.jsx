@@ -19,7 +19,6 @@ export default function PostComponent({ post }) {
   const profileId =
     typeof window !== "undefined" && localStorage.getItem("profileId");
 
-  
   const [isEdit, setIsEdit] = useState(false);
   const [commentEdit, setCommentEdit] = useState();
 
@@ -29,34 +28,30 @@ export default function PostComponent({ post }) {
       return;
     }
 
-    try{
-      const response = await fetch(`https://deployreciclame-production.up.railway.app/posts/${post.id}/likes`,{
-        method: 'PUT',
-        headers: {
-          "Content-Type": "application/json",
+    try {
+      const response = await fetch(
+        `https://deployreciclame-production.up.railway.app/posts/${post.id}/likes`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ profileId }),
         },
-        body: JSON.stringify({ profileId }) 
-      })
-      if( response.status === ok ){
-        console.log('Like enviado exitosamente')
+      );
+      if (response.status === ok) {
+        console.log("Like enviado exitosamente");
       }
-    } catch{
-      console.log('Error al enviar el like')
+    } catch {
+      console.log("Error al enviar el like");
     }
-  }
-  
-
+  };
 
   const userLoggedId =
     typeof window !== "undefined" && localStorage.getItem("userLoggedId");
 
   const isOwner =
     userLoggedId === post?.profileResponseDto?.userResponseDTO?.userId;
-
-
- 
-
- 
 
   return (
     <>
@@ -83,7 +78,7 @@ export default function PostComponent({ post }) {
                     alt="image Profile"
                     height={70}
                     width={70}
-                    className="rounded-full bg-[#b8b8b8]"
+                    className="max-h-[70px] max-w-[70px] rounded-full bg-[#b8b8b8] object-cover"
                   />
                 ) : (
                   <Image
@@ -137,7 +132,6 @@ export default function PostComponent({ post }) {
             )}
             {isLogged && (
               <>
-               
                 {post?.comments && (
                   <Coments
                     coments={post.comments}
