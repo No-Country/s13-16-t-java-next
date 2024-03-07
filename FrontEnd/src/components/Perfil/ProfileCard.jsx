@@ -4,12 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function ProfileCard({ profile, favs }) {
+export default function ProfileCard({ profile, favs, donations }) {
   const pathname = usePathname();
   const profileData = {
-    publications: { tittle: "Publicaciones", amount: profile.posts.length },
-    donations: { tittle: "Donaciones", amount: "2" },
-    favorites: { tittle: "Favoritos", amount: favs.length },
+    publications: {
+      tittle: "Publicaciones",
+      amount: profile.posts.length || 0,
+    },
+    donations: { tittle: "Donaciones", amount: donations.length || 0 },
+    favorites: { tittle: "Favoritos", amount: favs.length || 0 },
   };
 
   const links = [
