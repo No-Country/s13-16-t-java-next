@@ -18,11 +18,11 @@ export default function SubmenuPublication() {
             <span href={"/nuevopost"}>Publicación</span>
           </Link>
           <Link
-            href={""}
+            href={"/blogpost"}
             className="flex gap-3 border-secondary-violet hover:border-b-2"
           >
             <NewBlogPostIcon />
-            <Link href={"/blogpost"}>Noticia</Link>
+            Noticia
           </Link>
         </div>
       </div>

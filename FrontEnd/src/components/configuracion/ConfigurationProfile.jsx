@@ -26,6 +26,7 @@ export default function ConfigurationProfile({ categories, profile }) {
   const [ProvinceSelected, setProvinceSelected] = React.useState(
     profile?.userResponseDTO?.location?.province?.name,
   );
+
   const [Provinces, setProvinces] = useState([]);
 
   React.useEffect(() => {
@@ -216,7 +217,6 @@ export default function ConfigurationProfile({ categories, profile }) {
                     </div>
                     <div className="relative">
                       <select
-                        defaultValue={profile?.userResponseDTO?.location?.province?.name}
                         className={`input-form pr-8} truncate`}
                         placeholder="Ciudad"
                         id="province"
@@ -225,6 +225,8 @@ export default function ConfigurationProfile({ categories, profile }) {
                           setProvinceSelected(e.target.value)
                           console.log(e.target.value);
                         }}
+                        // defaultValue={profile?.userResponseDTO?.location?.province?.name}
+                        value={ProvinceSelected}
                       >
                         <option value={profile?.userResponseDTO?.location?.province?.name}>{profile?.userResponseDTO?.location?.province?.name}</option>
                         <hr />
@@ -249,13 +251,13 @@ export default function ConfigurationProfile({ categories, profile }) {
                     </div>
                     <div className="relative">
                       <select
-                        defaultValue={profile?.userResponseDTO?.location?.name}
                         className={`input-form pr-8"} truncate`}
                         placeholder="Ciudad"
                         id="city"
                         value={LocationSelected}
                         {...register("city")}
                         onChange={(e) => setLocationSelected(e.target.value)}
+                        // defaultValue={profile?.userResponseDTO?.location?.name}
                       >
                         {locations.length < 1 && profile?.userResponseDTO?.location?.id && (
                           <option value={profile?.userResponseDTO?.location?.id}>
