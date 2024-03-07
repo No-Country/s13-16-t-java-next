@@ -26,7 +26,7 @@ export default function ProfileCard({ profile, favs }) {
             alt="Foto de perfil"
             height={200}
             width={200}
-            className="ml-10 -translate-y-16 rounded-full border-4 border-solid border-white bg-gray-300"
+            className="ml-10 max-h-[200px] min-h-[200px] min-w-[200px] max-w-[200px] -translate-y-16 rounded-full border-4 border-solid border-white bg-gray-300 object-cover object-center"
           />
           <div className="mt-8 max-[855px]:-mt-8">
             <h2 className="text-4xl max-[855px]:ml-10">
