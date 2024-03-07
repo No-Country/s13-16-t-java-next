@@ -6,6 +6,7 @@ import com.s1316tjavanext.reciclamebackend.dto.UserProfileRequestDto;
 import com.s1316tjavanext.reciclamebackend.dto.UserResponseDTO;
 import com.s1316tjavanext.reciclamebackend.entity.*;
 import com.s1316tjavanext.reciclamebackend.entity.enums.Category;
+import com.s1316tjavanext.reciclamebackend.entity.enums.Status;
 import com.s1316tjavanext.reciclamebackend.exception.IdNotFoundException;
 import com.s1316tjavanext.reciclamebackend.mapper.PostMapper;
 import com.s1316tjavanext.reciclamebackend.mapper.ProfileMapper;
@@ -131,6 +132,14 @@ public class ProfileServiceImpl implements ProfileService {
         }else{
             throw new IdNotFoundException("ids not found");
         }
+    }
+    @Override
+    public List<PostDto> getPostsClosedByProfile(UUID profileId){
+        Optional<Profile> profile = profileRepository.findById(profileId);
+        if (profile.isPresent()){
+            List<Post> posts = postRepository.findAllByProfileIdAndStatus(profileId, Status.Cerrado);
+            return postMapper.postsToPostsDto(posts);
+        }else throw new IdNotFoundException("profile id no encontrado");
     }
 
     private boolean isImageNotNullNotEmpty(MultipartFile mpf) {
