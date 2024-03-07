@@ -1,6 +1,7 @@
 package com.s1316tjavanext.reciclamebackend.repository;
 
 import com.s1316tjavanext.reciclamebackend.entity.Post;
+import com.s1316tjavanext.reciclamebackend.entity.enums.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,4 +17,5 @@ public interface PostRepository extends JpaRepository<Post, UUID> {
     @Query("select a from Post a where a.title like %?1%" )
     public List<Post> findByTitle(String term);
 
+    List<Post> findAllByProfileIdAndStatus(UUID profileId, Status status);
 }

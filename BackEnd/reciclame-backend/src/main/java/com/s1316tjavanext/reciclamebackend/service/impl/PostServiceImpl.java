@@ -45,7 +45,9 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<PostDto> getPosts() {
-        return postMapper.postsToPostsDto(postRepository.findAll());
+        return postMapper.postsToPostsDto(postRepository.findAll()
+                .stream()
+                .filter(p -> p.getStatus().equals(Status.Abierto)).collect(Collectors.toList()));
     }
 
     @Override
@@ -127,6 +129,16 @@ public class PostServiceImpl implements PostService {
             throw new IdNotFoundException("ids no encontrados");
         }
 
+    }
+
+    @Override
+    public PostDto closePost(UUID id){
+        Optional<Post> postDB = postRepository.findById(id);
+        if (postDB.isPresent()){
+            postDB.get().setStatus(Status.Cerrado);
+            postRepository.save(postDB.get());
+            return postMapper.postToPostDto(postDB.get());
+        } else throw new IdNotFoundException("id no encontrado");
     }
 
     private boolean isImageNotNullNotEmpty(MultipartFile mpf) {

@@ -22,4 +22,6 @@ public interface ProfileService {
     List<PostDto> getFavoritePosts(UUID profileId);
 
     void updateFavoritePost(UUID profileId,UUID postId);
+
+    List<PostDto> getPostsClosedByProfile(UUID profileId);
 }

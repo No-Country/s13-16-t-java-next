@@ -31,6 +31,11 @@ public class ProfileController {
         return ResponseEntity.ok(profileService.getProfiles());
     }
 
+    @GetMapping("/{profileId}/posts-closed")
+    public ResponseEntity<List<PostDto>> getPostsClosedByProfile(@PathVariable UUID profileId){
+        return ResponseEntity.ok(profileService.getPostsClosedByProfile(profileId));
+    }
+
     @GetMapping("/{profileId}/favoritePosts")
     public ResponseEntity<List<PostDto>> getFavoritePosts(@PathVariable UUID profileId){
         return ResponseEntity.ok(profileService.getFavoritePosts(profileId));

@@ -96,4 +96,14 @@ public class PostController {
 
     }
 
+    @PutMapping("/{postId}/close-post")
+    public ResponseEntity<PostDto> closePost(@PathVariable UUID postId){
+        try {
+            return ResponseEntity.ok(postService.closePost(postId));
+        } catch (RuntimeException ignore){
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
 }
