@@ -29,6 +29,7 @@ public interface ProfileMapper {
     @Mapping(target = "posts", ignore = true)
     @Mapping(target = "postsFavorite", ignore = true)
     @Mapping(target = "postsLiked", ignore = true)
+    @Mapping(target = "notifications", ignore = true)
     Profile profileResponseDtoToProfile(ProfileResponseDto profileResponseDto);
 
 

@@ -48,15 +48,18 @@ public class Profile implements Serializable {
     @Schema(name = "categories", description = "Categories of the user", example = "{Madera, Vidrio, Plastico}")
     private List<Category> categories;
 
-    @OneToMany(mappedBy = "profile")
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "profile")
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    @OneToMany (mappedBy = "profile")
+    @OneToMany (mappedBy = "profile", cascade = CascadeType.ALL)
     private List<Like> postsLiked;
 
-    @OneToMany (mappedBy = "profile")
+    @OneToMany (mappedBy = "profile", cascade = CascadeType.ALL)
     private List<Favorite> postsFavorite;
+
+    @OneToMany (mappedBy = "recipient", cascade = CascadeType.ALL)
+    private List<Notification> notifications;
 }
