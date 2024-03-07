@@ -5,6 +5,7 @@ import Image from "next/image";
 import CommentSubmenu from "./CommentSubmenu";
 import { toast } from "sonner";
 import { useGetProfile } from "../hooks/useGetProfile";
+import { realDateTimeDiff } from "../utils/functions";
 
 export default function Coment({ coment, setIsEdit, setCommentEdit }) {
   const { description, date: dateTime } = coment;
@@ -20,32 +21,8 @@ export default function Coment({ coment, setIsEdit, setCommentEdit }) {
 
   const dateLongFormated = format(DATE, "h:mm A · MMMM D, YYYY");
 
-  function dateDiff(startDate, endDate) {
-    const diff = Math.abs(startDate - endDate);
-    const seconds = Math.floor(diff / 1000);
-    const minutes = Math.floor(diff / (1000 * 60));
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
-    const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-
-    if (years > 0) {
-      return `${years} ${years === 1 ? "año" : "años"}`;
-    } else if (months > 0) {
-      return `${months} ${months === 1 ? "mes" : "meses"}`;
-    } else if (days > 0) {
-      return `${days} ${days === 1 ? "día" : "días"}`;
-    } else if (hours > 0) {
-      return `${hours} ${hours === 1 ? "hora" : "horas"}`;
-    } else if (minutes > 0) {
-      return `${minutes} ${minutes === 1 ? "minuto" : "minutos"}`;
-    } else {
-      return `${seconds} ${seconds === 1 ? "segundo" : "segundos"}`;
-    }
-  }
-
   const endDate = new Date();
-  const dateShortFormated = dateDiff(DATE, endDate);
+  const dateShortFormated = realDateTimeDiff(DATE, endDate);
 
   async function handleDeleteComment() {
     try {

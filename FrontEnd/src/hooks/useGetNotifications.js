@@ -1,35 +1,29 @@
 import useSWR from "swr";
 
-const API_URL = 'http://localhost:3002/notifications'
 
 export function useGetNotifications () {
+  const profileId =
+  typeof window !== "undefined" && localStorage.getItem("profileId");
+
+  const API_URL = `https://deployreciclame-production.up.railway.app/profiles/notifications/${profileId}`
+
   const fetcher = (...args) => fetch(...args).then(res => res.json())
-  const { data, error, isLoading } = useSWR(API_URL, fetcher, { refreshInterval: 2000 })
-  const unread = data?.filter((notification) => !notification.read);
+  const { data, error, isLoading } = useSWR(API_URL, fetcher, { refreshInterval: 3000 })
+  let unread = [] 
+  if (data && Array.isArray(data)) {
+    unread = data.filter((notification) => !notification.isRead);
+  }
 
   async function markAsRead(){
     try {
-      const updatePromises = unread?.map(async (notification) => {
-        const specificApiUrl = `${API_URL}/${notification.id}`;
-        const response = await fetch(specificApiUrl, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            // token de autenticación
-          },
-          body: JSON.stringify({
-            read: true,
-          }),
-        });
-        if (!response.ok) {
-          throw new Error(`Error al marcar la notificación de ${notification.name} como leída`);
-        }
-        return await response.json();
-      });
-
-      const updatedNotifications = await Promise.all(updatePromises);
-      return updatedNotifications;
-    } catch (error) {
+      const API_URL = `https://deployreciclame-production.up.railway.app/profiles/updateNotifications/${profileId}`
+      const response = await fetch(API_URL, {
+        method: "PUT"
+      })
+      if (response.ok) {
+        console.log(response)
+      }
+    }catch(error){
       console.error('Error al marcar las notificaciones como leídas:', error.message);
       throw error;
     }
