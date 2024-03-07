@@ -145,7 +145,7 @@ function FormRegister({ provinces, categories }) {
           </div>
         </div>
         <div className="relative flex w-full flex-col justify-center gap-2">
-          <label className="capitalize">correo electronico</label>
+          <label className="capitalize">correo electrónico</label>
           <input
             type="email"
             className={`input-form ${errors.email ? "focus:outline-wrong" : "focus:outline-secondary-violet"}`}
@@ -212,7 +212,7 @@ function FormRegister({ provinces, categories }) {
           )}
         </div>
         <div className="relative flex w-full flex-col justify-center gap-2">
-          <label className="capitalize">Número telefonico</label>
+          <label className="capitalize">Número telefónico</label>
           <input
             type="tel"
             className={`input-form ${errors.phone ? "focus:outline-wrong" : "focus:outline-secondary-violet"}`}
@@ -356,7 +356,7 @@ function FormRegister({ provinces, categories }) {
           <p className="md:text-star flex w-full justify-center gap-2 text-lg md:justify-normal">
             ¿ Tienes cuenta?{" "}
             <Link href="/login" className="text-lg font-[500] underline">
-              Inicia sesion
+              Inicia sesión
             </Link>
           </p>
         </div>

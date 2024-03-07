@@ -48,7 +48,7 @@ export default function Submenu({ profile }) {
             onClick={logOut}
             className="border-secondary-violet hover:border-b-2"
           >
-            Cerrar Sesion
+            Cerrar Sesión
           </Link>
         </div>
       </div>
