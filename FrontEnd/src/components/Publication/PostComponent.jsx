@@ -98,8 +98,8 @@ export default function PostComponent({ post }) {
               </div>
               <button
                 onClick={handleLikeClick}
-                className="flex items-center gap-2"
-                disabled={post?.status === "Abierto" ? true : false}
+                className="flex items-center gap-2 hover:cursor-pointer "
+                
               >
                 <span>{post.love}</span>
                 <LikeIcon />
