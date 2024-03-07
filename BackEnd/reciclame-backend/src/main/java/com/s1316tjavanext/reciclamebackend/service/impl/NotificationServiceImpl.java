@@ -6,6 +6,7 @@ import com.s1316tjavanext.reciclamebackend.entity.Profile;
 import com.s1316tjavanext.reciclamebackend.repository.NotificationRepository;
 import com.s1316tjavanext.reciclamebackend.service.NotificationService;
 import lombok.AllArgsConstructor;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -31,25 +32,25 @@ public class NotificationServiceImpl implements NotificationService {
                         notification.getContent(),
                         notification.getDate(),
                         notification.isRead(),
-                        notification.getAffectedPostId(),
-                        notification.getActorProfileName(),
-                        notification.getActorProfileUrl())
+                        notification.getAffectedPostId()
+//                        ,
+//                        notification.getActorProfileName(),
+//                        notification.getActorProfileUrl()
+                        )
                 )
                 .toList();
     }
 
     @Override
-    public void createNotification(Profile recipient, String content, UUID postId, Profile actor) {
+    public void createNotification(Profile recipient, String content, UUID postId, String name, String url) {
         Notification notification = new Notification();
         notification.setContent(content);
         notification.setRecipient(recipient);
         notification.setRead(false);
         notification.setDate(LocalDateTime.now().withNano(0));
         notification.setAffectedPostId(postId);
-        String name = actor.getUser().getName()+ " " +
-                actor.getUser().getLastName();
-        notification.setActorProfileName(name);
-        notification.setActorProfileUrl(actor.getPhotoId());
+//        notification.setActorProfileName(name);
+//        notification.setActorProfileUrl(url);
         notificationRepository.save(notification);
     }
 
@@ -64,6 +65,9 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public void deleteNotification(String contentNotification) {
-        notificationRepository.delete(notificationRepository.findByContent(contentNotification));
+        Notification notification = notificationRepository.findByContent(contentNotification);
+        if (notification!=null){
+            notificationRepository.delete(notification);
+        }
     }
 }

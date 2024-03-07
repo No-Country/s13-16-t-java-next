@@ -28,6 +28,7 @@ public interface ProfileMapper {
     @InheritInverseConfiguration
     @Mapping(target = "posts", ignore = true)
     @Mapping(target = "postsFavorite", ignore = true)
+    @Mapping(target = "postsLiked", ignore = true)
     Profile profileResponseDtoToProfile(ProfileResponseDto profileResponseDto);
 
 

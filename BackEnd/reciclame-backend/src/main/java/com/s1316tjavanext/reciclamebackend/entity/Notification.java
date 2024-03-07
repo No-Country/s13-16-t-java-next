@@ -35,9 +35,9 @@ public class Notification {
     @Column(name = "affect_post_id", nullable = false)
     private UUID affectedPostId;
 
-    @Column(name = "actor_profile_name", nullable = false)
-    private String actorProfileName;
-
-    @Column(name = "actor_profile_name", nullable = false)
-    private String actorProfileUrl;
+//    @Column(name = "actor_profile_name", nullable = false)
+//    private String actorProfileName;
+//
+//    @Column(name = "actor_profile_url", nullable = false)
+//    private String actorProfileUrl;
 }

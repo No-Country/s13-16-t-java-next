@@ -14,7 +14,7 @@ import java.util.UUID;
 public interface NotificationService {
 
     List<NotificationDto> getNotificationsByProfileId(UUID profileId);
-    void createNotification(Profile recipient, String content, UUID id, Profile profile);
+    void createNotification(Profile recipient, String content, UUID id, String name, String url);
     void updateNotificationRead(UUID profileId);
     void deleteNotification(String contentNotification);
 }

@@ -57,15 +57,15 @@ public class Post implements Serializable {
     @Column(nullable = false)
     private Status status;
 
-    @OneToMany (mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "post")
     private List<Comment> comments;
 
     @Column(nullable = false)
     private boolean deleted;
 
-    @OneToMany (mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "post")
     private List<Like> profilesLiked;
 
-    @OneToMany (mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "post")
     private List<Favorite> profilesMarkedFavorite;
 }
