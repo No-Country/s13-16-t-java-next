@@ -46,18 +46,42 @@ export default function Post({ post }) {
     <>
       {openDeleteMenu && isOwner && (
         <div className="fixed inset-0 z-50 grid h-full w-full place-items-center opacity-100 backdrop-blur-sm">
-          <span
-            onClick={() => setOpenDeleteMenu(false)}
-            className="absolute top-0 h-full w-full"
-          />
-          <div className="relative rounded-lg rounded-bl-3xl border-[3px] border-wrong bg-white p-3">
-            <p>¿Estas seguro de eliminar esta publicación?</p>
-            <button
-              onClick={() => DeletePost()}
-              className="mt-4 rounded-full bg-wrong px-4 py-2 text-white"
+          <div className="relative flex flex-col items-center justify-center gap-6 rounded-3xl  border-wrong bg-white px-8 py-10 shadow-xl">
+            <span
+              className="absolute right-3 top-3 p-2 hover:cursor-pointer"
+              onClick={() => setOpenDeleteMenu(false)}
             >
-              Eliminar
-            </button>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 1L15 15M15 1L1 15"
+                  stroke="#A5A5A5"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+            <p>¿ Seguro desea eliminar la publicación?</p>
+            <div className="flex w-full justify-between gap-2">
+              <button
+                onClick={() => setOpenDeleteMenu(false)}
+                className=" rounded-full border border-[#D0D0D0] px-7 py-1 text-[#D0D0D0]"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={() => DeletePost()}
+                className=" rounded-full bg-wrong px-8 py-1 text-white"
+              >
+                Eliminar
+              </button>
+            </div>
           </div>
         </div>
       )}

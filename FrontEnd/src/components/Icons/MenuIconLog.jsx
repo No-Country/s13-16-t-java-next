@@ -114,6 +114,14 @@ export default function MenuIconLog({ profile }) {
             >
               Blog
             </Link>
+            <Link
+              className={`header-mobile-link ${pathname === `/configuracion/perfil/${profile?.id}` ?
+                "border border-secondary-violet" : ""}`} 
+              href={`/configuracion/perfil/${profile?.id}`}
+              onClick={handleLinkClick}
+            >
+            Configuración
+            </Link>
 
             <div className="absolute bottom-20 flex flex-col justify-start p-2">
               <Link
