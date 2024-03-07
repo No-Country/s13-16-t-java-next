@@ -89,7 +89,7 @@ function FormLogin() {
     >
       <p className="text-star w-full text-2xl font-bold uppercase">ingresar</p>
       <div className="relative flex w-full flex-col justify-center gap-2">
-        <label className="capitalize">correo electronico</label>
+        <label className="capitalize">correo electrónico</label>
         <input
           type="email"
           className={`input-form ${errors.email ? "focus:outline-wrong" : "focus:outline-secondary-violet"}`}
