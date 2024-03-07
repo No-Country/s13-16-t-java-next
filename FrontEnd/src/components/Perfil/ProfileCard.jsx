@@ -9,10 +9,10 @@ export default function ProfileCard({ profile, favs, donations }) {
   const profileData = {
     publications: {
       tittle: "Publicaciones",
-      amount: profile.posts.length || 0,
+      amount: profile.posts?.length || 0,
     },
-    donations: { tittle: "Donaciones", amount: donations.length || 0 },
-    favorites: { tittle: "Favoritos", amount: favs.length || 0 },
+    donations: { tittle: "Donaciones", amount: donations?.length || 0 },
+    favorites: { tittle: "Favoritos", amount: favs?.length || 0 },
   };
 
   const links = [
