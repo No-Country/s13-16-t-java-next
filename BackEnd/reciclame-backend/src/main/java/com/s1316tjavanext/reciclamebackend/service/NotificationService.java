@@ -12,9 +12,9 @@ import java.util.UUID;
  * @project reciclame-backend
  */
 public interface NotificationService {
+
     List<NotificationDto> getNotificationsByProfileId(UUID profileId);
     void createNotification(Profile recipient, String content, UUID id);
-    void updateNotificationRead(UUID notificationId);
-
+    void updateNotificationRead(UUID profileId);
     void deleteNotification(String contentNotification);
 }

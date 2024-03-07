@@ -87,9 +87,9 @@ public class ProfileController {
         return ResponseEntity.ok(notificationService.getNotificationsByProfileId(profileId));
     }
 
-    @PutMapping("/updateNotification/{notificationId}")
-    public ResponseEntity<Void> updateNotification(@PathVariable UUID notificationId) {
-        notificationService.updateNotificationRead(notificationId);
+    @PutMapping("/updateNotifications/{profileId}")
+    public ResponseEntity<Void> updateNotification(@PathVariable UUID profileId) {
+        notificationService.updateNotificationRead(profileId);
         return ResponseEntity.noContent().build();
     }
 }

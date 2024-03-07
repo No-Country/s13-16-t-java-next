@@ -3,7 +3,6 @@ package com.s1316tjavanext.reciclamebackend.service.impl;
 import com.s1316tjavanext.reciclamebackend.dto.NotificationDto;
 import com.s1316tjavanext.reciclamebackend.entity.Notification;
 import com.s1316tjavanext.reciclamebackend.entity.Profile;
-import com.s1316tjavanext.reciclamebackend.exception.IdNotFoundException;
 import com.s1316tjavanext.reciclamebackend.repository.NotificationRepository;
 import com.s1316tjavanext.reciclamebackend.service.NotificationService;
 import lombok.AllArgsConstructor;
@@ -49,12 +48,12 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     @Override
-    public void updateNotificationRead(UUID notificationId) {
-        Notification notification = notificationRepository.findById(notificationId)
-                .orElseThrow(
-                        () -> new IdNotFoundException("Id no encontrado"));
-        notification.setRead(true);
-        notificationRepository.save(notification);
+    public void updateNotificationRead(UUID profileId) {
+        List<Notification> notifications = notificationRepository.findAllByRecipientId(profileId);
+        notifications.forEach(notification -> {
+            notification.setRead(true);
+            notificationRepository.save(notification);
+        });
     }
 
     @Override
