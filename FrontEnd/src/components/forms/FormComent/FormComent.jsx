@@ -1,5 +1,4 @@
 "use client";
-import Button from "@/src/components/Button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { comentSchema } from "@/src/validations/userSchema";
@@ -152,13 +151,13 @@ export default function FormComent({ postId, isEdit, setIsEdit, commentEdit }) {
           {errors.description && (
             <p className=" text-sm text-wrong">{errors.description.message}</p>
           )}
-          <Button
+          <button
             disabled={isLoading}
             className="w-1/2 rounded-3xl bg-primary-green p-1 text-lg font-[500] text-white disabled:bg-gray-300 disabled:text-black"
             type="submit"
           >
             Enviar
-          </Button>
+          </button>
         </form>
       )}
     </>
