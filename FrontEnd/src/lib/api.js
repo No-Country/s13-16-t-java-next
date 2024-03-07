@@ -104,3 +104,10 @@ export async function getFavorites(profile_id) {
   const data = await res.json();
   return data;
 }
+
+export async function getDonations(profile_id) {
+  const API_URL = `https://deployreciclame-production.up.railway.app/profiles/${profile_id}/posts-closed`;
+  const res = await fetch(API_URL);
+  const data = await res.json();
+  return data;
+}
