@@ -28,4 +28,6 @@ public interface PostService {
     List<PostDto> findByTitle(String term);
 
     void updateProfilesLiked(UUID postId, UUID profileId);
+
+    PostDto closePost(UUID id);
 }

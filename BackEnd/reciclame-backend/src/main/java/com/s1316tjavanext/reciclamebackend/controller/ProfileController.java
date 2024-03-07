@@ -3,6 +3,7 @@ package com.s1316tjavanext.reciclamebackend.controller;
 import com.s1316tjavanext.reciclamebackend.dto.*;
 import com.s1316tjavanext.reciclamebackend.service.NotificationService;
 import com.s1316tjavanext.reciclamebackend.service.ProfileService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,16 +30,25 @@ public class ProfileController {
                 .orElse(ResponseEntity.notFound().build());
     }
     @GetMapping("/all")
+    @Operation(summary = "Get all profiles", description = "Get all profiles existing in system")
     public ResponseEntity<List<ProfileResponseDto>> getProfiles(){
         return ResponseEntity.ok(profileService.getProfiles());
     }
 
+    @GetMapping("/{profileId}/posts-closed")
+    @Operation(summary = "Get posts closed by profile", description = "Get posts closed by profile given its id")
+    public ResponseEntity<List<PostDto>> getPostsClosedByProfile(@PathVariable UUID profileId){
+        return ResponseEntity.ok(profileService.getPostsClosedByProfile(profileId));
+    }
+
     @GetMapping("/{profileId}/favoritePosts")
+    @Operation(summary = "Get favorite posts by profile", description = "Get favorite posts by profile given its id")
     public ResponseEntity<List<PostDto>> getFavoritePosts(@PathVariable UUID profileId){
         return ResponseEntity.ok(profileService.getFavoritePosts(profileId));
     }
 
     @PutMapping("/{profileId}/favorites")
+    @Operation(summary = "Update favorite posts by profile", description = "Set favorite posts by profile given its id")
     public ResponseEntity<Void> updateFavoritePost(@PathVariable UUID profileId,
                                                             @RequestBody PostFavoriteRequestDto postFavoriteRequestDto){
         try {
@@ -50,6 +60,7 @@ public class ProfileController {
     }
 
     @PutMapping("/update/{profileId}")
+    @Operation(summary = "Update profile", description = "Update profile given its id")
     public ResponseEntity<ProfileResponseDto> updateProfile(@PathVariable UUID profileId,
                                                             @RequestParam("image") MultipartFile mpf,
                                                              UserProfileRequestDto userProfileRequestDto
@@ -63,6 +74,7 @@ public class ProfileController {
     }
 
     @PutMapping("/complete-profile/{profileId}")
+    @Operation(summary = "Complete profile", description = "Complete profile given its id")
     public ResponseEntity<ProfileResponseDto> completeProfile(@PathVariable UUID profileId,
                                              @RequestParam("image") MultipartFile mpf,
                                              @RequestParam("categories") List<String> categories) {
@@ -74,6 +86,7 @@ public class ProfileController {
     }
 
     @DeleteMapping("/delete/{profileId}")
+    @Operation(summary = "Delete profile", description = "Delete profile given its id")
     public ResponseEntity<Void> deleteProfile(@PathVariable UUID profileId) {
         try {
             profileService.deleteProfile(profileId);

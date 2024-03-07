@@ -142,6 +142,16 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    @Override
+    public PostDto closePost(UUID id){
+        Optional<Post> postDB = postRepository.findById(id);
+        if (postDB.isPresent()){
+            postDB.get().setStatus(Status.Cerrado);
+            postRepository.save(postDB.get());
+            return postMapper.postToPostDto(postDB.get());
+        } else throw new IdNotFoundException("id no encontrado");
+    }
+
     private boolean isImageNotNullNotEmpty(MultipartFile mpf) {
         return mpf != null &&
                 !mpf.isEmpty();

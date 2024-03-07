@@ -30,7 +30,7 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/all")
-    @Operation(summary = "Get all Posts", description = "Get all posts existing in system")
+    @Operation(summary = "Get all Posts", description = "Get all posts with status 'Abierto' in the system")
     public ResponseEntity<List<PostDto>> getPosts (){
         return ResponseEntity.ok(postService.getPosts());
     }
@@ -85,11 +85,23 @@ public class PostController {
     }
 
     @PutMapping("/{postId}/likes")
+    @Operation(summary = "Update profiles liked", description = "Set profiles liked a post given its id")
     public ResponseEntity<Void> updateProfilesLiked(@PathVariable UUID postId,
                                                     @RequestBody ProfileLikeRequestDto profileLikeRequestDto){
         try {
             postService.updateProfilesLiked(postId,profileLikeRequestDto.profileId());
             return ResponseEntity.noContent().build();
+        } catch (RuntimeException ignore){
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
+    @PutMapping("/{postId}/close-post")
+    @Operation(summary = "Close a post", description = "Set status to 'Cerrado' a post given its id")
+    public ResponseEntity<PostDto> closePost(@PathVariable UUID postId){
+        try {
+            return ResponseEntity.ok(postService.closePost(postId));
         } catch (RuntimeException ignore){
             return ResponseEntity.notFound().build();
         }
