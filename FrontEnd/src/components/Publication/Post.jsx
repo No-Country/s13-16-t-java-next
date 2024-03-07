@@ -110,13 +110,13 @@ export default function Post({ post }) {
         <div className="-order-1 flex justify-between gap-1 p-5 lg:px-24">
           {post?.status == "Abierto" ? (
             <button
-              className="rounded-3xl bg-accent-yellow px-3 py-2 text-sm font-[500] hover:scale-105 hover:cursor-pointer disabled:bg-gray-300 disabled:text-black md:text-base lg:w-[30%]"
+              className="rounded-3xl bg-accent-yellow px-3 py-2 text-sm font-[500] hover:scale-105 hover:cursor-pointer disabled:bg-gray-300 disabled:text-black md:text-base lg:px-4"
               onClick={() => handleClosePost()}
             >
               Intercambio exitoso
             </button>
           ) : (
-            <div className="rounded-3xl bg-primary-green px-3 py-2 font-[500]  lg:w-[30%] ">
+            <div className="rounded-3xl bg-primary-green px-3 py-2 font-[500]   ">
               <span>Publicación Cerrada</span>
             </div>
           )}
