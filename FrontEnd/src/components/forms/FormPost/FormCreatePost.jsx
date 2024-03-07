@@ -48,7 +48,7 @@ export default function FormCreatePost({ categories, post, modeEdit }) {
   } = useForm({
     resolver: zodResolver(publicationSchema),
   });
-
+ 
   const profileId =
     typeof window !== "undefined" && localStorage.getItem("profileId");
 
@@ -166,7 +166,7 @@ export default function FormCreatePost({ categories, post, modeEdit }) {
             </Button>
             <p className="text-[#D9D9D9]">Activar Comentarios</p>
           </div>
-          <div className="hidden w-full  md:flex md:justify-end gap-2">
+          <div className="hidden w-full  gap-2 md:flex md:justify-end">
             <Link
               href={"/"}
               className=" w-full rounded-3xl border border-secondary-violet p-2 text-center text-secondary-violet transition duration-500 hover:scale-105 md:w-1/3 "
