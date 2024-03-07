@@ -6,14 +6,17 @@ export default async function Page({ params }) {
   return (
     <div>
       <div className="mb-10 flex flex-wrap justify-center gap-4 p-2  md:mx-auto md:columns-6">
-        {postsFavs?.map((post) => (
-          <CardPost
-            key={post.id}
-            publication={post}
-            profileId={params.id}
-            favorites={postsFavs}
-          />
-        ))}
+        {postsFavs != 0?
+          postsFavs?.map((post) => (
+            <CardPost
+              key={post.id}
+              publication={post}
+              profileId={params.id}
+              favorites={postsFavs}
+            />
+          )):(
+            <p>No tienes publicaciones en favoritos.</p>
+          )}
       </div>
     </div>
   );
