@@ -155,7 +155,7 @@ public class ProfileServiceImpl implements ProfileService {
             } catch (IOException e){
                 throw new RuntimeException("Photo not loaded");
             }
-        }else {
+        }else if(profile.getPhotoId()==null) {
             profile.setPhotoId(PROFILE_IMAGE_DEFAULT);
         }
     }
