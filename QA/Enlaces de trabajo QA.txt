@@ -4,5 +4,8 @@ https://trello.com/b/WflkPrBC/reciclame-social-media
 EXCEL
 https://docs.google.com/spreadsheets/d/1x16OLP8Q_gsuvQlxzk3RQgaqY_25Ujr23AFlI_32J0I/edit#gid=0
 
+JIRA
+https://reciclame.atlassian.net/jira/software/projects/RN/boards/2?atlOrigin=eyJpIjoiODQzMWFiOTA1OWQ1NDBlMGFlYjRmZGM4OGY3NjFmM2QiLCJwIjoiaiJ9
+
 
 
