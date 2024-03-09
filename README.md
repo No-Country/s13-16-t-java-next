@@ -67,4 +67,6 @@ Reciclame es una red social dedicada a promover la reutilización de materiales 
 
 ### QA
 [![trello](https://img.shields.io/badge/trello-000?style=for-the-badge&logo=trello&logoColor)](https://trello.com/b/WflkPrBC/reciclame-social-media)
+[![excel](https://img.shields.io/badge/trello-000?style=for-the-badge&logo=trello&logoColor)](https://docs.google.com/spreadsheets/d/1x16OLP8Q_gsuvQlxzk3RQgaqY_25Ujr23AFlI_32J0I/edit#gid=0) 
+
 
