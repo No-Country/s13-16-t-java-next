@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  error:
+    include-stacktrace: never
+  forward-headers-strategy: framework
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+cloudinary:
+  cloud_name: ${CLOUD_NAME}
+  cloud_key: ${CLOUD_KEY}
+  cloud_secret: ${CLOUD_SECRET}
