@@ -165,7 +165,7 @@ public class PostServiceImpl implements PostService {
             } catch (IOException e){
                 throw new RuntimeException("Image not loaded");
             }
-        }else {
+        }else if(post.getImageUrl()==null) {
             post.setImageUrl(POST_IMAGE_DEFAULT);
         }
     }
