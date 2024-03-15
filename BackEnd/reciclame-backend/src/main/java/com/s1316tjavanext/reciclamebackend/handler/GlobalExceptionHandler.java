@@ -5,6 +5,7 @@ import com.s1316tjavanext.reciclamebackend.exception.ObjectNotValidException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Arrays;
@@ -49,6 +50,13 @@ public class GlobalExceptionHandler {
         }
         else errors=getErrorsMap("Error de restricción de integridad" + message);
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<?> handleConstraintViolationException( MaxUploadSizeExceededException e){
+        Map <String, String> errors = new HashMap<>();
+        errors.put("image", e.getMessage()+" (5mb)");
+        return ResponseEntity.badRequest().body(getErrorsMap(errors));
     }
 
     private Map<String, Object> getErrorsMap(Object errors) {

@@ -15,6 +15,10 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
 cloudinary:
   cloud_name: ${CLOUD_NAME}
   cloud_key: ${CLOUD_KEY}
